@@ -28,8 +28,20 @@
     "ionic-gulp-scripts-copy": "^2.0.0",
     "run-sequence": "1.1.5"
   },
-  "name": "ionic-demo",
-  "description": "ionic-demo: An Ionic project",
+  "name": "Life Guide",
+  "description": "Lifestyle hybrid application developed with Ionic 2",
+  "author": "Razvan Tomegea",
+  "repository" : { 
+  	"type" : "git",
+  	"url" : "https://github.com/razvantomegea/life-guide-hybrid.git"
+  },
+  "licenses" : 
+  [
+  	{
+  		"type": "MIT",
+  		"url": "http://www.opensource.org/licenses/mit-license.php"
+  	}
+  ],
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
