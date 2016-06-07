@@ -5,12 +5,12 @@
 </ion-navbar>
 
 <ion-content class="home">
-  <ion-card>
+  <ion-card *ngFor="let item of items | async">
     <ion-card-header>
-      Card Header
+       {{item.name}}
     </ion-card-header>
     <ion-card-content>
-      Hello World
+      {{item.description}}
     </ion-card-content>
   </ion-card>
 </ion-content>
