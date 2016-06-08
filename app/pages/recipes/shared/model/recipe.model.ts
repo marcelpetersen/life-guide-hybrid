@@ -4,13 +4,13 @@ export class Recipe {
         category: string,
         dietary: string,
         chef: string,
-        ingredients: object[],
+        ingredients: any[],
         prepTime: number,
         cookMethod: string,
         cookTime: number,
         cookTemperature: number,
         steps: string[],
-        nutrients: object,
+        nutrients: any,
         comment: string
     ) {}
 }

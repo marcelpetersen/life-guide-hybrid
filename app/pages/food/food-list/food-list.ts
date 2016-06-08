@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { FirebaseListObservable } from 'angularfire2';
 
 import { FoodService } from '../shared';
 
@@ -8,7 +7,7 @@ import { FoodService } from '../shared';
   templateUrl: 'build/pages/food/food-list/food-list.html',
 })
 export class FoodListPage {
-  food: FirebaseListObservable<any[]>;
+  food: any;
   constructor(public nav: NavController, private _foodService: FoodService) {
     this.food = this._foodService.getFood();
   }

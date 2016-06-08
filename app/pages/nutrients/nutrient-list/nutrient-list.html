@@ -14,18 +14,36 @@
 <ion-content padding class="nutrients">
   <ion-card *ngFor="let micronutrient of micronutrients | async">
     <ion-card-header>
-       {{micronutrient.name}}
+      {{ micronutrient.name }}
     </ion-card-header>
     <ion-card-content>
-      {{micronutrient.category}}
+      {{ micronutrient.category }}
     </ion-card-content>
+    <ion-item>
+      <button primary clear item-left (click)="openNutrientDetails(micronutrient)">
+      <ion-icon name="bookmarks"></ion-icon>
+      <div>Read more</div>
+    </button>
+      <ion-note item-right>
+        11h ago
+      </ion-note>
+    </ion-item>
   </ion-card>
   <ion-card *ngFor="let macronutrient of macronutrients | async">
     <ion-card-header>
-       {{macronutrient.name}}
+      {{ macronutrient.name }}
     </ion-card-header>
     <ion-card-content>
-      {{macronutrient.category}}
+      {{ macronutrient.category }}
     </ion-card-content>
+    <ion-item>
+      <button primary clear item-left (click)="openNutrientDetails(macronutrient)">
+      <ion-icon name="bookmarks"></ion-icon>
+      <div>Read more</div>
+    </button>
+      <ion-note item-right>
+        11h ago
+      </ion-note>
+    </ion-item>
   </ion-card>
 </ion-content>
