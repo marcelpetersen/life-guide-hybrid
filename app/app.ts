@@ -16,8 +16,7 @@ import { FitnessPage } from './pages/fitness/fitness';
 import { FoodListPage, FoodService } from './pages/food';
 import { HomePage } from './pages/home/home';
 import { NutrientListPage, NutrientService } from './pages/nutrients';
-import { RecipesPage } from './pages/recipes/recipes';
-
+import { RecipeListPage, RecipeService } from './pages/recipes';
 
 
 @Component({
@@ -25,8 +24,13 @@ import { RecipesPage } from './pages/recipes/recipes';
   providers: [
     FoodService,
     NutrientService,
+    RecipeService,
     FIREBASE_PROVIDERS,
-    defaultFirebase('https://life-guiderta.firebaseio.com')
+    defaultFirebase('https://life-guiderta.firebaseio.com'),
+    firebaseAuthConfig({
+      provider: AuthProviders.Google,
+      method: AuthMethods.Redirect
+  })
   ]
 })
 export class MyApp {
@@ -42,13 +46,11 @@ export class MyApp {
       { title: 'Food', icon: 'cart', component: FoodListPage },
       { title: 'Home', icon: 'home', component: HomePage },
       { title: 'Nutrients', icon: 'nutrition', component: NutrientListPage },
-      { title: 'Recipes', icon: 'restaurant', component: RecipesPage }
+      { title: 'Recipes', icon: 'restaurant', component: RecipeListPage }
     ];
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
 }

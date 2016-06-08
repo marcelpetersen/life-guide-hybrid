@@ -1,12 +1,3 @@
-// http://ionicframework.com/docs/v2/theming/
-
-
-// App Shared Imports
-// --------------------------------------------------
-// These are the imports which make up the design of this app.
-// By default each design mode includes these shared imports.
-// App Shared Sass variables belong in app.variables.scss.
-
 @import url(https://fonts.googleapis.com/css?family=Roboto:300|Open+Sans+Condensed:300|Raleway:400,300|Lato:400,300);
 @import '../app';
 @import '../pages/diagnosis/diagnosis';
@@ -16,5 +7,5 @@
 @import '../pages/home/home';
 @import '../pages/nutrients/nutrient-list/nutrient-list';
 @import '../pages/nutrients/nutrient-details/nutrient-details';
-@import '../pages/recipes/recipes';
-
+@import '../pages/recipes/recipe-list/recipe-list';
+@import '../pages/recipes/recipe-details/recipe-details';
