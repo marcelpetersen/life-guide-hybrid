@@ -10,11 +10,12 @@ import {
   FIREBASE_PROVIDERS
 } from 'angularfire2';
 
+
 import { DiagnosisPage } from './pages/diagnosis/diagnosis';
 import { FitnessPage } from './pages/fitness/fitness';
-import { FoodPage } from './pages/food/food';
+import { FoodListPage, FoodService } from './pages/food';
 import { HomePage } from './pages/home/home';
-import { NutrientsPage } from './pages/nutrients/nutrients';
+import { NutrientListPage, NutrientService } from './pages/nutrients';
 import { RecipesPage } from './pages/recipes/recipes';
 
 
@@ -22,6 +23,8 @@ import { RecipesPage } from './pages/recipes/recipes';
 @Component({
   templateUrl: 'build/app.html',
   providers: [
+    FoodService,
+    NutrientService,
     FIREBASE_PROVIDERS,
     defaultFirebase('https://life-guiderta.firebaseio.com')
   ]
@@ -36,9 +39,9 @@ export class MyApp {
     this.pages = [
       { title: 'Diagnosis', icon: 'pulse', component: DiagnosisPage },
       { title: 'Fitness', icon: 'bicycle', component: FitnessPage },
-      { title: 'Food', icon: 'cart', component: FoodPage },
+      { title: 'Food', icon: 'cart', component: FoodListPage },
       { title: 'Home', icon: 'home', component: HomePage },
-      { title: 'Nutrients', icon: 'nutrition', component: NutrientsPage },
+      { title: 'Nutrients', icon: 'nutrition', component: NutrientListPage },
       { title: 'Recipes', icon: 'restaurant', component: RecipesPage }
     ];
   }
