@@ -10,7 +10,9 @@ import {
   FIREBASE_PROVIDERS
 } from 'angularfire2';
 
-import { FitnessPage } from './pages/fitness/fitness'
+import { DiagnosisPage } from './pages/diagnosis/diagnosis';
+import { FitnessPage } from './pages/fitness/fitness';
+import { FoodPage } from './pages/food/food';
 import { HomePage } from './pages/home/home';
 import { NutrientsPage } from './pages/nutrients/nutrients';
 import { RecipesPage } from './pages/recipes/recipes';
@@ -27,15 +29,17 @@ import { RecipesPage } from './pages/recipes/recipes';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = HomePage;
-  pages: Array<{title: string, component: any}>
+  pages: Array<{title: string, icon: string, component: any}>
 
   constructor(platform: Platform) {
     platform.ready().then(() => StatusBar.styleDefault());
     this.pages = [
-      { title: 'Fitness', component: FitnessPage },
-      { title: 'Home', component: HomePage },
-      { title: 'Nutrients', component: NutrientsPage },
-      { title: 'Recipes', component: RecipesPage }
+      { title: 'Diagnosis', icon: 'pulse', component: DiagnosisPage },
+      { title: 'Fitness', icon: 'bicycle', component: FitnessPage },
+      { title: 'Food', icon: 'cart', component: FoodPage },
+      { title: 'Home', icon: 'home', component: HomePage },
+      { title: 'Nutrients', icon: 'nutrition', component: NutrientsPage },
+      { title: 'Recipes', icon: 'restaurant', component: RecipesPage }
     ];
   }
 
