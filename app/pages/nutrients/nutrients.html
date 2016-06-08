@@ -12,5 +12,20 @@
 </ion-navbar>
 
 <ion-content padding class="nutrients">
-  
+  <ion-card *ngFor="let micronutrient of micronutrients | async">
+    <ion-card-header>
+       {{micronutrient.name}}
+    </ion-card-header>
+    <ion-card-content>
+      {{micronutrient.category}}
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngFor="let macronutrient of macronutrients | async">
+    <ion-card-header>
+       {{macronutrient.name}}
+    </ion-card-header>
+    <ion-card-content>
+      {{macronutrient.category}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>

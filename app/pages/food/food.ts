@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 /*
   Generated class for the FoodPage page.
@@ -11,5 +12,8 @@ import {NavController} from 'ionic-angular';
   templateUrl: 'build/pages/food/food.html',
 })
 export class FoodPage {
-  constructor(public nav: NavController) {}
+  food: FirebaseListObservable<any[]>;
+  constructor(public nav: NavController, af: AngularFire) {
+    this.food = af.database.list('/food');
+  }
 }

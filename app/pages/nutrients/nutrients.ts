@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 /*
   Generated class for the NutrientsPage page.
@@ -11,5 +12,10 @@ import {NavController} from 'ionic-angular';
   templateUrl: 'build/pages/nutrients/nutrients.html',
 })
 export class NutrientsPage {
-  constructor(public nav: NavController) {}
+  micronutrients: FirebaseListObservable<any[]>;
+  macronutrients: FirebaseListObservable<any[]>;
+  constructor(public nav: NavController, af: AngularFire) {
+    this.micronutrients = af.database.list('/micronutrients');
+    this.macronutrients = af.database.list('/macronutrients');
+  }
 }
