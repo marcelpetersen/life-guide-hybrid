@@ -9,6 +9,7 @@ import {
   firebaseAuthConfig,
   FIREBASE_PROVIDERS
 } from 'angularfire2';
+import { MATERIAL_PROVIDERS } from "ng2-material";
 
 
 import { DiagnosisPage } from './pages/diagnosis/diagnosis';
@@ -30,7 +31,8 @@ import { RecipeListPage, RecipeService } from './pages/recipes';
     firebaseAuthConfig({
       provider: AuthProviders.Google,
       method: AuthMethods.Redirect
-  })
+  }),
+  MATERIAL_PROVIDERS
   ]
 })
 export class MyApp {

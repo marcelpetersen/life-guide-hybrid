@@ -12,6 +12,7 @@
         <div *ngFor="let type of nutrient.classification">
             <h3>{{ type.name }}</h3>
             <p [innerHtml]="type.description"></p>
+            <pre *ngIf="type.intake">{{ type.intake | json }}</pre>
         </div>
     </div>
     <h1>Functions</h1>
@@ -29,5 +30,5 @@
     <h1>Nutrient relationships</h1>
     <p [innerHtml]="nutrient['relationship with other nutrients']"></p>
     <h1>Intakes</h1>
-    <pre>Will come soon when charts appear</pre>
+    <pre>{{ nutrient.intake | json }}</pre>
 </ion-content>

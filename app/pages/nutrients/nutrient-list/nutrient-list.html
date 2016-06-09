@@ -1,9 +1,3 @@
-<!--
-  Generated template for the NutrientsPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-navbar gray *navbar>
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
@@ -11,39 +5,41 @@
   <ion-title>Nutrients</ion-title>
 </ion-navbar>
 
-<ion-content padding class="nutrients">
-  <ion-card *ngFor="let micronutrient of micronutrients | async">
-    <ion-card-header>
-      {{ micronutrient.name }}
-    </ion-card-header>
-    <ion-card-content>
-      {{ micronutrient.category }}
-    </ion-card-content>
-    <ion-item>
-      <button primary clear item-left (click)="openNutrientDetails(micronutrient)">
-      <ion-icon name="bookmarks"></ion-icon>
-      <div>Read more</div>
-    </button>
-      <ion-note item-right>
-        11h ago
-      </ion-note>
-    </ion-item>
-  </ion-card>
-  <ion-card *ngFor="let macronutrient of macronutrients | async">
-    <ion-card-header>
-      {{ macronutrient.name }}
-    </ion-card-header>
-    <ion-card-content>
-      {{ macronutrient.category }}
-    </ion-card-content>
-    <ion-item>
-      <button primary clear item-left (click)="openNutrientDetails(macronutrient)">
-      <ion-icon name="bookmarks"></ion-icon>
-      <div>Read more</div>
-    </button>
-      <ion-note item-right>
-        11h ago
-      </ion-note>
-    </ion-item>
-  </ion-card>
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
+  <div padding>
+    <ion-segment [(ngModel)]="nutrientGroup">
+      <ion-segment-button value="macronutrients">
+        Macronutrients
+      </ion-segment-button>
+      <ion-segment-button value="micronutrients">
+        Micronutrients
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="nutrientGroup">
+    
+    <ion-list class="nutrient-list" *ngSwitchWhen="'micronutrients'">
+      <ion-item class="nutrient-list-item" *ngFor="let micronutrient of micronutrients | async | nutrientSearch: searchQuery">
+        <ion-thumbnail item-left>
+          <img src="img/{{micronutrient.name}}.png">
+        </ion-thumbnail>
+        <h2>{{ micronutrient.name }}</h2>
+        <p> {{ micronutrient.category }}</p>
+        <button clear item-right (click)="openNutrientDetails(micronutrient)">View</button>
+      </ion-item>
+    </ion-list>
+
+    <ion-list class="nutrient-list" *ngSwitchWhen="'macronutrients'">
+      <ion-item class="nutrient-list-item" *ngFor="let macronutrient of macronutrients | async | nutrientSearch: searchQuery">
+        <ion-thumbnail item-left>
+          <img src="img/{{macronutrient.name}}.png">
+        </ion-thumbnail>
+        <h2>{{ macronutrient.name }}</h2>
+        <p> {{ macronutrient.category }}</p>
+        <button clear item-right (click)="openNutrientDetails(macronutrient)">View</button>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

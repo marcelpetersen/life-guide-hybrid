@@ -11,13 +11,37 @@
   <ion-title>Food</ion-title>
 </ion-navbar>
 
-<ion-content padding class="food">
-  <ion-card *ngFor="let food of food | async">
-    <ion-card-header>
-       {{food.name}}
-    </ion-card-header>
-    <ion-card-content>
-      {{food.energy}}
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+<ion-content class="food">
+  <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
+  <md-data-table>
+    <thead>
+      <tr>
+        <th class="md-text-cell">Name</th>
+        <th class="md-text-cell">Energy (kcal)</th>
+        <th class="md-text-cell">Water (kcal)</th>
+        <th class="md-text-cell">Protein (g)</th>
+        <th class="md-text-cell">Carbohydrates (g)</th>
+        <th class="md-text-cell">Fiber (g)</th>
+        <th class="md-text-cell">Sugars (g)</th>
+        <th class="md-text-cell">Fats (g)</th>
+        <th class="md-text-cell">Monounsaturated fat (g)</th>
+        <th class="md-text-cell">Polyunsaturated fat (g)</th>
+        <th class="md-text-cell">Saturated fat (g)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let food of food | async | foodSearch: searchQuery">
+        <td class="md-text-cell">{{ food.name }}</td>
+        <td class="md-text-cell">{{ food.energy }}</td>
+        <td class="md-text-cell">{{ food.macronutrients.Water }}</td>
+        <td class="md-text-cell">{{ food.macronutrients.Protein }}</td>
+        <td class="md-text-cell">{{ food.macronutrients.Carbohydrates }}</td>
+        <td class="md-text-cell">{{ food.macronutrients.Fiber }}</td>
+        <td class="md-text-cell">{{ food.macronutrients.Sugars }}</td>
+        <td class="md-text-cell">{{ food.macronutrients.Fats }}</td>
+        <td class="md-text-cell">{{ food.macronutrients['Monounsaturated fat'] }}</td>
+        <td class="md-text-cell">{{ food.macronutrients['Polyunsaturated fat'] }}</td>
+        <td class="md-text-cell">{{ food.macronutrients['Saturated fat'] }}</td>
+      </tr>
+    </tbody>
+  </md-data-table>
