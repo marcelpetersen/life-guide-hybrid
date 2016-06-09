@@ -5,5 +5,29 @@
 </ion-navbar>
 
 <ion-content padding>
-    {{ nutrient.category }}
+    <h1>Description</h1>
+    <p [innerHtml]="nutrient.description"></p>
+    <div *ngIf="nutrient.classification">
+        <h1>Classification</h1>
+        <div *ngFor="let type of nutrient.classification">
+            <h3>{{ type.name }}</h3>
+            <p [innerHtml]="type.description"></p>
+        </div>
+    </div>
+    <h1>Functions</h1>
+    <ul>
+        <li *ngFor="let function of nutrient.functions">{{ function }}</li>
+    </ul>
+    <h1>Disease prevention</h1>
+    <ul>
+        <li *ngFor="let disease of nutrient['disease prevention']">{{ disease }}</li>
+    </ul>
+    <h1>Deficiency</h1>
+    <p [innerHtml]="nutrient.deficiency"></p>
+    <h1>Toxicity</h1>
+    <p [innerHtml]="nutrient.toxicity"></p>
+    <h1>Nutrient relationships</h1>
+    <p [innerHtml]="nutrient['relationship with other nutrients']"></p>
+    <h1>Intakes</h1>
+    <pre>Will come soon when charts appear</pre>
 </ion-content>
