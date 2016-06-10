@@ -9,6 +9,14 @@
         <ion-card-header>
             Macronutrients
         </ion-card-header>
+        <ion-list>
+            <button ion-item>
+               Water
+            </button>
+            <ion-note item-right>
+                {{ food.macronutrients.water }}
+            </ion-note>
+        </ion-list>
         <pre>{{ food.macronutrients | json }}</pre>
     </ion-card>
     <ion-card>
