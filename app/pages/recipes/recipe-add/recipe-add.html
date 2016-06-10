@@ -1,0 +1,118 @@
+<ion-toolbar>
+    <ion-title>
+        {{ recipe.name }}
+    </ion-title>
+    <ion-buttons start>
+        <button (click)="dismiss()">
+            <span primary>Cancel</span>
+            <ion-icon name="md-close"></ion-icon>
+        </button>
+    </ion-buttons>
+</ion-toolbar>
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label floating>Recipe name</ion-label>
+            <ion-input type="text" [(ngModel)]="recipe.name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Chef</ion-label>
+            <ion-input type="text" [(ngModel)]="recipe.chef"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Category</ion-label>
+            <ion-select [(ngModel)]="recipe.category">
+                <ion-option value="Breakfast">Breakfast</ion-option>
+                <ion-option value="Dessert">Dessert</ion-option>
+                <ion-option value="Dinner">Dinner</ion-option>
+                <ion-option value="Drink">Drink</ion-option>
+                <ion-option value="Grill">Grill</ion-option>
+                <ion-option value="Lunch">Lunch</ion-option>
+                <ion-option value="Salad">Salad</ion-option>
+                <ion-option value="Snack">Snack</ion-option>
+                <ion-option value="Soup">Soup</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>Dietary</ion-label>
+            <ion-select [(ngModel)]="recipe.dietary">
+                <ion-option value="Gluten-free">Vegetarian</ion-option>
+                <ion-option value="High-fiber">High-fiber</ion-option>
+                <ion-option value="High-protein">High-protein</ion-option>
+                <ion-option value="Low-carb">Low-carb</ion-option>
+                <ion-option value="Low-fat">Low-fat</ion-option>
+                <ion-option value="Mediteranean">Mediteranean</ion-option>
+                <ion-option value="Vegan">Vegan</ion-option>
+                <ion-option value="Vegetarian">Vegetarian</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Preparation time</ion-label>
+            <ion-input type="text" [(ngModel)]="recipe.preptime"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Cooking method</ion-label>
+            <ion-select [(ngModel)]="recipe.cookMethod">
+                <ion-option value="Baking">Baking</ion-option>
+                <ion-option value="Boiling">Boiling</ion-option>
+                <ion-option value="Braising">Braising</ion-option>
+                <ion-option value="Breading">Breading</ion-option>
+                <ion-option value="Brining">Brining</ion-option>
+                <ion-option value="Broasting">Broasting</ion-option>
+                <ion-option value="Browning">Browning</ion-option>
+                <ion-option value="Caramelization">Caramelization</ion-option>
+                <ion-option value="Casserole">Casserole</ion-option>
+                <ion-option value="Codling">Codling</ion-option>
+                <ion-option value="Curing">Curing</ion-option>
+                <ion-option value="'Dry roasting'">Dry roasting</ion-option>
+                <ion-option value="Fermentation">Fermentation</ion-option>
+                <ion-option value="Flambe">Flambe</ion-option>
+                <ion-option value="Frying">Frying</ion-option>
+                <ion-option value="Grilling">Grilling</ion-option>
+                <ion-option value="'Microwave cooking'">Microwave cooking</ion-option>
+                <ion-option value="Pasteurization">Pasteurization</ion-option>
+                <ion-option value="Pickling">Pickling</ion-option>
+                <ion-option value="Poaching">Poaching</ion-option>
+                <ion-option value="Puree">Puree</ion-option>
+                <ion-option value="Rotisserie">Rotisserie</ion-option>
+                <ion-option value="Sauteing">Sauteing</ion-option>
+                <ion-option value="Seasoning">Seasoning</ion-option>
+                <ion-option value="'Slow cooking'">Slow cooking</ion-option>
+                <ion-option value="Smoking">Smoking</ion-option>
+                <ion-option value="Steaming">Steaming</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Cooking time</ion-label>
+            <ion-input type="text" [(ngModel)]="recipe.cookTime"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Cooking temperature</ion-label>
+            <ion-input type="text" [(ngModel)]="recipe.cookTemperature"></ion-input>
+        </ion-item>
+        <h1>Ingredients</h1>
+        <button clear (click)="searchIngredient()">
+            <ion-icon name="add"></ion-icon>
+            <span>Add ingredient</span>
+        </button>
+        <ion-item *ngFor="let ingredient of recipe.ingredients">
+            <ion-label floating>{{ ingredient.name }}</ion-label>
+            <ion-input type="text" [(ngModel)]="ingredient.quantity"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Servings</ion-label>
+            <ion-select [(ngModel)]="recipe.servings">
+                <ion-option value="1">1</ion-option>
+                <ion-option value="2">2</ion-option>
+                <ion-option value="3">3</ion-option>
+                <ion-option value="4">4</ion-option>
+                <ion-option value="5">5</ion-option>
+                <ion-option value="6">6</ion-option>
+                <ion-option value="7">7</ion-option>
+                <ion-option value="8">8</ion-option>
+                <ion-option value="9">9</ion-option>
+                <ion-option value="10">10</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+</ion-content>

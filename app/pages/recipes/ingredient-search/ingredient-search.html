@@ -1,0 +1,22 @@
+<ion-toolbar>
+    <ion-title>
+        Add ingredients
+    </ion-title>
+    <ion-buttons start>
+        <button (click)="dismiss()">
+            <span primary>Cancel</span>
+            <ion-icon name="md-close"></ion-icon>
+        </button>
+    </ion-buttons>
+</ion-toolbar>
+<ion-content padding>
+    <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
+    <ion-list>
+    <ion-item *ngFor="let ingredient of foodSource | foodSearch: searchQuery; let i = index ">
+        <ion-label>{{ ingredient.name }}</ion-label>
+        <ion-checkbox [checked]="checkedIngredients[i]" (click)="addIngredient($event, ingredient, i)"></ion-checkbox>
+    </ion-item>
+
+</ion-list>
+
+</ion-content>

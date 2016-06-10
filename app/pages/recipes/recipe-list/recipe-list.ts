@@ -1,13 +1,24 @@
-import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import { FirebaseListObservable } from 'angularfire2';
+import { Component } from '@angular/core';
+import { Modal, NavController } from 'ionic-angular';
 
-import { RecipeService } from '../shared';
+import { RecipeAddPage } from '../recipe-add/recipe-add';
+import { Recipe, RecipeService } from '../shared';
 
 @Component({
   templateUrl: 'build/pages/recipes/recipe-list/recipe-list.html',
 })
 export class RecipeListPage {
-  recipes: FirebaseListObservable<any[]>;
-  constructor(public nav: NavController) {}
+  newRecipe: Recipe;
+  recipes: any;
+  searchQuery: string = '';
+  constructor(public nav: NavController) { }
+
+  createRecipe() {
+    this.newRecipe = new Recipe();
+    let recipeAddModal = Modal.create(RecipeAddPage, { recipe: this.newRecipe });
+    recipeAddModal.onDismiss(data => {
+      console.log(data);
+    });
+    this.nav.present(recipeAddModal);
+  }
 }
