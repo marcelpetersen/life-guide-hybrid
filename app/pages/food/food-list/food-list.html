@@ -15,37 +15,37 @@
 <ion-content class="food" overflow-scroll="true">
   <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
   <ion-card>
-      <md-data-table layout-fill flex>
-    <thead>
-      <tr>
-        <th class="md-text-cell">Name</th>
-        <th class="md-text-cell">Energy</th>
-        <th class="md-text-cell">Protein</th>
-        <th class="md-text-cell">Carbs</th>
-        <th class="md-text-cell">Fiber</th>
-        <th class="md-text-cell">Sugars</th>
-        <th class="md-text-cell">Fats</th>
-        <th class="md-text-cell">Unsaturated fat</th>
-        <th class="md-text-cell">Saturated fat</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-      <tr *ngFor="let food of food | async | foodSearch: searchQuery" (click)="openFoodDetails(food)">
-        <td class="md-text-cell">{{ food.name }}</td>
-        <td class="md-text-cell">{{ food.energy }} kcal</td>
-        <td class="md-text-cell">{{ food.macronutrients.Protein }} g</td>
-        <td class="md-text-cell">{{ food.macronutrients.Carbohydrates }} g</td>
-        <td class="md-text-cell">{{ food.macronutrients.Fiber }} g</td>
-        <td class="md-text-cell">{{ food.macronutrients.Sugars }} g</td>
-        <td class="md-text-cell">{{ food.macronutrients.Fats }} g</td>
-        <td class="md-text-cell">
-          {{ (food.macronutrients['Monounsaturated fat'] + food.macronutrients['Polyunsaturated fat']).toFixed(2) }} g
+    <md-data-table layout-fill flex>
+      <thead>
+        <tr>
+          <th class="md-text-cell">Name</th>
+          <th class="md-text-cell">Energy</th>
+          <th class="md-text-cell">Protein</th>
+          <th class="md-text-cell">Carbs</th>
+          <th class="md-text-cell">Fiber</th>
+          <th class="md-text-cell">Sugars</th>
+          <th class="md-text-cell">Fats</th>
+          <th class="md-text-cell">Unsaturated fat</th>
+          <th class="md-text-cell">Saturated fat</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let food of food | async | foodSearch: searchQuery" (click)="openFoodDetails(food)">
+          <td class="md-text-cell">{{ food.name }}</td>
+          <td>{{ food.energy }} kcal</td>
+          <td>{{ food.macronutrients.Protein }} g</td>
+          <td>{{ food.macronutrients.Carbohydrates }} g</td>
+          <td>{{ food.macronutrients.Fiber }} g</td>
+          <td>{{ food.macronutrients.Sugars }} g</td>
+          <td>{{ food.macronutrients.Fats }} g</td>
+          <td>
+            {{ (food.macronutrients['Monounsaturated fat'] + food.macronutrients['Polyunsaturated fat']).toFixed(2) }} g
           </td>
-        <td class="md-text-cell">{{ food.macronutrients['Saturated fat'] }} g</td>
-      </tr>
-    </tbody>
-  </md-data-table>
+          <td>{{ food.macronutrients['Saturated fat'] }} g</td>
+        </tr>
+      </tbody>
+    </md-data-table>
   </ion-card>
 
 </ion-content>
