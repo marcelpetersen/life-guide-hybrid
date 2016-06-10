@@ -1,0 +1,22 @@
+<ion-navbar *navbar>
+    <ion-title>
+        {{ food.name }}
+    </ion-title>
+</ion-navbar>
+
+<ion-content padding>
+    <h1>Macronutrient content</h1>
+    <pre>{{ food.macronutrients | json }}</pre>
+    <h1>Vitamin content</h1>
+    <pre>{{ food.vitamins | json }}</pre>
+    <h1>Mineral content</h1>
+    <pre>{{ food.minerals | json }}</pre>
+    <h1>Amino acid content</h1>
+    <pre>{{ food['amino acids'] | json }}</pre>
+    <h1>Flavonoid content</h1>
+    <pre>{{ food.flavonoids | json }}</pre>
+    <h1>Sterol content</h1>
+    <pre>{{ food.sterols | json }}</pre>
+    <h1>Other contents</h1>
+    <pre>{{ food.other | json }}</pre>
+</ion-content>
