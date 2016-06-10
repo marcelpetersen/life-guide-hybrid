@@ -5,18 +5,46 @@
 </ion-navbar>
 
 <ion-content padding>
-    <h1>Macronutrient content</h1>
-    <pre>{{ food.macronutrients | json }}</pre>
-    <h1>Vitamin content</h1>
-    <pre>{{ food.vitamins | json }}</pre>
-    <h1>Mineral content</h1>
-    <pre>{{ food.minerals | json }}</pre>
-    <h1>Amino acid content</h1>
-    <pre>{{ food['amino acids'] | json }}</pre>
-    <h1>Flavonoid content</h1>
-    <pre>{{ food.flavonoids | json }}</pre>
-    <h1>Sterol content</h1>
-    <pre>{{ food.sterols | json }}</pre>
-    <h1>Other contents</h1>
-    <pre>{{ food.other | json }}</pre>
+    <ion-card>
+        <ion-card-header>
+            Macronutrients
+        </ion-card-header>
+        <pre>{{ food.macronutrients | json }}</pre>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Vitamins
+        </ion-card-header>
+        <pre>{{ food.vitamins | json }}</pre>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Minerals
+        </ion-card-header>
+        <pre>{{ food.minerals | json }}</pre>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Amino acids
+        </ion-card-header>
+        <pre>{{ food['amino acids'] | json }}</pre>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Flavonoids
+        </ion-card-header>
+        <pre>{{ food.flavonoids | json }}</pre>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Sterols
+        </ion-card-header>
+        <pre>{{ food.sterols | json }}</pre>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Other contents
+        </ion-card-header>
+        <pre>{{ food.other | json }}</pre>
+    </ion-card>
 </ion-content>

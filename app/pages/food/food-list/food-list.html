@@ -14,8 +14,8 @@
 
 <ion-content class="food" overflow-scroll="true">
   <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
-  
-<md-data-table>
+  <ion-card>
+      <md-data-table layout-fill flex>
     <thead>
       <tr>
         <th class="md-text-cell">Name</th>
@@ -46,5 +46,6 @@
       </tr>
     </tbody>
   </md-data-table>
+  </ion-card>
 
 </ion-content>
