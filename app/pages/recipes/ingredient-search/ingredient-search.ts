@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 
-import { Food, FoodService, FoodSearchPipe } from '../../food';
+import { IFood, FoodService, FoodSearchPipe } from '../../food';
 
 @Component({
     templateUrl: 'build/pages/recipes/ingredient-search/ingredient-search.html',
@@ -9,8 +9,8 @@ import { Food, FoodService, FoodSearchPipe } from '../../food';
 })
 export class IngredientSearchPage implements OnInit {
     checkedIngredients: boolean[] = [];
-    foodSource: Food[];
-    selectedIngredients: Food[] = [];
+    foodSource: IFood[];
+    selectedIngredients: IFood[] = [];
     searchQuery: string = '';
     constructor(
         private _foodService: FoodService,

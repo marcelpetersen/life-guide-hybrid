@@ -1,4 +1,4 @@
-import { Food } from "../../../food";
+import { IFood } from "../../../food";
 
 export class Recipe {
     constructor (
@@ -6,7 +6,7 @@ export class Recipe {
         category: string = '',
         dietary: string = '',
         chef: string = '',
-        ingredients: Food[] = [],
+        ingredients: IFood[] = [],
         prepTime: number = 0,
         cookMethod: string = '',
         cookTime: number = 0,

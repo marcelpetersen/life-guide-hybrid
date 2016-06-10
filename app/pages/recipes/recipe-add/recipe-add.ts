@@ -3,15 +3,15 @@ import { Modal, NavController, ViewController } from 'ionic-angular';
 
 import { IngredientSearchPage } from '../ingredient-search/ingredient-search';
 import { Recipe, RecipeService } from '../shared';
-import { Food } from '../../food';
+import { IFood } from '../../food';
 
 @Component({
     templateUrl: 'build/pages/recipes/recipe-add/recipe-add.html'
 })
 export class RecipeAddPage implements OnInit {
     recipe: Recipe = new Recipe();
-    foodSource: Food[];
-    ingredient: Food;
+    foodSource: IFood[];
+    ingredient: IFood;
     constructor(public nav: NavController, public viewCtrl: ViewController) {}
 
     searchIngredient() {
