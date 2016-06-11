@@ -19,35 +19,47 @@
   </div>
 
   <div [ngSwitch]="nutrientGroup">
-    
+
     <ion-list class="nutrient-list" *ngSwitchWhen="'micronutrients'">
-      <button ion-item class="nutrient-list-item" 
-              *ngFor="let micronutrient of micronutrients | async | nutrientSearch: searchQuery" 
-              (click)="openNutrientDetails(micronutrient)">
-        <ion-thumbnail item-left>
-          <img src="img/{{micronutrient.name}}.png">
-        </ion-thumbnail>
-        <h2>{{ micronutrient.name }}</h2>
-        <p> {{ micronutrient.category }}</p>
-        <ion-note item-right>
-          Read more
-        </ion-note>
+      <ion-item-sliding class="nutrient-list-item" *ngFor="let micronutrient of micronutrients | async | nutrientSearch: searchQuery">
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src="img/{{micronutrient.name}}.png">
+          </ion-thumbnail>
+          <h2>{{ micronutrient.name }}</h2>
+          <p> {{ micronutrient.category }}</p>
+          <ion-note item-right>
+            Swipe
+          </ion-note>
+        </ion-item>
+        <ion-item-options>
+          <button (click)="openNutrientDetails(micronutrient)">
+        <ion-icon name="book"></ion-icon>
+        Read more
       </button>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-list>
 
     <ion-list class="nutrient-list" *ngSwitchWhen="'macronutrients'">
-      <button ion-item class="nutrient-list-item" 
-              *ngFor="let macronutrient of macronutrients | async | nutrientSearch: searchQuery" 
-              (click)="openNutrientDetails(macronutrient)">
-        <ion-thumbnail item-left>
-          <img src="img/{{macronutrient.name}}.png">
-        </ion-thumbnail>
-        <h2>{{ macronutrient.name }}</h2>
-        <p> {{ macronutrient.category }}</p>
-        <ion-note item-right>
-          Read more
-        </ion-note>
+      <ion-item-sliding class="nutrient-list-item" *ngFor="let macronutrient of macronutrients | async | nutrientSearch: searchQuery">
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src="img/{{macronutrient.name}}.png">
+          </ion-thumbnail>
+          <h2>{{ macronutrient.name }}</h2>
+          <p> {{ macronutrient.category }}</p>
+          <ion-note item-right>
+            Swipe
+          </ion-note>
+        </ion-item>
+        <ion-item-options>
+          <button (click)="openNutrientDetails(macronutrient)">
+        <ion-icon name="book"></ion-icon>
+        Read more
       </button>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-list>
   </div>
 </ion-content>

@@ -8,7 +8,7 @@ import { Food } from '../../food';
 @Component({
     templateUrl: 'build/pages/recipes/recipe-add/recipe-add.html'
 })
-export class RecipeAddPage {
+export class RecipeEditPage {
     recipe: Recipe = new Recipe();
     foodSource: Food[];
     ingredient: Food;

@@ -93,14 +93,13 @@
             <ion-label>Cooking temperature</ion-label>
             <ion-input type="number" [(ngModel)]="recipe.cookTemperature"></ion-input>
         </ion-item>
-        <h1>Ingredients</h1>
         <button clear (click)="searchIngredient()">
             <ion-icon name="add"></ion-icon>
             <span>Add ingredient</span>
         </button>
         <ion-item *ngFor="let ingredient of recipe.ingredients">
             <ion-label>{{ ingredient.name }}</ion-label>
-            <ion-input placeholder="Quantity (g)" type="number" [(ngModel)]="ingredient.quantity"></ion-input>
+            <ion-input clearInput placeholder="Quantity (g)" type="number" [(ngModel)]="ingredient.quantity"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Servings</ion-label>

@@ -19,7 +19,7 @@ export class IngredientSearchPage implements OnInit {
         ) {
             if (!!params.data.ingredients) {
                  this.selectedIngredients = params.data.ingredients;
-                 this.selectedIngredients.forEach(ingredient => this.checkedIngredients[ingredient['$key']] = true);
+                 this.selectedIngredients.forEach(ingredient => this.checkedIngredients[ingredient.key] = true);
             }
          }
 
@@ -27,7 +27,20 @@ export class IngredientSearchPage implements OnInit {
         this.checkedIngredients[ingredient['$key']] = !this.checkedIngredients[ingredient['$key']];
         let result = this.selectedIngredients.filter(item => item.name === ingredient.name);
         if (this.checkedIngredients[ingredient['$key']] && !result.length) {
-            this.selectedIngredients.push(ingredient);
+            let newIngredient: Food = new Food(
+                ingredient['$key'],
+                ingredient.name,
+                ingredient.category,
+                ingredient.energy,
+                ingredient.macronutrients,
+                ingredient.minerals,
+                ingredient.vitamins,
+                ingredient['amino acids'],
+                ingredient.flavonoids,
+                ingredient.sterols,
+                ingredient.other
+                );
+            this.selectedIngredients.push(newIngredient);
         } else if (!this.checkedIngredients[ingredient['$key']] && !!result.length) {
             this.selectedIngredients.splice(this.selectedIngredients.indexOf(result[0]), 1);
         }

@@ -7,8 +7,30 @@
 
 <ion-content class="recipes">
   <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
+  <ion-list>
+    <ion-item-sliding *ngFor="let recipe of recipes | async | foodSearch: searchQuery">
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img src="">
+        </ion-thumbnail>
+        <h2>{{ recipe.name }}</h2>
+        <p>{{ recipe.category }}</p>
+        <p>{{ recipe.dietary }}</p>
+        <p>{{ recipe.nutrients.energy }} kcal</p>
+        <ion-note item-right>
+          Swipe
+        </ion-note>
+      </ion-item>
+      <ion-item-options>
+        <button>
+        <ion-icon name="book"></ion-icon>
+        Read more
+      </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
   <button fab fab-bottom fab-right fab-fixed (click)="createRecipe()">
     <ion-icon name="add"></ion-icon>
-    </button>
-  
+  </button>
+
 </ion-content>

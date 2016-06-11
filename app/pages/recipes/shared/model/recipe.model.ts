@@ -14,6 +14,7 @@ export class Recipe {
         public steps: string[] = [],
         public nutrients: any = {},
         public servings: number = 1,
+        public quantity: number = 0,
         public comment: string = ''
     ) {}
 }

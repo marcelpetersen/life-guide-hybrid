@@ -1,5 +1,6 @@
 export class Food {
     constructor(
+        public key: number = 0,
         public name: string = "",
         public category: string = "",
         public energy: number = 0,
