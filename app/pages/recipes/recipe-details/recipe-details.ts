@@ -12,6 +12,6 @@ export class RecipeDetailsPage implements OnInit {
         this.recipe = params.data.recipe;
     }
 
-    ngOnInit() { }
+    ngOnInit(): void { }
 
 }

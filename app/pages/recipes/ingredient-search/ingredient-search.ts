@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 
-import { IFood, FoodService, FoodSearchPipe } from '../../food';
+import { Food, FoodService, FoodSearchPipe } from '../../food';
 
 @Component({
     templateUrl: 'build/pages/recipes/ingredient-search/ingredient-search.html',
@@ -9,8 +9,8 @@ import { IFood, FoodService, FoodSearchPipe } from '../../food';
 })
 export class IngredientSearchPage implements OnInit {
     checkedIngredients: boolean[] = [];
-    foodSource: IFood[];
-    selectedIngredients: IFood[] = [];
+    foodSource: Food[];
+    selectedIngredients: Food[] = [];
     searchQuery: string = '';
     constructor(
         private _foodService: FoodService,
@@ -19,16 +19,16 @@ export class IngredientSearchPage implements OnInit {
         ) {
             if (!!params.data.ingredients) {
                  this.selectedIngredients = params.data.ingredients;
-                 this.selectedIngredients.forEach((ingredient, index) => this.checkedIngredients[index] = true);
+                 this.selectedIngredients.forEach(ingredient => this.checkedIngredients[ingredient['$key']] = true);
             }
          }
 
-    addIngredient(event, ingredient, index) {
-        this.checkedIngredients[index] = !this.checkedIngredients[index];
+    addIngredient(event: any, ingredient: Food): void {
+        this.checkedIngredients[ingredient['$key']] = !this.checkedIngredients[ingredient['$key']];
         let result = this.selectedIngredients.filter(item => item.name === ingredient.name);
-        if (this.checkedIngredients[index] && !result.length) {
+        if (this.checkedIngredients[ingredient['$key']] && !result.length) {
             this.selectedIngredients.push(ingredient);
-        } else if (!this.checkedIngredients[index] && !!result.length) {
+        } else if (!this.checkedIngredients[ingredient['$key']] && !!result.length) {
             this.selectedIngredients.splice(this.selectedIngredients.indexOf(result[0]), 1);
         }
         console.log(
@@ -38,11 +38,15 @@ export class IngredientSearchPage implements OnInit {
             );
     }
 
-    dismiss() {
+    doneAdding(): void {
         this.viewCtrl.dismiss(this.selectedIngredients);
     }
 
-    ngOnInit() { 
+    cancelAdd(): void {
+        this.viewCtrl.dismiss();
+    }
+
+    ngOnInit(): void { 
         this._foodService.getFood().subscribe(food => this.foodSource = food);
     }
 

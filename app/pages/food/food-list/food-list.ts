@@ -3,7 +3,7 @@ import { MATERIAL_DIRECTIVES } from 'ng2-material';
 import { NavController } from 'ionic-angular';
 
 import { FoodDetailsPage } from '../food-details/food-details';
-import { IFood, FoodService, FoodSearchPipe } from '../shared';
+import { Food, FoodService, FoodSearchPipe } from '../shared';
 
 @Component({
   templateUrl: 'build/pages/food/food-list/food-list.html',
@@ -17,7 +17,7 @@ export class FoodListPage {
     this.food = this._foodService.getFood();
   }
 
-  openFoodDetails(food: IFood): void {
+  openFoodDetails(food: Food): void {
     this.nav.push(FoodDetailsPage, { food });
   }
 }

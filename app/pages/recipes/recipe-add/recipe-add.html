@@ -1,22 +1,25 @@
 <ion-toolbar>
-    <ion-title>
-        {{ recipe.name }}
-    </ion-title>
     <ion-buttons start>
-        <button (click)="dismiss()">
+        <button (click)="createRecipe()">
+            <span primary>Create</span>
+            <ion-icon name="done-all"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-buttons start>
+        <button (click)="cancelRecipe()">
             <span primary>Cancel</span>
-            <ion-icon name="md-close"></ion-icon>
+            <ion-icon name="close"></ion-icon>
         </button>
     </ion-buttons>
 </ion-toolbar>
-<ion-content>
+<ion-content padding>
     <ion-list>
         <ion-item>
-            <ion-label floating>Recipe name</ion-label>
+            <ion-label>Recipe name</ion-label>
             <ion-input type="text" [(ngModel)]="recipe.name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label floating>Chef</ion-label>
+            <ion-label>Chef</ion-label>
             <ion-input type="text" [(ngModel)]="recipe.chef"></ion-input>
         </ion-item>
         <ion-item>
@@ -47,8 +50,8 @@
             </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label floating>Preparation time</ion-label>
-            <ion-input type="text" [(ngModel)]="recipe.preptime"></ion-input>
+            <ion-label>Preparation time</ion-label>
+            <ion-input type="number" [(ngModel)]="recipe.prepTime"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Cooking method</ion-label>
@@ -83,12 +86,12 @@
             </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label floating>Cooking time</ion-label>
-            <ion-input type="text" [(ngModel)]="recipe.cookTime"></ion-input>
+            <ion-label>Cooking time</ion-label>
+            <ion-input type="number" [(ngModel)]="recipe.cookTime"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label floating>Cooking temperature</ion-label>
-            <ion-input type="text" [(ngModel)]="recipe.cookTemperature"></ion-input>
+            <ion-label>Cooking temperature</ion-label>
+            <ion-input type="number" [(ngModel)]="recipe.cookTemperature"></ion-input>
         </ion-item>
         <h1>Ingredients</h1>
         <button clear (click)="searchIngredient()">
@@ -96,23 +99,12 @@
             <span>Add ingredient</span>
         </button>
         <ion-item *ngFor="let ingredient of recipe.ingredients">
-            <ion-label floating>{{ ingredient.name }}</ion-label>
-            <ion-input type="text" [(ngModel)]="ingredient.quantity"></ion-input>
+            <ion-label>{{ ingredient.name }}</ion-label>
+            <ion-input placeholder="Quantity (g)" type="number" [(ngModel)]="ingredient.quantity"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Servings</ion-label>
-            <ion-select [(ngModel)]="recipe.servings">
-                <ion-option value="1">1</ion-option>
-                <ion-option value="2">2</ion-option>
-                <ion-option value="3">3</ion-option>
-                <ion-option value="4">4</ion-option>
-                <ion-option value="5">5</ion-option>
-                <ion-option value="6">6</ion-option>
-                <ion-option value="7">7</ion-option>
-                <ion-option value="8">8</ion-option>
-                <ion-option value="9">9</ion-option>
-                <ion-option value="10">10</ion-option>
-            </ion-select>
+            <ion-input type="number" [(ngModel)]="recipe.servings"></ion-input>
         </ion-item>
     </ion-list>
 </ion-content>
