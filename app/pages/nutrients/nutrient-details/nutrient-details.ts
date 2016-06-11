@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams } from 'ionic-angular';
-import { MATERIAL_DIRECTIVES } from 'ng2-material';
 
 import { INutrient, NutrientService } from '../shared';
 
 @Component({
-    templateUrl: 'build/pages/nutrients/nutrient-details/nutrient-details.html',
-    directives: [MATERIAL_DIRECTIVES]
+    templateUrl: 'build/pages/nutrients/nutrient-details/nutrient-details.html'
 })
 export class NutrientDetailsPage implements OnInit {
     nutrient: INutrient;
