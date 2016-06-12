@@ -10,11 +10,11 @@
 </ion-toolbar>
 <ion-content class="recipes">
 
-  <ion-list>
+  <ion-list class="recipe-list">
     <ion-item-sliding *ngFor="let recipe of recipes | async | foodSearch: searchQuery">
-      <ion-item>
+      <ion-item class="recipe-list-item">
         <ion-thumbnail item-left>
-          <img src="">
+          <img src="img/{{recipe.name}}.png">
         </ion-thumbnail>
         <h2>{{ recipe.name }}</h2>
         <p>{{ recipe.category }}</p>
