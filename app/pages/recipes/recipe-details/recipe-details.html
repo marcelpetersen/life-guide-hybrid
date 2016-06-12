@@ -5,35 +5,35 @@
 </ion-navbar>
 
 <ion-content padding>
-    <h3>Chef</h3>
+    <h4>Chef</h4>
     <p>{{recipe.chef}}</p>
-    <h3>Category</h3>
+    <h4>Category</h4>
     <p>{{recipe.category}}</p>
-    <h3>Dietary</h3>
+    <h4>Dietary</h4>
     <p>{{recipe.dietary}}</p>
-    <h3>Cooking method</h3>
+    <h4>Cooking method</h4>
     <p>{{recipe.cookMethod}}</p>
-    <h3>Preparation time</h3>
+    <h4>Preparation time</h4>
     <p>{{recipe.prepTime}}</p>
-    <h3>Cooking time</h3>
+    <h4>Cooking time</h4>
     <p>{{recipe.cookTime}}</p>
-    <h3>Cooking temperature</h3>
+    <h4>Cooking temperature</h4>
     <p>{{recipe.cookTemperature}}</p>
-    <h3>Ingredients</h3>
+    <h4>Ingredients</h4>
     <ion-list>
         <ion-item *ngFor="let ingredient of recipe.ingredients">
-            <h3>{{ ingredient.name }}</h3>
+            <h4>{{ ingredient.name }}</h4>
             <ion-note item-right>
                 {{ ingredient.quantity }} g
             </ion-note>
         </ion-item>
     </ion-list>
-    <h3>Steps</h3>
+    <h4>Steps</h4>
     <ion-list>
         <ion-item *ngFor="let step of recipe.steps">
-            <h3>{{ step }}</h3>
+            <h4>{{ step }}</h4>
         </ion-item>
     </ion-list>
-    <h3>Nutrition values</h3>
+    <h4>Nutrition values</h4>
     <nutrition-tables [nutritionData]="recipe.nutrients"></nutrition-tables>
 </ion-content>
