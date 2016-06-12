@@ -1,4 +1,4 @@
-<ion-toolbar>
+<ion-navbar *navbar>
     <ion-buttons start>
         <button (click)="createRecipe()">
             <span primary>Ready</span>
@@ -11,7 +11,7 @@
             <ion-icon name="close"></ion-icon>
         </button>
     </ion-buttons>
-</ion-toolbar>
+</ion-navbar>
 <ion-content padding>
     <ion-list>
         <ion-item>
@@ -39,7 +39,7 @@
         <ion-item>
             <ion-label>Dietary</ion-label>
             <ion-select [(ngModel)]="recipe.dietary">
-                <ion-option value="Gluten-free">Vegetarian</ion-option>
+                <ion-option value="Gluten-free">Gluten-free</ion-option>
                 <ion-option value="High-fiber">High-fiber</ion-option>
                 <ion-option value="High-protein">High-protein</ion-option>
                 <ion-option value="Low-carb">Low-carb</ion-option>
@@ -98,7 +98,7 @@
             <span>Add ingredient</span>
         </button>
         <ion-item *ngFor="let ingredient of recipe.ingredients">
-            <ion-label>{{ ingredient.name }}</ion-label>
+            <ion-label floating>{{ ingredient.name }}</ion-label>
             <ion-input clearInput placeholder="Quantity (g)" type="number" [(ngModel)]="ingredient.quantity"></ion-input>
         </ion-item>
         <ion-item>

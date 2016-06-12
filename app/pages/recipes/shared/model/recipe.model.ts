@@ -11,10 +11,8 @@ export class Recipe {
         public cookMethod: string = '',
         public cookTime: number = 0,
         public cookTemperature: number = 0,
-        public steps: string[] = [],
         public nutrients: any = {},
         public servings: number = 1,
-        public quantity: number = 0,
-        public comment: string = ''
+        public quantity: number = 0
     ) {}
 }

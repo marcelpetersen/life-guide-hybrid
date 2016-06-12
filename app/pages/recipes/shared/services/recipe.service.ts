@@ -31,11 +31,9 @@ export class RecipeService {
             cookMethod: recipe.cookMethod,
             cookTime: recipe.cookTime,
             cookTemperature: recipe.cookTemperature,
-            steps: recipe.steps,
             nutrients: recipe.nutrients,
             servings: recipe.servings,
-            quantity: recipe.quantity,
-            comment: recipe.comment
+            quantity: recipe.quantity
         });
     }
 
