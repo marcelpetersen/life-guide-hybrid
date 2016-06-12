@@ -22,10 +22,18 @@
         </ion-note>
       </ion-item>
       <ion-item-options>
-        <button>
-        <ion-icon name="book"></ion-icon>
-        Read more
-      </button>
+        <button (click)="openRecipeDetails(recipe)">
+          <ion-icon name="book"></ion-icon>
+          Details
+        </button>
+        <button secondary (click)="editRecipe(recipe)">
+          <ion-icon name="color-wand"></ion-icon>
+          Edit
+        </button>
+        <button danger (click)="removeRecipe(recipe)">
+          <ion-icon name="trash"></ion-icon>
+          Remove
+        </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

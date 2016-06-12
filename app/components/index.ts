@@ -1,0 +1,1 @@
+export * from './nutrition-tables/nutrition-tables.component';

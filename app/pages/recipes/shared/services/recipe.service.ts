@@ -21,7 +21,22 @@ export class RecipeService {
     }
 
     updateRecipe(recipe: Recipe): void {
-        this.recipes.update(recipe['$key'], recipe);
+        this.recipes.update(recipe['$key'], {
+            name: recipe.name,
+            category: recipe.category,
+            dietary: recipe.dietary,
+            chef: recipe.chef,
+            ingredients: recipe.ingredients,
+            prepTime: recipe.prepTime,
+            cookMethod: recipe.cookMethod,
+            cookTime: recipe.cookTime,
+            cookTemperature: recipe.cookTemperature,
+            steps: recipe.steps,
+            nutrients: recipe.nutrients,
+            servings: recipe.servings,
+            quantity: recipe.quantity,
+            comment: recipe.comment
+        });
     }
 
     removeRecipe(recipe: Recipe): void {
