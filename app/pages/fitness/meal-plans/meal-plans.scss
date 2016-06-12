@@ -1,5 +1,9 @@
 .meal-plan {
     overflow-x: scroll;
+    md-toolbar {
+        width: 100%;
+        background: none;
+    }
 }
 .meal-plan-date {
     text-align: center;
