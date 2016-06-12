@@ -5,8 +5,11 @@
   <ion-title>Recipes</ion-title>
 </ion-navbar>
 
-<ion-content class="recipes">
+<ion-toolbar light>
   <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
+</ion-toolbar>
+<ion-content class="recipes">
+
   <ion-list>
     <ion-item-sliding *ngFor="let recipe of recipes | async | foodSearch: searchQuery">
       <ion-item>

@@ -1,15 +1,19 @@
-import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
 
-/*
-  Generated class for the FitnessPage page.
+import { ActivityPlansPage } from './activity-plans/activity-plans';
+import { MealPlansPage } from './meal-plans';
+import { ProfilePage } from './profile/profile';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
-  templateUrl: 'build/pages/fitness/fitness.html',
+    templateUrl: 'build/pages/fitness/fitness.html'
 })
-export class FitnessPage {
-  constructor(public nav: NavController) {}
+export class FitnessPage implements OnInit {
+    constructor() { 
+        this.activityPlansTab = ActivityPlansPage;
+        this.mealPlansTab = MealPlansPage;
+        this.fitnesProfileTab = ProfilePage;
+     }
+
+    ngOnInit() { }
+
 }

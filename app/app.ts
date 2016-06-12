@@ -13,7 +13,7 @@ import { MATERIAL_PROVIDERS } from "ng2-material";
 
 
 import { DiagnosisPage } from './pages/diagnosis/diagnosis';
-import { FitnessPage } from './pages/fitness/fitness';
+import { FitnessPage, MealPlansService } from './pages/fitness';
 import { FoodListPage, FoodService } from './pages/food';
 import { HomePage } from './pages/home/home';
 import { NutrientListPage, NutrientService } from './pages/nutrients';
@@ -24,6 +24,7 @@ import { RecipeListPage, RecipeService } from './pages/recipes';
   templateUrl: 'build/app.html',
   providers: [
     FoodService,
+    MealPlansService,
     NutrientService,
     RecipeService,
     FIREBASE_PROVIDERS,

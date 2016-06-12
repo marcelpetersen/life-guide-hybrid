@@ -6,13 +6,13 @@ import { Recipe } from '../';
 
 @Injectable()
 export class RecipeService {
-    recipes: FirebaseListObservable<any[]>;
+    recipes: FirebaseListObservable<Recipe[]>;
 
     constructor(af: AngularFire) {
         this.recipes = af.database.list('/recipes');
     }
 
-    getRecipes(): FirebaseListObservable<any[]> {
+    getRecipes(): FirebaseListObservable<Recipe[]> {
         return this.recipes;
     }
 

@@ -5,8 +5,11 @@
   <ion-title>Nutrients</ion-title>
 </ion-navbar>
 
-<ion-content>
+<ion-toolbar light>
   <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
+</ion-toolbar>
+
+<ion-content>
   <div padding>
     <ion-segment [(ngModel)]="nutrientGroup">
       <ion-segment-button value="macronutrients">
