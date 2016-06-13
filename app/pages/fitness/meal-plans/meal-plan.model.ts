@@ -1,7 +1,7 @@
 export class MealPlan {
     constructor (
-        date: any = new Date(),
-        meals: any = {
+        public date: any = new Date(),
+        public meals: any = {
             Breakfast: [],
             Brunch: [],
             Lunch: [],

@@ -1,0 +1,25 @@
+<ion-navbar *navbar>
+    <ion-buttons start>
+        <button (click)="doneAdding()">
+            <ion-icon name="done-all"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title>Add ingredients</ion-title>
+    <ion-buttons end>
+        <button (click)="cancelAdd()">
+            <ion-icon name="close"></ion-icon>
+        </button>
+    </ion-buttons>
+</ion-navbar>
+<ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
+</ion-toolbar>
+<ion-content padding>
+    <ion-list>
+    <ion-item *ngFor="let meal of meals">
+        <p>{{ meal.name }}</p>
+    </ion-item>
+
+</ion-list>
+
+</ion-content>

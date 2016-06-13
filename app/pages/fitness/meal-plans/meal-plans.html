@@ -1,10 +1,13 @@
 
   <ion-item class="meal-plan-date">
     <ion-icon name="calendar" item-left></ion-icon>
-    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="currentDate"></ion-datetime>
+    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="currentDate" (ionChange)="getCurrentMealPlan()"></ion-datetime>
   </ion-item>
 
 <ion-content>
+  <button fab fab-bottom fab-right fab-fixed (click)="mealAdd()">
+    <ion-icon name="add"></ion-icon>
+  </button>
   <ion-card class="meal-plan">
     <md-toolbar>
       <md-title>Breakfast</md-title>
@@ -14,7 +17,6 @@
         <tr>
           <th class="md-text-cell">Meal name</th>
           <th class="md-text-cell">Energy</th>
-          <th class="md-text-cell">Water</th>
           <th class="md-text-cell">Protein</th>
           <th class="md-text-cell">Carbs</th>
           <th class="md-text-cell">Fiber</th>
@@ -28,7 +30,9 @@
         </tr>
       </thead>
       <tbody>
-
+        <tr *ngFor="let meals of currentMealPlan.meals.Breakfast">
+          {{ meals }}
+        </tr>
         <tr>
           <td>Total</td>
           <td></td>
