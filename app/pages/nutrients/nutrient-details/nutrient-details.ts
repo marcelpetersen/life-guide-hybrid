@@ -9,13 +9,11 @@ import { INutrient, NutrientService } from '../shared';
 export class NutrientDetailsPage implements OnInit {
     nutrient: INutrient;
     intakeUnit: string;
-    constructor(params: NavParams) { 
-        this.nutrient = params.data.nutrient;
+    constructor(private _params: NavParams) { }
+
+    ngOnInit(): void {
+        this.nutrient = this._params.data.nutrient;
         this.intakeUnit = (this.nutrient.category === 'Vitamin' || this.nutrient.category === 'Mineral') ? 'mg' : 'g';
-    }
-
-    ngOnInit() {
-
     }
 
 }

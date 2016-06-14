@@ -14,16 +14,11 @@ export class IngredientSearchPage implements OnInit {
     searchQuery: string = '';
     constructor(
         private _foodService: FoodService,
-        private params: NavParams,
-        public viewCtrl: ViewController
-        ) {
-            if (!!params.data.ingredients) {
-                 this.selectedIngredients = params.data.ingredients;
-                 this.selectedIngredients.forEach(ingredient => this.checkedIngredients[ingredient.key] = true);
-            }
-         }
+        private _params: NavParams,
+        private _viewCtrl: ViewController
+    ) { }
 
-    addIngredient(event: any, ingredient: Food): void {
+    addIngredient(ingredient: Food): void {
         this.checkedIngredients[ingredient['$key']] = !this.checkedIngredients[ingredient['$key']];
         let result = this.selectedIngredients.filter(item => item.name === ingredient.name);
         if (this.checkedIngredients[ingredient['$key']] && !result.length) {
@@ -39,28 +34,27 @@ export class IngredientSearchPage implements OnInit {
                 ingredient.flavonoids,
                 ingredient.sterols,
                 ingredient.other
-                );
+            );
             this.selectedIngredients.push(newIngredient);
         } else if (!this.checkedIngredients[ingredient['$key']] && !!result.length) {
             this.selectedIngredients.splice(this.selectedIngredients.indexOf(result[0]), 1);
         }
-        console.log(
-            "Checked:", this.checkedIngredients,
-            "Ingredient:", ingredient,
-            "Selected:", this.selectedIngredients
-            );
     }
 
     doneAdding(): void {
-        this.viewCtrl.dismiss(this.selectedIngredients);
+        this._viewCtrl.dismiss(this.selectedIngredients);
     }
 
     cancelAdd(): void {
-        this.viewCtrl.dismiss();
+        this._viewCtrl.dismiss();
     }
 
-    ngOnInit(): void { 
+    ngOnInit(): void {
         this._foodService.getFood().subscribe(food => this.foodSource = food);
+        if (!!this._params.data.ingredients) {
+            this.selectedIngredients = this._params.data.ingredients;
+            this.selectedIngredients.forEach(ingredient => this.checkedIngredients[ingredient.key] = true);
+        }
     }
 
 }

@@ -10,11 +10,10 @@ import { Recipe, RecipeService } from '../shared';
 })
 export class RecipeDetailsPage implements OnInit {
     recipe: Recipe;
-    constructor(public params: NavParams) {
-        this.recipe = params.data.recipe;
-        console.log(this.recipe);
-    }
+    constructor(private _params: NavParams) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void { 
+        this.recipe = this._params.data.recipe;
+    }
 
 }

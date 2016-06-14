@@ -12,10 +12,10 @@ import { NutritionTablesComponent } from '../../../components';
 })
 export class FoodDetailsPage implements OnInit {
     food: Food;
-    constructor(params: NavParams) {
-        this.food = params.data.food;
-     }
+    constructor(private _params: NavParams) { }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        this.food = this._params.data.food;
+     }
 
 }

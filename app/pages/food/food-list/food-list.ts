@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MATERIAL_DIRECTIVES } from 'ng2-material';
 import { NavController } from 'ionic-angular';
 
@@ -10,14 +10,16 @@ import { Food, FoodService, FoodSearchPipe } from '../shared';
   directives: [MATERIAL_DIRECTIVES],
   pipes: [FoodSearchPipe]
 })
-export class FoodListPage {
+export class FoodListPage implements OnInit {
   food: any;
   searchQuery: string = '';
-  constructor(public nav: NavController, private _foodService: FoodService) {
-    this.food = this._foodService.getFood();
-  }
+  constructor(private _foodService: FoodService, private _nav: NavController) { }
 
   openFoodDetails(food: Food): void {
-    this.nav.push(FoodDetailsPage, { food });
+    this._nav.push(FoodDetailsPage, { food });
+  }
+
+  ngOnInit(): void {
+    this.food = this._foodService.getFood();
   }
 }

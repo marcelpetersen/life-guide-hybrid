@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Modal, NavController } from 'ionic-angular';
 
 import { FoodSearchPipe } from '../../food'
@@ -10,13 +10,11 @@ import { Recipe, RecipeService } from '../shared';
   templateUrl: 'build/pages/recipes/recipe-list/recipe-list.html',
   pipes: [FoodSearchPipe]
 })
-export class RecipeListPage {
+export class RecipeListPage implements OnInit {
   newRecipe: Recipe;
   recipes: any;
   searchQuery: string = '';
-  constructor(private _recipeService: RecipeService, public nav: NavController) { 
-    this.recipes = this._recipeService.getRecipes();
-  }
+  constructor(private _nav: NavController, private _recipeService: RecipeService) { }
 
   createRecipe(): void {
     this.newRecipe = new Recipe();
@@ -27,11 +25,11 @@ export class RecipeListPage {
         this._recipeService.addRecipe(recipe);
       }
     });
-    this.nav.present(recipeAddModal);
+    this._nav.present(recipeAddModal);
   }
 
   openRecipeDetails(recipe: Recipe): void {
-    this.nav.push(RecipeDetailsPage, { recipe });
+    this._nav.push(RecipeDetailsPage, { recipe });
   }
 
   editRecipe(recipe: Recipe): void {
@@ -42,11 +40,15 @@ export class RecipeListPage {
         this._recipeService.updateRecipe(recipe);
       }
     });
-    this.nav.present(recipeEditModal);
+    this._nav.present(recipeEditModal);
   }
 
   removeRecipe(recipe: Recipe): void {
     this._recipeService.removeRecipe(recipe);
+  }
+
+  ngOnInit(): void {
+    this.recipes = this._recipeService.getRecipes();
   }
 
   

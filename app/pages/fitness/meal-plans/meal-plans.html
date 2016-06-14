@@ -1,14 +1,15 @@
 
   <ion-item class="meal-plan-date">
     <ion-icon name="calendar" item-left></ion-icon>
-    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="currentDate" (ionChange)="getCurrentMealPlan()"></ion-datetime>
+    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="currentDate" (ionChange)="syncMealPlan()"></ion-datetime>
   </ion-item>
 
 <ion-content>
-  <button fab fab-bottom fab-right fab-fixed (click)="mealAdd()">
-    <ion-icon name="add"></ion-icon>
-  </button>
-  <ion-card class="meal-plan">
+  <div *ngFor="let mealPlan of mealPlans | async | dateFilter: currentDate">
+    <button fab fab-bottom fab-right fab-fixed (click)="mealAdd(mealPlan)">
+     <ion-icon name="add"></ion-icon>
+    </button>
+     <ion-card class="meal-plan">
     <md-toolbar>
       <md-title>Breakfast</md-title>
     </md-toolbar>
@@ -26,17 +27,24 @@
           <th class="md-text-cell">Polyunsaturated fat</th>
           <th class="md-text-cell">Saturated fat</th>
           <th class="md-text-cell">Trans fat</th>
-          <th class="md-text-cell">Quantity</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let meals of currentMealPlan.meals.Breakfast">
-          {{ meals }}
+        <tr *ngFor="let meal of mealPlan.meals.Breakfast">
+          <td class="md-text-cell">{{ meal.name }}</td>
+          <td>{{ meal.macronutrients ? meal.energy : meal.nutrients.energy }} kcal</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Protein : meal.nutrients.macronutrients.Protein }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Carbohydrates : meal.nutrients.macronutrients.Carbohydrates }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Fiber : meal.nutrients.macronutrients.Fiber }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Sugars : meal.nutrients.macronutrients.Sugars }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Fats : meal.nutrients.macronutrients.Fats }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Monounsaturated fat'] : meal.nutrients.macronutrients['Monounsaturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Polyunsaturated fat'] : meal.nutrients.macronutrients['Polyunsaturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Saturated fat'] : meal.nutrients.macronutrients['Saturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Trans fat'] : meal.nutrients.macronutrients['Trans fat'] }} g</td>
         </tr>
         <tr>
           <td>Total</td>
-          <td></td>
-          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -61,7 +69,6 @@
         <tr>
           <th class="md-text-cell">Meal name</th>
           <th class="md-text-cell">Energy</th>
-          <th class="md-text-cell">Water</th>
           <th class="md-text-cell">Protein</th>
           <th class="md-text-cell">Carbs</th>
           <th class="md-text-cell">Fiber</th>
@@ -71,15 +78,24 @@
           <th class="md-text-cell">Polyunsaturated fat</th>
           <th class="md-text-cell">Saturated fat</th>
           <th class="md-text-cell">Trans fat</th>
-          <th class="md-text-cell">Quantity</th>
         </tr>
       </thead>
       <tbody>
-
+        <tr *ngFor="let meal of mealPlan.meals.Brunch">
+          <td class="md-text-cell">{{ meal.name }}</td>
+          <td>{{ meal.macronutrients ? meal.energy : meal.nutrients.energy }} kcal</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Protein : meal.nutrients.macronutrients.Protein }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Carbohydrates : meal.nutrients.macronutrients.Carbohydrates }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Fiber : meal.nutrients.macronutrients.Fiber }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Sugars : meal.nutrients.macronutrients.Sugars }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Fats : meal.nutrients.macronutrients.Fats }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Monounsaturated fat'] : meal.nutrients.macronutrients['Monounsaturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Polyunsaturated fat'] : meal.nutrients.macronutrients['Polyunsaturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Saturated fat'] : meal.nutrients.macronutrients['Saturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Trans fat'] : meal.nutrients.macronutrients['Trans fat'] }} g</td>
+        </tr>
         <tr>
           <td>Total</td>
-          <td></td>
-          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -104,7 +120,6 @@
         <tr>
           <th class="md-text-cell">Meal name</th>
           <th class="md-text-cell">Energy</th>
-          <th class="md-text-cell">Water</th>
           <th class="md-text-cell">Protein</th>
           <th class="md-text-cell">Carbs</th>
           <th class="md-text-cell">Fiber</th>
@@ -114,15 +129,24 @@
           <th class="md-text-cell">Polyunsaturated fat</th>
           <th class="md-text-cell">Saturated fat</th>
           <th class="md-text-cell">Trans fat</th>
-          <th class="md-text-cell">Quantity</th>
         </tr>
       </thead>
       <tbody>
-
+        <tr *ngFor="let meal of mealPlan.meals.Lunch">
+          <td class="md-text-cell">{{ meal.name }}</td>
+          <td>{{ meal.macronutrients ? meal.energy : meal.nutrients.energy }} kcal</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Protein : meal.nutrients.macronutrients.Protein }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Carbohydrates : meal.nutrients.macronutrients.Carbohydrates }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Fiber : meal.nutrients.macronutrients.Fiber }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Sugars : meal.nutrients.macronutrients.Sugars }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Fats : meal.nutrients.macronutrients.Fats }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Monounsaturated fat'] : meal.nutrients.macronutrients['Monounsaturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Polyunsaturated fat'] : meal.nutrients.macronutrients['Polyunsaturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Saturated fat'] : meal.nutrients.macronutrients['Saturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Trans fat'] : meal.nutrients.macronutrients['Trans fat'] }} g</td>
+        </tr>
         <tr>
           <td>Total</td>
-          <td></td>
-          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -147,7 +171,6 @@
         <tr>
           <th class="md-text-cell">Meal name</th>
           <th class="md-text-cell">Energy</th>
-          <th class="md-text-cell">Water</th>
           <th class="md-text-cell">Protein</th>
           <th class="md-text-cell">Carbs</th>
           <th class="md-text-cell">Fiber</th>
@@ -157,15 +180,24 @@
           <th class="md-text-cell">Polyunsaturated fat</th>
           <th class="md-text-cell">Saturated fat</th>
           <th class="md-text-cell">Trans fat</th>
-          <th class="md-text-cell">Quantity</th>
         </tr>
       </thead>
       <tbody>
-
+        <tr *ngFor="let meal of mealPlan.meals.Snack">
+          <td class="md-text-cell">{{ meal.name }}</td>
+          <td>{{ meal.macronutrients ? meal.energy : meal.nutrients.energy }} kcal</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Protein : meal.nutrients.macronutrients.Protein }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Carbohydrates : meal.nutrients.macronutrients.Carbohydrates }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Fiber : meal.nutrients.macronutrients.Fiber }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Sugars : meal.nutrients.macronutrients.Sugars }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Fats : meal.nutrients.macronutrients.Fats }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Monounsaturated fat'] : meal.nutrients.macronutrients['Monounsaturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Polyunsaturated fat'] : meal.nutrients.macronutrients['Polyunsaturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Saturated fat'] : meal.nutrients.macronutrients['Saturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Trans fat'] : meal.nutrients.macronutrients['Trans fat'] }} g</td>
+        </tr>
         <tr>
           <td>Total</td>
-          <td></td>
-          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -190,7 +222,6 @@
         <tr>
           <th class="md-text-cell">Meal name</th>
           <th class="md-text-cell">Energy</th>
-          <th class="md-text-cell">Water</th>
           <th class="md-text-cell">Protein</th>
           <th class="md-text-cell">Carbs</th>
           <th class="md-text-cell">Fiber</th>
@@ -200,15 +231,24 @@
           <th class="md-text-cell">Polyunsaturated fat</th>
           <th class="md-text-cell">Saturated fat</th>
           <th class="md-text-cell">Trans fat</th>
-          <th class="md-text-cell">Quantity</th>
         </tr>
       </thead>
       <tbody>
-
+        <tr *ngFor="let meal of mealPlan.meals.Dinner">
+          <td class="md-text-cell">{{ meal.name }}</td>
+          <td>{{ meal.macronutrients ? meal.energy : meal.nutrients.energy }} kcal</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Protein : meal.nutrients.macronutrients.Protein }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Carbohydrates : meal.nutrients.macronutrients.Carbohydrates }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Fiber : meal.nutrients.macronutrients.Fiber }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Sugars : meal.nutrients.macronutrients.Sugars }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients.Fats : meal.nutrients.macronutrients.Fats }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Monounsaturated fat'] : meal.nutrients.macronutrients['Monounsaturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Polyunsaturated fat'] : meal.nutrients.macronutrients['Polyunsaturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Saturated fat'] : meal.nutrients.macronutrients['Saturated fat'] }} g</td>
+          <td>{{ meal.macronutrients ? meal.macronutrients['Trans fat'] : meal.nutrients.macronutrients['Trans fat'] }} g</td>
+        </tr>
         <tr>
           <td>Total</td>
-          <td></td>
-          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -223,5 +263,7 @@
       </tbody>
     </md-data-table>
   </ion-card>
+  </div>
+ 
 
 </ion-content>

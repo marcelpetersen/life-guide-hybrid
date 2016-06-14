@@ -43,7 +43,6 @@ export class RecipeService {
 
     calculateRecipeNutrition(recipe: Recipe): Food {
         let nutrition: Food = new Food();
-        nutrition.quantity = recipe.quantity;
         recipe.ingredients.forEach(ingredient => {
             for (let nutrientCategory in ingredient) {
                 let nutrients = ingredient[nutrientCategory];
@@ -59,7 +58,7 @@ export class RecipeService {
                     }
                 }
             }
-            nutrition.quantity += +ingredient.quantity;
+            recipe.quantity += +ingredient.quantity;
         });
         for (let nutrientCategory in nutrition) {
             let nutrients = nutrition[nutrientCategory];
@@ -70,6 +69,7 @@ export class RecipeService {
                 nutrition[nutrientCategory][nutrient] = (+nutrition[nutrientCategory][nutrient] / +recipe.servings).toFixed(2);
             }
         }
+        recipe.quantity /= +recipe.servings;
         return nutrition;
     }
 }

@@ -8,12 +8,15 @@ import { ProfilePage } from './profile/profile';
     templateUrl: 'build/pages/fitness/fitness.html'
 })
 export class FitnessPage implements OnInit {
-    constructor() { 
+    activityPlansTab: any;
+    mealPlansTab: any;
+    fitnesProfileTab: any;
+    constructor() { }
+
+    ngOnInit(): void {
         this.activityPlansTab = ActivityPlansPage;
         this.mealPlansTab = MealPlansPage;
         this.fitnesProfileTab = ProfilePage;
      }
-
-    ngOnInit() { }
 
 }
