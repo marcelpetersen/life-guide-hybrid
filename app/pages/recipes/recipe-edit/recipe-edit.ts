@@ -12,6 +12,7 @@ export class RecipeEditPage implements OnInit {
     recipe: Recipe;
     foodSource: Food[];
     ingredient: Food;
+    recipeSteps: string[] = [];
     constructor(private _nav: NavController, private _params: NavParams, private _viewCtrl: ViewController) { }
 
     searchIngredient(): void {
@@ -20,7 +21,18 @@ export class RecipeEditPage implements OnInit {
         this._nav.present(ingredientSearchModal);
     }
 
+    addStep(): void {
+        this.recipeSteps.push('');
+        this.recipe.steps.push('');
+    }
+
+    removeStep(index): void {
+        this.recipeSteps.splice(index, 1);
+        this.recipe.steps.splice(index, 1);
+    }
+
     createRecipe(): void {
+        this.recipeSteps.forEach((step, index) => this.recipe.steps[index] = step);
         this._viewCtrl.dismiss(this.recipe);
     }
 
@@ -30,6 +42,11 @@ export class RecipeEditPage implements OnInit {
 
     ngOnInit(): void {
         this.recipe = this._params.data.recipe;
+        if (this.recipe.steps) {
+            this.recipe.steps.forEach((step, index) => this.recipeSteps[index] = step);
+        } else {
+            this.recipe.steps = [];
+        }
     }
 
 }

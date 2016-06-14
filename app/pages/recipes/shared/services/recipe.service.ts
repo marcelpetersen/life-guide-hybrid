@@ -33,6 +33,7 @@ export class RecipeService {
             cookTemperature: recipe.cookTemperature,
             nutrients: recipe.nutrients,
             servings: recipe.servings,
+            steps: recipe.steps,
             quantity: recipe.quantity
         });
     }

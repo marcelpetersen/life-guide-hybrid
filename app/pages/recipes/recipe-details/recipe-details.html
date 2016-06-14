@@ -31,8 +31,8 @@
     </ion-list>
     <h4>Steps</h4>
     <ion-list>
-        <ion-item *ngFor="let step of recipe.steps">
-            <h4>{{ step }}</h4>
+        <ion-item *ngFor="let step of recipe.steps; let i = index">
+            <h4>Step {{ i + 1 }}: {{ step }}</h4>
         </ion-item>
     </ion-list>
     <h4>Nutrition values</h4>

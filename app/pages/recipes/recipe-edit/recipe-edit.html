@@ -104,5 +104,16 @@
             <ion-label>Servings</ion-label>
             <ion-input type="number" [(ngModel)]="recipe.servings"></ion-input>
         </ion-item>
+        <button clear (click)="addStep()">
+            <ion-icon name="add"></ion-icon>
+            <span>Add step</span>
+        </button>
+        <ion-item *ngFor="let step of recipe.steps; let i = index">
+            <ion-label floating>Step {{i + 1}}</ion-label>
+            <ion-textarea [(ngModel)]="recipeSteps[i]"></ion-textarea>
+            <ion-note item-right>
+                <ion-icon class="item-remove-icon" (click)="removeStep(i)" name="close"></ion-icon>
+            </ion-note>
+        </ion-item>
     </ion-list>
 </ion-content>
