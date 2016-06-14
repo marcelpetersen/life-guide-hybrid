@@ -36,7 +36,8 @@ export class MealAddPage implements OnInit {
     }
 
     chooseMealTime(event, meal): void {
-        if (this.selectedMeals.indexOf(meal) !== -1) {
+        let mealIndex = this.selectedMeals.indexOf(meal);
+        if (mealIndex !== -1) {
             let alert = Alert.create();
             alert.setTitle('Meal time');
 
@@ -80,7 +81,11 @@ export class MealAddPage implements OnInit {
                 text: 'Ok',
                 handler: mealTime => {
                     this.mealTimeChoose = false;
-                    this.selectedMealTimes.push(mealTime);
+                    if (mealTime) {
+                        this.selectedMealTimes.push(mealTime);
+                    } else {
+                        this.selectedMeals.splice(mealIndex, 1);
+                    }
                 }
             });
 
@@ -101,7 +106,6 @@ export class MealAddPage implements OnInit {
             };
         }
         this.selectedMeals.forEach((meal, index) => {
-            console.log(meal);
             if (meal.hasOwnProperty('$key')) {
                 delete meal['$key'];
             }

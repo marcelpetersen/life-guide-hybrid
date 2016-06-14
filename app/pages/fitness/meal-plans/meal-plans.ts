@@ -33,7 +33,6 @@ export class MealPlansPage implements OnInit {
         mealPlans.forEach(mealPlan => {
           if (mealPlan.date == this.currentDate) {
             this.currentMealPlan['$key'] = mealPlan['$key'];
-            console.log(mealPlan);
             if (!!mealPlan.meals) {
               this.currentMealPlan.meals = mealPlan.meals;
             }
