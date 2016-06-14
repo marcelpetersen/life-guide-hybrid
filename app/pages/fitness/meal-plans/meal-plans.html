@@ -5,8 +5,7 @@
   </ion-item>
 
 <ion-content>
-  <div *ngFor="let mealPlan of mealPlans | async | dateFilter: currentDate">
-    <button fab fab-bottom fab-right fab-fixed (click)="mealAdd(mealPlan)">
+    <button fab fab-bottom fab-right fab-fixed (click)="mealAdd()">
      <ion-icon name="add"></ion-icon>
     </button>
      <ion-card class="meal-plan">
@@ -30,7 +29,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let meal of mealPlan.meals.Breakfast">
+        <tr *ngFor="let meal of currentMealPlan.meals.Breakfast">
           <td class="md-text-cell">{{ meal.name }}</td>
           <td>{{ meal.macronutrients ? meal.energy : meal.nutrients.energy }} kcal</td>
           <td>{{ meal.macronutrients ? meal.macronutrients.Protein : meal.nutrients.macronutrients.Protein }} g</td>
@@ -81,7 +80,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let meal of mealPlan.meals.Brunch">
+        <tr *ngFor="let meal of currentMealPlan.meals.Brunch">
           <td class="md-text-cell">{{ meal.name }}</td>
           <td>{{ meal.macronutrients ? meal.energy : meal.nutrients.energy }} kcal</td>
           <td>{{ meal.macronutrients ? meal.macronutrients.Protein : meal.nutrients.macronutrients.Protein }} g</td>
@@ -132,7 +131,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let meal of mealPlan.meals.Lunch">
+        <tr *ngFor="let meal of currentMealPlan.meals.Lunch">
           <td class="md-text-cell">{{ meal.name }}</td>
           <td>{{ meal.macronutrients ? meal.energy : meal.nutrients.energy }} kcal</td>
           <td>{{ meal.macronutrients ? meal.macronutrients.Protein : meal.nutrients.macronutrients.Protein }} g</td>
@@ -183,7 +182,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let meal of mealPlan.meals.Snack">
+        <tr *ngFor="let meal of currentMealPlan.meals.Snack">
           <td class="md-text-cell">{{ meal.name }}</td>
           <td>{{ meal.macronutrients ? meal.energy : meal.nutrients.energy }} kcal</td>
           <td>{{ meal.macronutrients ? meal.macronutrients.Protein : meal.nutrients.macronutrients.Protein }} g</td>
@@ -234,7 +233,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let meal of mealPlan.meals.Dinner">
+        <tr *ngFor="let meal of currentMealPlan.meals.Dinner">
           <td class="md-text-cell">{{ meal.name }}</td>
           <td>{{ meal.macronutrients ? meal.energy : meal.nutrients.energy }} kcal</td>
           <td>{{ meal.macronutrients ? meal.macronutrients.Protein : meal.nutrients.macronutrients.Protein }} g</td>
@@ -263,7 +262,6 @@
       </tbody>
     </md-data-table>
   </ion-card>
-  </div>
  
 
 </ion-content>
