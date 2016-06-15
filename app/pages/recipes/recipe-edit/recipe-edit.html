@@ -96,9 +96,12 @@
             <ion-icon name="add"></ion-icon>
             <span>Add ingredient</span>
         </button>
-        <ion-item *ngFor="let ingredient of recipe.ingredients">
+        <ion-item *ngFor="let ingredient of recipe.ingredients; let i = index">
             <ion-label floating>{{ ingredient.name }}</ion-label>
-            <ion-input clearInput placeholder="Quantity (g)" type="number" [(ngModel)]="ingredient.quantity"></ion-input>
+            <ion-textarea clearInput placeholder="Quantity (g)" type="number" [(ngModel)]="ingredient.quantity"></ion-textarea>
+            <ion-note item-right>
+                <ion-icon class="item-remove-icon" (click)="removeIngredient(i)" name="close"></ion-icon>
+            </ion-note>
         </ion-item>
         <ion-item>
             <ion-label>Servings</ion-label>

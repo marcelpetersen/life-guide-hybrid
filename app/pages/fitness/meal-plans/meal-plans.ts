@@ -34,7 +34,6 @@ export class MealPlansPage implements OnInit {
       }
     });
     this._nav.present(mealAddModal);
-    this.mealPlanNutrition = this._nutritionService.calculateTotalNutrition(this.currentMealPlan.meals);
   }
 
   viewDailyNutrition() {

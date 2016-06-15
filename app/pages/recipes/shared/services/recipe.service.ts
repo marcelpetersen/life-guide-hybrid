@@ -64,7 +64,7 @@ export class RecipeService {
         for (let nutrientCategory in nutrition) {
             let nutrients = nutrition[nutrientCategory];
             if (Number.isFinite(nutrients)) {
-                nutrition[nutrientCategory] /= +recipe.servings);
+                nutrition[nutrientCategory] /= +recipe.servings;
             }
             for (let nutrient in nutrients) {
                 nutrition[nutrientCategory][nutrient] /= +recipe.servings;

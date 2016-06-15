@@ -19,7 +19,7 @@
         <h2>{{ recipe.name }}</h2>
         <p>{{ recipe.category }}</p>
         <p>{{ recipe.dietary }}</p>
-        <p>{{ recipe.nutrients.energy }} kcal</p>
+        <p>{{ recipe.nutrients.energy.toFixed(0) }} kcal</p>
         <ion-note item-right>
           Swipe
         </ion-note>

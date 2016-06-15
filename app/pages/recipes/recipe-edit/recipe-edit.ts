@@ -26,7 +26,11 @@ export class RecipeEditPage implements OnInit {
         this.recipe.steps.push('');
     }
 
-    removeStep(index): void {
+    removeIngredient(index: number): void {
+        this.recipe.ingredients.splice(index, 1);
+    }
+
+    removeStep(index: number): void {
         this.recipeSteps.splice(index, 1);
         this.recipe.steps.splice(index, 1);
     }
