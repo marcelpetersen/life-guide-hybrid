@@ -1,0 +1,10 @@
+@import '../pages/fitness/activity-plans/activity-plans';
+@import '../pages/fitness/meal-plans/meal-plans';
+
+.plan-date {
+    text-align: center;
+    color: darkslategray;
+    ion-icon {
+        margin-bottom: 0.5em;
+    }
+}

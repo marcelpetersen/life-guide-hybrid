@@ -4,11 +4,7 @@
         width: 100%;
         background: none;
     }
-}
-.meal-plan-date {
-    text-align: center;
-    color: darkslategray;
-    ion-icon {
-        margin-bottom: 0.5em;
+    md-data-table tr td {
+        text-align: left;
     }
 }

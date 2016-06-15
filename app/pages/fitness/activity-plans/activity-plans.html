@@ -1,3 +1,37 @@
+<ion-item class="plan-date">
+    <ion-icon name="calendar" item-left></ion-icon>
+    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="currentDate" (ionChange)="syncMealPlan()"></ion-datetime>
+</ion-item>
+
 <ion-content>
-    Hello
+    <button fab fab-bottom fab-right fab-fixed (click)="activityAdd()">
+     <ion-icon name="add"></ion-icon>
+    </button>
+
+    <ion-card class="activity-plan">
+        <md-toolbar>
+            <md-title>Activities</md-title>
+        </md-toolbar>
+        <md-data-table>
+            <thead>
+                <tr>
+                    <th class="md-text-cell">Activity name</th>
+                    <th class="md-text-cell">Energy</th>
+                    <th class="md-text-cell">Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let activity of currentActivityPlan.activities">
+                    <td class="md-text-cell">{{ activity }}</td>
+                    <td class="md-text-cell">{{ activity }}</td>
+                    <td class="md-text-cell">{{ activity }}</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>kcal</td>
+                    <td>min</td>
+                </tr>
+            </tbody>
+        </md-data-table>
+    </ion-card>
 </ion-content>

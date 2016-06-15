@@ -1,102 +1,109 @@
+
 <ion-list>
+    <ion-item>
+        Energy
+        <ion-note item-right>
+            {{ nutritionData.energy.toFixed(0) }} kcal
+        </ion-note>
+    </ion-item>
     <ion-list-header>
         Macronutrients
     </ion-list-header>
     <ion-item>
         Water
         <ion-note item-right>
-            {{ nutritionData.macronutrients.Water }} ml
+            {{ nutritionData.macronutrients.Water.toFixed(0) }} ml
         </ion-note>
     </ion-item>
 
     <ion-item>
         Protein
         <ion-note item-right>
-            {{ nutritionData.macronutrients.Protein }} g
+            {{ nutritionData.macronutrients.Protein.toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Carbohydrates
         <ion-note item-right>
-            {{ nutritionData.macronutrients.Carbohydrates }} g
+            {{ nutritionData.macronutrients.Carbohydrates.toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Sugars
         <ion-note item-right>
-            {{ nutritionData.macronutrients.Sugars }} g
+            {{ nutritionData.macronutrients.Sugars.toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Glucose
         <ion-note item-right>
-            {{ nutritionData.macronutrients.Glucose }} g
+            {{ nutritionData.macronutrients.Glucose.toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Galactose
         <ion-note item-right>
-            {{ nutritionData.macronutrients.Galactose }} g
+            {{ nutritionData.macronutrients.Galactose.toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Lactose
         <ion-note item-right>
-            {{ nutritionData.macronutrients.Lactose }} g
+            {{ nutritionData.macronutrients.Lactose.toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Maltose
         <ion-note item-right>
-            {{ nutritionData.macronutrients.Maltose }} g
+            {{ nutritionData.macronutrients.Maltose.toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Sucrose
         <ion-note item-right>
-            {{ nutritionData.macronutrients.Sucrose }} g
+            {{ nutritionData.macronutrients.Sucrose.toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Starch
         <ion-note item-right>
-            {{ nutritionData.macronutrients.Starch }} g
+            {{ nutritionData.macronutrients.Starch.toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Fiber
         <ion-note item-right>
-            {{ nutritionData.macronutrients.Fiber }} g
+            {{ nutritionData.macronutrients.Fiber.toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Fats
         <ion-note item-right>
-            {{ nutritionData.macronutrients.Fats }} g
+            {{ nutritionData.macronutrients.Fats.toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Saturated fat
         <ion-note item-right>
-            {{ nutritionData.macronutrients['Saturated fat'] }} g
+            {{ nutritionData.macronutrients['Saturated fat'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Monounsaturated fat
         <ion-note item-right>
-            {{ nutritionData.macronutrients['Monounsaturated fat'] }} g
+            {{ nutritionData.macronutrients['Monounsaturated fat'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Polyunsaturated fat
         <ion-note item-right>
-            {{ nutritionData.macronutrients['Polyunsaturated fat'] }} g
+            {{ nutritionData.macronutrients['Polyunsaturated fat'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Trans fat
         <ion-note item-right>
-            {{ nutritionData.macronutrients['Trans fat'] }} g
+            {{ nutritionData.macronutrients['Trans fat'].toFixed(2) }} g
         </ion-note>
     </ion-item>
 </ion-list>
@@ -107,72 +114,72 @@
     <ion-item>
         Calcium
         <ion-note item-right>
-            {{ nutritionData.minerals.Calcium }} mg
+            {{ nutritionData.minerals.Calcium.toFixed(3) }} mg
         </ion-note>
     </ion-item>
 
     <ion-item>
         Copper
         <ion-note item-right>
-            {{ nutritionData.minerals.Copper }} mg
+            {{ nutritionData.minerals.Copper.toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Flouride
         <ion-note item-right>
-            {{ nutritionData.minerals.Flouride }} mg
+            {{ nutritionData.minerals.Flouride.toFixed(3) }} mg
         </ion-note>
     </ion-item>
 
     <ion-item>
         Iron
         <ion-note item-right>
-            {{ nutritionData.minerals.Iron }} mg
+            {{ nutritionData.minerals.Iron.toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Magnesium
         <ion-note item-right>
-            {{ nutritionData.minerals.Magnesium }} mg
+            {{ nutritionData.minerals.Magnesium.toFixed(3) }} mg
         </ion-note>
     </ion-item>
 
     <ion-item>
         Manganese
         <ion-note item-right>
-            {{ nutritionData.minerals.Manganese }} mg
+            {{ nutritionData.minerals.Manganese.toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Phosphorus
         <ion-note item-right>
-            {{ nutritionData.minerals.Phosphorus }} mg
+            {{ nutritionData.minerals.Phosphorus.toFixed(3) }} mg
         </ion-note>
     </ion-item>
 
     <ion-item>
         Potassium
         <ion-note item-right>
-            {{ nutritionData.minerals.Potassium }} mg
+            {{ nutritionData.minerals.Potassium.toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Selenium
         <ion-note item-right>
-            {{ nutritionData.minerals.Selenium }} mg
+            {{ nutritionData.minerals.Selenium.toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Sodium
         <ion-note item-right>
-            {{ nutritionData.minerals.Sodium }} mg
+            {{ nutritionData.minerals.Sodium.toFixed(3) }} mg
         </ion-note>
     </ion-item>
 
     <ion-item>
         Zinc
         <ion-note item-right>
-            {{ nutritionData.minerals.Zinc }} mg
+            {{ nutritionData.minerals.Zinc.toFixed(3) }} mg
         </ion-note>
     </ion-item>
 
@@ -184,157 +191,157 @@
     <ion-item>
         Vitamin A
         <ion-note item-right>
-            {{ nutritionData.vitamins['Vitamin A'] }} mg
+            {{ nutritionData.vitamins['Vitamin A'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         alpha-Carotene
         <ion-note item-right>
-            {{ nutritionData.vitamins['alpha-Carotene'] }} mg
+            {{ nutritionData.vitamins['alpha-Carotene'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         beta-Carotene
         <ion-note item-right>
-            {{ nutritionData.vitamins['beta-Carotene'] }} mg
+            {{ nutritionData.vitamins['beta-Carotene'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Retinol
         <ion-note item-right>
-            {{ nutritionData.vitamins['Retinol'] }} mg
+            {{ nutritionData.vitamins['Retinol'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Vitamin B1
         <ion-note item-right>
-            {{ nutritionData.vitamins['Vitamin B1'] }} mg
+            {{ nutritionData.vitamins['Vitamin B1'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Vitamin B2
         <ion-note item-right>
-            {{ nutritionData.vitamins['Vitamin B2'] }} mg
+            {{ nutritionData.vitamins['Vitamin B2'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Vitamin B3
         <ion-note item-right>
-            {{ nutritionData.vitamins['Vitamin B3'] }} mg
+            {{ nutritionData.vitamins['Vitamin B3'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Vitamin B5
         <ion-note item-right>
-            {{ nutritionData.vitamins['Vitamin B5'] }} mg
+            {{ nutritionData.vitamins['Vitamin B5'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Vitamin B6
         <ion-note item-right>
-            {{ nutritionData.vitamins['Vitamin B6'] }} mg
+            {{ nutritionData.vitamins['Vitamin B6'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Vitamin B9
         <ion-note item-right>
-            {{ nutritionData.vitamins['Vitamin B9'] }} mg
+            {{ nutritionData.vitamins['Vitamin B9'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Folic acid
         <ion-note item-right>
-            {{ nutritionData.vitamins['Folic acid'] }} mg
+            {{ nutritionData.vitamins['Folic acid'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         vitamin B12
         <ion-note item-right>
-            {{ nutritionData.vitamins['Vitamin B12'] }} mg
+            {{ nutritionData.vitamins['Vitamin B12'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Choline
         <ion-note item-right>
-            {{ nutritionData.vitamins['Choline'] }} mg
+            {{ nutritionData.vitamins['Choline'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Betaine
         <ion-note item-right>
-            {{ nutritionData.vitamins['Betaine'] }} mg
+            {{ nutritionData.vitamins['Betaine'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Vitamin D2
         <ion-note item-right>
-            {{ nutritionData.vitamins['Vitamin D2'] }} mg
+            {{ nutritionData.vitamins['Vitamin D2'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Vitamin D3
         <ion-note item-right>
-            {{ nutritionData.vitamins['Vitamin D3'] }} mg
+            {{ nutritionData.vitamins['Vitamin D3'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Vitamin E
         <ion-note item-right>
-            {{ nutritionData.vitamins['Vitamin E'] }} mg
+            {{ nutritionData.vitamins['Vitamin E'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Vitamin K
         <ion-note item-right>
-            {{ nutritionData.vitamins['Vitamin K'] }} mg
+            {{ nutritionData.vitamins['Vitamin K'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Astaxanthin
         <ion-note item-right>
-            {{ nutritionData.vitamins['Astaxanthin'] }} mg
+            {{ nutritionData.vitamins['Astaxanthin'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Canthaxanthin
         <ion-note item-right>
-            {{ nutritionData.vitamins['Canthaxanthin'] }} mg
+            {{ nutritionData.vitamins['Canthaxanthin'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Coenzyme Q10
         <ion-note item-right>
-            {{ nutritionData.vitamins['Coenzyme Q10'] }} mg
+            {{ nutritionData.vitamins['Coenzyme Q10'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         beta-Cryptoxanthin
         <ion-note item-right>
-            {{ nutritionData.vitamins['beta-Cryptoxanthin'] }} mg
+            {{ nutritionData.vitamins['beta-Cryptoxanthin'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         alpha-Lipoic acid
         <ion-note item-right>
-            {{ nutritionData.vitamins['alpha-Lipoic acid'] }} mg
+            {{ nutritionData.vitamins['alpha-Lipoic acid'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Lutein
         <ion-note item-right>
-            {{ nutritionData.vitamins['Lutein'] }} mg
+            {{ nutritionData.vitamins['Lutein'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Lycopene
         <ion-note item-right>
-            {{ nutritionData.vitamins['Lycopene'] }} mg
+            {{ nutritionData.vitamins['Lycopene'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Zeaxanthin
         <ion-note item-right>
-            {{ nutritionData.vitamins['Zeaxanthin'] }} mg
+            {{ nutritionData.vitamins['Zeaxanthin'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
 
@@ -346,127 +353,123 @@
     <ion-item>
         Alanine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Alanine'] : nutritionData.aminoAcids['Alanine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Alanine'] : nutritionData.aminoAcids['Alanine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Arginine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Arginine'] : nutritionData.aminoAcids['Arginine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Arginine'] : nutritionData.aminoAcids['Arginine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Aspargine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Aspargine'] : nutritionData.aminoAcids['Aspargine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Aspargine'] : nutritionData.aminoAcids['Aspargine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Aspartic acid
         <ion-note item-right>
             {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Aspartic acid'] : nutritionData.aminoAcids['Aspartic acid']
-            }} g
+           .toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Cysteine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Cysteine'] : nutritionData.aminoAcids['Cysteine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Cysteine'] : nutritionData.aminoAcids['Cysteine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Glutamine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Glutamine'] : nutritionData.aminoAcids['Glutamine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Glutamine'] : nutritionData.aminoAcids['Glutamine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Glutamic acid
         <ion-note item-right>
             {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Glutamic acid'] : nutritionData.aminoAcids['Glutamic acid']
-            }} g
+           .toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Glycine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Glycine'] : nutritionData.aminoAcids['Glycine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Glycine'] : nutritionData.aminoAcids['Glycine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Histidine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Histidine'] : nutritionData.aminoAcids['Histidine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Histidine'] : nutritionData.aminoAcids['Histidine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Isoleucine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Isoleucine'] : nutritionData.aminoAcids['Isoleucine'] }}
-            g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Isoleucine'] : nutritionData.aminoAcids['Isoleucine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Leucine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Leucine'] : nutritionData.aminoAcids['Leucine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Leucine'] : nutritionData.aminoAcids['Leucine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Lysine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Lysine'] : nutritionData.aminoAcids['Lysine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Lysine'] : nutritionData.aminoAcids['Lysine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Methionine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Methionine'] : nutritionData.aminoAcids['Methionine'] }}
-            g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Methionine'] : nutritionData.aminoAcids['Methionine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Phenylalanine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Phenylalanine'] : nutritionData.aminoAcids['Phenylalanine']
-            }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Phenylalanine'] : nutritionData.aminoAcids['Phenylalanine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Proline
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Proline'] : nutritionData.aminoAcids['Proline'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Proline'] : nutritionData.aminoAcids['Proline'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Serine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Serine'] : nutritionData.aminoAcids['Serine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Serine'] : nutritionData.aminoAcids['Serine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Threonine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Threonine'] : nutritionData.aminoAcids['Threonine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Threonine'] : nutritionData.aminoAcids['Threonine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Tryptophan
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Tryptophan'] : nutritionData.aminoAcids['Tryptophan'] }}
-            g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Tryptophan'] : nutritionData.aminoAcids['Tryptophan'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Tyrosine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Tyrosine'] : nutritionData.aminoAcids['Tyrosine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Tyrosine'] : nutritionData.aminoAcids['Tyrosine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Valine
         <ion-note item-right>
-            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Valine'] : nutritionData.aminoAcids['Valine'] }} g
+            {{ nutritionData['amino acids'] ? nutritionData['amino acids']['Valine'] : nutritionData.aminoAcids['Valine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
 
@@ -478,37 +481,37 @@
     <ion-item>
         Anthocyanidins
         <ion-note item-right>
-            {{ nutritionData.flavonoids['Anthocyanidins'] }} mg
+            {{ nutritionData.flavonoids['Anthocyanidins'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Catechins
         <ion-note item-right>
-            {{ nutritionData.flavonoids['Catechins'] }} mg
+            {{ nutritionData.flavonoids['Catechins'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Flavones
         <ion-note item-right>
-            {{ nutritionData.flavonoids['Flavones'] }} mg
+            {{ nutritionData.flavonoids['Flavones'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Isoflavones
         <ion-note item-right>
-            {{ nutritionData.flavonoids['Isoflavones'] }} mg
+            {{ nutritionData.flavonoids['Isoflavones'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Flavanones
         <ion-note item-right>
-            {{ nutritionData.flavonoids['Flavanones'] }} mg
+            {{ nutritionData.flavonoids['Flavanones'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Flavonols
         <ion-note item-right>
-            {{ nutritionData.flavonoids['Flavonols'] }} mg
+            {{ nutritionData.flavonoids['Flavonols'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
 
@@ -520,31 +523,31 @@
     <ion-item>
         Campesterol
         <ion-note item-right>
-            {{ nutritionData.sterols['Campesterol'] }} mg
+            {{ nutritionData.sterols['Campesterol'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Cholesterol
         <ion-note item-right>
-            {{ nutritionData.sterols['Cholesterol'] }} mg
+            {{ nutritionData.sterols['Cholesterol'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Phytosterols
         <ion-note item-right>
-            {{ nutritionData.sterols['Phytosterols'] }} mg
+            {{ nutritionData.sterols['Phytosterols'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         beta-Sitosterol
         <ion-note item-right>
-            {{ nutritionData.sterols['beta-Sitosterol'] }} mg
+            {{ nutritionData.sterols['beta-Sitosterol'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
     <ion-item>
         Stigmasterol
         <ion-note item-right>
-            {{ nutritionData.sterols['Stigmasterol'] }} mg
+            {{ nutritionData.sterols['Stigmasterol'].toFixed(3) }} mg
         </ion-note>
     </ion-item>
 
@@ -556,25 +559,25 @@
     <ion-item>
         Alcohol
         <ion-note item-right>
-            {{ nutritionData.other['Alcohol'] }} g
+            {{ nutritionData.other['Alcohol'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Caffeine
         <ion-note item-right>
-            {{ nutritionData.other['Caffeine'] }} g
+            {{ nutritionData.other['Caffeine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Melatonin
         <ion-note item-right>
-            {{ nutritionData.other['Melatonin'] }} g
+            {{ nutritionData.other['Melatonin'].toFixed(2) }} g
         </ion-note>
     </ion-item>
     <ion-item>
         Theobromine
         <ion-note item-right>
-            {{ nutritionData.other['Theobromine'] }} g
+            {{ nutritionData.other['Theobromine'].toFixed(2) }} g
         </ion-note>
     </ion-item>
 </ion-list>
