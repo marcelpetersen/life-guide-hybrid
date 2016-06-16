@@ -22,11 +22,7 @@ export class ActivityPlansPage implements OnInit {
         let activitySearchModal = Modal.create(ActivityAddPage, { activities: this.currentActivityPlan.activities });
         activitySearchModal.onDismiss(activities => {
             this.currentActivityPlan.activities = activities;
-            let totalActivity = this._activityPlanService.calculateTotalActivity(activities);
-            this.currentActivityPlan.totalEnergy = totalActivity[0];
-            this.currentActivityPlan.totalDuration = totalActivity[1];
-            this._activityPlanService.updateActivityPlan(this.currentActivityPlan);
-
+            this.updateActivityPlan();
         });
         this._nav.present(activitySearchModal);
     }
@@ -37,11 +33,20 @@ export class ActivityPlansPage implements OnInit {
 
     editActivityPlan(): void {
         if (this.editing) {
-            this._activityPlanService.updateActivityPlan(this.currentActivityPlan);
+            this.updateActivityPlan();
             this.editing = false;
         } else {
             this.editing = true;
         }
+    }
+
+    updateActivityPlan(): void {
+        this.currentActivityPlan.activities.forEach(activity => activity.energy = this._activityPlanService.calculateActivityEnergy(activity));
+        let totalActivity = this._activityPlanService.calculateTotalActivity(this.currentActivityPlan.activities);
+        this.currentActivityPlan.totalEnergy = totalActivity.totalEnergy;
+        this.currentActivityPlan.totalDuration = totalActivity.totalDuration;
+        console.log(this.currentActivityPlan)
+        this._activityPlanService.updateActivityPlan(this.currentActivityPlan);
     }
 
     syncActivityPlan() {
@@ -51,8 +56,10 @@ export class ActivityPlansPage implements OnInit {
                 activityPlans.forEach(activityPlan => {
                     if (activityPlan.date == this.currentDate) {
                         this.currentActivityPlan['$key'] = activityPlan['$key'];
-                        if (!!activityPlan.meals) {
+                        if (!!activityPlan.activities) {
                             this.currentActivityPlan.activities = activityPlan.activities;
+                            this.currentActivityPlan.totalEnergy = activityPlan.totalEnergy;
+                            this.currentActivityPlan.totalDuration = activityPlan.totalDuration;
                         }
                     }
                 });

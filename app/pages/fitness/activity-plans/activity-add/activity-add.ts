@@ -52,7 +52,6 @@ export class ActivityAddPage implements OnInit {
                         text: 'Save',
                         handler: data => {
                             activity.time = +data.duration;
-                            activity.energy = this._activityService.calculateActivityEnergy(activity);
                         }
                     }
                 ]

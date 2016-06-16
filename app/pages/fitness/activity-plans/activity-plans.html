@@ -19,24 +19,31 @@
         <md-data-table>
             <thead>
                 <tr>
+                    <th *ngIf="editing && currentActivityPlan.activities">Remove activities</th>
                     <th class="md-text-cell">Activity name</th>
                     <th class="md-text-cell">Energy</th>
                     <th class="md-text-cell">Time</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let activity of currentActivityPlan.activities">
+                <tr *ngFor="let activity of currentActivityPlan.activities; let i = index">
+                    <td *ngIf="editing">
+                        <button ion-item clear (click)="removeActivity(i)">
+                        <ion-icon primary name="trash"></ion-icon>
+                        </button>
+                    </td>
                     <td class="md-text-cell">{{ activity.name }}({{ activity.details }})</td>
                     <td>{{ activity.energy }}kcal</td>
                     <td *ngIf="!editing">{{ activity.time }}min</td>
                     <td *ngIf="editing">
-                        <ion-input clearInput placeholder="Minutes" type="number" [(ngModel)]="activity.time"></ion-input>
+                        <ion-input item-right placeholder="Minutes" type="number" [(ngModel)]="activity.time"></ion-input>
                     </td>
                 </tr>
                 <tr>
+                    <td *ngIf="editing && currentActivityPlan.activities"></td>
                     <td>Total</td>
-                    <td>kcal</td>
-                    <td>min</td>
+                    <td>{{ currentActivityPlan.totalEnergy }}kcal</td>
+                    <td>{{ currentActivityPlan.totalDuration }}min</td>
                 </tr>
             </tbody>
         </md-data-table>
