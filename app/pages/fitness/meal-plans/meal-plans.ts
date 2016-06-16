@@ -58,6 +58,13 @@ export class MealPlansPage implements OnInit {
 
   syncMealPlan() {
     this.currentMealPlan = new MealPlan(this.currentDate);
+    this.mealPlanNutrition = {
+      Breakfast: new Food(),
+      Brunch: new Food(),
+      Lunch: new Food(),
+      Snack: new Food(),
+      Dinner: new Food()
+    }
     this.mealPlans
       .subscribe(mealPlans => {
         mealPlans.forEach(mealPlan => {
@@ -87,13 +94,6 @@ export class MealPlansPage implements OnInit {
       ((currentMonth < 10) ? '0' + currentMonth : currentMonth) + '-' +
       ((currentDay < 10) ? '0' + currentDay : currentDay);
     this.currentMealPlan = new MealPlan(this.currentDate);
-    this.mealPlanNutrition = {
-      Breakfast: new Food(),
-      Brunch: new Food(),
-      Lunch: new Food(),
-      Snack: new Food(),
-      Dinner: new Food()
-    }
     this.syncMealPlan();
   }
 }

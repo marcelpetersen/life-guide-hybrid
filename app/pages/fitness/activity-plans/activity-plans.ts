@@ -80,7 +80,6 @@ export class ActivityPlansPage implements OnInit {
         this.currentDate = currentYear + '-' +
             ((currentMonth < 10) ? '0' + currentMonth : currentMonth) + '-' +
             ((currentDay < 10) ? '0' + currentDay : currentDay);
-        this.currentActivityPlan = new ActivityPlan(this.currentDate);
         this.syncActivityPlan();
     }
 
