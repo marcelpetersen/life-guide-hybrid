@@ -1,10 +1,14 @@
 <ion-item class="plan-date">
     <ion-icon name="calendar" item-left></ion-icon>
     <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="currentDate" (ionChange)="syncMealPlan()"></ion-datetime>
+    <button clear item-right (click)="editActivityPlan()">
+        <ion-icon *ngIf="!editing" name="create"></ion-icon>
+        <ion-icon *ngIf="editing" name="done-all"></ion-icon>
+    </button>
 </ion-item>
 
 <ion-content>
-    <button fab fab-bottom fab-right fab-fixed (click)="activityAdd()">
+    <button fab fab-bottom fab-right fab-fixed (click)="searchActivity()">
      <ion-icon name="add"></ion-icon>
     </button>
 
@@ -22,9 +26,12 @@
             </thead>
             <tbody>
                 <tr *ngFor="let activity of currentActivityPlan.activities">
-                    <td class="md-text-cell">{{ activity }}</td>
-                    <td class="md-text-cell">{{ activity }}</td>
-                    <td class="md-text-cell">{{ activity }}</td>
+                    <td class="md-text-cell">{{ activity.name }}({{ activity.details }})</td>
+                    <td>{{ activity.energy }}kcal</td>
+                    <td *ngIf="!editing">{{ activity.time }}min</td>
+                    <td *ngIf="editing">
+                        <ion-input clearInput placeholder="Minutes" type="number" [(ngModel)]="activity.time"></ion-input>
+                    </td>
                 </tr>
                 <tr>
                     <td>Total</td>

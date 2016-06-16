@@ -28,7 +28,7 @@
       </thead>
       <tbody>
 
-        <tr *ngFor="let food of food | async | foodSearch: searchQuery" (click)="openFoodDetails(food)">
+        <tr *ngFor="let food of food | async | itemSearch: searchQuery" (click)="openFoodDetails(food)">
           <td class="md-text-cell">{{ food.name }}</td>
           <td>{{ food.energy }} kcal</td>
           <td>{{ food.macronutrients.Protein }} g</td>

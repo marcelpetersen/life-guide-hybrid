@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Modal, NavController } from 'ionic-angular';
 
-import { FoodSearchPipe } from '../../food'
+import { ItemSearchPipe } from '../../shared';
 import { RecipeDetailsPage } from '../recipe-details/recipe-details';
 import { RecipeEditPage } from '../recipe-edit/recipe-edit';
 import { Recipe, RecipeService } from '../shared';
 
 @Component({
   templateUrl: 'build/pages/recipes/recipe-list/recipe-list.html',
-  pipes: [FoodSearchPipe]
+  pipes: [ItemSearchPipe]
 })
 export class RecipeListPage implements OnInit {
   newRecipe: Recipe;

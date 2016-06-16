@@ -24,7 +24,7 @@
   <div [ngSwitch]="nutrientGroup">
 
     <ion-list class="nutrient-list" *ngSwitchWhen="'micronutrients'">
-      <ion-item-sliding class="nutrient-list-item" *ngFor="let micronutrient of micronutrients | async | nutrientSearch: searchQuery">
+      <ion-item-sliding class="nutrient-list-item" *ngFor="let micronutrient of micronutrients | async | itemSearch: searchQuery">
         <ion-item>
           <ion-thumbnail item-left>
             <img src="img/{{micronutrient.name}}.png">
@@ -45,7 +45,7 @@
     </ion-list>
 
     <ion-list class="nutrient-list" *ngSwitchWhen="'macronutrients'">
-      <ion-item-sliding class="nutrient-list-item" *ngFor="let macronutrient of macronutrients | async | nutrientSearch: searchQuery">
+      <ion-item-sliding class="nutrient-list-item" *ngFor="let macronutrient of macronutrients | async | itemSearch: searchQuery">
         <ion-item>
           <ion-thumbnail item-left>
             <img src="img/{{macronutrient.name}}.png">

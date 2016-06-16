@@ -110,7 +110,6 @@ export class Food {
         },
         public quantity: number = 100
     ) {
-        this["amino acids"] = this.aminoAcids;
-        delete this.aminoAcids;
+        this["amino acids"] = aminoAcids;
      }
 }

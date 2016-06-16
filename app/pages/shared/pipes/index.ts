@@ -1,0 +1,1 @@
+export { ItemSearchPipe } from './item-search.pipe';

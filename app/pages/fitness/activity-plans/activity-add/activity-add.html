@@ -4,7 +4,7 @@
             <ion-icon name="done-all"></ion-icon>
         </button>
     </ion-buttons>
-    <ion-title>Add ingredients</ion-title>
+    <ion-title>Add activities</ion-title>
     <ion-buttons end>
         <button (click)="cancelAdd()">
             <ion-icon name="close"></ion-icon>
@@ -16,9 +16,11 @@
 </ion-toolbar>
 <ion-content padding>
     <ion-list>
-    <ion-item *ngFor="let ingredient of foodSource | itemSearch: searchQuery">
-        <ion-label>{{ ingredient.name }}</ion-label>
-        <ion-checkbox [checked]="checkedIngredients[ingredient['$key']]" (ionChange)="addIngredient(ingredient)">
+    <ion-item *ngFor="let activity of activities | itemSearch: searchQuery">
+        <ion-label>{{ activity.name }}({{activity.details}})</ion-label>
+        <ion-checkbox 
+        [checked]="(selectedActivities.indexOf(activity) !== -1)"
+        (click)="changeActivity(activity); setActivityTime($event, activity)">
         </ion-checkbox>
     </ion-item>
 

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 
-import { Food, FoodService, FoodSearchPipe } from '../../food';
+import { Food, FoodService } from '../../food';
+import { ItemSearchPipe } from '../../shared';
 
 @Component({
     templateUrl: 'build/pages/recipes/ingredient-search/ingredient-search.html',
-    pipes: [FoodSearchPipe]
+    pipes: [ItemSearchPipe]
 })
 export class IngredientSearchPage implements OnInit {
     checkedIngredients: boolean[] = [];

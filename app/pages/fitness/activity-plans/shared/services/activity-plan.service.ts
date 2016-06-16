@@ -24,7 +24,7 @@ export class ActivityPlanService {
         this.activityPlans.push(new ActivityPlan(date));
     }
 
-    updateMealPlan(activityPlan: ActivityPlan): void {
+    updateActivityPlan(activityPlan: ActivityPlan): void {
         if (activityPlan['$key']) {
             this.activityPlans.update(activityPlan['$key'], {
                 activities: activityPlan.activities
@@ -32,4 +32,20 @@ export class ActivityPlanService {
         }
 
     }
+
+    calculateTotalActivity(activities: Activity[], weight: number = 70): any {
+        let totalEnergy: number = 0,
+            totalTime: number = 0;
+        activities.forEach(activity => {
+            totalEnergy += Math.floor(0.0175 * activity.met * weight * activity.time);
+            totalTime += activity.time;
+        });
+        return { totalEnergy, totalTime };
+    }
+
+    calculateActivityEnergy(activity: Activity, weight: number = 70): number {
+        let totalEnergy = 0;
+        totalEnergy += Math.floor(0.0175 * activity.met * weight * activity.time);
+        return totalEnergy;
+    };
 }

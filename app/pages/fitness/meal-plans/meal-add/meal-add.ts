@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Alert, NavController, NavParams, ViewController } from 'ionic-angular';
 
-import { Food, FoodSearchPipe, FoodService } from '../../../food';
+import { Food, FoodService } from '../../../food';
+import { ItemSearchPipe } from '../../../shared';
 import { MealPlan } from '../shared';
 import { Recipe, RecipeService } from '../../../recipes';
 
 @Component({
     templateUrl: 'build/pages/fitness/meal-plans/meal-add/meal-add.html',
-    pipes: [FoodSearchPipe]
+    pipes: [ItemSearchPipe]
 })
 export class MealAddPage implements OnInit {
     food: any;
@@ -25,7 +26,7 @@ export class MealAddPage implements OnInit {
         private _viewCtrl: ViewController
     ) { }
 
-    changeMeal(meal): void {
+    changeMeal(meal: Food): void {
         let mealIndex = this.selectedMeals.indexOf(meal);
         if (mealIndex !== -1) {
             this.selectedMeals.splice(mealIndex, 1);
@@ -35,63 +36,63 @@ export class MealAddPage implements OnInit {
         }
     }
 
-    chooseMealTime(event, meal): void {
+    chooseMealTime(event: any, meal: Food): void {
         let mealIndex = this.selectedMeals.indexOf(meal);
         if (mealIndex !== -1) {
-            let alert = Alert.create();
-            alert.setTitle('Meal time');
-
-            alert.addInput({
-                type: 'radio',
-                label: 'Breakfast',
-                value: 'Breakfast',
-                checked: this.selectedMealTimes[this.selectedMeals.indexOf(meal)] === 'Breakfast'
-            });
-
-            alert.addInput({
-                type: 'radio',
-                label: 'Brunch',
-                value: 'Brunch',
-                checked: this.selectedMealTimes[this.selectedMeals.indexOf(meal)] === 'Brunch'
-            });
-
-            alert.addInput({
-                type: 'radio',
-                label: 'Lunch',
-                value: 'Lunch',
-                checked: this.selectedMealTimes[this.selectedMeals.indexOf(meal)] === 'Lunch'
-            });
-
-            alert.addInput({
-                type: 'radio',
-                label: 'Snack',
-                value: 'Snack',
-                checked: this.selectedMealTimes[this.selectedMeals.indexOf(meal)] === 'Snack'
-            });
-
-            alert.addInput({
-                type: 'radio',
-                label: 'Dinner',
-                value: 'Dinner',
-                checked: this.selectedMealTimes[this.selectedMeals.indexOf(meal)] === 'Dinner'
-            });
-
-            alert.addButton('Cancel');
-            alert.addButton({
-                text: 'Ok',
-                handler: mealTime => {
-                    this.mealTimeChoose = false;
-                    if (mealTime) {
-                        this.selectedMealTimes.push(mealTime);
-                    } else {
-                        this.selectedMeals.splice(mealIndex, 1);
+            let mealTimeAlert = Alert.create({
+                title: 'Meal time',
+                inputs: [
+                    {
+                        type: 'radio',
+                        label: 'Breakfast',
+                        value: 'Breakfast',
+                        checked: this.selectedMealTimes[this.selectedMeals.indexOf(meal)] === 'Breakfast'
+                    }, {
+                        type: 'radio',
+                        label: 'Brunch',
+                        value: 'Brunch',
+                        checked: this.selectedMealTimes[this.selectedMeals.indexOf(meal)] === 'Brunch'
+                    },
+                    {
+                        type: 'radio',
+                        label: 'Lunch',
+                        value: 'Lunch',
+                        checked: this.selectedMealTimes[this.selectedMeals.indexOf(meal)] === 'Lunch'
+                    }, {
+                        type: 'radio',
+                        label: 'Snack',
+                        value: 'Snack',
+                        checked: this.selectedMealTimes[this.selectedMeals.indexOf(meal)] === 'Snack'
+                    }, {
+                        type: 'radio',
+                        label: 'Dinner',
+                        value: 'Dinner',
+                        checked: this.selectedMealTimes[this.selectedMeals.indexOf(meal)] === 'Dinner'
                     }
-                }
+                ],
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: data => {
+                            console.log('Cancel clicked');
+                        }
+                    },
+                    {
+                        text: 'Ok',
+                        handler: mealTime => {
+                            this.mealTimeChoose = false;
+                            if (mealTime) {
+                                this.selectedMealTimes.push(mealTime);
+                            } else {
+                                this.selectedMeals.splice(mealIndex, 1);
+                            }
+                        }
+                    }
+                ]
             });
 
-            this._nav.present(alert).then(() => {
-                this.mealTimeChoose = true;
-            });
+            this._nav.present(mealTimeAlert).then(() => this.mealTimeChoose = true);
         }
     }
 
@@ -106,6 +107,7 @@ export class MealAddPage implements OnInit {
             };
         }
         this.selectedMeals.forEach((meal, index) => {
+            meal.amount = 1;
             if (meal.hasOwnProperty('$key')) {
                 delete meal['$key'];
             }

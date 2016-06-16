@@ -1,7 +1,14 @@
 
   <ion-item class="meal-plan-date">
-    <ion-icon name="calendar" item-left></ion-icon>
+    <ion-icon name="calendar" primary item-left></ion-icon>
     <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="currentDate" (ionChange)="syncMealPlan()"></ion-datetime>
+    <button item-right clear (click)="editMealPlan()">
+      <ion-icon *ngIf="!editing" name="create"></ion-icon>
+      <ion-icon *ngIf="editing" name="done-all"></ion-icon>
+    </button>
+    <button item-right clear (click)="viewDailyNutrition()">
+      <ion-icon primary name="stats"></ion-icon>
+    </button>
   </ion-item>
 
 <ion-content>
@@ -15,6 +22,7 @@
     <md-data-table>
       <thead>
         <tr>
+          <th *ngIf="editing && currentMealPlan.meals.Breakfast">Remove meals</th>
           <th class="md-text-cell">Meal name</th>
           <th class="md-text-cell">Energy</th>
           <th class="md-text-cell">Protein</th>
@@ -26,10 +34,16 @@
           <th class="md-text-cell">Polyunsaturated fat</th>
           <th class="md-text-cell">Saturated fat</th>
           <th class="md-text-cell">Trans fat</th>
+          <th class="md-text-cell">Amount</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let meal of currentMealPlan.meals.Breakfast">
+        <tr *ngFor="let meal of currentMealPlan.meals.Breakfast; let i = index">
+          <td *ngIf="editing && currentMealPlan.meals.Breakfast">
+            <button ion-item clear (click)="removeMeal(i, 'Breakfast')">
+              <ion-icon primary name="trash"></ion-icon>
+            </button>
+          </td>
           <td class="md-text-cell">{{ meal.name }}</td>
           <td>{{ meal.macronutrients ? meal.energy.toFixed(0) : meal.nutrients.energy.toFixed(0) }}kcal</td>
           <td>{{ meal.macronutrients ? meal.macronutrients.Protein.toFixed(2) : meal.nutrients.macronutrients.Protein.toFixed(2) }}g</td>
@@ -41,8 +55,15 @@
           <td>{{ meal.macronutrients ? meal.macronutrients['Polyunsaturated fat'].toFixed(2) : meal.nutrients.macronutrients['Polyunsaturated fat'].toFixed(2) }}g</td>
           <td>{{ meal.macronutrients ? meal.macronutrients['Saturated fat'].toFixed(2) : meal.nutrients.macronutrients['Saturated fat'].toFixed(2) }}g</td>
           <td>{{ meal.macronutrients ? meal.macronutrients['Trans fat'].toFixed(2) : meal.nutrients.macronutrients['Trans fat'].toFixed(2) }}g</td>
+          <td *ngIf="editing">
+            <ion-item>
+              <ion-input clearInput placeholder="Units" type="number" [(ngModel)]="meal.amount"></ion-input>
+            </ion-item>
+          </td>
+          <td *ngIf="!editing">{{ meal.amount }}</td>
         </tr>
         <tr>
+          <td *ngIf="editing && currentMealPlan.meals.Breakfast"></td>
           <td>Total</td>
           <td>{{ mealPlanNutrition.Breakfast.energy.toFixed(0) }}kcal</td>
           <td>{{ mealPlanNutrition.Breakfast.macronutrients.Protein.toFixed(2) }}g</td>
@@ -66,6 +87,7 @@
     <md-data-table>
       <thead>
         <tr>
+          <th *ngIf="editing && currentMealPlan.meals.Brunch">Remove meals</th>
           <th class="md-text-cell">Meal name</th>
           <th class="md-text-cell">Energy</th>
           <th class="md-text-cell">Protein</th>
@@ -80,7 +102,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let meal of currentMealPlan.meals.Brunch">
+        <tr *ngFor="let meal of currentMealPlan.meals.Brunch; let i = index">
+          <td *ngIf="editing && currentMealPlan.meals.Brunch">
+            <button ion-item clear (click)="removeMeal(i, 'Brunch')">
+              <ion-icon primary name="trash"></ion-icon>
+            </button>
+          </td>
           <td class="md-text-cell">{{ meal.name }}</td>
           <td>{{ meal.macronutrients ? meal.energy.toFixed(0) : meal.nutrients.energy.toFixed(0) }}kcal</td>
           <td>{{ meal.macronutrients ? meal.macronutrients.Protein.toFixed(2) : meal.nutrients.macronutrients.Protein.toFixed(2) }}g</td>
@@ -94,6 +121,7 @@
           <td>{{ meal.macronutrients ? meal.macronutrients['Trans fat'].toFixed(2) : meal.nutrients.macronutrients['Trans fat'].toFixed(2) }}g</td>
         </tr>
         <tr>
+          <td *ngIf="editing && currentMealPlan.meals.Brunch"></td>
           <td>Total</td>
           <td>{{ mealPlanNutrition.Brunch.energy.toFixed(0) }}kcal</td>
           <td>{{ mealPlanNutrition.Brunch.macronutrients.Protein.toFixed(2) }}g</td>
@@ -117,6 +145,7 @@
     <md-data-table>
       <thead>
         <tr>
+          <th *ngIf="editing && currentMealPlan.meals.Lunch">Remove meals</th>
           <th class="md-text-cell">Meal name</th>
           <th class="md-text-cell">Energy</th>
           <th class="md-text-cell">Protein</th>
@@ -131,7 +160,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let meal of currentMealPlan.meals.Lunch">
+        <tr *ngFor="let meal of currentMealPlan.meals.Lunch; let i = index">
+          <td *ngIf="editing && currentMealPlan.meals.Lunch">
+            <button ion-item clear (click)="removeMeal(i, 'Lunch')">
+              <ion-icon primary name="trash"></ion-icon>
+            </button>
+          </td>
           <td class="md-text-cell">{{ meal.name }}</td>
           <td>{{ meal.macronutrients ? meal.energy.toFixed(0) : meal.nutrients.energy.toFixed(0) }}kcal</td>
           <td>{{ meal.macronutrients ? meal.macronutrients.Protein.toFixed(2) : meal.nutrients.macronutrients.Protein.toFixed(2) }}g</td>
@@ -145,6 +179,7 @@
           <td>{{ meal.macronutrients ? meal.macronutrients['Trans fat'].toFixed(2) : meal.nutrients.macronutrients['Trans fat'].toFixed(2) }}g</td>
         </tr>
         <tr>
+          <td *ngIf="editing && currentMealPlan.meals.Lunch"></td>
           <td>Total</td>
           <td>{{ mealPlanNutrition.Lunch.energy.toFixed(0) }}kcal</td>
           <td>{{ mealPlanNutrition.Lunch.macronutrients.Protein.toFixed(2) }}g</td>
@@ -168,6 +203,7 @@
     <md-data-table>
       <thead>
         <tr>
+          <th *ngIf="editing && currentMealPlan.meals.Snack">Remove meals</th>
           <th class="md-text-cell">Meal name</th>
           <th class="md-text-cell">Energy</th>
           <th class="md-text-cell">Protein</th>
@@ -182,7 +218,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let meal of currentMealPlan.meals.Snack">
+        <tr *ngFor="let meal of currentMealPlan.meals.Snack; let i = index">
+          <td *ngIf="editing && currentMealPlan.meals.Snack">
+            <button ion-item clear (click)="removeMeal(i, 'Snack')">
+              <ion-icon primary name="trash"></ion-icon>
+            </button>
+          </td>
           <td class="md-text-cell">{{ meal.name }}</td>
           <td>{{ meal.macronutrients ? meal.energy.toFixed(0) : meal.nutrients.energy.toFixed(0) }}kcal</td>
           <td>{{ meal.macronutrients ? meal.macronutrients.Protein.toFixed(2) : meal.nutrients.macronutrients.Protein.toFixed(2) }}g</td>
@@ -196,6 +237,7 @@
           <td>{{ meal.macronutrients ? meal.macronutrients['Trans fat'].toFixed(2) : meal.nutrients.macronutrients['Trans fat'].toFixed(2) }}g</td>
         </tr>
         <tr>
+          <td *ngIf="editing && currentMealPlan.meals.Snack"></td>
           <td>Total</td>
           <td>{{ mealPlanNutrition.Snack.energy.toFixed(0) }}kcal</td>
           <td>{{ mealPlanNutrition.Snack.macronutrients.Protein.toFixed(2) }}g</td>
@@ -219,6 +261,7 @@
     <md-data-table>
       <thead>
         <tr>
+          <th *ngIf="editing && currentMealPlan.meals.Dinner">Remove meals</th>
           <th class="md-text-cell">Meal name</th>
           <th class="md-text-cell">Energy</th>
           <th class="md-text-cell">Protein</th>
@@ -233,7 +276,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let meal of currentMealPlan.meals.Dinner">
+        <tr *ngFor="let meal of currentMealPlan.meals.Dinner; let i = index">
+          <td *ngIf="editing && currentMealPlan.meals.Dinner">
+            <button ion-item clear (click)="removeMeal(i, 'Dinner')">
+              <ion-icon primary name="trash"></ion-icon>
+            </button>
+          </td>
           <td class="md-text-cell">{{ meal.name }}</td>
           <td>{{ meal.macronutrients ? meal.energy.toFixed(0) : meal.nutrients.energy.toFixed(0) }}kcal</td>
           <td>{{ meal.macronutrients ? meal.macronutrients.Protein.toFixed(2) : meal.nutrients.macronutrients.Protein.toFixed(2) }}g</td>
@@ -247,6 +295,7 @@
           <td>{{ meal.macronutrients ? meal.macronutrients['Trans fat'].toFixed(2) : meal.nutrients.macronutrients['Trans fat'].toFixed(2) }}g</td>
         </tr>
         <tr>
+          <td *ngIf="editing && currentMealPlan.meals.Dinner"></td>
           <td>Total</td>
           <td>{{ mealPlanNutrition.Dinner.energy.toFixed(0) }}kcal</td>
           <td>{{ mealPlanNutrition.Dinner.macronutrients.Protein.toFixed(2) }}g</td>
@@ -262,5 +311,4 @@
       </tbody>
     </md-data-table>
   </ion-card>
-  <button full small (click)="viewDailyNutrition()">Daily nutrition</button>
 </ion-content>

@@ -11,7 +11,7 @@
 <ion-content class="recipes">
 
   <ion-list class="recipe-list">
-    <ion-item-sliding *ngFor="let recipe of recipes | async | foodSearch: searchQuery">
+    <ion-item-sliding *ngFor="let recipe of recipes | async | itemSearch: searchQuery">
       <ion-item class="recipe-list-item">
         <ion-thumbnail item-left>
           <img src="img/{{recipe.name}}.png">

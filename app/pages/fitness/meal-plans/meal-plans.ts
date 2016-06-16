@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CORE_DIRECTIVES } from '@angular/common';
 import { Modal, NavController } from 'ionic-angular';
 import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 import { MATERIAL_DIRECTIVES } from 'ng2-material';
@@ -12,12 +13,13 @@ import { NutritionService } from '../shared';
 
 @Component({
   templateUrl: 'build/pages/fitness/meal-plans/meal-plans.html',
-  directives: [MATERIAL_DIRECTIVES, MD_TOOLBAR_DIRECTIVES],
+  directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES, MD_TOOLBAR_DIRECTIVES],
   pipes: [DateFilterPipe]
 })
 export class MealPlansPage implements OnInit {
   currentDate: string;
   currentMealPlan: MealPlan;
+  editing: boolean = false;
   mealPlans: any;
   mealPlanNutrition: any;
   constructor(
@@ -30,10 +32,24 @@ export class MealPlansPage implements OnInit {
     let mealAddModal = Modal.create(MealAddPage, { mealPlan: this.currentMealPlan });
     mealAddModal.onDismiss(mealPlan => {
       if (!!mealPlan) {
-        this._meaplPlansService.updateMealPlan(mealPlan);
+        this.currentMealPlan = mealPlan;
+        this._meaplPlansService.updateMealPlan(this.currentMealPlan);
       }
     });
     this._nav.present(mealAddModal);
+  }
+
+  removeMeal(mealIndex: number, mealTime: string): void {
+    this.currentMealPlan.meals[mealTime].splice(mealIndex, 1);
+  }
+
+  editMealPlan(): void {
+    if (this.editing) {
+      this._meaplPlansService.updateMealPlan(this.currentMealPlan);
+      this.editing = false;
+    } else {
+      this.editing = true;
+    }
   }
 
   viewDailyNutrition() {
