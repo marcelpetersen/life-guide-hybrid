@@ -28,7 +28,7 @@
             <tbody>
                 <tr *ngFor="let activity of currentActivityPlan.activities; let i = index">
                     <td *ngIf="editing">
-                        <button ion-item clear (click)="removeActivity(i)">
+                        <button clear (click)="removeActivity(i)">
                         <ion-icon primary name="trash"></ion-icon>
                         </button>
                     </td>
