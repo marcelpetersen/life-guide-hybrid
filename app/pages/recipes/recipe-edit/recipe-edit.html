@@ -97,7 +97,9 @@
             <span>Add ingredient</span>
         </button>
         <ion-item *ngFor="let ingredient of recipe.ingredients; let i = index">
-            <ion-icon item-left class="item-remove-icon" (click)="removeIngredient(i)" name="trash"></ion-icon>
+            <button class="item-remove-button" clear item-left (click)="removeIngredient(i)">
+                <ion-icon primary name="trash"></ion-icon>
+            </button>
             <ion-label floating>{{ ingredient.name }}</ion-label>
             <ion-input clearInput placeholder="Quantity (g)" type="number" [(ngModel)]="ingredient.quantity"></ion-input>
         </ion-item>
@@ -110,7 +112,9 @@
             <span>Add step</span>
         </button>
         <ion-item *ngFor="let step of recipe.steps; let i = index">
-            <ion-icon item-left class="item-remove-icon" (click)="removeStep(i)" name="trash"></ion-icon>
+            <button class="item-remove-button" clear item-left (click)="removeStep(i)">
+                <ion-icon primary name="trash"></ion-icon>
+            </button>
             <ion-label floating>Step {{i + 1}}</ion-label>
             <ion-input [(ngModel)]="recipeSteps[i]"></ion-input>
         </ion-item>

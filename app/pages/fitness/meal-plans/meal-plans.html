@@ -40,7 +40,7 @@
       <tbody>
         <tr *ngFor="let meal of currentMealPlan.meals.Breakfast; let i = index">
           <td *ngIf="editing">
-            <button clear (click)="removeMeal(i, 'Breakfast')">
+            <button clear class="table-item-remove" (click)="removeMeal(i, 'Breakfast')">
               <ion-icon primary name="trash"></ion-icon>
             </button>
           </td>
@@ -104,7 +104,7 @@
       <tbody>
         <tr *ngFor="let meal of currentMealPlan.meals.Brunch; let i = index">
           <td *ngIf="editing">
-            <button clear (click)="removeMeal(i, 'Brunch')">
+            <button clear class="table-item-remove" (click)="removeMeal(i, 'Brunch')">
               <ion-icon primary name="trash"></ion-icon>
             </button>
           </td>
@@ -168,7 +168,7 @@
       <tbody>
         <tr *ngFor="let meal of currentMealPlan.meals.Lunch; let i = index">
           <td *ngIf="editing">
-            <button clear (click)="removeMeal(i, 'Lunch')">
+            <button clear class="table-item-remove" (click)="removeMeal(i, 'Lunch')">
               <ion-icon primary name="trash"></ion-icon>
             </button>
           </td>
@@ -232,7 +232,7 @@
       <tbody>
         <tr *ngFor="let meal of currentMealPlan.meals.Snack; let i = index">
           <td *ngIf="editing">
-            <button clear (click)="removeMeal(i, 'Snack')">
+            <button clear class="table-item-remove" (click)="removeMeal(i, 'Snack')">
               <ion-icon primary name="trash"></ion-icon>
             </button>
           </td>
@@ -296,7 +296,7 @@
       <tbody>
         <tr *ngFor="let meal of currentMealPlan.meals.Dinner; let i = index">
           <td *ngIf="editing">
-            <button clear (click)="removeMeal(i, 'Dinner')">
+            <button clear class="table-item-remove" (click)="removeMeal(i, 'Dinner')">
               <ion-icon primary name="trash"></ion-icon>
             </button>
           </td>
