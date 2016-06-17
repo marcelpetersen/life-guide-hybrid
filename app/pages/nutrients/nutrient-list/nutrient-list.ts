@@ -10,13 +10,13 @@ import { INutrient, NutrientService } from '../shared';
   pipes: [ItemSearchPipe]
 })
 export class NutrientListPage implements OnInit {
-  micronutrients: any;
-  macronutrients: any;
-  nutrientGroup: string = "macronutrients";
-  searchQuery: string = '';
+  public micronutrients: any;
+  public macronutrients: any;
+  public nutrientGroup: string = "macronutrients";
+  public searchQuery: string = '';
   constructor(private _nav: NavController, private _nutrientService: NutrientService) { }
 
-  openNutrientDetails(nutrient: INutrient): void {
+  public openNutrientDetails(nutrient: INutrient): void {
     this._nav.push(NutrientDetailsPage, { nutrient });
   }
 

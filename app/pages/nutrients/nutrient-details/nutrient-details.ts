@@ -7,8 +7,8 @@ import { INutrient, NutrientService } from '../shared';
     templateUrl: 'build/pages/nutrients/nutrient-details/nutrient-details.html'
 })
 export class NutrientDetailsPage implements OnInit {
-    nutrient: INutrient;
-    intakeUnit: string;
+    public nutrient: INutrient;
+    public intakeUnit: string;
     constructor(private _params: NavParams) { }
 
     ngOnInit(): void {

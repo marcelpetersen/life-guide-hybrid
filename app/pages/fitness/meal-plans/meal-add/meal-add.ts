@@ -11,13 +11,13 @@ import { Recipe, RecipeService } from '../../../recipes';
     pipes: [ItemSearchPipe]
 })
 export class MealAddPage implements OnInit {
-    food: any;
-    recipes: any;
-    mealPlan: MealPlan;
-    mealTimeChoose: boolean;
-    selectedMeals: any[] = [];
-    selectedMealTimes: string[] = [];
-    searchQuery: string = '';
+    public food: any;
+    public recipes: any;
+    public mealPlan: MealPlan;
+    public mealTimeChoose: boolean;
+    public selectedMeals: any[] = [];
+    public selectedMealTimes: string[] = [];
+    public searchQuery: string = '';
     constructor(
         private _foodService: FoodService,
         private _nav: NavController,
@@ -26,7 +26,7 @@ export class MealAddPage implements OnInit {
         private _viewCtrl: ViewController
     ) { }
 
-    changeMeal(meal: Food): void {
+    public changeMeal(meal: Food): void {
         let mealIndex = this.selectedMeals.indexOf(meal);
         if (mealIndex !== -1) {
             this.selectedMeals.splice(mealIndex, 1);
@@ -36,7 +36,7 @@ export class MealAddPage implements OnInit {
         }
     }
 
-    chooseMealTime(event: any, meal: Food): void {
+    public chooseMealTime(event: any, meal: Food): void {
         let mealIndex = this.selectedMeals.indexOf(meal);
         if (mealIndex !== -1) {
             let mealTimeAlert = Alert.create({
@@ -96,7 +96,7 @@ export class MealAddPage implements OnInit {
         }
     }
 
-    doneAdding(): void {
+    public doneAdding(): void {
         if (!this.mealPlan.meals) {
             this.mealPlan.meals = {
                 Breakfast: [],
@@ -122,7 +122,7 @@ export class MealAddPage implements OnInit {
         this._viewCtrl.dismiss(this.mealPlan);
     }
 
-    cancelAdd(): void {
+    public cancelAdd(): void {
         this._viewCtrl.dismiss();
     }
 

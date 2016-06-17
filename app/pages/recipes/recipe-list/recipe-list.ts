@@ -11,12 +11,12 @@ import { Recipe, RecipeService } from '../shared';
   pipes: [ItemSearchPipe]
 })
 export class RecipeListPage implements OnInit {
-  newRecipe: Recipe;
-  recipes: any;
-  searchQuery: string = '';
+  private newRecipe: Recipe;
+  public recipes: any;
+  public searchQuery: string = '';
   constructor(private _nav: NavController, private _recipeService: RecipeService) { }
 
-  createRecipe(): void {
+  public createRecipe(): void {
     this.newRecipe = new Recipe();
     let recipeAddModal = Modal.create(RecipeEditPage, { recipe: this.newRecipe });
     recipeAddModal.onDismiss(recipe => {
@@ -28,11 +28,11 @@ export class RecipeListPage implements OnInit {
     this._nav.present(recipeAddModal);
   }
 
-  openRecipeDetails(recipe: Recipe): void {
+  public openRecipeDetails(recipe: Recipe): void {
     this._nav.push(RecipeDetailsPage, { recipe });
   }
 
-  editRecipe(recipe: Recipe): void {
+  public editRecipe(recipe: Recipe): void {
     let recipeEditModal = Modal.create(RecipeEditPage, { recipe });
     recipeEditModal.onDismiss(recipe => {
       if (!!recipe) {
@@ -43,7 +43,7 @@ export class RecipeListPage implements OnInit {
     this._nav.present(recipeEditModal);
   }
 
-  removeRecipe(recipe: Recipe): void {
+  public removeRecipe(recipe: Recipe): void {
     this._recipeService.removeRecipe(recipe);
   }
 

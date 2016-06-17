@@ -11,7 +11,7 @@ import { NutritionTablesComponent } from '../../../components';
     directives: [MATERIAL_DIRECTIVES, MD_TOOLBAR_DIRECTIVES, NutritionTablesComponent]
 })
 export class FoodDetailsPage implements OnInit {
-    food: Food;
+    public food: Food;
     constructor(private _params: NavParams) { }
 
     ngOnInit() { 

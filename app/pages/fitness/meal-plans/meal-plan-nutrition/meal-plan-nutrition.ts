@@ -9,7 +9,7 @@ import { NutritionTablesComponent } from '../../../../components';
     directives: [NutritionTablesComponent]
 })
 export class MealPlanNutritionPage implements OnInit {
-    totalNutrition: Food = new Food();
+    public totalNutrition: Food = new Food();
     constructor(private _params: NavParams) { }
 
     ngOnInit() {

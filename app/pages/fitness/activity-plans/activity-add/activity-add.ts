@@ -9,9 +9,9 @@ import { ItemSearchPipe } from '../../../shared';
     pipes: [ItemSearchPipe]
 })
 export class ActivityAddPage implements OnInit {
-    activities: Activity[];
-    searchQuery: string = '';
-    selectedActivities: Activity[] = [];
+    public activities: Activity[];
+    public searchQuery: string = '';
+    public selectedActivities: Activity[] = [];
     constructor(
         private _activityService: ActivityPlanService,
         private _nav: NavController,
@@ -19,7 +19,7 @@ export class ActivityAddPage implements OnInit {
         private _viewCtrl: ViewController
     ) { }
 
-    changeActivity(activity: Activity): void {
+    public changeActivity(activity: Activity): void {
         let activityIndex = this.selectedActivities.indexOf(activity);
         if (activityIndex !== -1) {
             this.selectedActivities.splice(activityIndex, 1);
@@ -28,7 +28,7 @@ export class ActivityAddPage implements OnInit {
         }
     }
 
-    setActivityTime(event: any, activity: Activity): void {
+    public setActivityTime(event: any, activity: Activity): void {
         let activityIndex = this.selectedActivities.indexOf(activity);
         if (activityIndex !== -1) {
             let durationModal = Alert.create({
@@ -60,7 +60,7 @@ export class ActivityAddPage implements OnInit {
         }
     }
 
-    doneAdding(): void {
+    public doneAdding(): void {
         this.selectedActivities.forEach(activity => {
             if (activity.hasOwnProperty('$key')) {
                 delete activity['$key'];
@@ -69,7 +69,7 @@ export class ActivityAddPage implements OnInit {
         this._viewCtrl.dismiss(this.selectedActivities);
     }
 
-    cancelAdd(): void {
+    public cancelAdd(): void {
         this._viewCtrl.dismiss();
     }
 

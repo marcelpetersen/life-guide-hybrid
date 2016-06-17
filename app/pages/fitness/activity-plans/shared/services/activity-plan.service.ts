@@ -5,28 +5,28 @@ import { Activity, ActivityPlan } from '../model';
 
 @Injectable()
 export class ActivityPlanService {
-    activities: FirebaseListObservable<Activity[]>;
-    activityPlans: FirebaseListObservable<ActivityPlan[]>;
+    private _activities: FirebaseListObservable<Activity[]>;
+    private _activityPlans: FirebaseListObservable<ActivityPlan[]>;
     constructor(af: AngularFire) {
-        this.activities = af.database.list('/activities');
-        this.activityPlans = af.database.list('/activity-plans');
+        this._activities = af.database.list('/activities');
+        this._activityPlans = af.database.list('/activity-plans');
     }
 
-    getActivities(): FirebaseListObservable<Activity[]> {
-        return this.activities;
+    public getActivities(): FirebaseListObservable<Activity[]> {
+        return this._activities;
     }
 
-    getActivityPlans(): FirebaseListObservable<ActivityPlan[]> {
-        return this.activityPlans;
+    public getActivityPlans(): FirebaseListObservable<ActivityPlan[]> {
+        return this._activityPlans;
     }
 
-    addActivityPlan(date: string): void {
-        this.activityPlans.push(new ActivityPlan(date));
+    public addActivityPlan(date: string): void {
+        this._activityPlans.push(new ActivityPlan(date));
     }
 
-    updateActivityPlan(activityPlan: ActivityPlan): void {
+    public updateActivityPlan(activityPlan: ActivityPlan): void {
         if (activityPlan['$key']) {
-            this.activityPlans.update(activityPlan['$key'], {
+            this._activityPlans.update(activityPlan['$key'], {
                 activities: activityPlan.activities,
                 totalEnergy: activityPlan.totalEnergy,
                 totalDuration: activityPlan.totalDuration
@@ -35,7 +35,7 @@ export class ActivityPlanService {
 
     }
 
-    calculateTotalActivity(activities: Activity[], weight: number = 70): any {
+    public calculateTotalActivity(activities: Activity[], weight: number = 70): any {
         let totalEnergy: number = 0,
             totalDuration: number = 0;
         activities.forEach(activity => {
@@ -45,7 +45,7 @@ export class ActivityPlanService {
         return { totalEnergy, totalDuration };
     }
 
-    calculateActivityEnergy(activity: Activity, weight: number = 70): number {
+    public calculateActivityEnergy(activity: Activity, weight: number = 70): number {
         let totalEnergy = 0;
         totalEnergy += Math.floor(0.0175 * activity.met * weight * activity.time);
         return totalEnergy;

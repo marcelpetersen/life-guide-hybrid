@@ -17,18 +17,18 @@ import { NutritionService } from '../shared';
   pipes: [DateFilterPipe]
 })
 export class MealPlansPage implements OnInit {
-  currentDate: string;
-  currentMealPlan: MealPlan;
-  editing: boolean = false;
-  mealPlans: any;
-  mealPlanNutrition: any;
+  private _mealPlans: any;
+  public currentDate: string;
+  public currentMealPlan: MealPlan;
+  public editing: boolean = false;
+  public mealPlanNutrition: any;
   constructor(
     private _meaplPlansService: MealPlansService, 
     private _nav: NavController, 
     private _nutritionService: NutritionService
     ) { }
 
-  mealAdd() {
+  public mealAdd() {
     let mealAddModal = Modal.create(MealAddPage, { mealPlan: this.currentMealPlan });
     mealAddModal.onDismiss(mealPlan => {
       if (!!mealPlan) {
@@ -39,11 +39,11 @@ export class MealPlansPage implements OnInit {
     this._nav.present(mealAddModal);
   }
 
-  removeMeal(mealIndex: number, mealTime: string): void {
+  public removeMeal(mealIndex: number, mealTime: string): void {
     this.currentMealPlan.meals[mealTime].splice(mealIndex, 1);
   }
 
-  editMealPlan(): void {
+  public editMealPlan(): void {
     if (this.editing) {
       this._meaplPlansService.updateMealPlan(this.currentMealPlan);
       this.editing = false;
@@ -52,11 +52,11 @@ export class MealPlansPage implements OnInit {
     }
   }
 
-  viewDailyNutrition() {
+  public viewDailyNutrition() {
     this._nav.push(MealPlanNutritionPage, { totalNutrition: this.mealPlanNutrition.Total });
   }
 
-  syncMealPlan() {
+  public syncMealPlan() {
     this.currentMealPlan = new MealPlan(this.currentDate);
     this.mealPlanNutrition = {
       Breakfast: new Food(),
@@ -65,7 +65,7 @@ export class MealPlansPage implements OnInit {
       Snack: new Food(),
       Dinner: new Food()
     }
-    this.mealPlans
+    this._mealPlans
       .subscribe(mealPlans => {
         mealPlans.forEach(mealPlan => {
           if (mealPlan.date == this.currentDate) {
@@ -85,7 +85,7 @@ export class MealPlansPage implements OnInit {
   }
 
   ngOnInit() {
-    this.mealPlans = this._meaplPlansService.getMealPlans();
+    this._mealPlans = this._meaplPlansService.getMealPlans();
     let myDate = new Date(),
       currentDay = myDate.getDate(),
       currentMonth = myDate.getMonth() + 1,

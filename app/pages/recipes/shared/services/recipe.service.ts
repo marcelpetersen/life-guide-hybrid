@@ -6,22 +6,22 @@ import { Recipe } from '../';
 
 @Injectable()
 export class RecipeService {
-    recipes: FirebaseListObservable<Recipe[]>;
+    private _recipes: FirebaseListObservable<Recipe[]>;
 
     constructor(af: AngularFire) {
-        this.recipes = af.database.list('/recipes');
+        this._recipes = af.database.list('/recipes');
     }
 
-    getRecipes(): FirebaseListObservable<Recipe[]> {
-        return this.recipes;
+    public getRecipes(): FirebaseListObservable<Recipe[]> {
+        return this._recipes;
     }
 
-    addRecipe(recipe: Recipe): void {
-        this.recipes.push(recipe);
+    public addRecipe(recipe: Recipe): void {
+        this._recipes.push(recipe);
     }
 
-    updateRecipe(recipe: Recipe): void {
-        this.recipes.update(recipe['$key'], {
+    public updateRecipe(recipe: Recipe): void {
+        this._recipes.update(recipe['$key'], {
             name: recipe.name,
             category: recipe.category,
             dietary: recipe.dietary,
@@ -38,11 +38,11 @@ export class RecipeService {
         });
     }
 
-    removeRecipe(recipe: Recipe): void {
-        this.recipes.remove(recipe['$key']);
+    public removeRecipe(recipe: Recipe): void {
+        this._recipes.remove(recipe['$key']);
     }
 
-    calculateRecipeNutrition(recipe: Recipe): Food {
+    public calculateRecipeNutrition(recipe: Recipe): Food {
         let nutrition: Food = new Food();
         recipe.ingredients.forEach(ingredient => {
             for (let nutrientCategory in ingredient) {

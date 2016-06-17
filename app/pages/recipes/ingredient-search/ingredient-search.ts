@@ -9,17 +9,17 @@ import { ItemSearchPipe } from '../../shared';
     pipes: [ItemSearchPipe]
 })
 export class IngredientSearchPage implements OnInit {
-    checkedIngredients: boolean[] = [];
-    foodSource: Food[];
-    selectedIngredients: Food[] = [];
-    searchQuery: string = '';
+    public checkedIngredients: boolean[] = [];
+    public foodSource: Food[];
+    public selectedIngredients: Food[] = [];
+    public searchQuery: string = '';
     constructor(
         private _foodService: FoodService,
         private _params: NavParams,
         private _viewCtrl: ViewController
     ) { }
 
-    addIngredient(ingredient: Food): void {
+    public addIngredient(ingredient: Food): void {
         this.checkedIngredients[ingredient['$key']] = !this.checkedIngredients[ingredient['$key']];
         let result = this.selectedIngredients.filter(item => item.name === ingredient.name);
         if (this.checkedIngredients[ingredient['$key']] && !result.length) {
@@ -42,11 +42,11 @@ export class IngredientSearchPage implements OnInit {
         }
     }
 
-    doneAdding(): void {
+    public doneAdding(): void {
         this._viewCtrl.dismiss(this.selectedIngredients);
     }
 
-    cancelAdd(): void {
+    public cancelAdd(): void {
         this._viewCtrl.dismiss();
     }
 

@@ -9,7 +9,7 @@ import { Recipe, RecipeService } from '../shared';
     directives: [NutritionTablesComponent]
 })
 export class RecipeDetailsPage implements OnInit {
-    recipe: Recipe;
+    public recipe: Recipe;
     constructor(private _params: NavParams) { }
 
     ngOnInit(): void { 

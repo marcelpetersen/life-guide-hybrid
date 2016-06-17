@@ -8,9 +8,9 @@ import { ProfilePage } from './profile/profile';
     templateUrl: 'build/pages/fitness/fitness.html'
 })
 export class FitnessPage implements OnInit {
-    activityPlansTab: any;
-    mealPlansTab: any;
-    fitnesProfileTab: any;
+    public activityPlansTab: any;
+    public mealPlansTab: any;
+    public fitnesProfileTab: any;
     constructor() { }
 
     ngOnInit(): void {

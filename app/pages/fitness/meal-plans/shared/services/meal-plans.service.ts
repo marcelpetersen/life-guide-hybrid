@@ -5,22 +5,22 @@ import { MealPlan } from '../model/meal-plan.model';
 
 @Injectable()
 export class MealPlansService {
-  mealPlans: FirebaseListObservable<MealPlan[]>;
+  private _mealPlans: FirebaseListObservable<MealPlan[]>;
   constructor(af: AngularFire) {
-    this.mealPlans = af.database.list('/meal-plans');
+    this._mealPlans = af.database.list('/meal-plans');
   }
 
-  getMealPlans(): FirebaseListObservable<MealPlan[]> {
-    return this.mealPlans;
+  public getMealPlans(): FirebaseListObservable<MealPlan[]> {
+    return this._mealPlans;
   }
 
-  addMealPlan(date: string): void {
-    this.mealPlans.push(new MealPlan(date));
+  public addMealPlan(date: string): void {
+    this._mealPlans.push(new MealPlan(date));
   }
 
-  updateMealPlan(mealPlan: MealPlan): void {
+  public updateMealPlan(mealPlan: MealPlan): void {
     if (mealPlan['$key']) {
-      this.mealPlans.update(mealPlan['$key'], {
+      this._mealPlans.update(mealPlan['$key'], {
         meals: mealPlan.meals
       });
     }

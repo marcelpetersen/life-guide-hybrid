@@ -9,38 +9,38 @@ import { Recipe, RecipeService } from '../shared';
     templateUrl: 'build/pages/recipes/recipe-edit/recipe-edit.html'
 })
 export class RecipeEditPage implements OnInit {
-    recipe: Recipe;
-    foodSource: Food[];
-    ingredient: Food;
-    recipeSteps: string[] = [];
+    public recipe: Recipe;
+    public foodSource: Food[];
+    public ingredient: Food;
+    public recipeSteps: string[] = [];
     constructor(private _nav: NavController, private _params: NavParams, private _viewCtrl: ViewController) { }
 
-    searchIngredient(): void {
+    public searchIngredient(): void {
         let ingredientSearchModal = Modal.create(IngredientSearchPage, { ingredients: this.recipe.ingredients });
         ingredientSearchModal.onDismiss(ingredients => this.recipe.ingredients = ingredients);
         this._nav.present(ingredientSearchModal);
     }
 
-    addStep(): void {
+    public addStep(): void {
         this.recipeSteps.push('');
         this.recipe.steps.push('');
     }
 
-    removeIngredient(index: number): void {
+    public removeIngredient(index: number): void {
         this.recipe.ingredients.splice(index, 1);
     }
 
-    removeStep(index: number): void {
+    public removeStep(index: number): void {
         this.recipeSteps.splice(index, 1);
         this.recipe.steps.splice(index, 1);
     }
 
-    createRecipe(): void {
+    public createRecipe(): void {
         this.recipeSteps.forEach((step, index) => this.recipe.steps[index] = step);
         this._viewCtrl.dismiss(this.recipe);
     }
 
-    cancelRecipe(): void {
+    public cancelRecipe(): void {
         this._viewCtrl.dismiss();
     }
 

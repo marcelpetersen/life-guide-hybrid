@@ -12,35 +12,13 @@ import { ActivityAddPage } from './activity-add/activity-add';
     directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES, MD_TOOLBAR_DIRECTIVES]
 })
 export class ActivityPlansPage implements OnInit {
-    activityPlans: any;
-    currentDate: string;
-    currentActivityPlan: ActivityPlan;
-    editing: boolean = false;
+    private _activityPlans: any;
+    public currentDate: string;
+    public currentActivityPlan: ActivityPlan;
+    public editing: boolean = false;
     constructor(private _activityPlanService: ActivityPlanService, private _nav: NavController) { }
 
-    searchActivity(): void {
-        let activitySearchModal = Modal.create(ActivityAddPage, { activities: this.currentActivityPlan.activities });
-        activitySearchModal.onDismiss(activities => {
-            this.currentActivityPlan.activities = activities;
-            this.updateActivityPlan();
-        });
-        this._nav.present(activitySearchModal);
-    }
-
-    removeActivity(activityIndex: number): void {
-        this.currentActivityPlan.activities.splice(activityIndex, 1);
-    }
-
-    editActivityPlan(): void {
-        if (this.editing) {
-            this.updateActivityPlan();
-            this.editing = false;
-        } else {
-            this.editing = true;
-        }
-    }
-
-    updateActivityPlan(): void {
+    private updateActivityPlan(): void {
         this.currentActivityPlan.activities.forEach(activity => activity.energy = this._activityPlanService.calculateActivityEnergy(activity));
         let totalActivity = this._activityPlanService.calculateTotalActivity(this.currentActivityPlan.activities);
         this.currentActivityPlan.totalEnergy = totalActivity.totalEnergy;
@@ -49,9 +27,31 @@ export class ActivityPlansPage implements OnInit {
         this._activityPlanService.updateActivityPlan(this.currentActivityPlan);
     }
 
-    syncActivityPlan() {
+    public searchActivity(): void {
+        let activitySearchModal = Modal.create(ActivityAddPage, { activities: this.currentActivityPlan.activities });
+        activitySearchModal.onDismiss(activities => {
+            this.currentActivityPlan.activities = activities;
+            this.updateActivityPlan();
+        });
+        this._nav.present(activitySearchModal);
+    }
+
+    public removeActivity(activityIndex: number): void {
+        this.currentActivityPlan.activities.splice(activityIndex, 1);
+    }
+
+    public editActivityPlan(): void {
+        if (this.editing) {
+            this.updateActivityPlan();
+            this.editing = false;
+        } else {
+            this.editing = true;
+        }
+    }
+
+    public syncActivityPlan() {
         this.currentActivityPlan = new ActivityPlan(this.currentDate);
-        this.activityPlans
+        this._activityPlans
             .subscribe(activityPlans => {
                 activityPlans.forEach(activityPlan => {
                     if (activityPlan.date == this.currentDate) {
@@ -72,7 +72,7 @@ export class ActivityPlansPage implements OnInit {
     }
 
     ngOnInit() {
-        this.activityPlans = this._activityPlanService.getActivityPlans();
+        this._activityPlans = this._activityPlanService.getActivityPlans();
         let myDate = new Date(),
             currentDay = myDate.getDate(),
             currentMonth = myDate.getMonth() + 1,
