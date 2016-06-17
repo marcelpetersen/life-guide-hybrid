@@ -39,14 +39,15 @@ import { RecipeListPage, RecipeService } from './pages/recipes';
     }),
     firebaseAuthConfig({
       provider: AuthProviders.Password,
-      method: AuthMethods.Password
+      method: AuthMethods.Password,
+      remember: 'default'
     }),
     MATERIAL_PROVIDERS
   ]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = HomePage;
+  rootPage: any = AuthenticationPage;
   pages: Array<{ title: string, icon: string, component: any }>
 
   constructor(platform: Platform) {
