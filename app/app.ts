@@ -47,8 +47,8 @@ import { RecipeListPage, RecipeService } from './pages/recipes';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = AuthenticationPage;
-  pages: Array<{ title: string, icon: string, component: any }>
+  public rootPage: any = AuthenticationPage;
+  public pages: Array<{ title: string, icon: string, component: any }>
 
   constructor(platform: Platform) {
     platform.ready().then(() => StatusBar.styleDefault());
@@ -62,7 +62,7 @@ export class MyApp {
     ];
   }
 
-  openPage(page) {
+  public openPage(page): void {
     this.nav.setRoot(page.component);
   }
 }

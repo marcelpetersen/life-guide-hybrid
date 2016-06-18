@@ -3,9 +3,7 @@ import { AngularFire, AuthMethods, AuthProviders, FirebaseAuth, FirebaseListObse
 
 @Injectable()
 export class AuthenticationService {
-    private _users: FirebaseListObservable<any[]>;
     constructor(private _af: AngularFire, private _auth: FirebaseAuth) {
-        this._users = _af.database.list('/users');
     }
 
     public getAuth(): any {
@@ -24,14 +22,12 @@ export class AuthenticationService {
         return this._auth.login(userCredentials);
     }
 
-    public registerUser(userCredentials: any): any {
-        this._users.push(userCredentials);
-        return this._auth.createUser(userCredentials);
+    public logoutUser(): void {
+        this._auth.logout();
     }
 
-    public addUser(authData: any, userCredentials: any): void {
-        console.log("Auth", authData, "Credentials", userCredentials);
-        console.log(this._auth);
+    public registerUser(userCredentials: any): any {
+        return this._auth.createUser(userCredentials);
     }
 
 }

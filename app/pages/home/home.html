@@ -2,7 +2,12 @@
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>Logged in as {{ username }}</ion-title>
+  <ion-buttons start>
+    <ion-avatar>
+      <img [src]="userImage">
+    </ion-avatar>
+  </ion-buttons>
+  <ion-title>Home</ion-title>
 </ion-navbar>
 
 <ion-content class="home">

@@ -6,11 +6,11 @@ import { NavParams } from 'ionic-angular';
 })
 export class HomePage implements OnInit {
   public username: string;
-  constructor(private _params: NavParams) {
-    
-  }
+  public userImage: string;
+  constructor(private _params: NavParams) { }
 
   ngOnInit(): void {
     this.username = this._params.data.authData.auth.displayName;
+    this.userImage = this._params.data.authData.auth.photoURL;
   }
 }

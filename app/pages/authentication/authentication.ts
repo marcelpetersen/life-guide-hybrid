@@ -12,7 +12,7 @@ import { HomePage } from '../home/home';
 export class AuthenticationPage implements OnInit {
   private _loading: Loading;
   public userLogin: boolean = true;
-  constructor(private _authService: AuthenticationService, private _nav: NavController) {}
+  constructor(private _authService: AuthenticationService, private _nav: NavController) { }
 
   private showError(message: string): void {
     setTimeout(() => {
@@ -41,13 +41,13 @@ export class AuthenticationPage implements OnInit {
         title: "Success",
         subTitle: "Your new account has been created",
         buttons: [
-                    {
-                        text: 'Ok',
-                        handler: () => {
-                            this._nav.setRoot(HomePage);
-                        }
-                    }
-                ]
+          {
+            text: 'Ok',
+            handler: () => {
+              this._nav.setRoot(HomePage);
+            }
+          }
+        ]
       });
       this._nav.present(successAlert);
     }).catch(error => {
@@ -75,15 +75,17 @@ export class AuthenticationPage implements OnInit {
     });
   }
 
-  public register(): void {
-    this.userLogin = false;
+  public changeAuthMethod(): void {
+    this.userLogin = !this.userLogin;
   }
 
   ngOnInit(): void {
     this.showLoading();
     this._authService.getAuth().subscribe(authData => {
-      if (authData) {
+      setTimeout(() => {
         this._loading.dismiss();
+      });
+      if (authData) {
         this._nav.setRoot(HomePage, { authData });
       }
     });

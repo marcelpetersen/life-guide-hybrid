@@ -14,7 +14,7 @@
     </ion-item>
     <div padding>
       <button block type="submit" [disabled]="!loginForm.form.valid">Log in</button>
-      <button block (click)="userLogin = false">Sign up</button>
+      <button block (click)="changeAuthMethod()">Sign up</button>
       <button ion-item (click)="googleLogin()">
         <ion-icon primary item-left name="logo-google">
         </ion-icon>
@@ -24,6 +24,7 @@
   </form>
 
   <form *ngIf="!userLogin" #registerForm="ngForm" (ngSubmit)="createAccount(registerForm.value)">
+    <!--
     <ion-item>
       <ion-label floating>Username</ion-label>
       <ion-input type="text" ngControl="username" required></ion-input>
@@ -47,6 +48,7 @@
       <ion-label floating>Height</ion-label>
       <ion-input placeholder="cm" type="number" ngControl="height" required></ion-input>
     </ion-item>
+    -->
     <ion-item>
       <ion-label floating>Email</ion-label>
       <ion-input type="email" ngControl="email" required></ion-input>
@@ -57,7 +59,7 @@
     </ion-item>
     <div padding>
       <button block type="submit" [disabled]="!registerForm.form.valid">Create account</button>
-      <button block (click)="userLogin = true">Log in</button>
+      <button block (click)="changeAuthMethod()">Log in</button>
     </div>
   </form>
 </ion-content>
