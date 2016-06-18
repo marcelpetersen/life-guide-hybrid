@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { NavParams } from 'ionic-angular';
+import { FirebaseAuth } from 'angularfire2';
 
 @Component({
   templateUrl: 'build/pages/home/home.html'
@@ -7,10 +7,14 @@ import { NavParams } from 'ionic-angular';
 export class HomePage implements OnInit {
   public username: string;
   public userImage: string;
-  constructor(private _params: NavParams) { }
+  constructor(private _auth: FirebaseAuth) { }
 
   ngOnInit(): void {
-    this.username = this._params.data.authData.auth.displayName;
-    this.userImage = this._params.data.authData.auth.photoURL;
+    this._auth.subscribe(authData => {
+      if (authData) {
+        this.username = authData.auth.displayName;
+        this.userImage = authData.auth.photoURL;
+      }
+    });
   }
 }
