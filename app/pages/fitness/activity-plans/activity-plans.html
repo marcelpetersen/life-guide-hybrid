@@ -1,5 +1,5 @@
 <ion-item class="plan-date">
-    <ion-icon name="calendar" item-left></ion-icon>
+    <ion-icon primary name="calendar" item-left></ion-icon>
     <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="currentDate" (ionChange)="syncActivityPlan()"></ion-datetime>
     <button clear class="table-item-remove" item-right (click)="editActivityPlan()">
         <ion-icon *ngIf="!editing" name="create"></ion-icon>
