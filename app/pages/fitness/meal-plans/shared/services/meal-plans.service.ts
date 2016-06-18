@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, FirebaseAuth, FirebaseListObservable } from 'angularfire2';
 
-import { AuthenticationService } from '../../../../authentication';
 import { MealPlan } from '../model/meal-plan.model';
 
 @Injectable()
 export class MealPlansService {
   private _mealPlans: FirebaseListObservable<MealPlan[]>;
-  constructor(private _af: AngularFire, private _authService: AuthenticationService) {
-    this._authService.getAuth().subscribe(authData => {
+  constructor(private _af: AngularFire, private _auth: FirebaseAuth) {
+    this._auth.subscribe(authData => {
       if (authData) {
         this._mealPlans = _af.database.list(`/meal-plans/${authData.uid}`);
       }
