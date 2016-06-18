@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
+import { AuthenticationService } from '../../../authentication';
 import { Food } from '../../../food';
 import { Recipe } from '../';
 
@@ -8,8 +9,12 @@ import { Recipe } from '../';
 export class RecipeService {
     private _recipes: FirebaseListObservable<Recipe[]>;
 
-    constructor(af: AngularFire) {
-        this._recipes = af.database.list('/recipes');
+    constructor(private _af: AngularFire, private _authService: AuthenticationService) {
+        this._authService.getAuth().subscribe(authData => {
+            if (authData) {
+                this._recipes = _af.database.list(`/recipes/${authData.uid}`);
+            }
+        });
     }
 
     public getRecipes(): FirebaseListObservable<Recipe[]> {

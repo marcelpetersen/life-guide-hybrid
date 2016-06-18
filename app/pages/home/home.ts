@@ -1,18 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { AngularFire, FirebaseAuth } from 'angularfire2';
+import { NavParams } from 'ionic-angular';
 
 @Component({
   templateUrl: 'build/pages/home/home.html'
 })
-export class HomePage implements OnInit{
-  constructor(public af: AngularFire, public auth: FirebaseAuth) {
+export class HomePage implements OnInit {
+  public username: string;
+  constructor(private _params: NavParams) {
+    
   }
 
   ngOnInit(): void {
-    this.auth.subscribe(data => {
-      if (data) {
-        console.log(data);
-      }
-    });
+    this.username = this._params.data.authData.auth.displayName;
   }
 }

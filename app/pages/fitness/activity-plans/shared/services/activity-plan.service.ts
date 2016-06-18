@@ -2,14 +2,19 @@ import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 import { Activity, ActivityPlan } from '../model';
+import { AuthenticationService } from '../../../../authentication';
 
 @Injectable()
 export class ActivityPlanService {
     private _activities: FirebaseListObservable<Activity[]>;
     private _activityPlans: FirebaseListObservable<ActivityPlan[]>;
-    constructor(af: AngularFire) {
-        this._activities = af.database.list('/activities');
-        this._activityPlans = af.database.list('/activity-plans');
+    constructor(private _af: AngularFire, private _authService: AuthenticationService) {
+        this._activities = _af.database.list('/activities');
+        this._authService.getAuth().subscribe(authData => {
+            if (authData) {
+                this._activityPlans = _af.database.list(`/activity-plans/${authData.uid}`);
+            }
+        });
     }
 
     public getActivities(): FirebaseListObservable<Activity[]> {

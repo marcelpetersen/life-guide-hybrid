@@ -1,4 +1,41 @@
 {
-  ".read": true,
-  ".write": true
+  "rules": {
+    "activities": {
+      ".read": "auth != null",
+      ".write": false
+    },
+      "activity-plans": {
+      	".read": "auth != null",
+        "$userId": {
+          ".read": "auth != null",
+          ".write": "$userId === auth.uid"
+        }
+    },
+      "food": {
+      	".read": "auth != null",
+      	".write": false
+    },
+      "macronutrients": {
+        ".read": "auth != null",
+        ".write": false
+    },
+      "meal-plans": {
+      	".read": "auth != null",
+        "$userId": {
+          ".read": "auth != null",
+          ".write": "$userId === auth.uid"
+        }
+    },
+      "micronutrients": {
+        ".read": "auth != null",
+        ".write": false
+    },
+      "recipes": {
+      	".read": "auth != null",
+        "$userId": {
+          ".read": "auth != null",
+          ".write": "$userId === auth.uid"
+        }
+    }
+  }
 }

@@ -23,7 +23,6 @@ export class ActivityPlansPage implements OnInit {
         let totalActivity = this._activityPlanService.calculateTotalActivity(this.currentActivityPlan.activities);
         this.currentActivityPlan.totalEnergy = totalActivity.totalEnergy;
         this.currentActivityPlan.totalDuration = totalActivity.totalDuration;
-        console.log(this.currentActivityPlan)
         this._activityPlanService.updateActivityPlan(this.currentActivityPlan);
     }
 

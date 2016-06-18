@@ -15,6 +15,11 @@
     <div padding>
       <button block type="submit" [disabled]="!loginForm.form.valid">Log in</button>
       <button block (click)="userLogin = false">Sign up</button>
+      <button ion-item (click)="googleLogin()">
+        <ion-icon primary item-left name="logo-google">
+        </ion-icon>
+        Log in with Gmail
+        </button>
     </div>
   </form>
 

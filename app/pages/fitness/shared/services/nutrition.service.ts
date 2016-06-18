@@ -60,7 +60,6 @@ export class NutritionService {
             });
             mp[mealTime] = nutritionValues;
         }
-        console.log(mp);
         return mp;
     }
 
