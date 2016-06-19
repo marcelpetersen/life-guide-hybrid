@@ -1,39 +1,39 @@
 {
   "rules": {
     "activities": {
-      ".read": "auth != null",
+      ".read": true,
       ".write": false
     },
       "activity-plans": {
-      	".read": "auth != null",
+      	".read": true,
         "$userId": {
-          ".read": "auth != null",
+          ".read": true,
           ".write": "$userId === auth.uid"
         }
     },
       "food": {
-      	".read": "auth != null",
+      	".read": true,
       	".write": false
     },
       "macronutrients": {
-        ".read": "auth != null",
+        ".read": true,
         ".write": false
     },
       "meal-plans": {
-      	".read": "auth != null",
+      	".read": true,
         "$userId": {
-          ".read": "auth != null",
+          ".read": true,
           ".write": "$userId === auth.uid"
         }
     },
       "micronutrients": {
-        ".read": "auth != null",
+        ".read": true,
         ".write": false
     },
       "recipes": {
-      	".read": "auth != null",
+      	".read": true,
         "$userId": {
-          ".read": "auth != null",
+          ".read": true,
           ".write": "$userId === auth.uid"
         }
     }

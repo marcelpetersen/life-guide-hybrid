@@ -1,15 +1,6 @@
-<ion-navbar gray *navbar>
-  <button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <ion-title>Recipes</ion-title>
-</ion-navbar>
-
-<ion-toolbar light>
-  <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
-</ion-toolbar>
+<navbar [pageTitle]="'Recipes'"></navbar>
 <ion-content class="recipes">
-
+  <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
   <ion-list class="recipe-list">
     <ion-item-sliding *ngFor="let recipe of recipes | async | itemSearch: searchQuery">
       <ion-item class="recipe-list-item">

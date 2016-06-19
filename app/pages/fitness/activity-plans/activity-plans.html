@@ -1,7 +1,8 @@
+<navbar [pageTitle]="'Fitness'"></navbar>
 <ion-item class="plan-date">
     <ion-icon primary name="calendar" item-left></ion-icon>
     <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="currentDate" (ionChange)="syncActivityPlan()"></ion-datetime>
-    <button clear class="table-item-remove" item-right (click)="editActivityPlan()">
+    <button item-right clear (click)="editActivityPlan()">
         <ion-icon *ngIf="!editing" name="create"></ion-icon>
         <ion-icon *ngIf="editing" name="done-all"></ion-icon>
     </button>

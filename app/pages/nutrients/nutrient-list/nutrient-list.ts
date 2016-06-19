@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { ItemSearchPipe } from '../../shared';
+import { NavbarComponent } from '../../../components';
 import { NutrientDetailsPage } from '../nutrient-details/nutrient-details';
 import { INutrient, NutrientService } from '../shared';
 
 @Component({
   templateUrl: 'build/pages/nutrients/nutrient-list/nutrient-list.html',
+  directives: [NavbarComponent],
   pipes: [ItemSearchPipe]
 })
 export class NutrientListPage implements OnInit {

@@ -1,15 +1,6 @@
-<ion-navbar gray *navbar>
-  <button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <ion-buttons start>
-    <ion-avatar>
-      <img [src]="userImage">
-    </ion-avatar>
-  </ion-buttons>
-  <ion-title>Home</ion-title>
-</ion-navbar>
+<navbar [pageTitle]="'Home'"></navbar>
 
-<ion-content class="home">
-
+<ion-content class="home" padding>
+  <img [src]="userImage">
+  <h1>Hello, {{ username }}</h1>
 </ion-content>

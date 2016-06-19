@@ -11,7 +11,7 @@ import {
 } from 'angularfire2';
 import { MATERIAL_PROVIDERS } from "ng2-material";
 
-import { AuthenticationPage, AuthenticationService } from './pages/authentication';
+import { AuthenticationPage } from './pages/authentication';
 import { DiagnosisPage } from './pages/diagnosis/diagnosis';
 import { ActivityPlanService, FitnessPage, MealPlansService, NutritionService } from './pages/fitness';
 import { FoodListPage, FoodService } from './pages/food';
@@ -24,7 +24,6 @@ import { RecipeListPage, RecipeService } from './pages/recipes';
   templateUrl: 'build/app.html',
   providers: [
     ActivityPlanService,
-    AuthenticationService,
     FoodService,
     MealPlansService,
     NutrientService,
@@ -40,7 +39,7 @@ import { RecipeListPage, RecipeService } from './pages/recipes';
     firebaseAuthConfig({
       provider: AuthProviders.Password,
       method: AuthMethods.Password,
-      remember: 'sessionOnly'
+      remember: 'default'
     }),
     MATERIAL_PROVIDERS
   ]

@@ -9,11 +9,12 @@ import { Food } from '../../food';
 import { MealAddPage } from './meal-add/meal-add';
 import { MealPlanNutritionPage } from './meal-plan-nutrition/meal-plan-nutrition';
 import { MealPlan, MealPlansService } from './shared';
+import { NavbarComponent } from '../../../components';
 import { NutritionService } from '../shared';
 
 @Component({
   templateUrl: 'build/pages/fitness/meal-plans/meal-plans.html',
-  directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES, MD_TOOLBAR_DIRECTIVES],
+  directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES, MD_TOOLBAR_DIRECTIVES, NavbarComponent],
   pipes: [DateFilterPipe]
 })
 export class MealPlansPage implements OnInit {

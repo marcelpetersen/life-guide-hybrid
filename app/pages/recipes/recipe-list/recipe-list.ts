@@ -6,8 +6,11 @@ import { RecipeDetailsPage } from '../recipe-details/recipe-details';
 import { RecipeEditPage } from '../recipe-edit/recipe-edit';
 import { Recipe, RecipeService } from '../shared';
 
+import { NavbarComponent } from '../../../components';
+
 @Component({
   templateUrl: 'build/pages/recipes/recipe-list/recipe-list.html',
+  directives: [NavbarComponent],
   pipes: [ItemSearchPipe]
 })
 export class RecipeListPage implements OnInit {

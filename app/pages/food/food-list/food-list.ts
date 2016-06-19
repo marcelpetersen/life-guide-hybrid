@@ -5,10 +5,11 @@ import { NavController } from 'ionic-angular';
 import { FoodDetailsPage } from '../food-details/food-details';
 import { Food, FoodService } from '../shared';
 import { ItemSearchPipe } from '../../shared';
+import { NavbarComponent } from '../../../components';
 
 @Component({
   templateUrl: 'build/pages/food/food-list/food-list.html',
-  directives: [MATERIAL_DIRECTIVES],
+  directives: [MATERIAL_DIRECTIVES, NavbarComponent],
   pipes: [ItemSearchPipe]
 })
 export class FoodListPage implements OnInit {

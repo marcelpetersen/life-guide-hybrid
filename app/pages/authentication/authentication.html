@@ -3,7 +3,7 @@
 </ion-navbar>
 
 <ion-content padding class="authentication">
-  <form *ngIf="userLogin" #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+  <form *ngIf="userLogin" #loginForm="ngForm" (ngSubmit)="passwordLogin(loginForm.value)">
     <ion-item>
       <ion-label floating>Email</ion-label>
       <ion-input type="email" ngControl="email" required></ion-input>

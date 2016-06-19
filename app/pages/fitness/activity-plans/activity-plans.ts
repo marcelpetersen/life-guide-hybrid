@@ -6,10 +6,11 @@ import { MATERIAL_DIRECTIVES } from 'ng2-material';
 
 import { Activity, ActivityPlan, ActivityPlanService } from './shared';
 import { ActivityAddPage } from './activity-add/activity-add';
+import { NavbarComponent } from '../../../components';
 
 @Component({
     templateUrl: 'build/pages/fitness/activity-plans/activity-plans.html',
-    directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES, MD_TOOLBAR_DIRECTIVES]
+    directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES, MD_TOOLBAR_DIRECTIVES, NavbarComponent]
 })
 export class ActivityPlansPage implements OnInit {
     private _activityPlans: any;

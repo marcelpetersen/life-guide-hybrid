@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES, NgForm } from '@angular/common'
 import { Alert, Loading, NavController } from 'ionic-angular';
+import { AngularFire, AuthMethods, AuthProviders, FirebaseAuth, FirebaseListObservable } from 'angularfire2';
 
-import { AuthenticationService } from'./authentication.service';
 import { HomePage } from '../home/home';
 
 @Component({
@@ -12,12 +12,10 @@ import { HomePage } from '../home/home';
 export class AuthenticationPage implements OnInit {
   private _loading: Loading;
   public userLogin: boolean = true;
-  constructor(private _authService: AuthenticationService, private _nav: NavController) { }
+  constructor(private _af: AngularFire, private _auth: FirebaseAuth, private _nav: NavController) { }
 
   private showError(message: string): void {
-    setTimeout(() => {
-      this._loading.dismiss();
-    });
+    this._loading.dismiss()
     let errorAlert = Alert.create({
       title: 'Login failed',
       subTitle: message,
@@ -35,8 +33,8 @@ export class AuthenticationPage implements OnInit {
 
   public createAccount(userCredentials: any): void {
     this.showLoading();
-    this._authService.registerUser(userCredentials).then(authData => {
-      this._loading.dismiss();
+    this._auth.createUser(userCredentials).then(authData => {
+      this._loading.dismiss()
       let successAlert = Alert.create({
         title: "Success",
         subTitle: "Your new account has been created",
@@ -44,7 +42,8 @@ export class AuthenticationPage implements OnInit {
           {
             text: 'Ok',
             handler: () => {
-              this._nav.setRoot(HomePage);
+              setTimeout(() => this._nav.setRoot(HomePage), 1000);
+
             }
           }
         ]
@@ -57,19 +56,23 @@ export class AuthenticationPage implements OnInit {
 
   public googleLogin(): void {
     this.showLoading();
-    this._authService.loginGoogle().then(authData => {
-      this._loading.dismiss();
+    this._auth.login({
+      provider: AuthProviders.Google,
+      method: AuthMethods.Popup,
+      remember: 'default'
+    }).then(authData => {
+      this._loading.dismiss()
       this._nav.setRoot(HomePage);
     }).catch(error => {
       this.showError(error);
     });
   }
 
-  public login(userCredentials: any): void {
+  public passwordLogin(userCredentials: any): void {
     this.showLoading();
-    this._authService.loginUser(userCredentials).then(authData => {
+    this._auth.login(userCredentials).then(authData => {
       this._loading.dismiss();
-      this._nav.setRoot(HomePage, { authData });
+      this._nav.setRoot(HomePage)
     }).catch(error => {
       this.showError(error);
     });
@@ -80,15 +83,6 @@ export class AuthenticationPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showLoading();
-    this._authService.getAuth().subscribe(authData => {
-      setTimeout(() => {
-        this._loading.dismiss();
-      });
-      if (authData) {
-        this._nav.setRoot(HomePage, { authData });
-      }
-    });
+    
   }
-
 }
