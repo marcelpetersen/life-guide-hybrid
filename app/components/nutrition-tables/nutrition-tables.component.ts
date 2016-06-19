@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NutritionTablesComponent implements OnInit {
     @Input() nutritionData: any;
+    @Input() percentage: boolean = false;
     constructor() { }
 
     ngOnInit() { }

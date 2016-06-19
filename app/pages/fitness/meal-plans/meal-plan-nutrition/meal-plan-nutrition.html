@@ -5,5 +5,23 @@
 </ion-navbar>
 
 <ion-content padding>
-    <nutrition-tables [nutritionData]="totalNutrition"></nutrition-tables>
+    <div padding>
+        <ion-segment [(ngModel)]="nutritionView">
+            <ion-segment-button value="total">
+                Total
+            </ion-segment-button>
+            <ion-segment-button value="remaining">
+                Remaining
+            </ion-segment-button>
+            <ion-segment-button value="required">
+                Required
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+
+    <div [ngSwitch]="nutritionView">
+        <nutrition-tables [percentage]="true" [nutritionData]="totalNutrition" *ngSwitchWhen="'total'"></nutrition-tables>
+        <nutrition-tables [nutritionData]="remainingNutrition" *ngSwitchWhen="'remaining'"></nutrition-tables>
+        <nutrition-tables [nutritionData]="requiredNutrition" *ngSwitchWhen="'required'"></nutrition-tables>
+    </div>
 </ion-content>
