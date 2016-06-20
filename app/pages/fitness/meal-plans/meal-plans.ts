@@ -4,6 +4,7 @@ import { Modal, NavController } from 'ionic-angular';
 import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 import { MATERIAL_DIRECTIVES } from 'ng2-material';
 
+import { ActivityPlan, ActivityPlanService } from '../activity-plans';
 import { DateFilterPipe } from './shared';
 import { Food } from '../../food';
 import { MealAddPage } from './meal-add/meal-add';
@@ -11,6 +12,7 @@ import { MealPlanNutritionPage } from './meal-plan-nutrition/meal-plan-nutrition
 import { MealPlan, MealPlansService } from './shared';
 import { NavbarComponent } from '../../../components';
 import { NutritionService } from '../shared';
+import { Profile, ProfileService } from '../profile';
 
 @Component({
   templateUrl: 'build/pages/fitness/meal-plans/meal-plans.html',
@@ -19,17 +21,66 @@ import { NutritionService } from '../shared';
 })
 export class MealPlansPage implements OnInit {
   private _mealPlans: any = {};
-  private _remainingNutrition: Food = new Food();
   private _requiredNutrition: Food = new Food();
   public currentDate: string;
   public currentMealPlan: MealPlan;
   public editing: boolean = false;
   public mealPlanNutrition: any;
   constructor(
+    private _activityPlanService: ActivityPlanService,
     private _meaplPlansService: MealPlansService,
     private _nav: NavController,
-    private _nutritionService: NutritionService
+    private _nutritionService: NutritionService,
+    private _profileService: ProfileService
   ) { }
+
+  private _setRequirements(date: string): void {
+    let energyExpand: number = 0,
+      profile: any = {};
+    this._activityPlanService.getActivityPlans().subscribe(plans => plans.forEach(plan => {
+      if (plan.date === date) {
+        energyExpand = plan.totalEnergy;
+      }
+    }));
+    this._profileService.getMyProfile()
+      .subscribe(data => {
+        if (!!data && !data.hasOwnProperty('$value')) {
+          profile = data;
+        }
+      });
+    setTimeout(() => {
+      this._requiredNutrition = this._profileService.getTotalRequirements(energyExpand, profile);
+    }, 1000);
+  }
+
+  private _syncMealPlan() {
+    this.currentMealPlan = new MealPlan(this.currentDate);
+    this.mealPlanNutrition = {
+      Breakfast: new Food(),
+      Brunch: new Food(),
+      Lunch: new Food(),
+      Snack: new Food(),
+      Dinner: new Food()
+    }
+    this._mealPlans
+      .subscribe(mealPlans => {
+        mealPlans.forEach(mealPlan => {
+          if (mealPlan.date == this.currentDate) {
+            this.currentMealPlan['$key'] = mealPlan['$key'];
+            if (!!mealPlan.meals) {
+              this.currentMealPlan.meals = mealPlan.meals;
+              this.mealPlanNutrition = this._nutritionService.calculateTotalNutrition(this.currentMealPlan.meals);
+              this._setRequirements(this.currentDate);
+            }
+          }
+        });
+      });
+    setTimeout(() => {
+      if (!this.currentMealPlan['$key']) {
+        this._meaplPlansService.addMealPlan(this.currentDate);
+      }
+    }, 1000);
+  }
 
   public mealAdd() {
     let mealAddModal = Modal.create(MealAddPage, { mealPlan: this.currentMealPlan });
@@ -56,55 +107,22 @@ export class MealPlansPage implements OnInit {
   }
 
   public viewDailyNutrition() {
-    let requiredNutrition: Food = this._nutritionService.getRequirements(this.currentDate),
-      remainingNutrition: Food,
-      totalNutrition: Food;
-    setTimeout(() => {
-      remainingNutrition = this._nutritionService.calculateRemainingNutrition(
-        requiredNutrition,
-        this.mealPlanNutrition.Total
-      );
-      totalNutrition = this._nutritionService.calculatePercentageNutrition(
-        requiredNutrition,
-        this.mealPlanNutrition.Total
-      );
-      this._nav.push(MealPlanNutritionPage, {
-        totalNutrition,
-        remainingNutrition,
-        requiredNutrition
-      });
-    }, 2000);
+    let remainingNutrition: Food = new Food(),
+      totalNutrition: Food = new Food();
+    remainingNutrition = this._nutritionService.calculateRemainingNutrition(
+      this._requiredNutrition,
+      this.mealPlanNutrition.Total
+    );
+    totalNutrition = this._nutritionService.calculatePercentageNutrition(
+      this._requiredNutrition,
+      this.mealPlanNutrition.Total
+    );
+    this._nav.push(MealPlanNutritionPage, {
+      totalNutrition,
+      remainingNutrition,
+      requiredNutrition: this._requiredNutrition
+    });
 
-
-
-  }
-
-  public syncMealPlan() {
-    this.currentMealPlan = new MealPlan(this.currentDate);
-    this.mealPlanNutrition = {
-      Breakfast: new Food(),
-      Brunch: new Food(),
-      Lunch: new Food(),
-      Snack: new Food(),
-      Dinner: new Food()
-    }
-    this._mealPlans
-      .subscribe(mealPlans => {
-        mealPlans.forEach(mealPlan => {
-          if (mealPlan.date == this.currentDate) {
-            this.currentMealPlan['$key'] = mealPlan['$key'];
-            if (!!mealPlan.meals) {
-              this.currentMealPlan.meals = mealPlan.meals;
-              this.mealPlanNutrition = this._nutritionService.calculateTotalNutrition(this.currentMealPlan.meals);
-            }
-          }
-        });
-      });
-    setTimeout(() => {
-      if (!this.currentMealPlan['$key']) {
-        this._meaplPlansService.addMealPlan(this.currentDate);
-      }
-    }, 3000);
   }
 
   ngOnInit() {
@@ -117,6 +135,6 @@ export class MealPlansPage implements OnInit {
       ((currentMonth < 10) ? '0' + currentMonth : currentMonth) + '-' +
       ((currentDay < 10) ? '0' + currentDay : currentDay);
     this.currentMealPlan = new MealPlan(this.currentDate);
-    this.syncMealPlan();
+    this._syncMealPlan();
   }
 }

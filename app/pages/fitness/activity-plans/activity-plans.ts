@@ -68,7 +68,7 @@ export class ActivityPlansPage implements OnInit {
             if (!this.currentActivityPlan['$key']) {
                 this._activityPlanService.addActivityPlan(this.currentDate);
             }
-        }, 3000);
+        }, 1000);
     }
 
     ngOnInit() {

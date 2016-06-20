@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { ActivityPlan, ActivityPlanService } from '../../activity-plans';
 import { Food } from '../../../food';
 import { MealPlan } from '../../meal-plans';
-import { Profile, ProfileService } from '../../profile';
 
 @Injectable()
 export class NutritionService {
-    constructor(private _activityPlanService: ActivityPlanService, private _profileService: ProfileService) { }
+    constructor() { }
 
     public calculateTotalNutrition(mealPlan: MealPlan): any {
         let mp: any = {
@@ -118,36 +116,5 @@ export class NutritionService {
             }
         }
         return nutritionValues;
-    }
-
-    public getRequirements(date: string): Food {
-        let energyExpand: number = 0,
-            energyReady: boolean = false,
-            profile: any = {},
-            profileReady: boolean = false,
-            requirements: Food = new Food();
-        this._activityPlanService.getActivityPlans().subscribe(plans => plans.forEach(plan => {
-            if (plan.date === date) {
-                energyExpand = plan.totalEnergy;
-                energyReady = true;
-            }
-        }));
-        this._profileService.getMyProfile()
-        .subscribe(data => {
-            if (!!data && !data.hasOwnProperty('$value')) {
-                profile = data;
-                profileReady = true;
-            }
-        });
-        setTimeout(() => {
-            if (energyReady && profileReady) {
-                requirements = this._profileService.getTotalRequirements(energyExpand, profile);
-                console.log(requirements);
-            }
-        }, 1000);
-        if(requirements.energy > 0 ) {
-            console.log(requirements);
-            return requirements;
-        }
     }
 }
