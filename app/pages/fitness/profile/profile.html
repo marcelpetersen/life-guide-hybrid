@@ -1,2 +1,219 @@
 <navbar [pageTitle]="'Fitness'"></navbar>
-<ion-content padding></ion-content>
+<ion-item>
+    <button item-right clear (click)="editProfile()">
+        <ion-icon *ngIf="!editing" name="create"></ion-icon>
+        <ion-icon *ngIf="editing" name="done-all"></ion-icon>
+    </button>
+</ion-item>
+<ion-content padding>
+    <ion-list>
+        <ion-list-header>
+            Fitness status
+        </ion-list-header>
+        <ion-item>
+            BMR
+            <ion-note item-right>
+                {{ profile.bmr }}
+            </ion-note>
+        </ion-item>
+        <ion-item>
+            <ion-icon *ngIf="profile.bmi.normal" item-left name="thumbs-up"></ion-icon>
+            <ion-icon *ngIf="!profile.bmi.normal" item-left name="thumbs-down"></ion-icon>
+            BMI
+            <ion-note item-right>
+                {{ profile.bmi.data }}
+            </ion-note>
+        </ion-item>
+        <ion-item>
+            <ion-icon *ngIf="profile.fatPercentage.normal" item-left name="thumbs-up"></ion-icon>
+            <ion-icon *ngIf="!profile.fatPercentage.normal" item-left name="thumbs-down"></ion-icon>
+            Body fat (%)
+            <ion-note item-right>
+                {{ profile.fatPercentage.data }}
+            </ion-note>
+        </ion-item>
+        <ion-list-header>
+            Fitness data
+        </ion-list-header>
+        <div *ngIf="editing">
+            <ion-item>
+                <ion-label>Infancy</ion-label>
+                <ion-select [(ngModel)]="profile.infancy">
+                    <ion-option value="yes">Yes</ion-option>
+                    <ion-option value="no">No</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>Age ({{profile.infancy == 'yes' ? 'months' : 'years'}})</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.age"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Gender</ion-label>
+                <ion-select [(ngModel)]="profile.gender">
+                    <ion-option value="male">Male</ion-option>
+                    <ion-option value="female">Female</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item *ngIf="profile.gender === 'female'">
+                <ion-label>Pregnancy status</ion-label>
+                <ion-select [(ngModel)]="profile.pregnancy">
+                    <ion-option value="normal">None</ion-option>
+                    <ion-option value="pregnancy">Pregnant</ion-option>
+                    <ion-option value="lactation">Lactating</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>Height (cm)</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.height"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Waistline (cm)</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.waist"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Weight (kg)</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.weight"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="profile.gender  === 'female'">
+                <ion-label>Forearm (cm)</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.forearm"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="profile.gender  === 'female'">
+                <ion-label>Hips (cm)</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.hips"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="profile.gender  === 'female'">
+                <ion-label>Wrist (cmkg)</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.wrist"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Goal</ion-label>
+                <ion-select [(ngModel)]="profile.goal">
+                    <ion-option value="lose weight">Lose weight</ion-option>
+                    <ion-option value="maintain weight">Maintain weight</ion-option>
+                    <ion-option value="gain weight">Gain weight</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-list-header>
+                Energy balance
+            </ion-list-header>
+            <ion-item>
+                <ion-label>Protein</ion-label>
+                <ion-select [(ngModel)]="profile.energyBalance.protein">
+                    <ion-option value="0.1">10%</ion-option>
+                    <ion-option value="0.15">15%</ion-option>
+                    <ion-option value="0.2">20%</ion-option>
+                    <ion-option value="0.25">25%</ion-option>
+                    <ion-option value="0.3">30%</ion-option>
+                    <ion-option value="0.35">35%</ion-option>
+                    <ion-option value="0.4">40%</ion-option>
+                    <ion-option value="0.45">45%</ion-option>
+                    <ion-option value="0.5">50%</ion-option>
+                    <ion-option value="0.55">55%</ion-option>
+                    <ion-option value="0.6">60%</ion-option>
+                    <ion-option value="0.65">65%</ion-option>
+                    <ion-option value="0.7">70%</ion-option>
+                    <ion-option value="0.75">75%</ion-option>
+                    <ion-option value="0.8">80%</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>Carbohydrates</ion-label>
+                <ion-select [(ngModel)]="profile.energyBalance.carbohydrates">
+                    <ion-option value="0.1">10%</ion-option>
+                    <ion-option value="0.15">15%</ion-option>
+                    <ion-option value="0.2">20%</ion-option>
+                    <ion-option value="0.25">25%</ion-option>
+                    <ion-option value="0.3">30%</ion-option>
+                    <ion-option value="0.35">35%</ion-option>
+                    <ion-option value="0.4">40%</ion-option>
+                    <ion-option value="0.45">45%</ion-option>
+                    <ion-option value="0.5">50%</ion-option>
+                    <ion-option value="0.55">55%</ion-option>
+                    <ion-option value="0.6">60%</ion-option>
+                    <ion-option value="0.65">65%</ion-option>
+                    <ion-option value="0.7">70%</ion-option>
+                    <ion-option value="0.75">75%</ion-option>
+                    <ion-option value="0.8">80%</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>Fats</ion-label>
+                <ion-select [(ngModel)]="profile.energyBalance.fats">
+                    <ion-option value="0.1">10%</ion-option>
+                    <ion-option value="0.15">15%</ion-option>
+                    <ion-option value="0.2">20%</ion-option>
+                    <ion-option value="0.25">25%</ion-option>
+                    <ion-option value="0.3">30%</ion-option>
+                    <ion-option value="0.35">35%</ion-option>
+                    <ion-option value="0.4">40%</ion-option>
+                    <ion-option value="0.45">45%</ion-option>
+                    <ion-option value="0.5">50%</ion-option>
+                    <ion-option value="0.55">55%</ion-option>
+                    <ion-option value="0.6">60%</ion-option>
+                    <ion-option value="0.65">65%</ion-option>
+                    <ion-option value="0.7">70%</ion-option>
+                    <ion-option value="0.75">75%</ion-option>
+                    <ion-option value="0.8">80%</ion-option>
+                </ion-select>
+            </ion-item>
+        </div>
+        <div *ngIf="!editing">
+            <ion-item>
+                Age
+                <ion-note item-right>{{ profile.infancy }} {{ profile.infancy === 'yes' ? 'months' : years }}</ion-note>
+            </ion-item>
+            <ion-item>
+                Gender
+                <ion-note item-right>{{ profile.gender }}</ion-note>
+            </ion-item>
+            <ion-item *ngIf="profile.gender === 'female'">
+                Pregnancy status
+                <ion-note item-right>{{ profile.pregnancy }}</ion-note>
+            </ion-item>
+            <ion-item>
+                Height
+                <ion-note item-right>{{ profile.height }} cm</ion-note>
+            </ion-item>
+            <ion-item *ngIf="profile.gender === 'female'">
+                Forearm
+                <ion-note item-right>{{ profile.forearm }} cm</ion-note>
+            </ion-item>
+            <ion-item *ngIf="profile.gender === 'female'">
+                Hips
+                <ion-note item-right>{{ profile.hips }} cm</ion-note>
+            </ion-item>
+            <ion-item *ngIf="profile.gender === 'female'">
+                Forearm
+                <ion-note item-right>{{ profile.forearm }} cm</ion-note>
+            </ion-item>
+            <ion-item>
+                Waistline
+                <ion-note item-right>{{ profile.waist }} cm</ion-note>
+            </ion-item>
+            <ion-item *ngIf="profile.gender === 'female'">
+                Wrist
+                <ion-note item-right>{{ profile.wrist }} cm</ion-note>
+            </ion-item>
+            <ion-item>
+                Goals
+                <ion-note item-right>{{ profile.goal }}</ion-note>
+            </ion-item>
+            <ion-list-header>
+                Energy balance
+            </ion-list-header>
+            <ion-item>
+                Protein
+                <ion-note item-right>{{ profile.energyBalance.protein * 100 }}%</ion-note>
+            </ion-item>
+            <ion-item>
+                Carbohydrates
+                <ion-note item-right>{{ profile.energyBalance.carbohydrates * 100 }}%</ion-note>
+            </ion-item>
+            <ion-item>
+                Fats
+                <ion-note item-right>{{ profile.energyBalance.fats * 100 }}%</ion-note>
+            </ion-item>
+        </div>
+    </ion-list>
+</ion-content>

@@ -30,6 +30,13 @@
         ".read": true,
         ".write": false
     },
+    "profiles": {
+      	".read": true,
+        "$userId": {
+          ".read": true,
+          ".write": "$userId === auth.uid"
+        }
+    },
       "recipes": {
       	".read": true,
         "$userId": {

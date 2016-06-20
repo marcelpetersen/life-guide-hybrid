@@ -18,16 +18,18 @@ import { NutritionService } from '../shared';
   pipes: [DateFilterPipe]
 })
 export class MealPlansPage implements OnInit {
-  private _mealPlans: any;
+  private _mealPlans: any = {};
+  private _remainingNutrition: Food = new Food();
+  private _requiredNutrition: Food = new Food();
   public currentDate: string;
   public currentMealPlan: MealPlan;
   public editing: boolean = false;
   public mealPlanNutrition: any;
   constructor(
-    private _meaplPlansService: MealPlansService, 
-    private _nav: NavController, 
+    private _meaplPlansService: MealPlansService,
+    private _nav: NavController,
     private _nutritionService: NutritionService
-    ) { }
+  ) { }
 
   public mealAdd() {
     let mealAddModal = Modal.create(MealAddPage, { mealPlan: this.currentMealPlan });
@@ -54,7 +56,27 @@ export class MealPlansPage implements OnInit {
   }
 
   public viewDailyNutrition() {
-    this._nav.push(MealPlanNutritionPage, { totalNutrition: this.mealPlanNutrition.Total });
+    let requiredNutrition: Food = this._nutritionService.getRequirements(this.currentDate),
+      remainingNutrition: Food,
+      totalNutrition: Food;
+    setTimeout(() => {
+      remainingNutrition = this._nutritionService.calculateRemainingNutrition(
+        requiredNutrition,
+        this.mealPlanNutrition.Total
+      );
+      totalNutrition = this._nutritionService.calculatePercentageNutrition(
+        requiredNutrition,
+        this.mealPlanNutrition.Total
+      );
+      this._nav.push(MealPlanNutritionPage, {
+        totalNutrition,
+        remainingNutrition,
+        requiredNutrition
+      });
+    }, 2000);
+
+
+
   }
 
   public syncMealPlan() {

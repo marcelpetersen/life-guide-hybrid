@@ -54,6 +54,20 @@ export class AuthenticationPage implements OnInit {
     });
   }
 
+  public facebookLogin(): void {
+    this.showLoading();
+    this._auth.login({
+      provider: AuthProviders.Facebook,
+      method: AuthMethods.Popup,
+      remember: 'default'
+    }).then(authData => {
+      this._loading.dismiss()
+      this._nav.setRoot(HomePage);
+    }).catch(error => {
+      this.showError(error);
+    });
+  }
+
   public googleLogin(): void {
     this.showLoading();
     this._auth.login({

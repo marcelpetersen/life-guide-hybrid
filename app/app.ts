@@ -13,7 +13,7 @@ import { MATERIAL_PROVIDERS } from "ng2-material";
 
 import { AuthenticationPage } from './pages/authentication';
 import { DiagnosisPage } from './pages/diagnosis/diagnosis';
-import { ActivityPlanService, FitnessPage, MealPlansService, NutritionService } from './pages/fitness';
+import { ActivityPlanService, FitnessPage, MealPlansService, NutritionService, ProfileService } from './pages/fitness';
 import { FoodListPage, FoodService } from './pages/food';
 import { HomePage } from './pages/home/home';
 import { NutrientListPage, NutrientService } from './pages/nutrients';
@@ -28,6 +28,7 @@ import { RecipeListPage, RecipeService } from './pages/recipes';
     MealPlansService,
     NutrientService,
     NutritionService,
+    ProfileService,
     RecipeService,
     FIREBASE_PROVIDERS,
     defaultFirebase({
