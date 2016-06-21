@@ -27,9 +27,9 @@
         <ion-item>
             <ion-icon *ngIf="profile.fatPercentage.normal" item-left name="thumbs-up"></ion-icon>
             <ion-icon *ngIf="!profile.fatPercentage.normal" item-left name="thumbs-down"></ion-icon>
-            Body fat (%)
+            Body fat
             <ion-note item-right>
-                {{ profile.fatPercentage.data }}
+                {{ profile.fatPercentage.data }}%
             </ion-note>
         </ion-item>
         <ion-list-header>
@@ -161,7 +161,7 @@
         <div *ngIf="!editing">
             <ion-item>
                 Age
-                <ion-note item-right>{{ profile.infancy }} {{ profile.infancy === 'yes' ? 'months' : years }}</ion-note>
+                <ion-note item-right>{{ profile.age }} {{ profile.infancy === 'yes' ? 'months' : years }}</ion-note>
             </ion-item>
             <ion-item>
                 Gender
@@ -174,6 +174,10 @@
             <ion-item>
                 Height
                 <ion-note item-right>{{ profile.height }} cm</ion-note>
+            </ion-item>
+            <ion-item>
+                Weight
+                <ion-note item-right>{{ profile.weight }} kg</ion-note>
             </ion-item>
             <ion-item *ngIf="profile.gender === 'female'">
                 Forearm

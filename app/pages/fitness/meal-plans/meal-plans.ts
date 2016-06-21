@@ -60,7 +60,8 @@ export class MealPlansPage implements OnInit {
       Brunch: new Food(),
       Lunch: new Food(),
       Snack: new Food(),
-      Dinner: new Food()
+      Dinner: new Food(),
+      Total: new Food()
     }
     this._mealPlans
       .subscribe(mealPlans => {
@@ -70,8 +71,8 @@ export class MealPlansPage implements OnInit {
             if (!!mealPlan.meals) {
               this.currentMealPlan.meals = mealPlan.meals;
               this.mealPlanNutrition = this._nutritionService.calculateTotalNutrition(this.currentMealPlan.meals);
-              this._setRequirements(this.currentDate);
             }
+            this._setRequirements(this.currentDate);
           }
         });
       });
@@ -100,6 +101,7 @@ export class MealPlansPage implements OnInit {
   public editMealPlan(): void {
     if (this.editing) {
       this._meaplPlansService.updateMealPlan(this.currentMealPlan);
+      this._syncMealPlan();
       this.editing = false;
     } else {
       this.editing = true;
@@ -117,6 +119,7 @@ export class MealPlansPage implements OnInit {
       this._requiredNutrition,
       this.mealPlanNutrition.Total
     );
+    console.log(this._requiredNutrition);
     this._nav.push(MealPlanNutritionPage, {
       totalNutrition,
       remainingNutrition,
