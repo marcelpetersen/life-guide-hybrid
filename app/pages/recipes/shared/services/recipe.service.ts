@@ -52,7 +52,7 @@ export class RecipeService {
             for (let nutrientCategory in ingredient) {
                 let nutrients = ingredient[nutrientCategory];
                 ingredient.quantity = ingredient.quantity || 100;
-                if (Number.isFinite(nutrients)) {
+                if (nutrientCategory === 'energy') {
                     nutrition[nutrientCategory] += +nutrients * (+ingredient.quantity / 100);
                 }
                 for (let nutrient in nutrients) {
@@ -67,7 +67,7 @@ export class RecipeService {
         });
         for (let nutrientCategory in nutrition) {
             let nutrients = nutrition[nutrientCategory];
-            if (Number.isFinite(nutrients)) {
+            if (nutrientCategory === 'energy') {
                 nutrition[nutrientCategory] /= +recipe.servings;
             }
             for (let nutrient in nutrients) {

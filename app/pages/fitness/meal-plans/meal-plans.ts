@@ -60,9 +60,8 @@ export class MealPlansPage implements OnInit {
       Brunch: new Food(),
       Lunch: new Food(),
       Snack: new Food(),
-      Dinner: new Food(),
-      Total: new Food()
-    }
+      Dinner: new Food()
+    };
     this._mealPlans
       .subscribe(mealPlans => {
         mealPlans.forEach(mealPlan => {
@@ -70,7 +69,7 @@ export class MealPlansPage implements OnInit {
             this.currentMealPlan['$key'] = mealPlan['$key'];
             if (!!mealPlan.meals) {
               this.currentMealPlan.meals = mealPlan.meals;
-              this.mealPlanNutrition = this._nutritionService.calculateTotalNutrition(this.currentMealPlan.meals);
+              this.mealPlanNutrition = this._nutritionService.calculateMealTimesNutrition(this.currentMealPlan.meals);
             }
             this._setRequirements(this.currentDate);
           }
@@ -110,19 +109,22 @@ export class MealPlansPage implements OnInit {
 
   public viewDailyNutrition() {
     let remainingNutrition: Food = new Food(),
-      totalNutrition: Food = new Food();
+        statisticNutrition: Food = new Food(),
+        totalNutrition: Food = new Food();
+    totalNutrition = this._nutritionService.calculateDailyNutrition(this.mealPlanNutrition);
     remainingNutrition = this._nutritionService.calculateRemainingNutrition(
       this._requiredNutrition,
-      this.mealPlanNutrition.Total
+      totalNutrition
     );
-    totalNutrition = this._nutritionService.calculatePercentageNutrition(
+    statisticNutrition = this._nutritionService.calculateStatisticNutrition(
       this._requiredNutrition,
-      this.mealPlanNutrition.Total
+      totalNutrition
     );
     this._nav.push(MealPlanNutritionPage, {
       totalNutrition,
       remainingNutrition,
-      requiredNutrition: this._requiredNutrition
+      requiredNutrition: this._requiredNutrition,
+      statisticNutrition
     });
 
   }
