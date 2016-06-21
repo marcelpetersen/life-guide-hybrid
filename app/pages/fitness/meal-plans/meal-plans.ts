@@ -119,7 +119,6 @@ export class MealPlansPage implements OnInit {
       this._requiredNutrition,
       this.mealPlanNutrition.Total
     );
-    console.log(this._requiredNutrition);
     this._nav.push(MealPlanNutritionPage, {
       totalNutrition,
       remainingNutrition,
