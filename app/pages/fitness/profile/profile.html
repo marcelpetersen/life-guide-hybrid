@@ -17,16 +17,16 @@
             </ion-note>
         </ion-item>
         <ion-item>
-            <ion-icon *ngIf="profile.bmi.normal" item-left name="thumbs-up"></ion-icon>
-            <ion-icon *ngIf="!profile.bmi.normal" item-left name="thumbs-down"></ion-icon>
+            <ion-icon *ngIf="profile.bmi.normal" aqua item-left name="thumbs-up"></ion-icon>
+            <ion-icon *ngIf="!profile.bmi.normal" danger item-left name="thumbs-down"></ion-icon>
             BMI
             <ion-note item-right>
                 {{ profile.bmi.data }}
             </ion-note>
         </ion-item>
         <ion-item>
-            <ion-icon *ngIf="profile.fatPercentage.normal" item-left name="thumbs-up"></ion-icon>
-            <ion-icon *ngIf="!profile.fatPercentage.normal" item-left name="thumbs-down"></ion-icon>
+            <ion-icon *ngIf="profile.fatPercentage.normal" aqua item-left name="thumbs-up"></ion-icon>
+            <ion-icon *ngIf="!profile.fatPercentage.normal" danger item-left name="thumbs-down"></ion-icon>
             Body fat
             <ion-note item-right>
                 {{ profile.fatPercentage.data }}%

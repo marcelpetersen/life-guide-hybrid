@@ -23,3 +23,19 @@
     margin: 2em 1em 0 1em;
     font-size: 14px;
 }
+
+ion-navbar, ion-menu {
+    font-family: 'Raleway', sans-serif;
+}
+
+ion-content {
+    font-family: 'Roboto', sans-serif;
+}
+
+.bad {
+    color: red;
+}
+
+.good {
+    color: blue;
+}
