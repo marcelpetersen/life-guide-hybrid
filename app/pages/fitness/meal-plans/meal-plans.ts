@@ -53,32 +53,7 @@ export class MealPlansPage implements OnInit {
     }, 1000);
   }
 
-  public mealAdd() {
-    let mealAddModal = Modal.create(MealAddPage, { mealPlan: this.currentMealPlan });
-    mealAddModal.onDismiss(mealPlan => {
-      if (!!mealPlan) {
-        this.currentMealPlan = mealPlan;
-        this._meaplPlansService.updateMealPlan(this.currentMealPlan);
-      }
-    });
-    this._nav.present(mealAddModal);
-  }
-
-  public removeMeal(mealIndex: number, mealTime: string): void {
-    this.currentMealPlan.meals[mealTime].splice(mealIndex, 1);
-  }
-
-  public editMealPlan(): void {
-    if (this.editing) {
-      this._meaplPlansService.updateMealPlan(this.currentMealPlan);
-      this.syncMealPlan();
-      this.editing = false;
-    } else {
-      this.editing = true;
-    }
-  }
-
-  public syncMealPlan() {
+  private _syncMealPlan() {
     this.currentMealPlan = new MealPlan(this.currentDate);
     this.mealPlanNutrition = {
       Breakfast: new Food(),
@@ -107,25 +82,54 @@ export class MealPlansPage implements OnInit {
     }, 1000);
   }
 
+  public mealAdd() {
+    let mealAddModal = Modal.create(MealAddPage, { mealPlan: this.currentMealPlan });
+    mealAddModal.onDismiss(mealPlan => {
+      if (!!mealPlan) {
+        this.currentMealPlan = mealPlan;
+        this._meaplPlansService.updateMealPlan(this.currentMealPlan);
+      }
+    });
+    this._nav.present(mealAddModal);
+  }
+
+  public removeMeal(mealIndex: number, mealTime: string): void {
+    this.currentMealPlan.meals[mealTime].splice(mealIndex, 1);
+  }
+
+  public editMealPlan(): void {
+    if (this.editing) {
+      this._meaplPlansService.updateMealPlan(this.currentMealPlan);
+      this._syncMealPlan();
+      this.editing = false;
+    } else {
+      this.editing = true;
+    }
+  }
+
   public viewDailyNutrition() {
     let remainingNutrition: Food = new Food(),
-        statisticNutrition: Food = new Food(),
-        totalNutrition: Food = new Food();
-    totalNutrition = this._nutritionService.calculateDailyNutrition(this.mealPlanNutrition);
-    remainingNutrition = this._nutritionService.calculateRemainingNutrition(
-      this._requiredNutrition,
-      totalNutrition
-    );
-    statisticNutrition = this._nutritionService.calculateStatisticNutrition(
-      this._requiredNutrition,
-      totalNutrition
-    );
-    this._nav.push(MealPlanNutritionPage, {
-      totalNutrition,
-      remainingNutrition,
-      requiredNutrition: this._requiredNutrition,
-      statisticNutrition
-    });
+      statisticNutrition: Food = new Food(),
+      totalNutrition: Food = new Food();
+    setTimeout(() => {
+      totalNutrition = this._nutritionService.calculateDailyNutrition(this.mealPlanNutrition);
+      remainingNutrition = this._nutritionService.calculateRemainingNutrition(
+        this._requiredNutrition,
+        totalNutrition
+      );
+    }, 1000);
+    setTimeout(() => {
+      statisticNutrition = this._nutritionService.calculateStatisticNutrition(
+        this._requiredNutrition,
+        totalNutrition
+      );
+      this._nav.push(MealPlanNutritionPage, {
+        totalNutrition,
+        remainingNutrition,
+        requiredNutrition: this._requiredNutrition,
+        statisticNutrition
+      });
+    }, 2000);
 
   }
 
@@ -139,6 +143,6 @@ export class MealPlansPage implements OnInit {
       ((currentMonth < 10) ? '0' + currentMonth : currentMonth) + '-' +
       ((currentDay < 10) ? '0' + currentDay : currentDay);
     this.currentMealPlan = new MealPlan(this.currentDate);
-    this.syncMealPlan();
+    this._syncMealPlan();
   }
 }
