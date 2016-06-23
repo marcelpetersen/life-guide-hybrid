@@ -10,12 +10,15 @@
         height: 100%;
         overflow: hidden!important;
         background-color: rgba(0,0,0,0.3);
-        padding: 15em 4em 4em 4em;
+        padding: 15em 4em 1em 4em;
         @media screen and(max-width: 480px){
-            padding-top: 10em;
+            padding-top: 9em;
         }
          @media screen and(max-width: 320px){
-            padding-top: 7em;
+            padding: 2em;
+            h1 {
+                font-size: 36px;
+            }
         }
         ion-input, ion-item, [ion-item] {
             background: transparent;
@@ -23,6 +26,9 @@
         }
         ion-label {
             color: white;
+        }
+        h1 {
+            font-size: 48px;
         }
     }
 }

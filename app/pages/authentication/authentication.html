@@ -4,6 +4,7 @@
 
 <ion-content class="authentication">
   <form *ngIf="userLogin" #loginForm="ngForm" (ngSubmit)="passwordLogin(loginForm.value)">
+    <h1 text-center light>Life Guide</h1>
     <ion-item>
       <ion-label floating>Email</ion-label>
       <ion-input type="email" ngControl="email" required></ion-input>
@@ -29,6 +30,7 @@
   </form>
 
   <form *ngIf="!userLogin" #registerForm="ngForm" (ngSubmit)="createAccount(registerForm.value)">
+    <h1 text-center light>Life Guide</h1>
     <!--
     <ion-item>
       <ion-label floating>Username</ion-label>
