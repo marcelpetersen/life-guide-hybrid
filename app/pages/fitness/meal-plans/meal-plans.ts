@@ -53,7 +53,32 @@ export class MealPlansPage implements OnInit {
     }, 1000);
   }
 
-  private _syncMealPlan() {
+  public mealAdd() {
+    let mealAddModal = Modal.create(MealAddPage, { mealPlan: this.currentMealPlan });
+    mealAddModal.onDismiss(mealPlan => {
+      if (!!mealPlan) {
+        this.currentMealPlan = mealPlan;
+        this._meaplPlansService.updateMealPlan(this.currentMealPlan);
+      }
+    });
+    this._nav.present(mealAddModal);
+  }
+
+  public removeMeal(mealIndex: number, mealTime: string): void {
+    this.currentMealPlan.meals[mealTime].splice(mealIndex, 1);
+  }
+
+  public editMealPlan(): void {
+    if (this.editing) {
+      this._meaplPlansService.updateMealPlan(this.currentMealPlan);
+      this.syncMealPlan();
+      this.editing = false;
+    } else {
+      this.editing = true;
+    }
+  }
+
+  public syncMealPlan() {
     this.currentMealPlan = new MealPlan(this.currentDate);
     this.mealPlanNutrition = {
       Breakfast: new Food(),
@@ -80,31 +105,6 @@ export class MealPlansPage implements OnInit {
         this._meaplPlansService.addMealPlan(this.currentDate);
       }
     }, 1000);
-  }
-
-  public mealAdd() {
-    let mealAddModal = Modal.create(MealAddPage, { mealPlan: this.currentMealPlan });
-    mealAddModal.onDismiss(mealPlan => {
-      if (!!mealPlan) {
-        this.currentMealPlan = mealPlan;
-        this._meaplPlansService.updateMealPlan(this.currentMealPlan);
-      }
-    });
-    this._nav.present(mealAddModal);
-  }
-
-  public removeMeal(mealIndex: number, mealTime: string): void {
-    this.currentMealPlan.meals[mealTime].splice(mealIndex, 1);
-  }
-
-  public editMealPlan(): void {
-    if (this.editing) {
-      this._meaplPlansService.updateMealPlan(this.currentMealPlan);
-      this._syncMealPlan();
-      this.editing = false;
-    } else {
-      this.editing = true;
-    }
   }
 
   public viewDailyNutrition() {
@@ -139,6 +139,6 @@ export class MealPlansPage implements OnInit {
       ((currentMonth < 10) ? '0' + currentMonth : currentMonth) + '-' +
       ((currentDay < 10) ? '0' + currentDay : currentDay);
     this.currentMealPlan = new MealPlan(this.currentDate);
-    this._syncMealPlan();
+    this.syncMealPlan();
   }
 }
