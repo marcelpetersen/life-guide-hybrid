@@ -61,7 +61,7 @@ export class MealPlansPage implements OnInit {
       Lunch: new Food(),
       Snack: new Food(),
       Dinner: new Food()
-    }
+    };
     this._mealPlans
       .subscribe(mealPlans => {
         mealPlans.forEach(mealPlan => {
@@ -69,9 +69,9 @@ export class MealPlansPage implements OnInit {
             this.currentMealPlan['$key'] = mealPlan['$key'];
             if (!!mealPlan.meals) {
               this.currentMealPlan.meals = mealPlan.meals;
-              this.mealPlanNutrition = this._nutritionService.calculateTotalNutrition(this.currentMealPlan.meals);
-              this._setRequirements(this.currentDate);
+              this.mealPlanNutrition = this._nutritionService.calculateMealTimesNutrition(this.currentMealPlan.meals);
             }
+            this._setRequirements(this.currentDate);
           }
         });
       });
@@ -100,6 +100,7 @@ export class MealPlansPage implements OnInit {
   public editMealPlan(): void {
     if (this.editing) {
       this._meaplPlansService.updateMealPlan(this.currentMealPlan);
+      this._syncMealPlan();
       this.editing = false;
     } else {
       this.editing = true;
@@ -108,20 +109,27 @@ export class MealPlansPage implements OnInit {
 
   public viewDailyNutrition() {
     let remainingNutrition: Food = new Food(),
+      statisticNutrition: Food = new Food(),
       totalNutrition: Food = new Food();
-    remainingNutrition = this._nutritionService.calculateRemainingNutrition(
-      this._requiredNutrition,
-      this.mealPlanNutrition.Total
-    );
-    totalNutrition = this._nutritionService.calculatePercentageNutrition(
-      this._requiredNutrition,
-      this.mealPlanNutrition.Total
-    );
-    this._nav.push(MealPlanNutritionPage, {
-      totalNutrition,
-      remainingNutrition,
-      requiredNutrition: this._requiredNutrition
-    });
+    setTimeout(() => {
+      totalNutrition = this._nutritionService.calculateDailyNutrition(this.mealPlanNutrition);
+      remainingNutrition = this._nutritionService.calculateRemainingNutrition(
+        this._requiredNutrition,
+        totalNutrition
+      );
+    }, 1000);
+    setTimeout(() => {
+      statisticNutrition = this._nutritionService.calculateStatisticNutrition(
+        this._requiredNutrition,
+        totalNutrition
+      );
+      this._nav.push(MealPlanNutritionPage, {
+        totalNutrition,
+        remainingNutrition,
+        requiredNutrition: this._requiredNutrition,
+        statisticNutrition
+      });
+    }, 2000);
 
   }
 

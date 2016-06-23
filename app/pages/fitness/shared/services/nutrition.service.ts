@@ -7,34 +7,30 @@ import { MealPlan } from '../../meal-plans';
 export class NutritionService {
     constructor() { }
 
-    public calculateTotalNutrition(mealPlan: MealPlan): any {
+    public calculateMealTimesNutrition(mealPlan: MealPlan): any {
         let mp: any = {
             Breakfast: new Food(),
             Brunch: new Food(),
             Lunch: new Food(),
             Snack: new Food(),
-            Dinner: new Food(),
-            Total: new Food()
+            Dinner: new Food()
         },
             nutritionValues: Food,
-            amount: number = 1,
-            totalNutrition: Food = new Food();
+            amount: number = 1;
         for (let mealTime in mealPlan) {
             nutritionValues = new Food();
             mealPlan[mealTime].forEach(meal => {
-                amount = meal.amount || 1;
+                amount = +meal.amount || 1;
                 if (meal.hasOwnProperty("chef")) {
                     for (let nutrientCategory in meal.nutrients) {
                         let nutrients = meal.nutrients[nutrientCategory];
-                        if (Number.isFinite(nutrients)) {
+                        if (nutrientCategory === 'energy') {
                             nutritionValues[nutrientCategory] += +nutrients * amount;
-                            mp.Total[nutrientCategory] += nutritionValues[nutrientCategory];
                         }
                         for (let nutrient in nutrients) {
                             if (nutritionValues.hasOwnProperty(nutrientCategory)
                                 && nutritionValues[nutrientCategory].hasOwnProperty(nutrient)) {
                                 nutritionValues[nutrientCategory][nutrient] += +nutrients[nutrient] * amount;
-                                mp.Total[nutrientCategory][nutrient] += nutritionValues[nutrientCategory][nutrient];
 
                             }
                         }
@@ -42,15 +38,13 @@ export class NutritionService {
                 } else {
                     for (let nutrientCategory in meal) {
                         let nutrients = meal[nutrientCategory];
-                        if (Number.isFinite(nutrients)) {
+                        if (nutrientCategory === 'energy') {
                             nutritionValues[nutrientCategory] += +nutrients * amount;
-                            mp.Total[nutrientCategory] += nutritionValues[nutrientCategory];
                         }
                         for (let nutrient in nutrients) {
                             if (nutritionValues.hasOwnProperty(nutrientCategory)
                                 && nutritionValues[nutrientCategory].hasOwnProperty(nutrient)) {
                                 nutritionValues[nutrientCategory][nutrient] += +nutrients[nutrient] * amount;
-                                mp.Total[nutrientCategory][nutrient] += nutritionValues[nutrientCategory][nutrient];
 
                             }
                         }
@@ -62,11 +56,33 @@ export class NutritionService {
         return mp;
     }
 
+    public calculateDailyNutrition(mealTimes: any): Food {
+        let totalNutrition: Food = new Food(),
+            amount: number = 1;
+        for (let mealTime in mealTimes) {
+            let mealTimeNutrition = mealTimes[mealTime];
+            for (let nutrientCategory in mealTimeNutrition) {
+                let nutrients = mealTimeNutrition[nutrientCategory];
+                if (nutrientCategory === 'energy') {
+                    totalNutrition[nutrientCategory] += +nutrients * amount;
+                }
+                for (let nutrient in nutrients) {
+                    if (totalNutrition.hasOwnProperty(nutrientCategory)
+                        && totalNutrition[nutrientCategory].hasOwnProperty(nutrient)) {
+                        totalNutrition[nutrientCategory][nutrient] += +nutrients[nutrient] * amount;
+
+                    }
+                }
+            }
+        }
+        return totalNutrition;
+    }
+
     public calculateRemainingNutrition(requiredNutrition, totalNutrition): Food {
         let nutritionValues: Food = new Food();
         for (let nutrientCategory in requiredNutrition) {
             let nutrients = requiredNutrition[nutrientCategory];
-            if (Number.isFinite(nutrients) && nutritionValues.hasOwnProperty(nutrientCategory)) {
+            if (nutrientCategory === 'energy' && nutritionValues.hasOwnProperty(nutrientCategory)) {
                 nutritionValues[nutrientCategory] = (nutrients === 0)
                     ? 0
                     : nutrients - totalNutrition[nutrientCategory];
@@ -89,11 +105,11 @@ export class NutritionService {
         return nutritionValues;
     }
 
-    public calculatePercentageNutrition(requiredNutrition, totalNutrition): Food {
+    public calculateStatisticNutrition(requiredNutrition, totalNutrition): Food {
         let nutritionValues: Food = new Food();
         for (let nutrientCategory in requiredNutrition) {
             let nutrients = requiredNutrition[nutrientCategory];
-            if (Number.isFinite(nutrients) && nutritionValues.hasOwnProperty(nutrientCategory)) {
+            if (nutrientCategory === 'energy' && nutritionValues.hasOwnProperty(nutrientCategory)) {
                 if (nutrients > 0) {
                     nutritionValues[nutrientCategory] = (totalNutrition[nutrientCategory] / nutrients) * 100;
                 } else {

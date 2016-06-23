@@ -2,8 +2,9 @@
   <ion-title>{{ userLogin ? 'Login' : 'Sign up' }}</ion-title>
 </ion-navbar>
 
-<ion-content padding class="authentication">
+<ion-content class="authentication">
   <form *ngIf="userLogin" #loginForm="ngForm" (ngSubmit)="passwordLogin(loginForm.value)">
+    <h1 text-center light>Life Guide</h1>
     <ion-item>
       <ion-label floating>Email</ion-label>
       <ion-input type="email" ngControl="email" required></ion-input>
@@ -13,15 +14,15 @@
       <ion-input type="Password" ngControl="password" required></ion-input>
     </ion-item>
     <div padding>
-      <button block type="submit" [disabled]="!loginForm.form.valid">Log in</button>
-      <button block (click)="changeAuthMethod()">Sign up</button>
+      <button light block type="submit" [disabled]="!loginForm.form.valid">Log in</button>
+      <button light block (click)="changeAuthMethod()">Sign up</button>
       <button ion-item (click)="googleLogin()">
-        <ion-icon primary item-left name="logo-google">
+        <ion-icon light item-left name="logo-google">
         </ion-icon>
         Log in with Google
         </button>
       <button ion-item (click)="facebookLogin()">
-        <ion-icon primary item-left name="logo-facebook">
+        <ion-icon light item-left name="logo-facebook">
         </ion-icon>
         Log in with Facebook
         </button>
@@ -29,6 +30,7 @@
   </form>
 
   <form *ngIf="!userLogin" #registerForm="ngForm" (ngSubmit)="createAccount(registerForm.value)">
+    <h1 text-center light>Life Guide</h1>
     <!--
     <ion-item>
       <ion-label floating>Username</ion-label>

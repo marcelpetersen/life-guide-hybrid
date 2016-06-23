@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
     public userImage: string;
     constructor(private _auth: FirebaseAuth, private _nav: NavController) { }
 
-    showLogout(event: any): void {
+    public showLogout(event: any): void {
         let logoutPopover = Popover.create(LogoutComponent);
         this._nav.present(logoutPopover, {
             ev: event

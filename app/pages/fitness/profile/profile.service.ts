@@ -182,17 +182,17 @@ export class ProfileService {
         nutrientRequirements.macronutrients.Carbohydrates =
             nutrientRequirements.energy * profile.energyBalance.carbohydrates / carbEnergy;
         nutrientRequirements.macronutrients.Fiber =
-            nutrientRequirements.energy * profile.energyBalance.carbohydrates * 0.3 / fiberEnergy;
+            nutrientRequirements.energy * profile.energyBalance.carbohydrates * 0.15 / fiberEnergy;
         nutrientRequirements.macronutrients.Sugars =
-            nutrientRequirements.energy * profile.energyBalance.carbohydrates * 0.2 / sugarEnergy;
+            nutrientRequirements.energy * profile.energyBalance.carbohydrates * 0.3 / sugarEnergy;
         nutrientRequirements.macronutrients.Sucrose = nutrientRequirements.macronutrients.Sugars / 6;
         nutrientRequirements.macronutrients.Fructose = nutrientRequirements.macronutrients.Sugars / 6;
         nutrientRequirements.macronutrients.Galactose = nutrientRequirements.macronutrients.Sugars / 6;
         nutrientRequirements.macronutrients.Maltose = nutrientRequirements.macronutrients.Sugars / 6;
         nutrientRequirements.macronutrients.Glucose = nutrientRequirements.macronutrients.Sugars / 6;
         nutrientRequirements.macronutrients.Lactose = nutrientRequirements.macronutrients.Sugars / 6;
-        nutrientRequirements.macronutrients.Starch = (nutrientRequirements.macronutrients.Carbohydrates -
-            nutrientRequirements.macronutrients.Sugars - nutrientRequirements.macronutrients.Fiber) / 11;
+        nutrientRequirements.macronutrients.Starch = nutrientRequirements.macronutrients.Carbohydrates -
+            nutrientRequirements.macronutrients.Sugars - nutrientRequirements.macronutrients.Fiber;
         nutrientRequirements.macronutrients.Fats = nutrientRequirements.energy * profile.energyBalance.fats / fatEnergy;
         nutrientRequirements.macronutrients['Saturated fat'] =
             nutrientRequirements.energy * 0.07 / fatEnergy;

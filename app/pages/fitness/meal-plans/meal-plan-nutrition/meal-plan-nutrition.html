@@ -20,7 +20,13 @@
     </div>
 
     <div [ngSwitch]="nutritionView">
-        <nutrition-tables [percentage]="true" [nutritionData]="totalNutrition" *ngSwitchWhen="'total'"></nutrition-tables>
+        <div *ngSwitchWhen="'total'">
+            <button block (click)="changeView()">
+                {{ statsView ? 'Numeric view' : 'Statistic view' }}
+            </button>
+            <nutrition-tables *ngIf="!statsView" [nutritionData]="totalNutrition"></nutrition-tables>
+            <nutrition-tables *ngIf="statsView" [percentage]="true" [nutritionData]="statisticNutrition"></nutrition-tables>
+        </div>
         <nutrition-tables [nutritionData]="remainingNutrition" *ngSwitchWhen="'remaining'"></nutrition-tables>
         <nutrition-tables [nutritionData]="requiredNutrition" *ngSwitchWhen="'required'"></nutrition-tables>
     </div>
