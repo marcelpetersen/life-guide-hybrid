@@ -1,0 +1,96 @@
+[
+    {
+        "name": "Abdominal aortic aneurysm",
+        "description": "An abdominal aortic aneurysm is an enlarged area in the lower part of the aorta, the major blood vessel that supplies blood to the body. The aorta, about the thickness of a garden hose, runs from your heart through the center of your chest and abdomen. Because the aorta is the body's main supplier of blood, a ruptured abdominal aortic aneurysm can cause life-threatening bleeding.Depending on the size and the rate at which your abdominal aortic aneurysm is growing, treatment may vary from watchful waiting to emergency surgery. Once an abdominal aortic aneurysm is found, doctors will closely monitor it so that surgery can be planned if it's necessary. Emergency surgery for a ruptured abdominal aortic aneurysm can be risky.",
+        "causes": [
+            "smoking",
+            "atherosclerosis",
+            "high blood pressure",
+            "blood vessel disease in the aorta",
+            "infection in the aorta",
+            "trauma",
+            "male gender",
+            "old age",
+            "white race",
+            "family history of abdominal aortic aneurysm"
+        ],
+        "symptoms": [
+            "back pain",
+            "intense, persistent abdominal pain",
+            "sweatiness",
+            "clamminess",
+            "dizziness",
+            "nausea",
+            "vomiting",
+            "low blood pressure",
+            "fast pulse"
+        ],
+        "remedies": [
+            "avoid stressfull situations",
+            "pay attention to stimulants",
+            "exercise regularly, but not to intense, so that your blood pressure is not to high",
+            "quit smoking",
+            "have a good sleep",
+            "keep you cholesterol and sodium levels low",
+            "have a healthy diet based on grains, fruits and vegetables"
+        ]
+    },
+    {
+        "name": "Acanthosis nigricans",
+        "description": "Acanthosis nigricans is a skin condition characterized by areas of dark, velvety discoloration in body folds and creases. The affected skin can become thickened. Most often, acanthosis nigricans affects your armpits, groin and neck. The skin changes of acanthosis nigricans (ak-an-THOE-sis NIE-grih-kuns) typically occur in people who are obese or have diabetes. Children who develop the condition are at higher risk of developing type 2 diabetes. Rarely, acanthosis nigricans can be a warning sign of a cancerous tumor in an internal organ, such as the stomach or liver. No specific treatment is available for acanthosis nigricans. Treatment of underlying conditions may restore some of the normal color and texture to affected areas of skin.",
+        "causes": [
+            "insulin resistance",
+            "ovarian cysts",
+            "hypothyroidism",
+            "adrenal gland disease",
+            "drugs and supplements (niacin, birth control pills, prednisone, orticosteroids)",
+            "cancer",
+            "caucasian race",
+            "obesity",
+            "family history of acanthosis nigricans"
+        ],
+        "symptoms": [
+            "dark skin (armpits, groin, neck) followed by itching and odor",
+            "thickened skin (armpits, groin, neck) followed by itching and odor",
+            "velvet skin (armpits, groin, neck) followed by itching and odor"
+        ],
+        "remedies": [
+            "keep your blood sugar levels stable",
+            "decrease sugar and starch intake and increase fiber intake",
+            "substitute saturated fats with unsaturated fats",
+            "exercise regularly",
+            "have a good sleep"
+        ]
+    },
+    {
+        "name": "Achilles tendinitis",
+        "description": "Achilles tendinitis is an overuse injury of the Achilles (uh-KILL-eez) tendon, the band of tissue that connects calf muscles at the back of the lower leg to your heel bone. Achilles tendinitis most commonly occurs in runners who have suddenly increased the intensity or duration of their runs. It's also common in middle-aged people who play sports, such as tennis or basketball, only on the weekends. Most cases of Achilles tendinitis can be treated with relatively simple, at-home care under your doctor's supervision. Self-care strategies are usually necessary to prevent recurring episodes. More-serious cases of Achilles tendinitis can lead to tendon tears (ruptures) that may require surgical repair.",
+        "causes": [
+            "intense strain on the Achiles tendon",
+            "male gender",
+            "old age",
+            "obesity",
+            "running in worn-out shoes",
+            "running on hilly terrain",
+            "psoriasis",
+            "high blood pressure",
+            "intense running",
+            "drugs and supplements (fluoroquinolones)"
+        ],
+        "symptoms": [
+            "heel pain when walking or running"
+        ],
+        "remedies": [
+            "avoid activities that strain the Achilles tendon for a period of time",
+            "apply ice on the tendon when the pain occurs",
+            "put wraps or compressive elastic bandages to reduce swelling and to keep the tendon fix",
+            "elevate the affected foot above the level of your heart",
+            "always start a new exercise slowly and gradually",
+            "warm up before every strenuous exercise",
+            "buy shoes that provide adequate cushioning for your heel and have a firm arch support to help reduce the tension in the Achilles tendon",
+            "stretch your calf muscles and Achilles tendon in the morning, before exercise and after exercise to maintain flexibility",
+            "alternate high-impact activities, such as running and jumping, with low-impact activities, such as cycling and swimming",
+            "strengthen your calf muscles"
+        ]
+    }
+]
