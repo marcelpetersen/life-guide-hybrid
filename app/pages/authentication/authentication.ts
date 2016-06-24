@@ -59,7 +59,7 @@ export class AuthenticationPage implements OnInit {
     this._auth.login({
       provider: AuthProviders.Facebook,
       method: AuthMethods.Popup,
-      remember: 'default'
+      remember: 'sessionOnly'
     }).then(authData => {
       this._loading.dismiss()
       this._nav.setRoot(HomePage);
@@ -73,7 +73,7 @@ export class AuthenticationPage implements OnInit {
     this._auth.login({
       provider: AuthProviders.Google,
       method: AuthMethods.Popup,
-      remember: 'default'
+      remember: 'sessionOnly'
     }).then(authData => {
       this._loading.dismiss()
       this._nav.setRoot(HomePage);
