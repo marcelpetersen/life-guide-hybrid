@@ -128,7 +128,18 @@ export class MealAddPage implements OnInit {
 
     ngOnInit() {
         this.food = this._foodService.getFood();
-        this.recipes = this._recipeService.getRecipes();
+        this._recipeService.getAllRecipes().subscribe(users => users.map(userRecipes => {
+            if (!!userRecipes) {
+                for (let recipeKey in userRecipes) {
+                    let recipe = userRecipes[recipeKey],
+                        recipeIndex = this.recipes.indexOf(recipe);
+                    if (recipeIndex !== -1) {
+                        this.recipes.splice(recipeIndex, 1);
+                    }
+                    this.recipes.push(recipe);
+                }
+            }
+        }));
         this.mealPlan = this._params.data.mealPlan;
     }
 
