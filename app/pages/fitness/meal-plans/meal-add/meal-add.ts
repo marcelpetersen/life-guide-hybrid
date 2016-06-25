@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CORE_DIRECTIVES } from '@angular/common';
 import { Alert, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { Food, FoodService } from '../../../food';
@@ -8,11 +9,12 @@ import { Recipe, RecipeService } from '../../../recipes';
 
 @Component({
     templateUrl: 'build/pages/fitness/meal-plans/meal-add/meal-add.html',
+    directives: [CORE_DIRECTIVES],
     pipes: [ItemSearchPipe]
 })
 export class MealAddPage implements OnInit {
     public food: any;
-    public recipes: any;
+    public recipes: any[] = [];
     public mealPlan: MealPlan;
     public mealTimeChoose: boolean;
     public selectedMeals: any[] = [];
@@ -74,8 +76,9 @@ export class MealAddPage implements OnInit {
                     {
                         text: 'Cancel',
                         role: 'cancel',
-                        handler: data => {
-                            console.log('Cancel clicked');
+                        handler: mealTime => {
+                            this.mealTimeChoose = false;
+                            this.selectedMeals.splice(mealIndex, 1);
                         }
                     },
                     {
