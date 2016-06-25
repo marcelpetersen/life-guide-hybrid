@@ -17,7 +17,7 @@ export class RecipeService {
         });
     }
 
-    public getAllRecipes(): FirebaseListObservable<Recipe[]> {
+    public getAllRecipes(): FirebaseListObservable<any[]> {
         return this._allRecipes;
     }
 

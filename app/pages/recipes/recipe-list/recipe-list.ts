@@ -18,6 +18,7 @@ export class RecipeListPage implements OnInit {
   public allRecipes: Recipe[] = [];
   private newRecipe: Recipe;
   public myRecipes: any;
+  public recipeFilter: string = "mine";
   public searchQuery: string = '';
   constructor(private _nav: NavController, private _recipeService: RecipeService) { }
 
@@ -54,13 +55,18 @@ export class RecipeListPage implements OnInit {
 
   ngOnInit(): void {
     this.myRecipes = this._recipeService.getMyRecipes();
-    this._recipeService.getAllRecipes().subscribe(recipes => recipes.map(recipe => {
-      let recipeIndex = this.allRecipes.indexOf(recipe);
-      if (recipeIndex !== -1) {
-        this.allRecipes.splice(recipeIndex, 1);
+    this._recipeService.getAllRecipes().subscribe(users => users.map(userRecipes => {
+      if (!!userRecipes) {
+        for (let recipeKey in userRecipes) {
+          let recipe = userRecipes[recipeKey],
+            recipeIndex = this.allRecipes.indexOf(recipe);
+          if (recipeIndex !== -1) {
+            this.allRecipes.splice(recipeIndex, 1);
+          }
+          this.allRecipes.push(recipe);
+        }
       }
-      this.allRecipes.push(recipe);
-    }))
+    }));
   }
 
 
