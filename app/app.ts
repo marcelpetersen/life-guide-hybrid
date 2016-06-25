@@ -40,7 +40,7 @@ import { RecipeListPage, RecipeService } from './pages/recipes';
     firebaseAuthConfig({
       provider: AuthProviders.Password,
       method: AuthMethods.Password,
-      remember: 'default'
+      remember: 'sessionOnly'
     }),
     MATERIAL_PROVIDERS
   ]
