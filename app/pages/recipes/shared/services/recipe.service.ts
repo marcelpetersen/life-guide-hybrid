@@ -6,26 +6,31 @@ import { Recipe } from '../';
 
 @Injectable()
 export class RecipeService {
-    private _recipes: FirebaseListObservable<Recipe[]>;
-
+    private _allRecipes: FirebaseListObservable<Recipe[]>;
+    private _userRecipes: FirebaseListObservable<any[]>;
     constructor(private _af: AngularFire, private _auth: FirebaseAuth) {
+        this._allRecipes = _af.database.list('/recipes');
         this._auth.subscribe(authData => {
             if (authData) {
-                this._recipes = _af.database.list(`/recipes/${authData.uid}`);
+                this._userRecipes = _af.database.list(`/recipes/${authData.uid}`);
             }
         });
     }
 
-    public getRecipes(): FirebaseListObservable<Recipe[]> {
-        return this._recipes;
+    public getAllRecipes(): FirebaseListObservable<any[]> {
+        return this._allRecipes;
+    }
+
+    public getMyRecipes(): FirebaseListObservable<Recipe[]> {
+        return this._userRecipes;
     }
 
     public addRecipe(recipe: Recipe): void {
-        this._recipes.push(recipe);
+        this._userRecipes.push(recipe);
     }
 
     public updateRecipe(recipe: Recipe): void {
-        this._recipes.update(recipe['$key'], {
+        this._userRecipes.update(recipe['$key'], {
             name: recipe.name,
             category: recipe.category,
             dietary: recipe.dietary,
@@ -43,7 +48,7 @@ export class RecipeService {
     }
 
     public removeRecipe(recipe: Recipe): void {
-        this._recipes.remove(recipe['$key']);
+        this._userRecipes.remove(recipe['$key']);
     }
 
     public calculateRecipeNutrition(recipe: Recipe): Food {

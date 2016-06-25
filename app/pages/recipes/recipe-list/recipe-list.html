@@ -1,38 +1,77 @@
 <navbar [pageTitle]="'Recipes'"></navbar>
 <ion-content class="recipes">
   <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
-  <ion-list class="recipe-list">
-    <ion-item-sliding *ngFor="let recipe of recipes | async | itemSearch: searchQuery">
-      <ion-item class="recipe-list-item">
-        <ion-thumbnail item-left>
-          <img src="img/{{recipe.name}}.png">
-        </ion-thumbnail>
-        <h2>{{ recipe.name }}</h2>
-        <p>{{ recipe.category }}</p>
-        <p>{{ recipe.dietary }}</p>
-        <p>{{ recipe.nutrients.energy.toFixed(0) }} kcal</p>
-        <ion-note item-right>
-          Swipe
-        </ion-note>
-      </ion-item>
-      <ion-item-options>
-        <button (click)="openRecipeDetails(recipe)">
+  <div padding>
+    <ion-segment [(ngModel)]="recipeFilter">
+      <ion-segment-button value="mine">
+        My recipes
+      </ion-segment-button>
+      <ion-segment-button value="all">
+        All recipes
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="recipeFilter">
+    <ion-list class="recipe-list" *ngSwitchWhen="'mine'">
+      <ion-item-sliding *ngFor="let recipe of myRecipes | async | itemSearch: searchQuery">
+        <ion-item class="recipe-list-item">
+          <ion-thumbnail item-left>
+            <img src="img/{{recipe.name}}.png">
+          </ion-thumbnail>
+          <h2>{{ recipe.name }}</h2>
+          <p>{{ recipe.category }}</p>
+          <p>{{ recipe.dietary }}</p>
+          <p>{{ recipe.nutrients.energy.toFixed(0) }} kcal</p>
+          <ion-note item-right>
+            Swipe
+          </ion-note>
+        </ion-item>
+        <ion-item-options>
+          <button (click)="openRecipeDetails(recipe)">
           <ion-icon name="book"></ion-icon>
           Details
         </button>
-        <button secondary (click)="editRecipe(recipe)">
+          <button secondary (click)="editRecipe(recipe)">
           <ion-icon name="color-wand"></ion-icon>
           Edit
         </button>
-        <button danger (click)="removeRecipe(recipe)">
+          <button danger (click)="removeRecipe(recipe)">
           <ion-icon name="trash"></ion-icon>
           Remove
         </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-  <button fab fab-bottom fab-right fab-fixed (click)="createRecipe()">
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <button fab fab-bottom fab-right fab-fixed (click)="createRecipe()">
     <ion-icon name="color-wand"></ion-icon>
   </button>
+    <ion-list class="recipe-list" *ngSwitchWhen="'all'">
+      <ion-item-sliding *ngFor="let recipe of allRecipes | itemSearch: searchQuery">
+        <ion-item class="recipe-list-item">
+          <ion-thumbnail item-left>
+            <img src="img/{{recipe.name}}.png">
+          </ion-thumbnail>
+          <h2>{{ recipe.name }}</h2>
+          <p>{{ recipe.category }}</p>
+          <p>{{ recipe.dietary }}</p>
+          <p>{{ recipe.nutrients.energy.toFixed(0) }} kcal</p>
+          <ion-note item-right>
+            Swipe
+          </ion-note>
+        </ion-item>
+        <ion-item-options>
+          <button (click)="openRecipeDetails(recipe)">
+          <ion-icon name="book"></ion-icon>
+          Details
+        </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <button fab fab-bottom fab-right fab-fixed (click)="createRecipe()">
+    <ion-icon name="color-wand"></ion-icon>
+  </button>
+  </div>
+
+
 
 </ion-content>

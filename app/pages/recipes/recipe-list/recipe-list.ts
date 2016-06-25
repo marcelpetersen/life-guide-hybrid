@@ -14,8 +14,9 @@ import { NavbarComponent } from '../../../components';
   pipes: [ItemSearchPipe]
 })
 export class RecipeListPage implements OnInit {
+  public allRecipes: Recipe[];
   private newRecipe: Recipe;
-  public recipes: any;
+  public myRecipes: any;
   public searchQuery: string = '';
   constructor(private _nav: NavController, private _recipeService: RecipeService) { }
 
@@ -51,8 +52,17 @@ export class RecipeListPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recipes = this._recipeService.getRecipes();
+    this.myRecipes = this._recipeService.getMyRecipes();
+    this._recipeService.getAllRecipes().subscribe(users => users.map(userRecipes => {
+      userRecipes.forEach(recipe => {
+        let recipeIndex = this.allRecipes.indexOf(recipe);
+        if (recipeIndex !== -1) {
+          this.allRecipes.splice(recipeIndex, 1);
+        }
+        this.allRecipes.push(recipe);
+      });
+    }))
   }
 
-  
+
 }
