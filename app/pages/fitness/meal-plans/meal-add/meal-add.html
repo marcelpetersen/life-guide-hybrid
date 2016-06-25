@@ -16,20 +16,17 @@
 </ion-toolbar>
 <ion-content padding>
     <ion-list>
-    <ion-item *ngIf="recipe.ingredients" *ngFor="let recipe of recipes | itemSearch: searchQuery">
-        <ion-label>{{ recipe.name }}</ion-label>
-        <ion-checkbox 
-        [checked]="(selectedMeals.indexOf(recipe) !== -1)"
-        (click)="changeMeal(recipe); chooseMealTime($event, recipe)">
-        </ion-checkbox>
-    </ion-item>
-    <ion-item *ngFor="let food of food | async | itemSearch: searchQuery">
-        <ion-label>{{ food.name }}</ion-label>
-        <ion-checkbox [checked]="(selectedMeals.indexOf(food) !== -1)"
-        (click)="changeMeal(food); chooseMealTime($event, food)">
-        </ion-checkbox>
-    </ion-item>
+        <ion-item *ngFor="let recipe of recipes | itemSearch: searchQuery">
+            <ion-label>{{ recipe.name }}</ion-label>
+            <ion-checkbox [checked]="(selectedMeals.indexOf(recipe) !== -1)" (click)="changeMeal(recipe); chooseMealTime($event, recipe)">
+            </ion-checkbox>
+        </ion-item>
+        <ion-item *ngFor="let food of food | async | itemSearch: searchQuery">
+            <ion-label>{{ food.name }}</ion-label>
+            <ion-checkbox [checked]="(selectedMeals.indexOf(food) !== -1)" (click)="changeMeal(food); chooseMealTime($event, food)">
+            </ion-checkbox>
+        </ion-item>
 
-</ion-list>
+    </ion-list>
 
 </ion-content>

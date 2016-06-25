@@ -139,7 +139,9 @@ export class MealAddPage implements OnInit {
                     if (recipeIndex !== -1) {
                         this.recipes.splice(recipeIndex, 1);
                     }
-                    this.recipes.push(recipe);
+                    if (recipe.name && recipe.category && recipe.dietary && recipe.ingredients) {
+                        this.recipes.push(recipe);
+                    }
                 }
             }
         }));

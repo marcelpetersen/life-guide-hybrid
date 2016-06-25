@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CORE_DIRECTIVES, NgForm } from '@angular/common'
+import { CORE_DIRECTIVES, NgForm } from '@angular/common';
 import { Alert, Loading, NavController } from 'ionic-angular';
 import { AngularFire, AuthMethods, AuthProviders, FirebaseAuth, FirebaseListObservable } from 'angularfire2';
 

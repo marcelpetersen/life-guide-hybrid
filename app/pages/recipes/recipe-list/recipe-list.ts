@@ -63,7 +63,10 @@ export class RecipeListPage implements OnInit {
           if (recipeIndex !== -1) {
             this.allRecipes.splice(recipeIndex, 1);
           }
-          this.allRecipes.push(recipe);
+          // Workaround untill recipe creation restrictions
+          if (recipe.name && recipe.category && recipe.dietary && recipe.ingredients) {
+            this.allRecipes.push(recipe);
+          }
         }
       }
     }));

@@ -14,7 +14,7 @@
       <ion-input type="Password" ngControl="password" required></ion-input>
     </ion-item>
     <div padding>
-      <button light block type="submit" [disabled]="!loginForm.form.valid">Log in</button>
+      
       <button light block (click)="changeAuthMethod()">Sign up</button>
       <button ion-item (click)="googleLogin()">
         <ion-icon light item-left name="logo-google">
