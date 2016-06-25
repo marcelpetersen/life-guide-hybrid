@@ -47,7 +47,7 @@
   </button>
     <ion-list class="recipe-list" *ngSwitchWhen="'all'">
       <ion-item-sliding *ngFor="let recipe of allRecipes | itemSearch: searchQuery">
-        <ion-item class="recipe-list-item">
+        <ion-item *ngIf="recipe && recipe.ingredients" class="recipe-list-item">
           <ion-thumbnail item-left>
             <img src="img/{{recipe.name}}.png">
           </ion-thumbnail>

@@ -7,7 +7,7 @@ import { Recipe } from '../';
 @Injectable()
 export class RecipeService {
     private _allRecipes: FirebaseListObservable<Recipe[]>;
-    private _userRecipes: FirebaseListObservable<any[]>;
+    private _userRecipes: FirebaseListObservable<Recipe[]>;
     constructor(private _af: AngularFire, private _auth: FirebaseAuth) {
         this._allRecipes = _af.database.list('/recipes');
         this._auth.subscribe(authData => {
@@ -17,7 +17,7 @@ export class RecipeService {
         });
     }
 
-    public getAllRecipes(): FirebaseListObservable<any[]> {
+    public getAllRecipes(): FirebaseListObservable<Recipe[]> {
         return this._allRecipes;
     }
 

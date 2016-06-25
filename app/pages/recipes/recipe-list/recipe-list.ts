@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CORE_DIRECTIVES } from '@angular/common'
 import { Modal, NavController } from 'ionic-angular';
 
 import { ItemSearchPipe } from '../../shared';
@@ -10,11 +11,11 @@ import { NavbarComponent } from '../../../components';
 
 @Component({
   templateUrl: 'build/pages/recipes/recipe-list/recipe-list.html',
-  directives: [NavbarComponent],
+  directives: [CORE_DIRECTIVES, NavbarComponent],
   pipes: [ItemSearchPipe]
 })
 export class RecipeListPage implements OnInit {
-  public allRecipes: Recipe[];
+  public allRecipes: Recipe[] = [];
   private newRecipe: Recipe;
   public myRecipes: any;
   public searchQuery: string = '';
@@ -53,14 +54,12 @@ export class RecipeListPage implements OnInit {
 
   ngOnInit(): void {
     this.myRecipes = this._recipeService.getMyRecipes();
-    this._recipeService.getAllRecipes().subscribe(users => users.map(userRecipes => {
-      userRecipes.forEach(recipe => {
-        let recipeIndex = this.allRecipes.indexOf(recipe);
-        if (recipeIndex !== -1) {
-          this.allRecipes.splice(recipeIndex, 1);
-        }
-        this.allRecipes.push(recipe);
-      });
+    this._recipeService.getAllRecipes().subscribe(recipes => recipes.map(recipe => {
+      let recipeIndex = this.allRecipes.indexOf(recipe);
+      if (recipeIndex !== -1) {
+        this.allRecipes.splice(recipeIndex, 1);
+      }
+      this.allRecipes.push(recipe);
     }))
   }
 
