@@ -24,10 +24,10 @@
             <button block (click)="changeView()">
                 {{ statsView ? 'Numeric view' : 'Statistic view' }}
             </button>
-            <nutrition-tables *ngIf="!statsView" [nutritionData]="totalNutrition"></nutrition-tables>
-            <nutrition-tables *ngIf="statsView" [percentage]="true" [nutritionData]="statisticNutrition"></nutrition-tables>
+            <nutrition-tables *ngIf="!statsView" [nutritionData]="totalIntake"></nutrition-tables>
+            <nutrition-tables *ngIf="statsView" [percentage]="true" [nutritionData]="dailyNutrition"></nutrition-tables>
         </div>
-        <nutrition-tables [nutritionData]="remainingNutrition" *ngSwitchWhen="'remaining'"></nutrition-tables>
+        <nutrition-tables [nutritionData]="remainingIntake" *ngSwitchWhen="'remaining'"></nutrition-tables>
         <nutrition-tables [nutritionData]="requiredNutrition" *ngSwitchWhen="'required'"></nutrition-tables>
     </div>
 </ion-content>

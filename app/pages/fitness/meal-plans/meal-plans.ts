@@ -20,8 +20,13 @@ import { Profile, ProfileService } from '../profile';
   pipes: [DateFilterPipe]
 })
 export class MealPlansPage implements OnInit {
-  private _mealPlans: any = {};
-  private _requiredNutrition: Food = new Food();
+  private _dailyNutrition: Food;
+  private _energyExpand: number = 0;
+  private _fitnessProfile: any = {};
+  private _mealPlans: any;
+  private _remainingIntake: Food;
+  private _requiredNutrition: Food;
+  private _totalIntake: Food;
   public currentDate: string;
   public currentMealPlan: MealPlan;
   public editing: boolean = false;
@@ -34,26 +39,38 @@ export class MealPlansPage implements OnInit {
     private _profileService: ProfileService
   ) { }
 
-  private _setRequirements(date: string): void {
-    let energyExpand: number = 0,
-      profile: any = {};
+  private _getFitnessData(date: string): void {
     this._activityPlanService.getActivityPlans().subscribe(plans => plans.forEach(plan => {
       if (plan.date === date) {
-        energyExpand = plan.totalEnergy;
+        this._energyExpand = plan.totalEnergy;
       }
     }));
     this._profileService.getMyProfile()
       .subscribe(data => {
         if (!!data && !data.hasOwnProperty('$value')) {
-          profile = data;
+          this._fitnessProfile = data;
         }
       });
-    setTimeout(() => {
-      this._requiredNutrition = this._profileService.getTotalRequirements(energyExpand, profile);
-    }, 1000);
   }
 
-  private _syncMealPlan() {
+  private _getNutritionData(): void {
+    if (!!this._fitnessProfile) {
+      this._totalIntake = this._nutritionService.calculateTotalIntake(this.mealPlanNutrition);
+      this._requiredNutrition = this._profileService.getTotalRequirements(this._energyExpand, this._fitnessProfile);
+      this._remainingIntake = this._nutritionService.calculateRemainingIntake(this._requiredNutrition, this._totalIntake);
+      this._dailyNutrition = this._nutritionService.calculateDailyNutrition(this._requiredNutrition, this._totalIntake);
+    }
+    console.log(
+      "Energy expand:", this._energyExpand,
+      "\nFitness profile:", this._fitnessProfile,
+      "\nTotal intake:", this._totalIntake,
+      "\nRemaining intake:", this._remainingIntake,
+      "\nRequired intake:", this._requiredNutrition,
+      "\nTotal nutrition:", this._dailyNutrition
+    );
+  }
+
+  public syncMealPlan() {
     this.currentMealPlan = new MealPlan(this.currentDate);
     this.mealPlanNutrition = {
       Breakfast: new Food(),
@@ -62,6 +79,7 @@ export class MealPlansPage implements OnInit {
       Snack: new Food(),
       Dinner: new Food()
     };
+    this._getFitnessData(this.currentDate);
     this._mealPlans
       .subscribe(mealPlans => {
         mealPlans.forEach(mealPlan => {
@@ -69,9 +87,8 @@ export class MealPlansPage implements OnInit {
             this.currentMealPlan['$key'] = mealPlan['$key'];
             if (!!mealPlan.meals) {
               this.currentMealPlan.meals = mealPlan.meals;
-              this.mealPlanNutrition = this._nutritionService.calculateMealTimesNutrition(this.currentMealPlan.meals);
+              this.mealPlanNutrition = this._nutritionService.calculateMealPlanNutrition(this.currentMealPlan.meals);
             }
-            this._setRequirements(this.currentDate);
           }
         });
       });
@@ -79,6 +96,7 @@ export class MealPlansPage implements OnInit {
       if (!this.currentMealPlan['$key']) {
         this._meaplPlansService.addMealPlan(this.currentDate);
       }
+      this._getNutritionData();
     }, 1000);
   }
 
@@ -100,7 +118,7 @@ export class MealPlansPage implements OnInit {
   public editMealPlan(): void {
     if (this.editing) {
       this._meaplPlansService.updateMealPlan(this.currentMealPlan);
-      this._syncMealPlan();
+      this.syncMealPlan();
       this.editing = false;
     } else {
       this.editing = true;
@@ -108,28 +126,13 @@ export class MealPlansPage implements OnInit {
   }
 
   public viewDailyNutrition() {
-    let remainingNutrition: Food = new Food(),
-      statisticNutrition: Food = new Food(),
-      totalNutrition: Food = new Food();
-    setTimeout(() => {
-      totalNutrition = this._nutritionService.calculateDailyNutrition(this.mealPlanNutrition);
-      remainingNutrition = this._nutritionService.calculateRemainingNutrition(
-        this._requiredNutrition,
-        totalNutrition
-      );
-    }, 1000);
-    setTimeout(() => {
-      statisticNutrition = this._nutritionService.calculateStatisticNutrition(
-        this._requiredNutrition,
-        totalNutrition
-      );
-      this._nav.push(MealPlanNutritionPage, {
-        totalNutrition,
-        remainingNutrition,
-        requiredNutrition: this._requiredNutrition,
-        statisticNutrition
-      });
-    }, 2000);
+    this._getNutritionData();
+    this._nav.push(MealPlanNutritionPage, {
+      totalIntake: this._totalIntake,
+      remainingIntake: this._remainingIntake,
+      requiredNutrition: this._requiredNutrition,
+      dailyNutrition: this._dailyNutrition
+    });
 
   }
 
@@ -143,6 +146,6 @@ export class MealPlansPage implements OnInit {
       ((currentMonth < 10) ? '0' + currentMonth : currentMonth) + '-' +
       ((currentDay < 10) ? '0' + currentDay : currentDay);
     this.currentMealPlan = new MealPlan(this.currentDate);
-    this._syncMealPlan();
+    this.syncMealPlan();
   }
 }
