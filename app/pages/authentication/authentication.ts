@@ -7,7 +7,7 @@ import { HomePage } from '../home/home';
 
 @Component({
   templateUrl: 'build/pages/authentication/authentication.html',
-  directives: [CORE_DIRECTIVES]
+  directives: [CORE_DIRECTIVES, NgForm]
 })
 export class AuthenticationPage implements OnInit {
   private _loading: Loading;

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Modal, NavController, NavParams, ViewController } from 'ionic-angular';
+import { CORE_DIRECTIVES, NgForm } from '@angular/common';
+import { Modal, NavController, NavParams, Toast, ViewController } from 'ionic-angular';
 
 import { Food } from '../../food';
 import { IngredientSearchPage } from '../ingredient-search/ingredient-search';
 import { Recipe, RecipeService } from '../shared';
 
 @Component({
-    templateUrl: 'build/pages/recipes/recipe-edit/recipe-edit.html'
+    templateUrl: 'build/pages/recipes/recipe-edit/recipe-edit.html',
+    directives: [CORE_DIRECTIVES, NgForm]
 })
 export class RecipeEditPage implements OnInit {
     public recipe: Recipe;
@@ -37,7 +39,16 @@ export class RecipeEditPage implements OnInit {
 
     public createRecipe(): void {
         this.recipeSteps.forEach((step, index) => this.recipe.steps[index] = step);
-        this._viewCtrl.dismiss(this.recipe);
+        if (!this.recipe.ingredients || !this.recipe.steps) {
+            const toast = Toast.create({
+                message: 'Please complete the entire recipe!',
+                showCloseButton: true,
+                closeButtonText: 'Ok'
+            });
+            this._nav.present(toast);
+        } else {
+            this._viewCtrl.dismiss(this.recipe);
+        }
     }
 
     public cancelRecipe(): void {

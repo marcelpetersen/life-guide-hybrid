@@ -14,7 +14,7 @@ import { Recipe, RecipeService } from '../../../recipes';
 })
 export class MealAddPage implements OnInit {
     public food: any;
-    public recipes: any[] = [];
+    public recipes: Recipe[];
     public mealPlan: MealPlan;
     public mealTimeChoose: boolean;
     public selectedMeals: any[] = [];
@@ -132,6 +132,7 @@ export class MealAddPage implements OnInit {
     ngOnInit() {
         this.food = this._foodService.getFood();
         this._recipeService.getAllRecipes().subscribe(users => users.map(userRecipes => {
+            this.recipes = [];
             if (!!userRecipes) {
                 for (let recipeKey in userRecipes) {
                     let recipe = userRecipes[recipeKey],
@@ -139,7 +140,7 @@ export class MealAddPage implements OnInit {
                     if (recipeIndex !== -1) {
                         this.recipes.splice(recipeIndex, 1);
                     }
-                    if (recipe.name && recipe.category && recipe.dietary && recipe.ingredients) {
+                    if (recipe.ingredients) {
                         this.recipes.push(recipe);
                     }
                 }

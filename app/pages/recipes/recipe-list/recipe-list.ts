@@ -15,7 +15,7 @@ import { NavbarComponent } from '../../../components';
   pipes: [ItemSearchPipe]
 })
 export class RecipeListPage implements OnInit {
-  public allRecipes: Recipe[] = [];
+  public allRecipes: Recipe[];
   private newRecipe: Recipe;
   public myRecipes: any;
   public recipeFilter: string = "mine";
@@ -56,6 +56,7 @@ export class RecipeListPage implements OnInit {
   ngOnInit(): void {
     this.myRecipes = this._recipeService.getMyRecipes();
     this._recipeService.getAllRecipes().subscribe(users => users.map(userRecipes => {
+      this.allRecipes = [];
       if (!!userRecipes) {
         for (let recipeKey in userRecipes) {
           let recipe = userRecipes[recipeKey],
@@ -63,8 +64,7 @@ export class RecipeListPage implements OnInit {
           if (recipeIndex !== -1) {
             this.allRecipes.splice(recipeIndex, 1);
           }
-          // Workaround untill recipe creation restrictions
-          if (recipe.name && recipe.category && recipe.dietary && recipe.ingredients) {
+          if (recipe.ingredients) {
             this.allRecipes.push(recipe);
           }
         }

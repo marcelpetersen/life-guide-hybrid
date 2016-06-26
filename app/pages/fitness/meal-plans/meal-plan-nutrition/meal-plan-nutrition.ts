@@ -14,12 +14,12 @@ export class MealPlanNutritionPage implements OnInit {
     public remainingIntake: Food = new Food();
     public requiredNutrition: Food = new Food();
     public dailyNutrition: Food = new Food();
-    public statsView: boolean = true;
+    public reportView: boolean = true;
     public totalIntake: Food = new Food();
     constructor(private _params: NavParams) { }
 
     public changeView(): void {
-        this.statsView = !this.statsView;
+        this.reportView = !this.reportView;
     }
 
     ngOnInit() {
