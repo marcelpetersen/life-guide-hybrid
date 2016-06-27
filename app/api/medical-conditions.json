@@ -19,7 +19,7 @@
             "intense, persistent abdominal pain",
             "sweatiness",
             "clamminess",
-            "dizziness",
+            "dizziness (vertigo)",
             "nausea",
             "vomiting",
             "low blood pressure",
@@ -92,6 +92,217 @@
             "alternate high-impact activities, such as running and jumping, with low-impact activities, such as cycling and swimming",
             "strengthen your calf muscles"
         ]
+    },
+    {
+        "name": "Achilles tendon rupture",
+        "description": "Achilles (uh-KILL-eez) tendon rupture is an injury that affects the back of your lower leg. It most commonly occurs in people playing recreational sports. The Achilles tendon is a strong fibrous cord that connects the muscles in the back of your calf to your heel bone. If you overstretch your Achilles tendon, it can tear (rupture) completely or just partially. If your Achilles tendon ruptures, you might feel a pop or snap, followed by an immediate sharp pain in the back of your ankle and lower leg that is likely to affect your ability to walk properly. Surgery is often the best option to repair an Achilles tendon rupture. For many people, however, nonsurgical treatment works just as well.",
+        "causes": [
+            "intense jumping",
+            "landing from a jump incorrectly",
+            "falling from a height",
+            "steping into a hole",
+            "intense running",
+            "intense strain on the Achiles tendon",
+            "old age",
+            "male gender",
+            "drugs and supplements (steroids, ciprofloxacin, levofloxacin)"
+        ],
+        "symptoms": [
+            "heel pain when walking or running",
+            "swollen heel",
+            "severe heel pain followed by a popping or snapping sound",
+            "inability to stand on toes",
+            "inability to bend the foot"
+        ],
+        "remedies": [
+            "wear a cast or walking boot with wedges to elevate your heel, which allows your torn tendon to heal",
+            "do exercises that strengthen your leg muscles and Achilles tendons",
+            "in some cases, a surgery is required, but this involves a deep investigation",
+            "always start a new exercise slowly and gradually",
+            "warm up before every strenuous exercise",
+            "buy shoes that provide adequate cushioning for your heel and have a firm arch support to help reduce the tension in the Achilles tendon",
+            "stretch your calf muscles and Achilles tendon in the morning, before exercise and after exercise to maintain flexibility",
+            "alternate high-impact activities, such as running and jumping, with low-impact activities, such as cycling and swimming",
+            "strengthen your calf muscles"
+        ]
+    },
+    {
+        "name": "Gastroesophageal reflux disease (GERD)",
+        "description": "Gastroesophageal reflux disease (GERD) is a chronic digestive disease. GERD occurs when stomach acid or, occasionally, stomach content, flows back into your food pipe (esophagus). The backwash (reflux) irritates the lining of your esophagus and causes GERD. Both acid reflux and heartburn are common digestive conditions that many people experience from time to time. When these signs and symptoms occur at least twice each week or interfere with your daily life, or when your doctor can see damage to your esophagus, you may be diagnosed with GERD. Most people can manage the discomfort of GERD with lifestyle changes and over-the-counter medications. But some people with GERD may need stronger medications, or even surgery, to reduce symptoms",
+        "causes": [
+            "intense stress on the knee",
+            "intense jumping",
+            "suddenly slowing down and changing direction",
+            "pivoting with your foot firmly planted",
+            "landing from a jump incorrectly",
+            "stopping suddenly",
+            "receiving a direct blow to the knee or collision",
+            "falling from a height",
+            "female gender"
+        ],
+        "symptoms": [
+            "burning sensation (chest, throat) followed by sour taste in mouth",
+            "heartburn",
+            "chest pain",
+            "difficulty swallowing (dysphagia)",
+            "dry cough",
+            "hoarseness",
+            "sore throat",
+            "regurgitation of food or sour liquid (acid reflux)",
+            "sensation of a lump in throat"
+        ],
+        "remedies": [
+            "maintain a healthy weight, because excess pounds put pressure on your abdomen, pushing up your stomach and causing acid to back up into your esophagus",
+            "avoid tight-fitting clothing, because clothes that fit tightly around your waist put pressure on your abdomen and the lower esophageal sphincter",
+            "avoid foods and drinks that trigger heartburn",
+            "eat smaller meals",
+            "don't lie down after a meal",
+            "elevate the head of your bed",
+            "quit smoking"
+        ]
+    },
+    {
+        "name": "ACL injury",
+        "description": "An ACL injury is the tearing of the anterior cruciate (KROO-she-ate) ligament (ACL) — one of the major ligaments in your knee. ACL injuries most commonly occur during sports that involve sudden stops, jumping or changes in direction — such as basketball, soccer, football, tennis, downhill skiing, volleyball and gymnastics. Many people hear or feel a 'pop' in the knee when an ACL injury occurs. Your knee may swell, feel unstable and become too painful to bear weight. Depending on the severity of your ACL injury, treatment may include rest and rehabilitation exercises to help you regain strength and stability or surgery to replace the torn ligament followed by rehabilitation. A proper training program may help reduce the risk of an ACL injury.",
+        "causes": [
+            "frequent acid reflux",
+            "pregnancy",
+            "dry mouth",
+            "asthma",
+            "diabetes",
+            "delayed stomach emptying",
+            "scleroderma",
+            "bulging of top of stomach up into the diaphragm (hiatal hernia)",
+            "obesity",
+            "smoking"
+        ],
+        "symptoms": [
+            "severe knee pain followed by a popping or snapping sound",
+            "knee pain when walking or running",
+            "swollen knee",
+            "loss of range of motion",
+            "instability"
+        ],
+        "remedies": [
+            "rest",
+            "try to ice your knee at least every two hours for 20 minutes at a time",
+            "wrap an elastic bandage or compression wrap around your knee",
+            "lie down with your knee propped up on pillows",
+            "do exercises that strengthen muscles of the legs, hips and lower torso",
+            "improve jumping and landing techniques",
+            "improve techniques for pivoting and cutting"
+        ]
+    },
+    {
+        "name": "Acne",
+        "description": "Acne is a skin condition that occurs when your hair follicles become plugged with oil and dead skin cells. Acne usually appears on your face, neck, chest, back and shoulders. Effective treatments are available, but acne can be persistent. The pimples and bumps heal slowly, and when one begins to go away, others seem to crop up. Acne is most common among teenagers, with a reported prevalence of 70 to 87 percent. Increasingly, younger children are getting acne as well. Depending on its severity, acne can cause emotional distress and scar the skin. The earlier you start treatment, the lower your risk of lasting physical and emotional damage.",
+        "causes": [
+            "excess amount of sebum",
+            "excess dead skin cells",
+            "clogged pores",
+            "bacteria",
+            "puberty",
+            "drugs and supplements (corticosteroids, androgens or lithium)",
+            "food (diary, high-carbohydrate)",
+            "stress",
+            "family history of acne",
+            "friction or pressure on skin",
+            "cosmetics (oily lotions, creams)",
+            "pregnancy"
+        ],
+        "symptoms": [
+            "whiteheads (closed plugged pores)",
+            "blackheads (open plugged pores)",
+            "small, red, tender bumps (papules)",
+            "pimples (pustules)",
+            "large, solid, painful lumps under the skin (nodules)",
+            "painful, pus-filled lumps under the skin (cystic lesions)",
+            "bunps"
+        ],
+        "remedies": [
+            "wash affected areas with a gentle cleanser and use oil-free, water-based skin care products only twice a day; washing removes excess oil and dead skin cells, but too much washing can irritate the skin",
+            "substitute shampoos with basic soap",
+            "use nonoily makeup",
+            "remove makeup before going to bed",
+            "avoid certain products, such as facial scrubs, astringents and masks, because they tend to irritate skin, which can worsen acne",
+            "avoid excessive washing and scrubbing, because it also can irritate skin",
+            "be gentle while shaving affected skin",
+            "avoid oily or greasy cosmetics, sunscreens, hairstyling products or acne concealers",
+            "watch what touches your skin",
+            "wear loosefitting clothing",
+            "shower after strenuous activities",
+            "avoid touching or picking at the affected areas, because you may trigger more acne",
+            "although sunlight can help in drying the skin surface and making the acne look lighter, too much exposure of the skin to the harmful ultra violet rays of the sun does more harm than good",
+            "have a diet rich in fruit and vegetables that contain vitamin A and B-Complex"
+        ]
+    },
+    {
+        "name": "Acoustic neuroma",
+        "description": "Acoustic neuroma is an uncommon, noncancerous (benign) and usually slow-growing tumor that develops on the main nerve leading from your inner ear to your brain. Because branches of this nerve directly influence your balance and hearing, pressure from an acoustic neuroma can cause hearing loss, ringing in your ear and unsteadiness. Also known as vestibular schwannoma, acoustic neuroma usually grows slowly or not at all. However, in a few cases, it may grow rapidly and become large enough to press against the brain and interfere with vital functions. Treatments for acoustic neuroma include regular monitoring, radiation and surgical removal.",
+        "causes": [
+            "malfunctioning gene on chromosome 22",
+            "family history of neurofibromatosis type 2 (NF2)"
+        ],
+        "symptoms": [
+            "hearing loss",
+            "ringing (tinnitus)",
+            "facial numbness",
+            "weakness (asthenia)",
+            "dizziness (vertigo)",
+            "instability"
+        ],
+        "remedies": [
+            "home or natural remedies are not known at the moment for this condition",
+            "if you have a small acoustic neuroma that isn't growing or is growing slowly, you and your doctor may decide to monitor it",
+            "your doctor may recommend stereotactic radiosurgery (ster-e-oh-TAK-tik ray-dee-oh-SUR-jur-e) if you have an acoustic neuroma to stop the growth of a tumor, preserve the facial nerve's function and possibly preserve hearing"
+        ]
+    },
+    {
+        "name": "HIV/AIDS",
+        "description": "Acquired immunodeficiency syndrome (AIDS) is a chronic, potentially life-threatening condition caused by the human immunodeficiency virus (HIV). By damaging your immune system, HIV interferes with your body's ability to fight the organisms that cause disease. HIV is a sexually transmitted infection. It can also be spread by contact with infected blood or from mother to child during pregnancy, childbirth or breast-feeding. Without medication, it may take years before HIV weakens your immune system to the point that you have AIDS. There's no cure for HIV/AIDS, but there are medications that can dramatically slow the progression of the disease. These drugs have reduced AIDS deaths in many developed nations. But HIV continues to decimate populations in Africa, Haiti and parts of Asia.",
+        "causes": [
+            "unprotected oral sex",
+            "unprotected vaginal sex",
+            "unprotected anal sex",
+            "blood transfusion",
+            "sharing needles",
+            "breastfed",
+            "uncircumcised male"
+        ],
+        "symptoms": [
+            "fever",
+            "headache",
+            "muscle aches",
+            "joint pain",
+            "rash",
+            "swollen lymph glands (neck)",
+            "diarheea",
+            "weight loss",
+            "oral yeast infection (thrush)",
+            "shingles (herpes zoster)",
+            "soaking night sweats",
+            "chronic diarrhea",
+            "persistent white spots (tongue, mouth)",
+            "lesions (tongue, mouth)",
+            "persistent fatigue",
+            "bumps",
+            "fatigue",
+            "sore throat"
+        ],
+        "remedies": [
+            "there is no treatment that could cure and eradicate HIV/AIDS, but there are a variety of drugs that can stabilize it. It is best to talk to your personal doctor for them",
+            "have a diet rich in fruit, vegetables, whole grains and lean protein",
+            "avoid unpasteurized dairy products, raw eggs, raw seafood such as oysters, sushi or sashimi and raw meat in general",
+            "strengthen your immune system",
+            "be careful when playing with pets, because some animals may carry parasites that can cause infections in people who are HIV-positive. Cat feces can cause toxoplasmosis, reptiles can carry salmonella, and birds can carry the fungus cryptococcus or histoplasmosis. Wash hands thoroughly after handling pets or emptying the litter box",
+            "acetyl-L-carnitine might help nerve pain linked to HIV, but it may be helpful only if you're already deficient in acetyl-L-carnitine",
+            "whey protein can help some people with HIV gain weight, reduce diarrhea and increase CD4 counts",
+            "use a new condom every time you have sex",
+            "a drug called Truvada can reduce the risk of sexually transmitted HIV infection and it is also used as an HIV treatment along with other medication (Truvada should only be used along with other prevention strategies, such as condom use every time you have sex, as it doesn't protect against other sexually transmitted infections, and it can't provide complete protection against HIV transmission. If you're interested in Truvada, talk with your doctor about the potential risks and benefits of the drug)",
+            "tell your sexual partners if you have HIV",
+            "use clean needles",
+            "get medical care during pregnancy",
+            "have a male circumcision"
+        ]
     }
 ]
-// Achiles tendon rupture
