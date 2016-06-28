@@ -45,20 +45,24 @@
     <button fab fab-bottom fab-right fab-fixed class="float-button" (click)="createRecipe()">
     <ion-icon name="color-wand"></ion-icon>
   </button>
-    <ion-list class="recipe-list" *ngSwitchWhen="'all'">
-      <button ion-item class="recipe-list-item" (click)="openRecipeDetails(recipe)" *ngFor="let recipe of allRecipes | itemSearch: searchQuery">
+    <ion-list class="recipe-list" *ngSwitchWhen="'all'" [virtualScroll]="allRecipes">
+      <button ion-item class="recipe-list-item" (click)="openRecipeDetails(recipe)" *virtualItem="let recipe">
           <ion-thumbnail item-left>
             <img src="img/{{recipe.name}}.png">
           </ion-thumbnail>
           <h2>{{ recipe.name }}</h2>
           <p>{{ recipe.category }}</p>
           <p>{{ recipe.dietary }}</p>
-          <p>{{ recipe.nutrients.energy.toFixed(0) }} kcal</p>
+          <p *ngIf="recipe.nutrients">{{ recipe.nutrients.energy.toFixed(0) }} kcal</p>
           <ion-note item-right>
             Read more
           </ion-note>
         </button>
     </ion-list>
+    <ion-infinite-scroll (infinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
     <button fab fab-bottom fab-right fab-fixed (click)="createRecipe()">
     <ion-icon name="color-wand"></ion-icon>
   </button>

@@ -17,8 +17,21 @@ export class RecipeService {
         });
     }
 
-    public getAllRecipes(): FirebaseListObservable<any[]> {
-        return this._allRecipes;
+    public getAllRecipes(): any {
+        return new Promise(resolve => {
+            this._allRecipes.subscribe(users => users.map(userRecipes => {
+                let allRecipes: Recipe[] = [];
+                if (!!userRecipes) {
+                    for (let recipeKey in userRecipes) {
+                        let recipe = userRecipes[recipeKey];
+                        if (recipe.ingredients) {
+                            allRecipes.push(recipe);
+                        }
+                    }
+                    resolve(allRecipes);
+                }
+            }));
+        });
     }
 
     public getMyRecipes(): FirebaseListObservable<Recipe[]> {

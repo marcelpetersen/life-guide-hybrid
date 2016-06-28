@@ -15,12 +15,22 @@ import { NavbarComponent } from '../../../components';
   pipes: [ItemSearchPipe]
 })
 export class RecipeListPage implements OnInit {
-  public allRecipes: Recipe[];
   private newRecipe: Recipe;
+  public allRecipes: Recipe[] = [];
   public myRecipes: any;
   public recipeFilter: string = "mine";
   public searchQuery: string = '';
   constructor(private _nav: NavController, private _recipeService: RecipeService) { }
+
+  private _loadRecipes(): any {
+    return new Promise(resolve => {
+      this._recipeService.getAllRecipes().then(recipes => {
+        console.log(recipes);
+        this.allRecipes = recipes;
+        resolve(this.allRecipes);
+      });
+    });
+  }
 
   public createRecipe(): void {
     this.newRecipe = new Recipe();
@@ -32,6 +42,11 @@ export class RecipeListPage implements OnInit {
       }
     });
     this._nav.present(recipeAddModal);
+  }
+
+  public doInfinite(infiniteScroll: any): void {
+     console.log('Scrolling');
+     this._loadRecipes().then(recipes => infiniteScroll.complete());
   }
 
   public openRecipeDetails(recipe: Recipe): void {
@@ -55,21 +70,7 @@ export class RecipeListPage implements OnInit {
 
   ngOnInit(): void {
     this.myRecipes = this._recipeService.getMyRecipes();
-    this._recipeService.getAllRecipes().subscribe(users => users.map(userRecipes => {
-      this.allRecipes = [];
-      if (!!userRecipes) {
-        for (let recipeKey in userRecipes) {
-          let recipe = userRecipes[recipeKey],
-            recipeIndex = this.allRecipes.indexOf(recipe);
-          if (recipeIndex !== -1) {
-            this.allRecipes.splice(recipeIndex, 1);
-          }
-          if (recipe.ingredients) {
-            this.allRecipes.push(recipe);
-          }
-        }
-      }
-    }));
+    this._loadRecipes();
   }
 
 
