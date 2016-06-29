@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common'
+import { Observable } from 'rxjs/Observable';
 import { Modal, NavController } from 'ionic-angular';
 
 import { ItemSearchPipe } from '../../shared';
@@ -16,21 +17,11 @@ import { NavbarComponent } from '../../../components';
 })
 export class RecipeListPage implements OnInit {
   private newRecipe: Recipe;
-  public allRecipes: Recipe[] = [];
+  public allRecipes: Observable<Recipe[]>;
   public myRecipes: any;
   public recipeFilter: string = "mine";
   public searchQuery: string = '';
   constructor(private _nav: NavController, private _recipeService: RecipeService) { }
-
-  private _loadRecipes(): any {
-    return new Promise(resolve => {
-      this._recipeService.getAllRecipes().then(recipes => {
-        console.log(recipes);
-        this.allRecipes = recipes;
-        resolve(this.allRecipes);
-      });
-    });
-  }
 
   public createRecipe(): void {
     this.newRecipe = new Recipe();
@@ -42,11 +33,6 @@ export class RecipeListPage implements OnInit {
       }
     });
     this._nav.present(recipeAddModal);
-  }
-
-  public doInfinite(infiniteScroll: any): void {
-     console.log('Scrolling');
-     this._loadRecipes().then(recipes => infiniteScroll.complete());
   }
 
   public openRecipeDetails(recipe: Recipe): void {
@@ -70,7 +56,9 @@ export class RecipeListPage implements OnInit {
 
   ngOnInit(): void {
     this.myRecipes = this._recipeService.getMyRecipes();
-    this._loadRecipes();
+    this.allRecipes = this._recipeService.getAllRecipes();
+    //this.allRecipes.retryWhen(error => error.delay(2000));
+    //this.myRecipes.retryWhen(error => error.delay(2000));
   }
 
 

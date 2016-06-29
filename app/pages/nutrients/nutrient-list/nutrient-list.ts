@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { FirebaseListObservable } from 'angularfire2';
 
 import { ItemSearchPipe } from '../../shared';
 import { NavbarComponent } from '../../../components';
@@ -12,8 +13,8 @@ import { INutrient, NutrientService } from '../shared';
   pipes: [ItemSearchPipe]
 })
 export class NutrientListPage implements OnInit {
-  public micronutrients: any;
-  public macronutrients: any;
+  public micronutrients: FirebaseListObservable<INutrient[]>;
+  public macronutrients: FirebaseListObservable<INutrient[]>;
   public nutrientGroup: string = "macronutrients";
   public searchQuery: string = '';
   constructor(private _nav: NavController, private _nutrientService: NutrientService) { }

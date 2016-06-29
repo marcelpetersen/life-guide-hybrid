@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseListObservable } from 'angularfire2';
 import { NavParams, ViewController } from 'ionic-angular';
 
 import { Food, FoodService } from '../../food';
@@ -10,7 +11,7 @@ import { ItemSearchPipe } from '../../shared';
 })
 export class IngredientSearchPage implements OnInit {
     public checkedIngredients: boolean[] = [];
-    public foodSource: Food[];
+    public foodSource: FirebaseListObservable<Food[]>;
     public selectedIngredients: Food[] = [];
     public searchQuery: string = '';
     constructor(
@@ -51,7 +52,7 @@ export class IngredientSearchPage implements OnInit {
     }
 
     ngOnInit(): void {
-        this._foodService.getFood().subscribe(food => this.foodSource = food);
+        this.foodSource = this._foodService.getFood();
         if (!!this._params.data.ingredients) {
             this.selectedIngredients = this._params.data.ingredients;
             this.selectedIngredients.forEach(ingredient => this.checkedIngredients[ingredient.key] = true);

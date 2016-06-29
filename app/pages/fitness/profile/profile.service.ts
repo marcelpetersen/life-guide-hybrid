@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseAuth, FirebaseObjectObservable } from 'angularfire2';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 import { Food } from '../../food';
 import { INutrient, NutrientService } from '../../nutrients';
@@ -16,8 +18,8 @@ export class ProfileService {
                 this._profile = _af.database.object(`/profiles/${authData.uid}`);
             }
         });
-        this._nutrientService.getMacronutrients().subscribe(macronutrients => this._macronutrients = macronutrients);
         this._nutrientService.getMicronutrients().subscribe(micronutrients => this._micronutrients = micronutrients);
+        this._nutrientService.getMacronutrients().subscribe(macronutrients => this._macronutrients = macronutrients);
     }
 
     private _setAgeLabel(profile: Profile): string {
@@ -210,8 +212,16 @@ export class ProfileService {
         this._profile.update(profile);
     }
 
-    public getMyProfile(): FirebaseObjectObservable<Profile> {
-        return this._profile;
+    public getMyProfile(): Observable<any> {
+        return new Observable(observer => {
+            this._profile.subscribe(data => {
+                if (!data.hasOwnProperty('$value')) {
+                    observer.next(data);
+                } else {
+                    observer.error("No profile found!");
+                }
+            });
+        });
     }
 
     public setFitness(profile: Profile): void {
@@ -220,11 +230,11 @@ export class ProfileService {
         this._setBodyFat(profile);
     }
 
-    public getTotalRequirements(energyExpand: number = 0, profile: Profile): Food {
+    public getTotalRequirements(energyExpand: number = 0, profile: Profile): any {
         let nutrientRequirements: Food = new Food();
         this._setMicroRequirements(nutrientRequirements, profile);
         this._setBasicMacroRequirements(nutrientRequirements, profile);
         this._setSpecificMacroRequirements(energyExpand, nutrientRequirements, profile);
-        return nutrientRequirements;
+        return new Promise(resolve => resolve(nutrientRequirements));
     }
 }

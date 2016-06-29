@@ -5,11 +5,11 @@ import { Food } from '../';
 
 @Injectable()
 export class FoodService {
-    food: FirebaseListObservable<Food[]>;
-    constructor(af: AngularFire) {
-        this.food = af.database.list('/food');
+    private _food: FirebaseListObservable<Food[]>;
+    constructor(private _af: AngularFire) {
+        this._food = _af.database.list('/food');
     }
-    getFood(): FirebaseListObservable<Food[]> {
-        return this.food;
+    public getFood(): FirebaseListObservable<Food[]> {
+        return this._food;
     }
 }

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 import { AngularFire, FirebaseAuth, FirebaseListObservable } from 'angularfire2';
 
 import { Food } from '../../../food';
@@ -17,9 +19,9 @@ export class RecipeService {
         });
     }
 
-    public getAllRecipes(): any {
-        return new Promise(resolve => {
-            this._allRecipes.subscribe(users => users.map(userRecipes => {
+    public getAllRecipes(): Observable<any> {
+        return new Observable(observer => {
+            this._allRecipes.subscribe(users => users.forEach(userRecipes => {
                 let allRecipes: Recipe[] = [];
                 if (!!userRecipes) {
                     for (let recipeKey in userRecipes) {
@@ -28,7 +30,10 @@ export class RecipeService {
                             allRecipes.push(recipe);
                         }
                     }
-                    resolve(allRecipes);
+                    observer.next(allRecipes);
+                    //observer.complete();
+                } else {
+                    observer.error("No recipes found");
                 }
             }));
         });

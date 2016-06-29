@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Alert, NavController, NavParams, ViewController } from 'ionic-angular';
+import { FirebaseListObservable } from 'angularfire2';
 
 import { Activity, ActivityPlanService } from '../shared';
 import { ItemSearchPipe } from '../../../shared';
@@ -9,7 +10,7 @@ import { ItemSearchPipe } from '../../../shared';
     pipes: [ItemSearchPipe]
 })
 export class ActivityAddPage implements OnInit {
-    public activities: Activity[];
+    public activities: FirebaseListObservable<Activity[]>;
     public searchQuery: string = '';
     public selectedActivities: Activity[] = [];
     constructor(
@@ -74,7 +75,7 @@ export class ActivityAddPage implements OnInit {
     }
 
     ngOnInit() {
-        this._activityService.getActivities().subscribe(activities => this.activities = activities);
+        this.activities = this._activityService.getActivities();
         if (!!this._params.data.activities) {
             this.selectedActivities = this._params.data.activities;
         }

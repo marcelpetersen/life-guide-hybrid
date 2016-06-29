@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseAuth, FirebaseListObservable } from 'angularfire2';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 import { MealPlan } from '../model/meal-plan.model';
 
@@ -14,8 +16,19 @@ export class MealPlansService {
     });
   }
 
-  public getMealPlans(): FirebaseListObservable<MealPlan[]> {
-    return this._mealPlans;
+  public getMealPlans(date: string): Observable<any> {
+
+    return new Observable(observer => {
+      let mp;
+      this._mealPlans.subscribe(mealPlans => mp = mealPlans.filter(mealPlans => mealPlans.date == date)[0]);
+      setTimeout(() => {
+        if (!mp) {
+          this.addMealPlan(date);
+        } else {
+          observer.next(mp);
+        }
+      }, 1000);
+    });
   }
 
   public addMealPlan(date: string): void {

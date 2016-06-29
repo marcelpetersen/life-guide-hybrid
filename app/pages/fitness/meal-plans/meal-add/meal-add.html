@@ -16,7 +16,7 @@
 </ion-toolbar>
 <ion-content padding>
     <ion-list>
-        <ion-item *ngFor="let recipe of recipes | itemSearch: searchQuery">
+        <ion-item *ngFor="let recipe of recipes | async | itemSearch: searchQuery">
             <ion-label>{{ recipe.name }}</ion-label>
             <ion-checkbox [checked]="(selectedMeals.indexOf(recipe) !== -1)" (click)="changeMeal(recipe); chooseMealTime($event, recipe)">
             </ion-checkbox>

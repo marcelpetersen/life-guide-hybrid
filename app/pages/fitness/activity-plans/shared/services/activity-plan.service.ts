@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseAuth, FirebaseListObservable } from 'angularfire2';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 import { Activity, ActivityPlan } from '../model';
 
@@ -16,12 +18,22 @@ export class ActivityPlanService {
         });
     }
 
-    public getActivities(): FirebaseListObservable<Activity[]> {
-        return this._activities;
+    public getActivities(): any {
+        return new Promise(resolve => this._activities.subscribe(activities => resolve(activities)));
     }
 
-    public getActivityPlans(): FirebaseListObservable<ActivityPlan[]> {
-        return this._activityPlans;
+    public getActivityPlans(date: string): Observable<any> {
+        return new Observable(observer => {
+            let ap;
+            this._activityPlans.subscribe(activityPlans => ap = activityPlans.filter(activityPlan => activityPlan.date == date)[0]);
+            setTimeout(() => {
+                if (!ap) {
+                    this.addActivityPlan(date);
+                } else {
+                    observer.next(ap);
+                }
+            }, 1000);
+        });
     }
 
     public addActivityPlan(date: string): void {

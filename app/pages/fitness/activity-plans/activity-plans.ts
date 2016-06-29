@@ -51,28 +51,16 @@ export class ActivityPlansPage implements OnInit {
 
     public syncActivityPlan() {
         this.currentActivityPlan = new ActivityPlan(this.currentDate);
-        this._activityPlans
-            .subscribe(activityPlans => {
-                activityPlans.forEach(activityPlan => {
-                    if (activityPlan.date == this.currentDate) {
-                        this.currentActivityPlan['$key'] = activityPlan['$key'];
-                        if (!!activityPlan.activities) {
-                            this.currentActivityPlan.activities = activityPlan.activities;
-                            this.currentActivityPlan.totalEnergy = activityPlan.totalEnergy;
-                            this.currentActivityPlan.totalDuration = activityPlan.totalDuration;
-                        }
-                    }
-                });
-            });
-        setTimeout(() => {
-            if (!this.currentActivityPlan['$key']) {
-                this._activityPlanService.addActivityPlan(this.currentDate);
+        this._activityPlanService.getActivityPlans(this.currentDate).subscribe(activityPlan => {
+            if (!!activityPlan.activities) {
+                this.currentActivityPlan = activityPlan;
+            } else {
+                this.currentActivityPlan['$key'] = activityPlan['$key'];
             }
-        }, 1000);
+        });
     }
 
     ngOnInit() {
-        this._activityPlans = this._activityPlanService.getActivityPlans();
         let myDate = new Date(),
             currentDay = myDate.getDate(),
             currentMonth = myDate.getMonth() + 1,

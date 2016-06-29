@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { Alert, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
+import { FirebaseListObservable } from 'angularfire2';
 
 import { Food, FoodService } from '../../../food';
 import { ItemSearchPipe } from '../../../shared';
@@ -13,8 +16,8 @@ import { Recipe, RecipeService } from '../../../recipes';
     pipes: [ItemSearchPipe]
 })
 export class MealAddPage implements OnInit {
-    public food: any;
-    public recipes: Recipe[];
+    public food: FirebaseListObservable<Food[]>;
+    public recipes: Observable<Recipe[]>;
     public mealPlan: MealPlan;
     public mealTimeChoose: boolean;
     public selectedMeals: any[] = [];
@@ -131,21 +134,7 @@ export class MealAddPage implements OnInit {
 
     ngOnInit() {
         this.food = this._foodService.getFood();
-        this._recipeService.getAllRecipes().subscribe(users => users.map(userRecipes => {
-            this.recipes = [];
-            if (!!userRecipes) {
-                for (let recipeKey in userRecipes) {
-                    let recipe = userRecipes[recipeKey],
-                        recipeIndex = this.recipes.indexOf(recipe);
-                    if (recipeIndex !== -1) {
-                        this.recipes.splice(recipeIndex, 1);
-                    }
-                    if (recipe.ingredients) {
-                        this.recipes.push(recipe);
-                    }
-                }
-            }
-        }));
+        this.recipes = this._recipeService.getAllRecipes();
         this.mealPlan = this._params.data.mealPlan;
     }
 

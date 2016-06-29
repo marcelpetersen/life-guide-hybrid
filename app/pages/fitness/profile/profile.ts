@@ -25,15 +25,9 @@ export class ProfilePage implements OnInit {
     }
 
     ngOnInit() {
-        this._profileService.getMyProfile()
-        .subscribe(profile => {
-            if (!!profile && !profile.hasOwnProperty('$value')) {
-                this.profile = profile;
-            }
-            else {
-                this._profileService.addProfile(this.profile);
-            }
-        });
+        this._profileService.getMyProfile().subscribe(
+            profile => this.profile = profile,
+            error => this._profileService.addProfile(this.profile)
+        );
      }
-
 }
