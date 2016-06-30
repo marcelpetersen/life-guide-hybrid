@@ -8,7 +8,7 @@ import { NavbarComponent } from '../../components';
   directives: [NavbarComponent]
 })
 export class CreditsPage implements OnInit{
-  public creditsList: string[];
+  public creditsList: any[];
   constructor(public nav: NavController) {}
 
   ngOnInit(): void {
