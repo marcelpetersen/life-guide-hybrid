@@ -28,8 +28,15 @@ ion-navbar, ion-menu {
     font-family: 'Raleway', sans-serif;
 }
 
-ion-content {
+ion-content, ion-list {
+  font-family: 'Lato', sans-serif;
+  font-style: normal;
+  p {
     font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    }
 }
 
 .bad {

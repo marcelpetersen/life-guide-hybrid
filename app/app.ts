@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, enableProdMode, ViewChild } from "@angular/core";
 import { Platform, ionicBootstrap, Nav } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 import {
@@ -12,6 +12,7 @@ import {
 import { MATERIAL_PROVIDERS } from "ng2-material";
 
 import { AuthenticationPage } from './pages/authentication';
+import { CreditsPage } from './pages/credits/credits';
 import { DiagnosisPage } from './pages/diagnosis/diagnosis';
 import { ActivityPlanService, FitnessPage, MealPlansService, NutritionService, ProfileService } from './pages/fitness';
 import { FoodListPage, FoodService } from './pages/food';
@@ -58,7 +59,8 @@ export class MyApp {
       { title: 'Food', icon: 'cart', component: FoodListPage },
       { title: 'Home', icon: 'home', component: HomePage },
       { title: 'Nutrients', icon: 'nutrition', component: NutrientListPage },
-      { title: 'Recipes', icon: 'restaurant', component: RecipeListPage }
+      { title: 'Recipes', icon: 'restaurant', component: RecipeListPage },
+      { title: 'Credits', icon: 'quote', component: CreditsPage }
     ];
   }
 
@@ -67,5 +69,6 @@ export class MyApp {
   }
 }
 
+enableProdMode();
 ionicBootstrap(MyApp);
 

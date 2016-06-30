@@ -26,13 +26,13 @@
             "fast pulse"
         ],
         "remedies": [
-            "avoid stressfull situations",
+            "manage stress",
             "pay attention to stimulants",
             "exercise regularly, but not to intense, so that your blood pressure is not to high",
             "quit smoking",
             "have a good sleep",
-            "keep you cholesterol and sodium levels low",
-            "have a healthy diet based on grains, fruits and vegetables"
+            "keep your cholesterol and sodium levels low",
+            "have a healthy diet based on grains, nuts, seeds, fruits, vegetables and legumes"
         ]
     },
     {
@@ -50,9 +50,7 @@
             "family history of acanthosis nigricans"
         ],
         "symptoms": [
-            "dark skin (armpits, groin, neck) followed by itching and odor",
-            "thickened skin (armpits, groin, neck) followed by itching and odor",
-            "velvet skin (armpits, groin, neck) followed by itching and odor"
+            "thickened, dark, velvet skin (armpits, groin, neck) followed by itching and odor"
         ],
         "remedies": [
             "keep your blood sugar levels stable",
@@ -143,7 +141,7 @@
         "symptoms": [
             "burning sensation (chest, throat) followed by sour taste in mouth",
             "heartburn",
-            "chest pain",
+            "chest pain (angina)",
             "difficulty swallowing (dysphagia)",
             "dry cough",
             "hoarseness",
@@ -303,6 +301,162 @@
             "use clean needles",
             "get medical care during pregnancy",
             "have a male circumcision"
+        ]
+    },
+    {
+        "name": "Acromegaly",
+        "description": "Acromegaly is a hormonal disorder that develops when your pituitary gland produces too much growth hormone during adulthood. When this happens, your bones increase in size, including those of your hands, feet and face. Acromegaly usually affects middle-aged adults. In children who are still growing, too much growth hormone can cause a condition called gigantism. These children have exaggerated bone growth and an abnormal increase in height. Because acromegaly is uncommon and physical changes occur gradually, the condition often isn't recognized immediately: sometimes not for years. If not treated promptly, acromegaly can lead to serious illness and even become life-threatening. However, available treatments for acromegaly can reduce your risk of complications and significantly improve your symptoms, including the enlargement of your features.",
+        "causes": [
+            "pituitary gland overproducing growth hormone (GH)",
+            "pituitary gland tumor",
+            "lung tumor",
+            "adrenal glands tumor",
+            "pancreas tumor"
+        ],
+        "symptoms": [
+            "enlarged hands",
+            "enlarged feet",
+            "coarsened, enlarged facial features",
+            "coarse, oily, thickened skin",
+            "excessive sweating and body odor",
+            "sweatiness",
+            "small outgrowths of skin tissue (skin tags)",
+            "muscle weakness",
+            "fatigue",
+            "deepened, husky voice",
+            "enlarged vocal cords",
+            "enlarged sinuses",
+            "severe snoring",
+            "snoring",
+            "impaired vision",
+            "headache",
+            "enlarged tongue",
+            "joint pain",
+            "limited joint mobility",
+            "irregular menstrual cycle in women",
+            "erectile dysfunction in men",
+            "enlarged internal organs",
+            "enlarged chest"
+        ],
+        "remedies": [
+            "home or natural remedies are not known at the moment for this condition",
+            "medical treatment focuses on lowering GH production and reducing the negative effects of the tumor",
+            "surgery may be required"
+        ]
+    },
+    {
+        "name": "Actinic keratosis",
+        "description": "An actinic keratosis (ak-TIN-ik ker-uh-TOE-sis) is a rough, scaly patch on your skin that develops from years of exposure to the sun. It's most commonly found on your face, lips, ears, back of your hands, forearms, scalp or neck. Also known as solar keratosis, an actinic keratosis enlarges slowly and usually causes no signs or symptoms other than a patch or small spot on your skin. These lesions take years to develop, usually first appearing in older adults. A small percentage of actinic keratosis lesions can eventually become skin cancer. You can reduce your risk of actinic keratosis by minimizing your sun exposure and protecting your skin from ultraviolet (UV) rays.",
+        "causes": [
+            "frequent or intense exposure to UV",
+            "living in sunny climate",
+            "pale skin",
+            "family history of actinic keratosis",
+            "family history of skin cancer",
+            "weak immune system",
+            "medical therapies (chemotherapy)",
+            "AIDS",
+            "leukemia",
+            "white race"
+        ],
+        "symptoms": [
+            "rough, dry or scaly patch of skin (face, lips, ears, back of your hands, forearms, scalp or neck) followed by itching or burning",
+            "pink, red, brown or flesh-colored flat to slightly raised patch (face, lips, ears, back of your hands, forearms, scalp or neck)"
+        ],
+        "remedies": [
+            "Cryosurgery (use of extreme cold to destroy the unwanted tissue)",
+            "apply raw, oranic apple cider vinegar to the spots 2-4 times a day using a cotton ball or q-tip",
+            "add 1-3 teaspoons of apple cider vinegar to a tall glass of water once or twice a day",
+            "make a paste with borax and water and apply to the lesions 2-4 times a day using a cotton ball or q-tip",
+            "mix 1/8 teaspoon of ascorbic acid with 1 teaspoon of water and apply to your lesions 2-4 times a day using a cotton ball or q-tip",
+            "apply iodine to your lesions 2-4 times a day using a cotton ball or q-tip",
+            "apply colloidal silver 2-4 times a day"
+        ]
+    },
+    {
+        "name": "Acute coronary syndrome",
+        "description": "Acute coronary syndrome is a term used to describe a range of conditions associated with sudden, reduced blood flow to the heart. One condition under the umbrella of acute coronary syndrome is myocardial infarction (heart attack) — when cell death results in damaged or destroyed heart tissue. Even when acute coronary syndrome causes no cell death, the reduced blood flow alters heart function and indicates a high risk of heart attack. Acute coronary syndrome often causes severe chest pain or discomfort. It is a medical emergency that requires prompt diagnosis and care. Treatment goals include improving blood flow, treating complications and preventing future problems.",
+        "causes": [
+            "fatty deposits (plaques) in and on the walls of coronary arteries",
+            "blood vessel disease in the aorta",
+            "old age",
+            "high blood pressure",
+            "high blood cholesterol",
+            "smoking",
+            "sedentary lifestyle",
+            "unhealthy diet",
+            "obesity",
+            "diabetes",
+        ],
+        "symptoms": [
+            "chest pain followed by aching, pressure, tightness or burning",
+            "chest pain (angina)",
+            "heartburn",
+            "vomiting",
+            "nausea",
+            "indigestion",
+            "sudden, heavy sweating (diaphoresis)",
+            "sweatiness",
+            "shortness of breath (dyspnea)",
+            "dizziness (vertigo)",
+            "fatigue"
+        ],
+        "remedies": [
+            "quit smoking",
+            "have a healthy diet based on grains, nuts, seeds, fruits, vegetables and legumes",
+            "lower your intake of sugar, trans fat and saturated fat",
+            "exercise regularly",
+            "keep your cholesterol and sodium levels low",
+            "keep a normal blood pressure",
+            "maintain a healthy weight",
+            "manage stress",
+            "drink alcohol in moderation"
+        ]
+    },
+    {
+        "name": "Sweet's syndrome",
+        "description": "Sweet's syndrome is a rare skin condition. Its main signs include fever and painful skin lesions that appear mostly on your arms, neck, head and trunk. The exact cause of Sweet's syndrome isn't known. In some people, it's triggered by an infection, illness or certain medications. Sweet's syndrome can also occur with some types of cancer. The most common treatment for Sweet's syndrome is corticosteroid pills, such as prednisone. Signs and symptoms often disappear just a few days after treatment begins, but recurrence is common.",
+        "causes": [
+            "cancer",
+            "leukemia",
+            "breast cancer",
+            "colon cancer",
+            "female gender",
+            "old age",
+            "pregnancy"
+        ],
+        "symptoms": [
+            "bumps",
+            "small, red, tender bumps (papules)",
+            "fever",
+            "respiratory infection",
+            "rash"
+        ],
+        "remedies": [
+            "Sweet's syndrome not associated with a malignancy may disappear on its own within one to three months"
+        ]
+    },
+    {
+        "name": "Acute kidney failure",
+        "description": "Acute kidney failure occurs when your kidneys suddenly become unable to filter waste products from your blood. When your kidneys lose their filtering ability, dangerous levels of wastes may accumulate, and your blood's chemical makeup may get out of balance. Acute kidney failure — also called acute renal failure or acute kidney injury — develops rapidly over a few hours or a few days. Acute kidney failure is most common in people who are already hospitalized, particularly in critically ill people who need intensive care.  Acute kidney failure can be fatal and requires intensive treatment. However, acute kidney failure may be reversible. If you're otherwise in good health, you may recover normal or nearly normal kidney function.",
+        "causes": [
+            "cancer",
+            "leukemia",
+            "breast cancer",
+            "colon cancer",
+            "female gender",
+            "old age",
+            "pregnancy"
+        ],
+        "symptoms": [
+            "bumps",
+            "small, red, tender bumps (papules)",
+            "fever",
+            "respiratory infection",
+            "rash"
+        ],
+        "remedies": [
+            "Sweet's syndrome not associated with a malignancy may disappear on its own within one to three months"
         ]
     }
 ]

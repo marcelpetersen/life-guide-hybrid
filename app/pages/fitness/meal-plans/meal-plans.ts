@@ -79,6 +79,8 @@ export class MealPlansPage implements OnInit {
       if (!!mealPlan) {
         this.currentMealPlan = mealPlan;
         this._meaplPlansService.updateMealPlan(this.currentMealPlan);
+        this.mealPlanNutrition = this._nutritionService.calculateMealPlanNutrition(this.currentMealPlan.meals);
+        this._getNutritionData();
       }
     });
     this._nav.present(mealAddModal);
@@ -91,7 +93,8 @@ export class MealPlansPage implements OnInit {
   public editMealPlan(): void {
     if (this.editing) {
       this._meaplPlansService.updateMealPlan(this.currentMealPlan);
-      this.syncMealPlan();
+      this.mealPlanNutrition = this._nutritionService.calculateMealPlanNutrition(this.currentMealPlan.meals);
+      this._getNutritionData();
       this.editing = false;
     } else {
       this.editing = true;
@@ -102,8 +105,8 @@ export class MealPlansPage implements OnInit {
     this._getNutritionData().then(nutritionData => {
       console.log(
         "\nTotal intake:", nutritionData[0],
-        "\nRemaining intake:", nutritionData[1],
-        "\nRequired intake:", nutritionData[2],
+        "\nRequired intake:", nutritionData[1],
+        "\nnRemaining intake:", nutritionData[2],
         "\nTotal nutrition:", nutritionData[3]
       );
       this._nav.push(MealPlanNutritionPage, {
