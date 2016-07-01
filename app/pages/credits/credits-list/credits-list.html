@@ -1,0 +1,12 @@
+<navbar [pageTitle]="'Credits'"></navbar>
+
+<ion-content padding class="credits">
+  <h1>Special thanks to:</h1>
+  <ion-list>
+    <button ion-item *ngFor="let source of creditsList" (click)="viewSource(source)">
+        <ion-note item-right>
+            View refferences
+          </ion-note>
+      </button>
+  </ion-list>
+</ion-content>

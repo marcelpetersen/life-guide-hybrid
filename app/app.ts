@@ -12,7 +12,7 @@ import {
 import { MATERIAL_PROVIDERS } from "ng2-material";
 
 import { AuthenticationPage } from './pages/authentication';
-import { CreditsPage } from './pages/credits/credits';
+import { CreditsListPage, CreditsService } from './pages/credits';
 import { DiagnosisPage } from './pages/diagnosis/diagnosis';
 import { ActivityPlanService, FitnessPage, MealPlansService, NutritionService, ProfileService } from './pages/fitness';
 import { FoodListPage, FoodService } from './pages/food';
@@ -25,6 +25,7 @@ import { RecipeListPage, RecipeService } from './pages/recipes';
   templateUrl: 'build/app.html',
   providers: [
     ActivityPlanService,
+    CreditsService,
     FoodService,
     MealPlansService,
     NutrientService,
@@ -60,7 +61,7 @@ export class MyApp {
       { title: 'Home', icon: 'home', component: HomePage },
       { title: 'Nutrients', icon: 'nutrition', component: NutrientListPage },
       { title: 'Recipes', icon: 'restaurant', component: RecipeListPage },
-      { title: 'Credits', icon: 'quote', component: CreditsPage }
+      { title: 'Credits', icon: 'quote', component: CreditsListPage }
     ];
   }
 
