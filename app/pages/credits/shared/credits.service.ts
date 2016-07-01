@@ -26,6 +26,12 @@ const sources: any[] = [
     },
     {
         name: "Mayoclinic",
-        urls: ["http://www.healthline.com/"]
+        urls: ["http://www.mayoclinic.org/diseases-conditions"]
+    },
+    {
+        name: "Home remedies",
+        urls: [
+            "http://www.home-remedies-for-you.com/remedy/Liver-Disease.html"
+        ]
     }
 ];

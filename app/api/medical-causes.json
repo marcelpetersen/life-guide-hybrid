@@ -108,7 +108,7 @@
     "thrombotic thrombocytopenic purpura",
     "cocaine",
     "alcohol",
-    "heavy metals",
+    "exposure to heavy metals",
     "inflammation of blood vessels (vasculitis)",
     "bladder cancer",
     "blood clots in the urinary tract",
@@ -118,5 +118,18 @@
     "kidney stones",
     "damage to the nerves that control the bladder",
     "prostate cancer",
-    "peripheral artery disease"
+    "peripheral artery disease",
+    "drugs and supplements (acetaminophen, antibiotics, anti-inflamatory drugs, anticonvulsants, kava, ephedra, skullcap, pennyroyal)",
+    "hepatitis A",
+    "hepatitis B",
+    "hepatitis E",
+    "Epstein-Barr virus infection",
+    "cytomegalovirus infection",
+    "herpes simplex virus infection",
+    "food (mushroom Amanita phalloides)",
+    "autoimmune disease",
+    "liver veins disease",
+    "metabolic disease",
+    "exposure to benzene",
+    "exposure to radiation"
 ]
