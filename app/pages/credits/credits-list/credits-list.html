@@ -4,6 +4,8 @@
   <h1>Special thanks to:</h1>
   <ion-list>
     <button ion-item *ngFor="let source of creditsList" (click)="viewSource(source)">
+      <h2>{{ source.name }}</h2>
+      <p>{{ source.urls.length }} refferences</p>
         <ion-note item-right>
             View refferences
           </ion-note>
