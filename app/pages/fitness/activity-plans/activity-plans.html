@@ -2,6 +2,9 @@
 <ion-item class="plan-date">
     <ion-icon primary name="calendar" item-left></ion-icon>
     <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="currentDate" (ionChange)="syncActivityPlan()"></ion-datetime>
+    <button item-right clear (click)="syncActivityPlan()">
+    <ion-icon primary name="refresh"></ion-icon>
+  </button>
     <button item-right clear (click)="editActivityPlan()">
         <ion-icon *ngIf="!editing" name="create"></ion-icon>
         <ion-icon *ngIf="editing" name="done-all"></ion-icon>
