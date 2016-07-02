@@ -1,5 +1,5 @@
-<ion-navbar gray *navbar>
-  <button menuToggle>
+<ion-navbar gray *navbar class="top-nav">
+  <button secondary menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
   <ion-buttons end *ngIf="userImage">
@@ -8,7 +8,7 @@
     </ion-avatar>
   </ion-buttons>
   <ion-buttons end>
-    <button (click)="showLogout($event)">
+    <button secondary (click)="showLogout($event)">
       <ion-icon name="more"></ion-icon>
     </button>
   </ion-buttons>

@@ -1,7 +1,3 @@
-<ion-navbar *navbar>
-  <ion-title>{{ userLogin ? 'Login' : 'Sign up' }}</ion-title>
-</ion-navbar>
-
 <ion-content class="authentication">
   <form *ngIf="userLogin" #loginForm="ngForm" (ngSubmit)="passwordLogin(loginForm.value)">
     <h1 text-center light>Life Guide</h1>
