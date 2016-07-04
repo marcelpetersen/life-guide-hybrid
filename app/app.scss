@@ -1,35 +1,23 @@
-.side-menu ion-content{
-    background-color: rgba(48, 48, 48, 1);
+h1, h2, h3, h4, h5, h6, ion-navbar, ion-menu {
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 600;
 }
+
+ion-content {
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.side-menu ion-content{
+    background-color: #7eb0fc;
+}
+
 .side-menu ion-list, .side-menu button {
     background: transparent;
-    border-color: cyan;
-    color: cyan;
-}
-.menu-header {
-    position: relative;
-    text-align: center;
-    width: 100%;
-    height: 57px;
-    background-color: white;
-
-    .menu-header-image {
-        width: 100%;
-        height: 100%;
-        border: 0px;
-    }
-
-    .menu-header-title {
-        position: absolute;
-        top: 0px;
-        margin: 0.4em auto;
-        width: 100%;
-        font-size: 2em;
-        font-family: 'Open Sans', sans-serif;
-        font-style: normal;
-        font-weight: 300;
-        color: #7cfc00;
-  }
+    color: white;
+    padding: 2em auto;
 }
 
 .item-remove-button {
@@ -37,30 +25,16 @@
     font-size: 14px;
 }
 
-ion-navbar, ion-menu {
-    font-family: 'Open Sans', sans-serif;
-    font-style: normal;
-    font-weight: 300;
+ion-content {
+    background-color: rgba(240, 240, 255, 1);
 }
 
-ion-content, ion-list {
-  font-family: 'Open Sans', sans-serif;
-  font-style: normal;
-  font-weight: 300;
-  ion-note {
-      color: #64ff64;
-  }
-  p {
-    font-family: 'Raleway', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    }
-}
+
 
 ion-card {
-    -webkit-box-shadow: 0px 4px 10px -2px cyan;
-    -moz-box-shadow: 0px 4px 10px -2px cyan;
-    box-shadow: 0px 4px 10px -2px cyan;
+    -webkit-box-shadow: 0px 4px 10px -2px rgba(0, 255, 255, 0.9);
+    -moz-box-shadow: 0px 4px 10px -2px rgba(0, 255, 255, 0.9);
+    box-shadow: 0px 4px 10px -2px rgba(0, 255, 255, 0.9);
 
 
 }
@@ -70,7 +44,7 @@ ion-card {
 }
 
 .good {
-    color: blue;
+    color: #2FB16F;
 }
 
 .float-button {

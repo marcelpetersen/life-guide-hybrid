@@ -7,6 +7,7 @@ import {
   AuthProviders,
   defaultFirebase,
   firebaseAuthConfig,
+  FirebaseAuth,
   FIREBASE_PROVIDERS
 } from 'angularfire2';
 import { MATERIAL_PROVIDERS } from "ng2-material";
@@ -52,8 +53,8 @@ export class MyApp {
   public rootPage: any = AuthenticationPage;
   public pages: Array<{ title: string, icon: string, component: any }>
 
-  constructor(platform: Platform) {
-    platform.ready().then(() => StatusBar.styleDefault());
+  constructor(private _auth: FirebaseAuth, private _platform: Platform) {
+    _platform.ready().then(() => StatusBar.styleDefault());
     this.pages = [
       { title: 'Diagnosis', icon: 'pulse', component: DiagnosisPage },
       { title: 'Fitness', icon: 'bicycle', component: FitnessPage },
@@ -65,11 +66,16 @@ export class MyApp {
     ];
   }
 
+  public logout(): void {
+    this._auth.logout();
+    this.nav.setRoot(AuthenticationPage);
+  }
+
   public openPage(page): void {
     this.nav.setRoot(page.component);
   }
 }
 
-enableProdMode();
+//enableProdMode();
 ionicBootstrap(MyApp);
 

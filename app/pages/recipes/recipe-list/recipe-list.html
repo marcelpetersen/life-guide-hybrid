@@ -12,50 +12,58 @@
     </ion-segment>
   </div>
   <div [ngSwitch]="recipeFilter">
-    <ion-list class="recipe-list" *ngSwitchWhen="'mine'">
-      <ion-item-sliding *ngFor="let recipe of myRecipes | async | itemSearch: searchQuery">
-        <ion-item class="recipe-list-item">
-          <ion-thumbnail item-left>
-            <img src="img/{{recipe.name}}.png">
-          </ion-thumbnail>
-          <h2>{{ recipe.name }}</h2>
+    <div *ngSwitchWhen="'mine'">
+      <ion-card *ngFor="let recipe of myRecipes | async | itemSearch: searchQuery">
+        <ion-card-header>
+          {{ recipe.name }}
+        </ion-card-header>
+        <ion-card-content padding>
           <p>{{ recipe.category }}</p>
           <p>{{ recipe.dietary }}</p>
           <p>{{ recipe.nutrients.energy.toFixed(0) }} kcal</p>
-          <ion-note item-right>
-            Swipe
-          </ion-note>
-        </ion-item>
-        <ion-item-options>
-          <button (click)="openRecipeDetails(recipe)">
-          <ion-icon name="book"></ion-icon>
-          Details
-        </button>
-          <button aqua (click)="editRecipe(recipe)">
-          <ion-icon name="color-wand"></ion-icon>
-          Edit
-        </button>
-          <button danger (click)="removeRecipe(recipe)">
-          <ion-icon name="trash"></ion-icon>
-          Remove
-        </button>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
-    <ion-list class="recipe-list" *ngSwitchWhen="'all'">
-      <button ion-item class="recipe-list-item" (click)="openRecipeDetails(recipe)" *ngFor="let recipe of allRecipes | async | itemSearch: searchQuery">
-          <ion-thumbnail item-left>
-            <img src="img/{{recipe.name}}.png">
-          </ion-thumbnail>
-          <h2>{{ recipe.name }}</h2>
+        </ion-card-content>
+        <ion-row no-padding>
+          <ion-col>
+            <button clear small secondary (click)="openRecipeDetails(recipe)">
+              <ion-icon name='book'></ion-icon>
+              Read more
+            </button>
+          </ion-col>
+          <ion-col text-center>
+            <button clear small primary (click)="editRecipe(recipe)">
+              <ion-icon name='create'></ion-icon>
+              Edit
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button clear small danger (click)="removeRecipe(recipe)">
+              <ion-icon name='trash'></ion-icon>
+              Delete
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+    <div *ngSwitchWhen="'all'">
+      <ion-card *ngFor="let recipe of allRecipes | async | itemSearch: searchQuery">
+        <ion-card-header>
+          {{ recipe.name }}
+        </ion-card-header>
+        <ion-card-content padding>
           <p>{{ recipe.category }}</p>
           <p>{{ recipe.dietary }}</p>
-          <p *ngIf="recipe.nutrients">{{ recipe.nutrients.energy.toFixed(0) }} kcal</p>
-          <ion-note item-right>
-            Read more
-          </ion-note>
-        </button>
-    </ion-list>
+          <p>{{ recipe.nutrients.energy.toFixed(0) }} kcal</p>
+        </ion-card-content>
+        <ion-row no-padding>
+          <ion-col>
+            <button clear small secondary (click)="openRecipeDetails(recipe)">
+              <ion-icon name='book'></ion-icon>
+              Read more
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
     <button fab fab-bottom fab-right fab-fixed (click)="createRecipe()">
     <ion-icon name="color-wand"></ion-icon>
   </button>

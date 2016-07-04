@@ -1,16 +1,11 @@
-<ion-navbar gray *navbar class="top-nav">
-  <button secondary menuToggle>
+<ion-navbar light *navbar class="top-nav">
+  <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
   <ion-buttons end *ngIf="userImage">
     <ion-avatar>
       <img [src]="userImage">
     </ion-avatar>
-  </ion-buttons>
-  <ion-buttons end>
-    <button secondary (click)="showLogout($event)">
-      <ion-icon name="more"></ion-icon>
-    </button>
   </ion-buttons>
   <ion-title>{{ pageTitle }}</ion-title>
 </ion-navbar>
