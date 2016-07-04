@@ -7,7 +7,11 @@ import { Food } from '../';
 export class FoodService {
     private _food: FirebaseListObservable<Food[]>;
     constructor(private _af: AngularFire) {
-        this._food = _af.database.list('/food');
+        this._food = _af.database.list('/food', {
+            query: {
+                orderByChild: 'name'
+            }
+        });
     }
     public getFood(): FirebaseListObservable<Food[]> {
         return this._food;

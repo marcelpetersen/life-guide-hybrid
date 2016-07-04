@@ -11,11 +11,20 @@ export class MealPlansService {
   constructor(private _af: AngularFire, private _auth: FirebaseAuth) {
     this._auth.subscribe(authData => {
       if (authData) {
-        this._mealPlans = _af.database.list(`/meal-plans/${authData.uid}`);
+        this._mealPlans = _af.database.list(`/meal-plans/${authData.uid}`, {
+          query: {
+            orderByChild: 'date'
+          }
+        });
       }
     });
   }
 
+  public getMealPlans(): FirebaseListObservable<MealPlan[]> {
+    return this._mealPlans;
+  }
+
+  /*
   public getMealPlans(date: string): Observable<any> {
 
     return new Observable(observer => {
@@ -30,9 +39,10 @@ export class MealPlansService {
       }, 1000);
     });
   }
+  */
 
-  public addMealPlan(date: string): void {
-    this._mealPlans.push(new MealPlan(date));
+  public addMealPlan(mealPlan: MealPlan): void {
+    this._mealPlans.push(mealPlan);
   }
 
   public updateMealPlan(mealPlan: MealPlan): void {

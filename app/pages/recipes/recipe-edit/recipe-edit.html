@@ -7,9 +7,9 @@
     </ion-buttons>
 </ion-navbar>
 <ion-content padding>
-    <ion-card>
-        <ion-card-content>
-            <form #recipeForm="ngForm" (ngSubmit)="createRecipe()">
+    <form #recipeForm="ngForm" (ngSubmit)="createRecipe()">
+        <ion-card>
+            <ion-card-content>
                 <ion-list>
                     <ion-item>
                         <ion-label>Recipe name</ion-label>
@@ -90,13 +90,13 @@
                         <ion-label>Cooking temperature</ion-label>
                         <ion-input type="number" [(ngModel)]="recipe.cookTemperature" required></ion-input>
                     </ion-item>
-                    <button clear type="button" (click)="searchIngredient()">
+                    <button clear primary type="button" (click)="searchIngredient()">
                         <ion-icon name="add"></ion-icon>
                         <span>Add ingredient</span>
                     </button>
                     <ion-item *ngFor="let ingredient of recipe.ingredients; let i = index">
                         <button class="item-remove-button" clear item-left (click)="removeIngredient(i)">
-                            <ion-icon primary name="trash"></ion-icon>
+                            <ion-icon danger name="trash"></ion-icon>
                         </button>
                         <ion-label floating>{{ ingredient.name }}</ion-label>
                         <ion-input clearInput placeholder="Quantity (g)" type="number" [(ngModel)]="ingredient.quantity"></ion-input>
@@ -105,20 +105,20 @@
                         <ion-label>Servings</ion-label>
                         <ion-input type="number" [(ngModel)]="recipe.servings"></ion-input>
                     </ion-item>
-                    <button clear type="button" (click)="addStep()">
+                    <button clear primary type="button" (click)="addStep()">
                         <ion-icon name="add"></ion-icon>
                         <span>Add step</span>
                     </button>
                     <ion-item *ngFor="let step of recipe.steps; let i = index">
                         <button class="item-remove-button" clear item-left (click)="removeStep(i)">
-                            <ion-icon primary name="trash"></ion-icon>
+                            <ion-icon danger name="trash"></ion-icon>
                         </button>
                         <ion-label floating>Step {{i + 1}}</ion-label>
                         <ion-input [(ngModel)]="recipeSteps[i]"></ion-input>
                     </ion-item>
                 </ion-list>
-                <button block primary type="submit" [disabled]="!recipeForm.form.valid">Prepare recipe</button>
-            </form>
-        </ion-card-content>
-    </ion-card>
+            </ion-card-content>
+        </ion-card>
+        <button block secondary type="submit" [disabled]="!recipeForm.form.valid">Prepare recipe</button>
+    </form>
 </ion-content>

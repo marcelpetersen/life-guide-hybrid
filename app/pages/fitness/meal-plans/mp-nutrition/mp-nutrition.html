@@ -1,0 +1,33 @@
+<ion-navbar *navbar>
+    <ion-title>
+        Daily nutrition
+    </ion-title>
+</ion-navbar>
+
+<ion-content padding>
+    <div padding>
+        <ion-segment [(ngModel)]="nutritionView">
+            <ion-segment-button value="total">
+                Total
+            </ion-segment-button>
+            <ion-segment-button value="remaining">
+                Remaining
+            </ion-segment-button>
+            <ion-segment-button value="required">
+                Required
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+
+    <div [ngSwitch]="nutritionView">
+        <div *ngSwitchWhen="'total'">
+            <button block (click)="changeView()">
+                {{ reportView ? 'Intake view' : 'Report view' }}
+            </button>
+            <nutrition-tables *ngIf="!reportView" [nutritionData]="totalIntake"></nutrition-tables>
+            <nutrition-tables *ngIf="reportView" [percentage]="true" [nutritionData]="dailyNutrition"></nutrition-tables>
+        </div>
+        <nutrition-tables [nutritionData]="remainingIntake" *ngSwitchWhen="'remaining'"></nutrition-tables>
+        <nutrition-tables [nutritionData]="requiredNutrition" *ngSwitchWhen="'required'"></nutrition-tables>
+    </div>
+</ion-content>

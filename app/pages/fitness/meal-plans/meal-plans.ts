@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
+import { FirebaseListObservable } from 'angularfire2';
 import { Modal, NavController } from 'ionic-angular';
 import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 import { MATERIAL_DIRECTIVES } from 'ng2-material';
@@ -7,10 +8,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { ActivityPlan, ActivityPlanService } from '../activity-plans';
-import { DateFilterPipe } from './shared';
 import { Food } from '../../food';
-import { MealAddPage } from './meal-add/meal-add';
-import { MealPlanNutritionPage } from './meal-plan-nutrition/meal-plan-nutrition';
+import { ItemLimitPipe } from '../../shared';
+import { MpEditPage } from './mp-edit/mp-edit';
+import { MpNutritionPage } from './mp-nutrition/mp-nutrition';
 import { MealPlan, MealPlansService } from './shared';
 import { NavbarComponent } from '../../../components';
 import { NutritionService } from '../shared';
@@ -19,15 +20,18 @@ import { Profile, ProfileService } from '../profile';
 @Component({
   templateUrl: 'build/pages/fitness/meal-plans/meal-plans.html',
   directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES, MD_TOOLBAR_DIRECTIVES, NavbarComponent],
-  pipes: [DateFilterPipe]
+  pipes: [ItemLimitPipe]
 })
 export class MealPlansPage implements OnInit {
+  /*
   private _energyExpand: number = 0;
   private _fitnessProfile: Profile;
   public currentDate: string;
-  public currentMealPlan: MealPlan;
   public editing: boolean = false;
   public mealPlanNutrition: any;
+  */
+  public limit: number = 10;
+  public mealPlans: FirebaseListObservable<MealPlan[]>;
   constructor(
     private _activityPlanService: ActivityPlanService,
     private _meaplPlansService: MealPlansService,
@@ -36,6 +40,37 @@ export class MealPlansPage implements OnInit {
     private _profileService: ProfileService
   ) { }
 
+  public addMealPlan(): void {
+    let newMp: MealPlan = new MealPlan();
+    let mpAddModal = Modal.create(MpEditPage, { mp: newMp });
+    this._nav.present(mpAddModal);
+  }
+
+  public loadMore(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      this.limit += 5;
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
+  }
+
+  ngOnInit() {
+    /*
+    this.currentMealPlan = new MealPlan(this.currentDate);
+    this.syncMealPlan();
+    */
+    this.mealPlans = this._meaplPlansService.getMealPlans();
+    this.mealPlans.subscribe(mealPlans => console.log(mealPlans));
+  }
+}
+
+
+
+
+/*
   private _getNutritionData(): any {
     let totalIntake: Food,
       requiredNutrition: Food,
@@ -51,6 +86,7 @@ export class MealPlansPage implements OnInit {
       });
     });
   }
+
 
   public syncMealPlan() {
     this.currentMealPlan = new MealPlan(this.currentDate);
@@ -118,16 +154,4 @@ export class MealPlansPage implements OnInit {
     });
 
   }
-
-  ngOnInit() {
-    let myDate = new Date(),
-      currentDay = myDate.getDate(),
-      currentMonth = myDate.getMonth() + 1,
-      currentYear = myDate.getFullYear();
-    this.currentDate = currentYear + '-' +
-      ((currentMonth < 10) ? '0' + currentMonth : currentMonth) + '-' +
-      ((currentDay < 10) ? '0' + currentDay : currentDay);
-    this.currentMealPlan = new MealPlan(this.currentDate);
-    this.syncMealPlan();
-  }
-}
+*/

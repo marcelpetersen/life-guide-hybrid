@@ -1,4 +1,21 @@
 <navbar [pageTitle]="'Fitness'"></navbar>
+<ion-content [virtualScroll]="mealPlans | async | itemLimit: limit">
+  <ion-card *virtualItem="let mealPlan">
+    <ion-card-header>
+      {{ mealPlan.date }}
+    </ion-card-header>
+    <ion-card-content>
+      Some energy
+    </ion-card-content>
+  </ion-card>
+  <button fab fab-bottom fab-right fab-fixed class="float-button" (click)="addMealPlan()">
+    <ion-icon name="add"></ion-icon>
+  </button>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+</ion-content>
+<!--
 <ion-item class="plan-date">
   <ion-icon name="calendar" primary item-left></ion-icon>
   <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="currentDate" (ionChange)="syncMealPlan()"></ion-datetime>
@@ -338,3 +355,5 @@
     </md-data-table>
   </ion-card>
 </ion-content>
+
+-->

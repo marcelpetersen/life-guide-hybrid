@@ -7,7 +7,6 @@ import { FirebaseListObservable } from 'angularfire2';
 
 import { Food, FoodService } from '../../../food';
 import { ItemSearchPipe } from '../../../shared';
-import { MealPlan } from '../shared';
 import { Recipe, RecipeService } from '../../../recipes';
 
 @Component({
@@ -18,10 +17,7 @@ import { Recipe, RecipeService } from '../../../recipes';
 export class MealAddPage implements OnInit {
     public food: FirebaseListObservable<Food[]>;
     public recipes: Observable<Recipe[]>;
-    public mealPlan: MealPlan;
-    public mealTimeChoose: boolean;
     public selectedMeals: any[] = [];
-    public selectedMealTimes: string[] = [];
     public searchQuery: string = '';
     constructor(
         private _foodService: FoodService,
@@ -35,12 +31,11 @@ export class MealAddPage implements OnInit {
         let mealIndex = this.selectedMeals.indexOf(meal);
         if (mealIndex !== -1) {
             this.selectedMeals.splice(mealIndex, 1);
-            this.selectedMealTimes.splice(mealIndex, 1);
         } else {
             this.selectedMeals.push(meal);
         }
     }
-
+    /*
     public chooseMealTime(event: any, meal: Food): void {
         let mealIndex = this.selectedMeals.indexOf(meal);
         if (mealIndex !== -1) {
@@ -100,9 +95,10 @@ export class MealAddPage implements OnInit {
 
             this._nav.present(mealTimeAlert).then(() => this.mealTimeChoose = true);
         }
-    }
+    */
 
     public doneAdding(): void {
+        /*
         if (!this.mealPlan.meals) {
             this.mealPlan.meals = {
                 Breakfast: [],
@@ -125,7 +121,8 @@ export class MealAddPage implements OnInit {
                 this.mealPlan.meals[mealTime].push(meal);
             }
         });
-        this._viewCtrl.dismiss(this.mealPlan);
+        */
+        this._viewCtrl.dismiss(this.selectedMeals);
     }
 
     public cancelAdd(): void {
@@ -135,7 +132,7 @@ export class MealAddPage implements OnInit {
     ngOnInit() {
         this.food = this._foodService.getFood();
         this.recipes = this._recipeService.getAllRecipes();
-        this.mealPlan = this._params.data.mealPlan;
+        this.selectedMeals = this._params.data.meals;
     }
 
 }
