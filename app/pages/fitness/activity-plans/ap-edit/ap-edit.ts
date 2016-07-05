@@ -23,7 +23,7 @@ export class ApEditPage implements OnInit {
         this._viewCtrl.dismiss();
     }
 
-    public createap(): void {
+    public createAp(): void {
         if (!this.activityPlan.date) {
             const toast = Toast.create({
                 message: 'Please enter the date!',
@@ -64,7 +64,16 @@ export class ApEditPage implements OnInit {
     }
 
     ngOnInit() {
+        let myDate = new Date(),
+            currentDay = myDate.getDate(),
+            currentMonth = myDate.getMonth() + 1,
+            currentYear = myDate.getFullYear();
         this.activityPlan = this._params.data.activityPlan;
+        if (!this.activityPlan.date) {
+            this.activityPlan.date = currentYear + '-' +
+                ((currentMonth < 10) ? '0' + currentMonth : currentMonth) + '-' +
+                ((currentDay < 10) ? '0' + currentDay : currentDay);
+        }
     }
 
 }
