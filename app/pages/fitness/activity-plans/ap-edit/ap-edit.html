@@ -22,21 +22,25 @@
                     <button full block primary type="button" (click)="changeActivityView()">
                         {{ durationView ? 'Duration' : 'Energy' }}
                     </button>
-                    <ion-item *ngIf="!durationView" *ngFor="let activity of activityPlan.activities; let i = index">
-                        <button class="item-remove-button" clear item-left (click)="removeActivity(i)">
+                    <div *ngIf="!durationView">
+                        <button ion-item *ngFor="let activity of activityPlan.activities; let i = index" class="item-remove-button" clear item-left (click)="removeActivity(i)">
                             <ion-icon primary name="trash"></ion-icon>
-                        </button> {{ activity.name }}
-                        <ion-note item-right>
-                            {{ activity.energy }}
-                        </ion-note>
-                    </ion-item>
-                    <ion-item *ngIf="durationView" *ngFor="let activity of activityPlan.activities; let i = index">
-                        <button class="item-remove-button" clear item-left (click)="removeActivity(i)">
+                            {{ activity.name }}
+                            <ion-note item-right>
+                                {{ activity.energy }}
+                            </ion-note>
+                        </button>
+                    </div>
+                    <div *ngIf="durationView">
+                        <ion-item *ngFor="let activity of activityPlan.activities; let i = index">
+                            <button class="item-remove-button" clear item-left (click)="removeActivity(i)">
                             <ion-icon primary name="trash"></ion-icon>
                         </button>
-                        <ion-label floating>{{ activity.name }}</ion-label>
-                        <ion-input clearInput placeholder="Duration (min)" type="number" [(ngModel)]="activity.time" required></ion-input>
-                    </ion-item>
+                            <ion-label floating>{{ activity.name }}</ion-label>
+                            <ion-input clearInput placeholder="Duration (min)" type="number" [(ngModel)]="activity.time" required></ion-input>
+                        </ion-item>
+                    </div>
+
                 </ion-list>
             </ion-card-content>
         </ion-card>
