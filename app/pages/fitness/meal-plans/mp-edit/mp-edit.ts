@@ -38,11 +38,11 @@ export class MpEditPage implements OnInit {
                 closeButtonText: 'Ok'
             });
             this._nav.present(toast);
-        } else if (!this.mealPlan.breakfast.meals.length
-            && !this.mealPlan.brunch.meals.length
-            && !this.mealPlan.lunch.meals.length
-            && !this.mealPlan.snack.meals.length
-            && !this.mealPlan.dinner.meals.length
+        } else if (!this.mealPlan.breakfast.meals
+            && !this.mealPlan.brunch.meals
+            && !this.mealPlan.lunch.meals
+            && !this.mealPlan.snack.meals
+            && !this.mealPlan.dinner.meals
         ) {
             const toast = Toast.create({
                 message: 'Please enter at least one meal!',
