@@ -11,11 +11,7 @@ export class MealPlansService {
   constructor(private _af: AngularFire, private _auth: FirebaseAuth) {
     this._auth.subscribe(authData => {
       if (authData) {
-        this._mealPlans = _af.database.list(`/meal-plans/${authData.uid}`, {
-          query: {
-            orderByChild: 'date'
-          }
-        });
+        this._mealPlans = _af.database.list(`/meal-plans/${authData.uid}`);
       }
     });
   }
@@ -24,23 +20,6 @@ export class MealPlansService {
     return this._mealPlans;
   }
 
-  /*
-  public getMealPlans(date: string): Observable<any> {
-
-    return new Observable(observer => {
-      let mp;
-      this._mealPlans.subscribe(mealPlans => mp = mealPlans.filter(mealPlans => mealPlans.date == date)[0]);
-      setTimeout(() => {
-        if (!mp) {
-          this.addMealPlan(date);
-        } else {
-          observer.next(mp);
-        }
-      }, 1000);
-    });
-  }
-  */
-
   public addMealPlan(mealPlan: MealPlan): void {
     this._mealPlans.push(mealPlan);
   }
@@ -48,8 +27,20 @@ export class MealPlansService {
   public updateMealPlan(mealPlan: MealPlan): void {
     if (mealPlan['$key']) {
       this._mealPlans.update(mealPlan['$key'], {
-        meals: mealPlan.meals
+        date: mealPlan.date,
+        breakfast: mealPlan.breakfast,
+        brunch: mealPlan.brunch,
+        lunch: mealPlan.lunch,
+        snack: mealPlan.snack,
+        dinner: mealPlan.dinner,
+        numericIntake: mealPlan.numericIntake,
+        percentIntake: mealPlan.percentIntake,
+        remainingIntake: mealPlan.remainingIntake,
+        requiredIntake: mealPlan.requiredIntake
       });
     }
+  }
+  public removeMealPlan(mealPlan: MealPlan): void {
+    this._mealPlans.remove(mealPlan);
   }
 }

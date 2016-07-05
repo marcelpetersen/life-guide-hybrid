@@ -1,0 +1,46 @@
+<ion-navbar *navbar>
+    <ion-title>Edit meal plan</ion-title>
+    <ion-buttons end>
+        <button (click)="cancelAp()">
+            <ion-icon name="close"></ion-icon>
+        </button>
+    </ion-buttons>
+</ion-navbar>
+<ion-content>
+    <form #apForm="ngForm" (ngSubmit)="createAp()">
+        <ion-card>
+            <ion-card-content>
+                <ion-datetime displayFormat="MM DD YYYY" [(ngModel)]="activityPlan.date"></ion-datetime>
+                <ion-list>
+                    <ion-list-header>
+                        Activities
+                    </ion-list-header>
+                    <button clear type="button" (click)="searchActivity()">
+                        <ion-icon name="add"></ion-icon>
+                        Add activity
+                    </button>
+                    <button full block primary type="button" (click)="changeActivityView()">
+                        {{ durationView ? 'Duration' : 'Energy' }}
+                    </button>
+                    <ion-item *ngFor="let activity of activityPlan.activities; let i = index">
+                        {{ activity | json }}
+                        <button class="item-remove-button" clear item-left (click)="removeActivity(i)">
+                            <ion-icon primary name="trash"></ion-icon>
+                        </button>
+                        <div *ngIf="durationView">
+                            <ion-label floating>{{ activity.name }}</ion-label>
+                            <ion-input clearInput placeholder="Duration (min)" type="number" [(ngModel)]="activity.time" required></ion-input>
+                        </div>
+                        <div *ngIf="!durationView">
+                            {{ activity.name }}
+                            <ion-note item-right>
+                                {{ activity.energy }}
+                            </ion-note>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+        <button block secondary type="submit" [disabled]="!apForm.form.valid">Set activity plan</button>
+    </form>
+</ion-content>

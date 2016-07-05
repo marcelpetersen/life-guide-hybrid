@@ -196,8 +196,7 @@ export class ProfileService {
         nutrientRequirements.macronutrients.Starch = nutrientRequirements.macronutrients.Carbohydrates -
             nutrientRequirements.macronutrients.Sugars - nutrientRequirements.macronutrients.Fiber;
         nutrientRequirements.macronutrients.Fats = nutrientRequirements.energy * profile.energyBalance.fats / fatEnergy;
-        nutrientRequirements.macronutrients['Saturated fat'] =
-            nutrientRequirements.energy * 0.07 / fatEnergy;
+        nutrientRequirements.macronutrients['Saturated fat'] = nutrientRequirements.macronutrients.Fats * 0.33;
         nutrientRequirements.sterols.Cholesterol = 300;
     };
 

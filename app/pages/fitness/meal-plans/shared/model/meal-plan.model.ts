@@ -23,6 +23,9 @@ export class MealPlan {
             meals: [],
             total: new Food()
         },
-        public totalNutrition: Food = new Food()
+        public percentIntake: Food = new Food(),
+        public numericIntake: Food = new Food(),
+        public remainingIntake: Food = new Food(),
+        public requiredIntake: Food = new Food()
     ) { }
 }

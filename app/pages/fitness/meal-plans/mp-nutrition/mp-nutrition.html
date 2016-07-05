@@ -22,12 +22,12 @@
     <div [ngSwitch]="nutritionView">
         <div *ngSwitchWhen="'total'">
             <button block (click)="changeView()">
-                {{ reportView ? 'Intake view' : 'Report view' }}
+                {{ percentageView ? 'Numeric' : 'Percentage' }}
             </button>
-            <nutrition-tables *ngIf="!reportView" [nutritionData]="totalIntake"></nutrition-tables>
-            <nutrition-tables *ngIf="reportView" [percentage]="true" [nutritionData]="dailyNutrition"></nutrition-tables>
+            <nutrition-tables *ngIf="!percentageView" [nutritionData]="numericIntake"></nutrition-tables>
+            <nutrition-tables *ngIf="percentageView" [percentage]="true" [nutritionData]="percentIntake"></nutrition-tables>
         </div>
         <nutrition-tables [nutritionData]="remainingIntake" *ngSwitchWhen="'remaining'"></nutrition-tables>
-        <nutrition-tables [nutritionData]="requiredNutrition" *ngSwitchWhen="'required'"></nutrition-tables>
+        <nutrition-tables [nutritionData]="requiredIntake" *ngSwitchWhen="'required'"></nutrition-tables>
     </div>
 </ion-content>

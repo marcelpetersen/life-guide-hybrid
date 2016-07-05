@@ -7,82 +7,66 @@ import { MealPlan } from '../../meal-plans';
 export class NutritionService {
     constructor() { }
 
-    public calculateMealPlanNutrition(mealPlan: MealPlan): any {
-        let mp: any = {
-            Breakfast: new Food(),
-            Brunch: new Food(),
-            Lunch: new Food(),
-            Snack: new Food(),
-            Dinner: new Food()
-        },
-            nutritionValues: Food,
-            amount: number = 1;
-        for (let mealTime in mealPlan) {
-            nutritionValues = new Food();
-            mealPlan[mealTime].forEach(meal => {
-                amount = +meal.amount || 1;
-                if (meal.hasOwnProperty("chef")) {
-                    for (let nutrientCategory in meal.nutrients) {
-                        let nutrients = meal.nutrients[nutrientCategory];
-                        if (nutrientCategory === 'energy') {
-                            nutritionValues[nutrientCategory] += +nutrients * amount;
+    public setMpNutrition(mealPlan: MealPlan): void {
+        for (let key in mealPlan) {
+            if (mealPlan[key].hasOwnProperty('meals')) {
+                mealPlan[key].total = new Food();
+                mealPlan[key].meals.forEach(meal => {
+                    if (meal.hasOwnProperty("chef")) {
+                        // it's a recipe
+                        for (let nutrientCategory in meal.nutrients) {
+                            let nutrients = meal.nutrients[nutrientCategory];
+                            if (nutrientCategory === 'energy') {
+                                mealPlan[key].total[nutrientCategory] += +nutrients * meal.amount;
+                            }
+                            for (let nutrient in nutrients) {
+                                mealPlan[key].total[nutrientCategory][nutrient] += +nutrients[nutrient] * meal.amount;
+                            }
                         }
-                        for (let nutrient in nutrients) {
-                            if (nutritionValues.hasOwnProperty(nutrientCategory)
-                                && nutritionValues[nutrientCategory].hasOwnProperty(nutrient)) {
-                                nutritionValues[nutrientCategory][nutrient] += +nutrients[nutrient] * amount;
-
+                    } else {
+                        // it's a common food
+                        for (let nutrientCategory in meal) {
+                            let nutrients = meal[nutrientCategory];
+                            if (nutrientCategory === 'energy') {
+                                mealPlan[key].total[nutrientCategory] += +nutrients * meal.amount;
+                            }
+                            for (let nutrient in nutrients) {
+                                mealPlan[key].total[nutrientCategory][nutrient] += +nutrients[nutrient] * meal.amount;
                             }
                         }
                     }
-                } else {
-                    for (let nutrientCategory in meal) {
-                        let nutrients = meal[nutrientCategory];
-                        if (nutrientCategory === 'energy') {
-                            nutritionValues[nutrientCategory] += +nutrients * amount;
-                        }
-                        for (let nutrient in nutrients) {
-                            if (nutritionValues.hasOwnProperty(nutrientCategory)
-                                && nutritionValues[nutrientCategory].hasOwnProperty(nutrient)) {
-                                nutritionValues[nutrientCategory][nutrient] += +nutrients[nutrient] * amount;
-
-                            }
-                        }
-                    }
-                }
-            });
-            mp[mealTime] = nutritionValues;
-        }
-        return mp;
-    }
-
-    public calculateTotalIntake(mealTimes: any): Food {
-        let totalIntake: Food = new Food(),
-            amount: number = 1;
-        for (let mealTime in mealTimes) {
-            let mealTimeNutrition = mealTimes[mealTime];
-            for (let nutrientCategory in mealTimeNutrition) {
-                let nutrients = mealTimeNutrition[nutrientCategory];
-                if (nutrientCategory === 'energy') {
-                    totalIntake[nutrientCategory] += +nutrients * amount;
-                }
-                for (let nutrient in nutrients) {
-                    if (totalIntake.hasOwnProperty(nutrientCategory)
-                        && totalIntake[nutrientCategory].hasOwnProperty(nutrient)) {
-                        totalIntake[nutrientCategory][nutrient] += +nutrients[nutrient] * amount;
-
-                    }
-                }
+                });
             }
         }
-        return totalIntake;
+        this.setTotalIntake(mealPlan);
     }
 
-    public calculateRemainingIntake(requiredIntake, totalIntake): Food {
+    public setTotalIntake(mealPlan: MealPlan): void {
+        mealPlan.numericIntake = new Food();
+        for (let nutrientCategory in mealPlan.numericIntake) {
+            if (nutrientCategory === 'energy') {
+                mealPlan.numericIntake[nutrientCategory] += mealPlan.breakfast.total[nutrientCategory] +
+                    mealPlan.brunch.total[nutrientCategory] +
+                    mealPlan.lunch.total[nutrientCategory] +
+                    mealPlan.snack.total[nutrientCategory] +
+                    mealPlan.dinner.total[nutrientCategory];
+            }
+            for (let nutrient in mealPlan.numericIntake[nutrientCategory]) {
+                mealPlan.numericIntake[nutrientCategory][nutrient] += mealPlan.breakfast.total[nutrientCategory][nutrient] +
+                    mealPlan.brunch.total[nutrientCategory][nutrient] +
+                    mealPlan.lunch.total[nutrientCategory][nutrient] +
+                    mealPlan.snack.total[nutrientCategory][nutrient] +
+                    mealPlan.dinner.total[nutrientCategory][nutrient];
+
+            }
+        }
+    }
+
+    public getRemainingIntake(requiredIntake, totalIntake): Food {
         let nutritionValues: Food = new Food();
         for (let nutrientCategory in requiredIntake) {
             let nutrients = requiredIntake[nutrientCategory];
-            if (nutrientCategory === 'energy' && nutritionValues.hasOwnProperty(nutrientCategory)) {
+            if (nutrientCategory === 'energy') {
                 nutritionValues[nutrientCategory] = (nutrients === 0)
                     ? 0
                     : nutrients - totalIntake[nutrientCategory];
@@ -91,25 +75,22 @@ export class NutritionService {
                 }
             }
             for (let nutrient in nutrients) {
-                if (nutritionValues.hasOwnProperty(nutrientCategory)
-                    && nutritionValues[nutrientCategory].hasOwnProperty(nutrient)) {
-                    nutritionValues[nutrientCategory][nutrient] = (nutrients[nutrient] === 0)
-                        ? 0
-                        : nutrients[nutrient] - totalIntake[nutrientCategory][nutrient];
-                    if (nutritionValues[nutrientCategory][nutrient] < 0) {
-                        nutritionValues[nutrientCategory][nutrient] = 0;
-                    }
+                nutritionValues[nutrientCategory][nutrient] = (nutrients[nutrient] === 0)
+                    ? 0
+                    : nutrients[nutrient] - totalIntake[nutrientCategory][nutrient];
+                if (nutritionValues[nutrientCategory][nutrient] < 0) {
+                    nutritionValues[nutrientCategory][nutrient] = 0;
                 }
             }
         }
         return nutritionValues;
     }
 
-    public calculateDailyNutrition(requiredIntake, totalIntake): Food {
+    public getPercentIntake(requiredIntake, totalIntake): Food {
         let nutritionValues: Food = new Food();
         for (let nutrientCategory in requiredIntake) {
             let nutrients = requiredIntake[nutrientCategory];
-            if (nutrientCategory === 'energy' && nutritionValues.hasOwnProperty(nutrientCategory)) {
+            if (nutrientCategory === 'energy') {
                 if (nutrients > 0) {
                     nutritionValues[nutrientCategory] = (totalIntake[nutrientCategory] / nutrients) * 100;
                 } else {
@@ -119,15 +100,12 @@ export class NutritionService {
                 }
             }
             for (let nutrient in nutrients) {
-                if (nutritionValues.hasOwnProperty(nutrientCategory)
-                    && nutritionValues[nutrientCategory].hasOwnProperty(nutrient)) {
-                    if (nutrients[nutrient] > 0) {
-                        nutritionValues[nutrientCategory][nutrient] = (totalIntake[nutrientCategory][nutrient] / nutrients[nutrient]) * 100;
-                    } else {
-                        nutritionValues[nutrientCategory][nutrient] = (totalIntake[nutrientCategory][nutrient] === 0)
-                            ? 100
-                            : 100 + totalIntake[nutrientCategory][nutrient];
-                    }
+                if (nutrients[nutrient] > 0) {
+                    nutritionValues[nutrientCategory][nutrient] = (totalIntake[nutrientCategory][nutrient] / nutrients[nutrient]) * 100;
+                } else {
+                    nutritionValues[nutrientCategory][nutrient] = (totalIntake[nutrientCategory][nutrient] === 0)
+                        ? 100
+                        : 100 + totalIntake[nutrientCategory][nutrient];
                 }
             }
         }

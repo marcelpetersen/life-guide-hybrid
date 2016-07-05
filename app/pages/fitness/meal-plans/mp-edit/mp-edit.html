@@ -7,84 +7,84 @@
     </ion-buttons>
 </ion-navbar>
 <ion-content>
-    
-    <ion-card>
-        <ion-card-content>
-            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="mpDate"></ion-datetime>
-            <ion-list>
-                <ion-list-header>
-                    Breakfast
-                </ion-list-header>
-                <button clear type="button" (click)="searchMeal('breakfast')">
+    <form #mpForm="ngForm" (ngSubmit)="createMp()">
+        <ion-card>
+            <ion-card-content>
+                <ion-datetime displayFormat="MM DD YYYY" [(ngModel)]="mealPlan.date"></ion-datetime>
+                <ion-list>
+                    <ion-list-header>
+                        Breakfast
+                    </ion-list-header>
+                    <button clear type="button" (click)="searchMeal('breakfast')">
                     <ion-icon name="add"></ion-icon>
                     <span>Add meal</span>
                 </button>
-                <ion-item *ngFor="let meal of mealPlan.breakfast.meals; let i = index">
-                    <button class="item-remove-button" clear item-left (click)="removeMeal('breakfast', i)">
+                    <ion-item *ngFor="let meal of mealPlan.breakfast.meals; let i = index">
+                        <button class="item-remove-button" clear item-left (click)="removeMeal('breakfast', i)">
                         <ion-icon primary name="trash"></ion-icon>
                     </button>
-                    <ion-label floating>{{ meal.name }}</ion-label>
-                    <ion-input clearInput placeholder="Amount (unit)" type="number" [(ngModel)]="meal.amount"></ion-input>
-                </ion-item>
-                <ion-list-header>
-                    Brunch
-                </ion-list-header>
-                <button clear type="button" (click)="searchMeal('brunch')">
+                        <ion-label floating>{{ meal.name }}</ion-label>
+                        <ion-input clearInput placeholder="Amount (unit)" type="number" [(ngModel)]="meal.amount" required></ion-input>
+                    </ion-item>
+                    <ion-list-header>
+                        Brunch
+                    </ion-list-header>
+                    <button clear type="button" (click)="searchMeal('brunch')">
                     <ion-icon name="add"></ion-icon>
                     <span>Add meal</span>
                 </button>
-                <ion-item *ngFor="let meal of mealPlan.brunch.meals; let i = index">
-                    <button class="item-remove-button" clear item-left (click)="removeMeal('brunch', i)">
+                    <ion-item *ngFor="let meal of mealPlan.brunch.meals; let i = index">
+                        <button class="item-remove-button" clear item-left (click)="removeMeal('brunch', i)">
                         <ion-icon primary name="trash"></ion-icon>
                     </button>
-                    <ion-label floating>{{ meal.name }}</ion-label>
-                    <ion-input clearInput placeholder="Amount (unit)" type="number" [(ngModel)]="meal.amount"></ion-input>
-                </ion-item>
-                <ion-list-header>
-                    Lunch
-                </ion-list-header>
-                <button clear type="button" (click)="searchMeal('lunch')">
+                        <ion-label floating>{{ meal.name }}</ion-label>
+                        <ion-input clearInput placeholder="Amount (unit)" type="number" [(ngModel)]="meal.amount" required></ion-input>
+                    </ion-item>
+                    <ion-list-header>
+                        Lunch
+                    </ion-list-header>
+                    <button clear type="button" (click)="searchMeal('lunch')">
                     <ion-icon name="add"></ion-icon>
                     <span>Add meal</span>
                 </button>
-                <ion-item *ngFor="let meal of mealPlan.lunch.meals; let i = index">
-                    <button class="item-remove-button" clear item-left (click)="removeMeal('lunch', i)">
+                    <ion-item *ngFor="let meal of mealPlan.lunch.meals; let i = index">
+                        <button class="item-remove-button" clear item-left (click)="removeMeal('lunch', i)">
                         <ion-icon primary name="trash"></ion-icon>
                     </button>
-                    <ion-label floating>{{ meal.name }}</ion-label>
-                    <ion-input clearInput placeholder="Amount (unit)" type="number" [(ngModel)]="meal.amount"></ion-input>
-                </ion-item>
-                <ion-list-header>
-                    Snack
-                </ion-list-header>
-                <button clear type="button" (click)="searchMeal('snack')">
+                        <ion-label floating>{{ meal.name }}</ion-label>
+                        <ion-input clearInput placeholder="Amount (unit)" type="number" [(ngModel)]="meal.amount" required></ion-input>
+                    </ion-item>
+                    <ion-list-header>
+                        Snack
+                    </ion-list-header>
+                    <button clear type="button" (click)="searchMeal('snack')">
                     <ion-icon name="add"></ion-icon>
                     <span>Add meal</span>
                 </button>
-                <ion-item *ngFor="let meal of mealPlan.snack.meals; let i = index">
-                    <button class="item-remove-button" clear item-left (click)="removeMeal('snack', i)">
+                    <ion-item *ngFor="let meal of mealPlan.snack.meals; let i = index">
+                        <button class="item-remove-button" clear item-left (click)="removeMeal('snack', i)">
                         <ion-icon primary name="trash"></ion-icon>
                     </button>
-                    <ion-label floating>{{ meal.name }}</ion-label>
-                    <ion-input clearInput placeholder="Amount (unit)" type="number" [(ngModel)]="meal.amount"></ion-input>
-                </ion-item>
-                <ion-list-header>
-                    Dinner
-                </ion-list-header>
-                <button clear type="button" (click)="searchMeal('dinner')">
+                        <ion-label floating>{{ meal.name }}</ion-label>
+                        <ion-input clearInput placeholder="Amount (unit)" type="number" [(ngModel)]="meal.amount" required></ion-input>
+                    </ion-item>
+                    <ion-list-header>
+                        Dinner
+                    </ion-list-header>
+                    <button clear type="button" (click)="searchMeal('dinner')">
                     <ion-icon name="add"></ion-icon>
                     <span>Add meal</span>
                 </button>
-                <ion-item *ngFor="let meal of mealPlan.dinner.meals; let i = index">
-                    <button class="item-remove-button" clear item-left (click)="removeMeal('dinner', i)">
+                    <ion-item *ngFor="let meal of mealPlan.dinner.meals; let i = index">
+                        <button class="item-remove-button" clear item-left (click)="removeMeal('dinner', i)">
                         <ion-icon primary name="trash"></ion-icon>
                     </button>
-                    <ion-label floating>{{ meal.name }}</ion-label>
-                    <ion-input clearInput placeholder="Amount (unit)" type="number" [(ngModel)]="meal.amount"></ion-input>
-                </ion-item>
-            </ion-list>
-        </ion-card-content>
-    </ion-card>
-    <button block secondary type="submit" [disabled]="!recipeForm.form.valid">Prepare recipe</button>
+                        <ion-label floating>{{ meal.name }}</ion-label>
+                        <ion-input clearInput placeholder="Amount (unit)" type="number" [(ngModel)]="meal.amount" required></ion-input>
+                    </ion-item>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+        <button block secondary type="submit" [disabled]="!mpForm.form.valid">Set meal plan</button>
     </form>
 </ion-content>

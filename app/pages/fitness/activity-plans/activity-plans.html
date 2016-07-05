@@ -1,55 +1,31 @@
 <navbar [pageTitle]="'Fitness'"></navbar>
-<ion-item class="plan-date">
-    <ion-icon primary name="calendar" item-left></ion-icon>
-    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="currentDate" (ionChange)="syncActivityPlan()"></ion-datetime>
-    <button item-right clear (click)="syncActivityPlan()">
-    <ion-icon primary name="refresh"></ion-icon>
-  </button>
-    <button item-right clear (click)="editActivityPlan()">
-        <ion-icon *ngIf="!editing" name="create"></ion-icon>
-        <ion-icon *ngIf="editing" name="done-all"></ion-icon>
-    </button>
-</ion-item>
-
-<ion-content>
-    <button fab fab-bottom fab-right fab-fixed class="float-button" (click)="searchActivity()">
-     <ion-icon name="add"></ion-icon>
-    </button>
-
-    <ion-card class="activity-plan">
-        <md-toolbar>
-            <md-title>Activities</md-title>
-        </md-toolbar>
-        <md-data-table>
-            <thead>
-                <tr>
-                    <th *ngIf="editing && currentActivityPlan.activities">Remove activities</th>
-                    <th class="md-text-cell">Activity name</th>
-                    <th class="md-text-cell">Energy</th>
-                    <th class="md-text-cell">Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let activity of currentActivityPlan.activities; let i = index">
-                    <td *ngIf="editing">
-                        <button clear class="table-item-remove" (click)="removeActivity(i)">
-                        <ion-icon primary name="trash"></ion-icon>
-                        </button>
-                    </td>
-                    <td class="md-text-cell">{{ activity.name }}({{ activity.details }})</td>
-                    <td>{{ activity.energy }}kcal</td>
-                    <td *ngIf="!editing">{{ activity.time }}min</td>
-                    <td *ngIf="editing">
-                        <ion-input item-right placeholder="Minutes" type="number" [(ngModel)]="activity.time"></ion-input>
-                    </td>
-                </tr>
-                <tr>
-                    <td *ngIf="editing && currentActivityPlan.activities"></td>
-                    <td>Total</td>
-                    <td>{{ currentActivityPlan.totalEnergy }}kcal</td>
-                    <td>{{ currentActivityPlan.totalDuration }}min</td>
-                </tr>
-            </tbody>
-        </md-data-table>
+<ion-content [virtualScroll]="activityPlans | async | itemLimit: limit">
+    <ion-card *virtualItem="let ap">
+        <ion-card-header>
+            {{ ap.date }}
+        </ion-card-header>
+        <ion-card-content>
+            {{ ap.totalDuration }} {{ ap.totalEnergy }}
+        </ion-card-content>
+        <ion-row no-padding>
+            <ion-col>
+                <button clear small secondary (click)="editAp(ap)">
+              <ion-icon name='create'></ion-icon>
+              Edit
+            </button>
+            </ion-col>
+            <ion-col text-right>
+                <button clear small danger (click)="removeAp(ap)">
+              <ion-icon name='trash'></ion-icon>
+              Delete
+            </button>
+            </ion-col>
+        </ion-row>
     </ion-card>
+    <button secondary fab fab-bottom fab-right fab-fixed class="float-button" (click)="addActivityPlan()">
+    <ion-icon name="add"></ion-icon>
+  </button>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
