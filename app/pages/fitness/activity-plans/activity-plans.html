@@ -2,7 +2,7 @@
 <ion-content [virtualScroll]="activityPlans | async | itemLimit: limit">
     <ion-card *virtualItem="let ap">
         <ion-card-header>
-            {{ ap.date }}
+            <h1>{{ ap.date }}</h1>
         </ion-card-header>
         <ion-card-content>
             {{ ap.totalDuration }} {{ ap.totalEnergy }}

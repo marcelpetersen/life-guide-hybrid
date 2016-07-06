@@ -23,11 +23,31 @@ export class ActivityPlanService {
         return this._activities;
     }
 
-    public getAp(): FirebaseListObservable<ActivityPlan[]> {
+    public getActivityPlans(): FirebaseListObservable<ActivityPlan[]> {
         return this._activityPlans;
     }
 
+    public getApDate(date: string): Promise<ActivityPlan> {
+        return new Promise(resolve => {
+            this.getActivityPlans().subscribe(activityPlans => activityPlans.forEach(ap => {
+                if (ap.date === date) {
+                    resolve(ap);
+                }
+            }));
+        });
+    }
+
     public addAp(ap: ActivityPlan): void {
+        this.getApDate(ap.date).then(res => {
+            if (!!res) {
+                let key = res['$key'];
+                res = ap;
+                res['$key'] = key;
+                this.updateAp(res);
+            } else {
+                this._activityPlans.push(ap);
+            }
+        });
         this._activityPlans.push(ap);
     }
 

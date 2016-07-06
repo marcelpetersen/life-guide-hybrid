@@ -19,7 +19,18 @@ export class RecipeEditPage implements OnInit {
 
     public searchIngredient(): void {
         let ingredientSearchModal = Modal.create(IngredientSearchPage, { ingredients: this.recipe.ingredients });
-        ingredientSearchModal.onDismiss(ingredients => this.recipe.ingredients = ingredients);
+        ingredientSearchModal.onDismiss(ingredients => {
+            if (!!ingredients) {
+                ingredients.forEach(ingredient => {
+                    if (ingredient.hasOwnProperty('$key')) {
+                        delete ingredient['$key'];
+                    }
+                    if (this.recipe.ingredients.indexOf(ingredient) === -1) {
+                        this.recipe.ingredients.push(ingredient);
+                    }
+                });
+            }
+        });
         this._nav.present(ingredientSearchModal);
     }
 
@@ -39,15 +50,18 @@ export class RecipeEditPage implements OnInit {
 
     public createRecipe(): void {
         this.recipeSteps.forEach((step, index) => this.recipe.steps[index] = step);
-        if (!this.recipe.ingredients || !this.recipe.steps) {
+        if (
+            (!!this.recipe.ingredients && !!this.recipe.ingredients.length) &&
+            (!!this.recipe.steps && !!this.recipe.steps.length)
+        ) {
+            this._viewCtrl.dismiss(this.recipe);
+        } else {
             const toast = Toast.create({
                 message: 'Please complete the entire recipe!',
                 showCloseButton: true,
                 closeButtonText: 'Ok'
             });
             this._nav.present(toast);
-        } else {
-            this._viewCtrl.dismiss(this.recipe);
         }
     }
 

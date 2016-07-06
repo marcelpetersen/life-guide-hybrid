@@ -6,7 +6,7 @@ export class Recipe {
         public category: string = '',
         public dietary: string = '',
         public chef: string = '',
-        public ingredients: Food[] = [],
+        public ingredients: any[] = [],
         public prepTime: number = 0,
         public cookMethod: string = '',
         public cookTime: number = 0,

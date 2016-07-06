@@ -24,7 +24,7 @@
                     </button>
                     <div *ngIf="!durationView">
                         <button ion-item *ngFor="let activity of activityPlan.activities; let i = index" class="item-remove-button" clear item-left (click)="removeActivity(i)">
-                            <ion-icon primary name="trash"></ion-icon>
+                            <ion-icon danger name="trash"></ion-icon>
                             {{ activity.name }}
                             <ion-note item-right>
                                 {{ activity.energy }}
@@ -34,7 +34,7 @@
                     <div *ngIf="durationView">
                         <ion-item *ngFor="let activity of activityPlan.activities; let i = index">
                             <button class="item-remove-button" clear item-left (click)="removeActivity(i)">
-                            <ion-icon primary name="trash"></ion-icon>
+                            <ion-icon danger name="trash"></ion-icon>
                         </button>
                             <ion-label floating>{{ activity.name }}</ion-label>
                             <ion-input clearInput placeholder="Duration (min)" type="number" [(ngModel)]="activity.time" required></ion-input>

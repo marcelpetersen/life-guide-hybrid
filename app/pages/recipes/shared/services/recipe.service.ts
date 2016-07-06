@@ -72,20 +72,30 @@ export class RecipeService {
     public calculateRecipeNutrition(recipe: Recipe): Food {
         let nutrition: Food = new Food();
         recipe.ingredients.forEach(ingredient => {
-            for (let nutrientCategory in ingredient) {
-                let nutrients = ingredient[nutrientCategory];
-                ingredient.quantity = ingredient.quantity || 100;
-                if (nutrientCategory === 'energy') {
-                    nutrition[nutrientCategory] += +nutrients * (+ingredient.quantity / 100);
+            if (ingredient.hasOwnProperty('chef')) {
+                for (let nutrientCategory in ingredient.nutrients) {
+                    let nutrients = ingredient.nutrients[nutrientCategory];
+                    if (nutrientCategory === 'energy') {
+                        nutrition[nutrientCategory] += +nutrients * +ingredient.amount;
+                    } else if (typeof nutrients === 'object') {
+                        for (let nutrient in nutrients) {
+                            nutrition[nutrientCategory][nutrient] += +nutrients[nutrient] * +ingredient.amount;
+                        }
+                    }
                 }
-                for (let nutrient in nutrients) {
-                    if (nutrition.hasOwnProperty(nutrientCategory)
-                        && nutrition[nutrientCategory].hasOwnProperty(nutrient)) {
-                        nutrition[nutrientCategory][nutrient] += +nutrients[nutrient] * (+ingredient.quantity / 100);
-
+            } else {
+                for (let nutrientCategory in ingredient) {
+                    let nutrients = ingredient[nutrientCategory];
+                    if (nutrientCategory === 'energy') {
+                        nutrition[nutrientCategory] += +nutrients * (+ingredient.quantity / 100);
+                    } else if (typeof nutrients === 'object') {
+                        for (let nutrient in nutrients) {
+                            nutrition[nutrientCategory][nutrient] += +nutrients[nutrient] * (+ingredient.quantity / 100);
+                        }
                     }
                 }
             }
+
             recipe.quantity += +ingredient.quantity;
         });
         for (let nutrientCategory in nutrition) {

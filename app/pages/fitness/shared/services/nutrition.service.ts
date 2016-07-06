@@ -29,10 +29,10 @@ export class NutritionService {
                         for (let nutrientCategory in meal) {
                             let nutrients = meal[nutrientCategory];
                             if (nutrientCategory === 'energy') {
-                                mealPlan[key].total[nutrientCategory] += +nutrients * +meal.amount;
+                                mealPlan[key].total[nutrientCategory] += +nutrients * (+meal.amount / 100);
                             } else if (typeof nutrients === 'object') {
                                 for (let nutrient in nutrients) {
-                                    mealPlan[key].total[nutrientCategory][nutrient] += +nutrients[nutrient] * +meal.amount;
+                                    mealPlan[key].total[nutrientCategory][nutrient] += +nutrients[nutrient] * (+meal.amount / 100);
                                 }
                             }
                         }

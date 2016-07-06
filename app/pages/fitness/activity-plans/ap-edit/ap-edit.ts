@@ -50,11 +50,20 @@ export class ApEditPage implements OnInit {
     public searchActivity(): void {
         let activitySearchModal = Modal.create(ActivityAddPage, { activities: this.activityPlan.activities });
         activitySearchModal.onDismiss(activities => {
-            this.activityPlan.activities = activities;
-            this.activityPlan.activities.forEach(activity => activity.energy = this._activityPlanService.getEnergyExpand(activity));
-            let totalActivity = this._activityPlanService.getEnergyDuration(this.activityPlan.activities);
-            this.activityPlan.totalEnergy = totalActivity.totalEnergy;
-            this.activityPlan.totalDuration = totalActivity.totalDuration;
+            if (!!activities) {
+                activities.forEach(activity => {
+                    if (activity.hasOwnProperty('$key')) {
+                        delete activity['$key'];
+                    }
+                    if (this.activityPlan.activities.indexOf(activity) === -1) {
+                        this.activityPlan.activities.push(activity);
+                    }
+                });
+                this.activityPlan.activities.forEach(activity => activity.energy = this._activityPlanService.getEnergyExpand(activity));
+                let totalActivity = this._activityPlanService.getEnergyDuration(this.activityPlan.activities);
+                this.activityPlan.totalEnergy = totalActivity.totalEnergy;
+                this.activityPlan.totalDuration = totalActivity.totalDuration;
+            }
         });
         this._nav.present(activitySearchModal);
     }

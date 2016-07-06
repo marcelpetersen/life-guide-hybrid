@@ -16,31 +16,48 @@ export class MealPlansService {
     });
   }
 
+  public getMpDate(date: string): Promise<MealPlan> {
+    return new Promise(resolve => {
+      this.getMealPlans().subscribe(mealPlans => mealPlans.forEach(mp => {
+        if (mp.date === date) {
+          resolve(mp);
+        }
+      }));
+    });
+  }
+
   public getMealPlans(): FirebaseListObservable<MealPlan[]> {
     return this._mealPlans;
   }
 
-  public addMealPlan(mealPlan: MealPlan): void {
-    this._mealPlans.push(mealPlan);
+  public addMealPlan(mp: MealPlan): void {
+    this.getMpDate(mp.date).then(res => {
+      if (!!res) {
+        let key = res['$key'];
+        res = mp;
+        res['$key'] = key;
+        this.updateMealPlan(res);
+      } else {
+        this._mealPlans.push(mp);
+      }
+    });
   }
 
-  public updateMealPlan(mealPlan: MealPlan): void {
-    if (mealPlan['$key']) {
-      this._mealPlans.update(mealPlan['$key'], {
-        date: mealPlan.date,
-        breakfast: mealPlan.breakfast,
-        brunch: mealPlan.brunch,
-        lunch: mealPlan.lunch,
-        snack: mealPlan.snack,
-        dinner: mealPlan.dinner,
-        numericIntake: mealPlan.numericIntake,
-        percentIntake: mealPlan.percentIntake,
-        remainingIntake: mealPlan.remainingIntake,
-        requiredIntake: mealPlan.requiredIntake
-      });
-    }
+  public updateMealPlan(mp: MealPlan): void {
+    this._mealPlans.update(mp['$key'], {
+      date: mp.date,
+      breakfast: mp.breakfast,
+      brunch: mp.brunch,
+      lunch: mp.lunch,
+      snack: mp.snack,
+      dinner: mp.dinner,
+      numericIntake: mp.numericIntake,
+      percentIntake: mp.percentIntake,
+      remainingIntake: mp.remainingIntake,
+      requiredIntake: mp.requiredIntake
+    });
   }
-  public removeMealPlan(mealPlan: MealPlan): void {
-    this._mealPlans.remove(mealPlan);
+  public removeMealPlan(mp: MealPlan): void {
+    this._mealPlans.remove(mp);
   }
 }

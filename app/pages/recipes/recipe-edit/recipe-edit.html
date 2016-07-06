@@ -7,7 +7,7 @@
     </ion-buttons>
 </ion-navbar>
 <ion-content padding>
-    <form #recipeForm="ngForm" (ngSubmit)="createRecipe()">
+    <form #recipeForm="ngForm" (ngSubmit)="createRecipe()" novalidate>
         <ion-card>
             <ion-card-content>
                 <ion-list>
@@ -99,7 +99,8 @@
                             <ion-icon danger name="trash"></ion-icon>
                         </button>
                         <ion-label floating>{{ ingredient.name }}</ion-label>
-                        <ion-input clearInput placeholder="Quantity (g)" type="number" [(ngModel)]="ingredient.quantity"></ion-input>
+                        <ion-input *ngIf="!ingredient.chef" clearInput placeholder="Quantity (g)" type="number" [(ngModel)]="ingredient.quantity" required></ion-input>
+                        <ion-input *ngIf="ingredient.chef" clearInput placeholder="Quantity (unit)" type="number" [(ngModel)]="ingredient.amount" required></ion-input>
                     </ion-item>
                     <ion-item>
                         <ion-label>Servings</ion-label>
@@ -114,7 +115,7 @@
                             <ion-icon danger name="trash"></ion-icon>
                         </button>
                         <ion-label floating>Step {{i + 1}}</ion-label>
-                        <ion-input [(ngModel)]="recipeSteps[i]"></ion-input>
+                        <ion-input [(ngModel)]="recipeSteps[i]" required></ion-input>
                     </ion-item>
                 </ion-list>
             </ion-card-content>

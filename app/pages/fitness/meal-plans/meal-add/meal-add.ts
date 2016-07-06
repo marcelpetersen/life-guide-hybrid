@@ -26,28 +26,23 @@ export class MealAddPage implements OnInit {
     ) { }
 
     public changeMeal(meal: Food): void {
+        if (!meal.hasOwnProperty('amount')) {
+            Object.defineProperty(meal, 'amount', {
+                value: 1,
+                writable: true,
+                enumerable: true,
+                configurable: true
+            });
+        }
         let mealIndex = this.selectedMeals.indexOf(meal);
         if (mealIndex !== -1) {
             this.selectedMeals.splice(mealIndex, 1);
         } else {
-            if(!meal.hasOwnProperty('amount')) {
-                Object.defineProperty(meal, 'amount', {
-                    value: 1,
-                    writable: true,
-                    enumerable: true,
-                    configurable: true
-                });
-            }
             this.selectedMeals.push(meal);
         }
     }
 
     public doneAdding(): void {
-        this.selectedMeals.forEach(meal => {
-            if (meal.hasOwnProperty('$key')) {
-                delete meal['$key'];
-            }
-        });
         this._viewCtrl.dismiss(this.selectedMeals);
     }
 

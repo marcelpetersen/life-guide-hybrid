@@ -1,45 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
 import { NavParams, ViewController } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
 
-import { Food, FoodService } from '../../food';
+import { Food, FoodService } from '../../food/shared';
 import { ItemSearchPipe } from '../../shared';
+import { Recipe, RecipeService } from '../../recipes/shared';
 
 @Component({
     templateUrl: 'build/pages/recipes/ingredient-search/ingredient-search.html',
     pipes: [ItemSearchPipe]
 })
 export class IngredientSearchPage implements OnInit {
-    public checkedIngredients: boolean[] = [];
-    public foodSource: FirebaseListObservable<Food[]>;
-    public selectedIngredients: Food[] = [];
+    public food: FirebaseListObservable<Food[]>;
+    public recipes: Observable<Recipe[]>;
+    public selectedIngredients: any[] = [];
     public searchQuery: string = '';
     constructor(
         private _foodService: FoodService,
         private _params: NavParams,
+        private _recipeService: RecipeService,
         private _viewCtrl: ViewController
     ) { }
 
-    public addIngredient(ingredient: Food): void {
-        this.checkedIngredients[ingredient['$key']] = !this.checkedIngredients[ingredient['$key']];
-        let result = this.selectedIngredients.filter(item => item.name === ingredient.name);
-        if (this.checkedIngredients[ingredient['$key']] && !result.length) {
-            let newIngredient: Food = new Food(
-                ingredient['$key'],
-                ingredient.name,
-                ingredient.category,
-                ingredient.energy,
-                ingredient.macronutrients,
-                ingredient.minerals,
-                ingredient.vitamins,
-                ingredient['amino acids'],
-                ingredient.flavonoids,
-                ingredient.sterols,
-                ingredient.other
-            );
-            this.selectedIngredients.push(newIngredient);
-        } else if (!this.checkedIngredients[ingredient['$key']] && !!result.length) {
-            this.selectedIngredients.splice(this.selectedIngredients.indexOf(result[0]), 1);
+    public changeIngredient(ingredient: any): void {
+        if (!ingredient.hasOwnProperty('quantity')) {
+            Object.defineProperty(ingredient, 'quantity', {
+                value: 100,
+                writable: true,
+                enumerable: true,
+                configurable: true
+            });
+        }
+        if (!ingredient.hasOwnProperty('amount')) {
+            Object.defineProperty(ingredient, 'amount', {
+                value: 1,
+                writable: true,
+                enumerable: true,
+                configurable: true
+            });
+        }
+        let ingredientIndex = this.selectedIngredients.indexOf(ingredient);
+        if (ingredientIndex !== -1) {
+            this.selectedIngredients.splice(ingredientIndex, 1);
+        } else {
+            this.selectedIngredients.push(ingredient);
         }
     }
 
@@ -52,10 +57,10 @@ export class IngredientSearchPage implements OnInit {
     }
 
     ngOnInit(): void {
-        this.foodSource = this._foodService.getFood();
+        this.food = this._foodService.getFood();
+        this.recipes = this._recipeService.getAllRecipes();
         if (!!this._params.data.ingredients) {
             this.selectedIngredients = this._params.data.ingredients;
-            this.selectedIngredients.forEach(ingredient => this.checkedIngredients[ingredient.key] = true);
         }
     }
 

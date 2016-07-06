@@ -52,7 +52,7 @@ export class ActivityPlansPage implements OnInit {
     }
 
     ngOnInit() {
-        this.activityPlans = this._activityPlanService.getAp();
+        this.activityPlans = this._activityPlanService.getActivityPlans();
     }
 
 }

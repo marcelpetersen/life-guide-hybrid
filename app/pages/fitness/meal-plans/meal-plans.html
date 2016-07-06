@@ -2,7 +2,7 @@
 <ion-content [virtualScroll]="mealPlans | async | itemLimit: limit">
   <ion-card *virtualItem="let mealPlan">
     <ion-card-header>
-      {{ mealPlan.date }}
+      <h1>{{ mealPlan.date }}</h1>
     </ion-card-header>
     <ion-row no-padding>
       <ion-col>

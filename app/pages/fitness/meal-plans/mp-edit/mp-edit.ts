@@ -31,7 +31,6 @@ export class MpEditPage implements OnInit {
     }
 
     public createMp(): void {
-        console.log(this.mealPlan)
         if (!this.mealPlan.date) {
             const toast = Toast.create({
                 message: 'Please enter the date!',
@@ -67,8 +66,14 @@ export class MpEditPage implements OnInit {
         let mealAddModal = Modal.create(MealAddPage, { meals: this.mealPlan[mpTime].meals });
         mealAddModal.onDismiss(meals => {
             if (!!meals) {
-                this.mealPlan[mpTime].meals = meals;
-                console.log(this.mealPlan);
+                meals.forEach(meal => {
+                    if (meal.hasOwnProperty('$key')) {
+                        delete meal['$key'];
+                    }
+                    if (this.mealPlan[mpTime].meals.indexOf(meal) === -1) {
+                        this.mealPlan[mpTime].meals.push(meal);
+                    }
+                });
             }
         });
         this._nav.present(mealAddModal);
@@ -90,11 +95,11 @@ export class MpEditPage implements OnInit {
                 ((currentDay < 10) ? '0' + currentDay : currentDay);
         }
         this._profileService.getMyProfile().subscribe(profile => this._fitnessProfile = profile);
-        this._apService.getAp().subscribe(activityPlans => this._energyExpand = activityPlans.map(ap => {
-            if (ap.date === this.mealPlan.date) {
-                return ap.totalEnergy
+        this._apService.getApDate(this.mealPlan.date).then(res => {
+            if (!!res) {
+                this._energyExpand = res.totalEnergy;
             }
-        })[0]);
+        });
     }
 
 }

@@ -62,11 +62,6 @@ export class ActivityAddPage implements OnInit {
     }
 
     public doneAdding(): void {
-        this.selectedActivities.forEach(activity => {
-            if (activity.hasOwnProperty('$key')) {
-                delete activity['$key'];
-            }
-        });
         this._viewCtrl.dismiss(this.selectedActivities);
     }
 
