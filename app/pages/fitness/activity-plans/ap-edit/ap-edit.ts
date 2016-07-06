@@ -31,7 +31,7 @@ export class ApEditPage implements OnInit {
                 closeButtonText: 'Ok'
             });
             this._nav.present(toast);
-        } else if (!this.activityPlan.activities) {
+        } else if (!this.activityPlan.activities || !this.activityPlan.activities.length) {
             const toast = Toast.create({
                 message: 'Please enter at least one activity!',
                 showCloseButton: true,

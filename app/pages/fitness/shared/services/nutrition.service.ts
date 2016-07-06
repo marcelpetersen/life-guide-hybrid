@@ -12,17 +12,16 @@ export class NutritionService {
             if (mealPlan[key].hasOwnProperty('meals') && !!mealPlan[key].meals.length) {
                 mealPlan[key].total = new Food();
                 mealPlan[key].meals.forEach(meal => {
-                    let amount = meal.amount ? +meal.amount : 1;
-                    console.log(amount);
                     if (meal.hasOwnProperty("chef")) {
                         // it's a recipe
                         for (let nutrientCategory in meal.nutrients) {
                             let nutrients = meal.nutrients[nutrientCategory];
                             if (nutrientCategory === 'energy') {
-                                mealPlan[key].total[nutrientCategory] += +nutrients * amount;
-                            }
-                            for (let nutrient in nutrients) {
-                                mealPlan[key].total[nutrientCategory][nutrient] += +nutrients[nutrient] * amount;
+                                mealPlan[key].total[nutrientCategory] += +nutrients * +meal.amount;
+                            } else if (typeof nutrients === 'object') {
+                                for (let nutrient in nutrients) {
+                                    mealPlan[key].total[nutrientCategory][nutrient] += +nutrients[nutrient] * +meal.amount;
+                                }
                             }
                         }
                     } else {
@@ -30,10 +29,11 @@ export class NutritionService {
                         for (let nutrientCategory in meal) {
                             let nutrients = meal[nutrientCategory];
                             if (nutrientCategory === 'energy') {
-                                mealPlan[key].total[nutrientCategory] += +nutrients * amount;
-                            }
-                            for (let nutrient in nutrients) {
-                                mealPlan[key].total[nutrientCategory][nutrient] += +nutrients[nutrient] * amount;
+                                mealPlan[key].total[nutrientCategory] += +nutrients * +meal.amount;
+                            } else if (typeof nutrients === 'object') {
+                                for (let nutrient in nutrients) {
+                                    mealPlan[key].total[nutrientCategory][nutrient] += +nutrients[nutrient] * +meal.amount;
+                                }
                             }
                         }
                     }

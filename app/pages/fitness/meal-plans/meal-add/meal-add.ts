@@ -43,6 +43,11 @@ export class MealAddPage implements OnInit {
     }
 
     public doneAdding(): void {
+        this.selectedMeals.forEach(meal => {
+            if (meal.hasOwnProperty('$key')) {
+                delete meal['$key'];
+            }
+        });
         this._viewCtrl.dismiss(this.selectedMeals);
     }
 
