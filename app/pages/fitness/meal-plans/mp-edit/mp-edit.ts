@@ -31,6 +31,7 @@ export class MpEditPage implements OnInit {
     }
 
     public createMp(): void {
+        console.log(this.mealPlan)
         if (!this.mealPlan.date) {
             const toast = Toast.create({
                 message: 'Please enter the date!',
@@ -38,19 +39,13 @@ export class MpEditPage implements OnInit {
                 closeButtonText: 'Ok'
             });
             this._nav.present(toast);
-        } else if (!this.mealPlan.breakfast.meals &&
-                !this.mealPlan.brunch.meals &&
-                !this.mealPlan.lunch.meals &&
-                !this.mealPlan.snack.meals &&
-                !this.mealPlan.dinner.meals
+        } else if (
+            (this.mealPlan.breakfast.hasOwnProperty('meals') && !!this.mealPlan.breakfast.meals.length) ||
+            (this.mealPlan.brunch.hasOwnProperty('meals') && !!this.mealPlan.brunch.meals.length) ||
+            (this.mealPlan.lunch.hasOwnProperty('meals') && !!this.mealPlan.lunch.meals.length) ||
+            (this.mealPlan.snack.hasOwnProperty('meals') && !!this.mealPlan.snack.meals.length) ||
+            (this.mealPlan.dinner.hasOwnProperty('meals') && !!this.mealPlan.dinner.meals.length)
         ) {
-            const toast = Toast.create({
-                message: 'Please enter at least one meal!',
-                showCloseButton: true,
-                closeButtonText: 'Ok'
-            });
-            this._nav.present(toast);
-        } else {
             this._nutritionService.setMpNutrition(this.mealPlan);
             this._profileService.getTotalRequirements(this._energyExpand, this._fitnessProfile).then(data => {
                 this.mealPlan.requiredIntake = data;
@@ -58,6 +53,13 @@ export class MpEditPage implements OnInit {
                 this.mealPlan.percentIntake = this._nutritionService.getPercentIntake(data, this.mealPlan.numericIntake);
                 this._viewCtrl.dismiss(this.mealPlan);
             });
+        } else {
+            const toast = Toast.create({
+                message: 'Please enter at least one meal!',
+                showCloseButton: true,
+                closeButtonText: 'Ok'
+            });
+            this._nav.present(toast);
         }
     }
 
@@ -66,6 +68,7 @@ export class MpEditPage implements OnInit {
         mealAddModal.onDismiss(meals => {
             if (!!meals) {
                 this.mealPlan[mpTime].meals = meals;
+                console.log(this.mealPlan);
             }
         });
         this._nav.present(mealAddModal);

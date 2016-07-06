@@ -7,7 +7,7 @@
     </ion-buttons>
 </ion-navbar>
 <ion-content>
-    <form #mpForm="ngForm" (ngSubmit)="createMp()">
+    <form #mpForm="ngForm" (ngSubmit)="createMp()" novalidate>
         <ion-card>
             <ion-card-content>
                 <ion-datetime displayFormat="MM DD YYYY" [(ngModel)]="mealPlan.date"></ion-datetime>
