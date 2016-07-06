@@ -20,6 +20,9 @@ export class RecipeEditPage implements OnInit {
     public searchIngredient(): void {
         let ingredientSearchModal = Modal.create(IngredientSearchPage, { ingredients: this.recipe.ingredients });
         ingredientSearchModal.onDismiss(ingredients => {
+            if (!this.recipe.hasOwnProperty('ingredients')) {
+                this.recipe.ingredients = [];
+            }
             if (!!ingredients) {
                 ingredients.forEach(ingredient => {
                     if (ingredient.hasOwnProperty('$key')) {

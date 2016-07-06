@@ -39,6 +39,10 @@ export class ApEditPage implements OnInit {
             });
             this._nav.present(toast);
         } else {
+            this.activityPlan.activities.forEach(activity => activity.energy = this._activityPlanService.getEnergyExpand(activity));
+            let totalActivity = this._activityPlanService.getEnergyDuration(this.activityPlan.activities);
+            this.activityPlan.totalEnergy = totalActivity.totalEnergy;
+            this.activityPlan.totalDuration = totalActivity.totalDuration;
             this._viewCtrl.dismiss(this.activityPlan);
         }
     }
@@ -50,6 +54,9 @@ export class ApEditPage implements OnInit {
     public searchActivity(): void {
         let activitySearchModal = Modal.create(ActivityAddPage, { activities: this.activityPlan.activities });
         activitySearchModal.onDismiss(activities => {
+            if (!this.activityPlan.hasOwnProperty('activities')) {
+                this.activityPlan.activities = [];
+            }
             if (!!activities) {
                 activities.forEach(activity => {
                     if (activity.hasOwnProperty('$key')) {
@@ -59,10 +66,6 @@ export class ApEditPage implements OnInit {
                         this.activityPlan.activities.push(activity);
                     }
                 });
-                this.activityPlan.activities.forEach(activity => activity.energy = this._activityPlanService.getEnergyExpand(activity));
-                let totalActivity = this._activityPlanService.getEnergyDuration(this.activityPlan.activities);
-                this.activityPlan.totalEnergy = totalActivity.totalEnergy;
-                this.activityPlan.totalDuration = totalActivity.totalDuration;
             }
         });
         this._nav.present(activitySearchModal);
