@@ -2,7 +2,16 @@
 <ion-content [virtualScroll]="mealPlans | async | itemLimit: limit">
   <ion-card *virtualItem="let mealPlan">
     <ion-card-header>
-      <h1>{{ mealPlan.date }}</h1>
+      <ion-row no-paddin>
+        <ion-col>
+          <h1>{{ mealPlan.date }}</h1>
+        </ion-col>
+        <ion-col text-right>
+          <button item-left clear (click)="refreshMp(mealPlan)">
+            <ion-icon name="refresh"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
     </ion-card-header>
     <ion-row no-padding>
       <ion-col>
@@ -17,8 +26,8 @@
             View meals
           </button>
       </ion-col>
-      </ion-row>
-      <ion-row no-padding>
+    </ion-row>
+    <ion-row no-padding>
       <ion-col>
         <button clear small secondary (click)="editMp(mealPlan)">
           <ion-icon name='create'></ion-icon>

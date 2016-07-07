@@ -23,21 +23,25 @@
                         {{ durationView ? 'Duration' : 'Energy' }}
                     </button>
                     <div *ngIf="!durationView">
-                        <button ion-item *ngFor="let activity of activityPlan.activities; let i = index" class="item-remove-button" clear item-left (click)="removeActivity(i)">
-                            <ion-icon danger name="trash"></ion-icon>
-                            {{ activity.name }}
-                            <ion-note item-right>
-                                {{ activity.energy }}
-                            </ion-note>
-                        </button>
+                        <ion-item *ngFor="let activity of activityPlan.activities; let i = index">
+                            <button type="button" clear item-left (click)="removeActivity(i)">
+                                <ion-icon danger name="trash"></ion-icon>
+                            </button>
+                            {{ activity.name }} {{ activity.energy }} kcal
+                            <button type="button" clear item-right (click)="changeEnergy(activity)">
+                                <ion-icon primary name="create"></ion-icon>
+                            </button>
+                        </ion-item>
                     </div>
                     <div *ngIf="durationView">
                         <ion-item *ngFor="let activity of activityPlan.activities; let i = index">
-                            <button class="item-remove-button" clear item-left (click)="removeActivity(i)">
-                            <ion-icon danger name="trash"></ion-icon>
-                        </button>
-                            <ion-label floating>{{ activity.name }}</ion-label>
-                            <ion-input clearInput placeholder="Duration (min)" type="number" [(ngModel)]="activity.time" required></ion-input>
+                            <button type="button" clear item-left (click)="removeActivity(i)">
+                                <ion-icon danger name="trash"></ion-icon>
+                            </button>
+                            {{ activity.name }} {{ activity.time }} minutes
+                            <button type="button" clear item-right (click)="changeDuration(activity)">
+                                <ion-icon primary name="create"></ion-icon>
+                            </button>
                         </ion-item>
                     </div>
 

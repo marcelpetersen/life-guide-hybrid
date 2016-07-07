@@ -95,12 +95,13 @@
                         <span>Add ingredient</span>
                     </button>
                     <ion-item *ngFor="let ingredient of recipe.ingredients; let i = index">
-                        <button class="item-remove-button" clear item-left (click)="removeIngredient(i)">
+                        <button type="button" clear item-left (click)="removeIngredient(i)">
                             <ion-icon danger name="trash"></ion-icon>
                         </button>
-                        <ion-label floating>{{ ingredient.name }}</ion-label>
-                        <ion-input *ngIf="!ingredient.chef" clearInput placeholder="Quantity (g)" type="number" [(ngModel)]="ingredient.quantity" required></ion-input>
-                        <ion-input *ngIf="ingredient.chef" clearInput placeholder="Quantity (unit)" type="number" [(ngModel)]="ingredient.amount" required></ion-input>
+                        {{ ingredient.name }} {{ ingredient.chef ? ingredient.amount : ingredient.quantity + 'g' }}
+                        <button type="button" clear item-right (click)="changeQuantity(ingredient)">
+                            <ion-icon primary name="create"></ion-icon>
+                        </button>
                     </ion-item>
                     <ion-item>
                         <ion-label>Servings</ion-label>

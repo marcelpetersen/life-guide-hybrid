@@ -20,18 +20,17 @@ export class ActivityAddPage implements OnInit {
         private _viewCtrl: ViewController
     ) { }
 
-    public changeActivity(activity: Activity): void {
-        let activityIndex = this.selectedActivities.indexOf(activity);
-        if (activityIndex !== -1) {
-            this.selectedActivities.splice(activityIndex, 1);
-        } else {
-            this.selectedActivities.push(activity);
-        }
+    public cancelAdd(): void {
+        this._viewCtrl.dismiss();
     }
 
-    public setActivityTime(event: any, activity: Activity): void {
+    public doneAdding(): void {
+        this._viewCtrl.dismiss(this.selectedActivities);
+    }
+
+    public setActivity(event: any, activity: Activity): void {
         let activityIndex = this.selectedActivities.indexOf(activity);
-        if (activityIndex !== -1) {
+        if (activityIndex === -1) {
             let durationModal = Alert.create({
                 title: `${activity.name} (${activity.details})`,
                 message: "Enter activity duration",
@@ -46,34 +45,26 @@ export class ActivityAddPage implements OnInit {
                     {
                         text: 'Cancel',
                         handler: () => {
-                            this.selectedActivities.splice(activityIndex, 1);
+                            console.log('Canceled');
                         }
                     },
                     {
                         text: 'Save',
                         handler: data => {
                             activity.time = +data.duration;
+                            this.selectedActivities.push(activity);
                         }
                     }
                 ]
             });
             this._nav.present(durationModal);
+        } else {
+            this.selectedActivities.splice(activityIndex, 1);
         }
-    }
-
-    public doneAdding(): void {
-        this._viewCtrl.dismiss(this.selectedActivities);
-    }
-
-    public cancelAdd(): void {
-        this._viewCtrl.dismiss();
     }
 
     ngOnInit() {
         this.activities = this._activityService.getActivities();
-        if (!!this._params.data.activities) {
-            this.selectedActivities = this._params.data.activities;
-        }
     }
 
 }

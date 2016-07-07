@@ -19,6 +19,15 @@ export class ActivityPlanService {
         });
     }
 
+    public addAp(ap: ActivityPlan): void {
+        this.getApDate(ap.date).then(res => {
+            let key = res['$key'];
+            res = ap;
+            res['$key'] = key;
+            this.updateAp(res);
+        }, err => this._activityPlans.push(ap));
+    }
+
     public getActivities(): FirebaseListObservable<Activity[]> {
         return this._activities;
     }
@@ -44,25 +53,8 @@ export class ActivityPlanService {
         });
     }
 
-    public addAp(ap: ActivityPlan): void {
-        this.getApDate(ap.date).then(res => {
-            let key = res['$key'];
-            res = ap;
-            res['$key'] = key;
-            this.updateAp(res);
-        }, err => this._activityPlans.push(ap));
-    }
-
-    public updateAp(activityPlan: ActivityPlan): void {
-        this._activityPlans.update(activityPlan['$key'], {
-            activities: activityPlan.activities,
-            totalEnergy: activityPlan.totalEnergy,
-            totalDuration: activityPlan.totalDuration
-        });
-    }
-
-    public removeAp(ap: ActivityPlan): void {
-        this._activityPlans.remove(ap);
+    public energyToTime(activity: Activity, energy: number = 70): number {
+        return Math.floor((energy * activity.time) / activity.energy);
     }
 
     public getEnergyDuration(activities: Activity[], weight: number = 70): any {
@@ -76,8 +68,19 @@ export class ActivityPlanService {
     }
 
     public getEnergyExpand(activity: Activity, weight: number = 70): number {
-        let totalEnergy = 0;
-        totalEnergy += Math.floor(0.0175 * activity.met * weight * activity.time);
-        return totalEnergy;
+        return Math.floor(0.0175 * activity.met * weight * activity.time);
     };
+
+    public removeAp(ap: ActivityPlan): void {
+        this._activityPlans.remove(ap);
+    }
+
+    public updateAp(activityPlan: ActivityPlan): void {
+        this._activityPlans.update(activityPlan['$key'], {
+            activities: activityPlan.activities,
+            totalEnergy: activityPlan.totalEnergy,
+            totalDuration: activityPlan.totalDuration
+        });
+    }
+
 }

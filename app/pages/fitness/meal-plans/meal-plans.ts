@@ -3,6 +3,7 @@ import { CORE_DIRECTIVES } from '@angular/common';
 import { FirebaseListObservable } from 'angularfire2';
 import { Modal, NavController } from 'ionic-angular';
 
+import { ActivityPlanService } from '../activity-plans';
 import { Food } from '../../food';
 import { ItemLimitPipe } from '../../shared';
 import { MpDetailsPage } from './mp-details/mp-details';
@@ -11,6 +12,7 @@ import { MpNutritionPage } from './mp-nutrition/mp-nutrition';
 import { MealPlan, MealPlansService } from './shared';
 import { NavbarComponent } from '../../../components';
 import { NutritionService } from '../shared';
+import { Profile, ProfileService } from '../profile';
 
 @Component({
   templateUrl: 'build/pages/fitness/meal-plans/meal-plans.html',
@@ -18,12 +20,15 @@ import { NutritionService } from '../shared';
   pipes: [ItemLimitPipe]
 })
 export class MealPlansPage implements OnInit {
+  private _fitnessProfile: Profile;
   public limit: number = 10;
   public mealPlans: FirebaseListObservable<MealPlan[]>;
   constructor(
+    private _apService: ActivityPlanService,
     private _meaplPlansService: MealPlansService,
     private _nav: NavController,
-    private _nutritionService: NutritionService
+    private _nutritionService: NutritionService,
+    private _profileService: ProfileService
   ) { }
 
   public addMealPlan(): void {
@@ -71,7 +76,18 @@ export class MealPlansPage implements OnInit {
     });
   }
 
+  public refreshMp(mealPlan: MealPlan): void {
+    this._apService.getApDate(mealPlan.date).then(res => {
+      this._profileService.getTotalRequirements(res.totalEnergy, this._fitnessProfile).then(data => {
+        mealPlan.requiredIntake = data;
+        mealPlan.remainingIntake = this._nutritionService.getRemainingIntake(data, mealPlan.numericIntake);
+        mealPlan.percentIntake = this._nutritionService.getPercentIntake(data, mealPlan.numericIntake);
+      });
+    });
+  }
+
   ngOnInit() {
     this.mealPlans = this._meaplPlansService.getMealPlans();
+    this._profileService.getMyProfile().subscribe(profile => this._fitnessProfile = profile);
   }
 }

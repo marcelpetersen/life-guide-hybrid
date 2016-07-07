@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES, NgForm } from '@angular/common';
-import { Modal, NavController, NavParams, Toast, ViewController } from 'ionic-angular';
+import { Alert, Modal, NavController, NavParams, Toast, ViewController } from 'ionic-angular';
 
 import { ActivityPlanService } from '../../activity-plans';
 import { Food } from '../../../food';
@@ -28,6 +28,35 @@ export class MpEditPage implements OnInit {
 
     public cancelMp(): void {
         this._viewCtrl.dismiss();
+    }
+
+    public changeQuantity(meal: any): void {
+        let quantityModal = Alert.create({
+            title: `${meal.name}`,
+            message: "Enter quantity",
+            inputs: [
+                {
+                    name: 'quantity',
+                    placeholder: meal.hasOwnProperty('chef') ? 'Units' : 'Grams',
+                    type: 'number'
+                },
+            ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: () => {
+                        console.log('Canceled');
+                    }
+                },
+                {
+                    text: 'Save',
+                    handler: data => {
+                        meal.amount = +data.quantity;
+                    }
+                }
+            ]
+        });
+        this._nav.present(quantityModal);
     }
 
     public createMp(): void {
@@ -62,8 +91,12 @@ export class MpEditPage implements OnInit {
         }
     }
 
+    public removeMeal(mpTime: string, index: number): void {
+        this.mealPlan[mpTime].meals.splice(index, 1);
+    }
+
     public searchMeal(mpTime: string): void {
-        let mealAddModal = Modal.create(MealAddPage, { meals: this.mealPlan[mpTime].meals });
+        let mealAddModal = Modal.create(MealAddPage);
         mealAddModal.onDismiss(meals => {
             if (!this.mealPlan[mpTime].hasOwnProperty('meals')) {
                 this.mealPlan[mpTime].meals = [];
@@ -80,10 +113,6 @@ export class MpEditPage implements OnInit {
             }
         });
         this._nav.present(mealAddModal);
-    }
-
-    public removeMeal(mpTime: string, index: number): void {
-        this.mealPlan[mpTime].meals.splice(index, 1);
     }
 
     ngOnInit() {

@@ -20,7 +20,7 @@
         <ion-label>{{ activity.name }}({{activity.details}})</ion-label>
         <ion-checkbox 
         [checked]="(selectedActivities.indexOf(activity) !== -1)"
-        (click)="changeActivity(activity); setActivityTime($event, activity)">
+        (click)="setActivity($event, activity)">
         </ion-checkbox>
     </ion-item>
 

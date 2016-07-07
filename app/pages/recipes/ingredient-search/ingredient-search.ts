@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
-import { NavParams, ViewController } from 'ionic-angular';
+import { Alert, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 
 import { Food, FoodService } from '../../food/shared';
@@ -18,12 +18,21 @@ export class IngredientSearchPage implements OnInit {
     public searchQuery: string = '';
     constructor(
         private _foodService: FoodService,
+        private _nav: NavController,
         private _params: NavParams,
         private _recipeService: RecipeService,
         private _viewCtrl: ViewController
     ) { }
 
-    public changeIngredient(ingredient: any): void {
+    public cancelAdd(): void {
+        this._viewCtrl.dismiss();
+    }
+
+    public doneAdding(): void {
+        this._viewCtrl.dismiss(this.selectedIngredients);
+    }
+
+    public setIngredient(event: any, ingredient: any): void {
         if (!ingredient.hasOwnProperty('quantity')) {
             Object.defineProperty(ingredient, 'quantity', {
                 value: 100,
@@ -40,28 +49,47 @@ export class IngredientSearchPage implements OnInit {
                 configurable: true
             });
         }
-        let ingredientIndex = this.selectedIngredients.indexOf(ingredient);
-        if (ingredientIndex !== -1) {
-            this.selectedIngredients.splice(ingredientIndex, 1);
+        let selectedIngredients = this.selectedIngredients.indexOf(ingredient);
+        if (selectedIngredients === -1) {
+            let quantityModal = Alert.create({
+                title: `${ingredient.name}`,
+                message: "Enter quantity",
+                inputs: [
+                    {
+                        name: 'quantity',
+                        placeholder: ingredient.hasOwnProperty('chef') ? 'Units' : 'Grams',
+                        type: 'number'
+                    },
+                ],
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        handler: () => {
+                            console.log('Canceled');
+                        }
+                    },
+                    {
+                        text: 'Save',
+                        handler: data => {
+                            if (ingredient.hasOwnProperty('chef')) {
+                                ingredient.amount = +data.quantity;
+                            } else {
+                                ingredient.quantity = +data.quantity;
+                            }
+                            this.selectedIngredients.push(ingredient);
+                        }
+                    }
+                ]
+            });
+            this._nav.present(quantityModal);
         } else {
-            this.selectedIngredients.push(ingredient);
+            this.selectedIngredients.splice(selectedIngredients, 1);
         }
-    }
-
-    public doneAdding(): void {
-        this._viewCtrl.dismiss(this.selectedIngredients);
-    }
-
-    public cancelAdd(): void {
-        this._viewCtrl.dismiss();
     }
 
     ngOnInit(): void {
         this.food = this._foodService.getFood();
         this.recipes = this._recipeService.getAllRecipes();
-        if (!!this._params.data.ingredients) {
-            this.selectedIngredients = this._params.data.ingredients;
-        }
     }
 
 }
