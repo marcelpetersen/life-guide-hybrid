@@ -98,11 +98,6 @@ export class MpEditPage implements OnInit {
                 ((currentDay < 10) ? '0' + currentDay : currentDay);
         }
         this._profileService.getMyProfile().subscribe(profile => this._fitnessProfile = profile);
-        this._apService.getApDate(this.mealPlan.date).then(res => {
-            if (!!res) {
-                this._energyExpand = res.totalEnergy;
-            }
-        });
+        this._apService.getApDate(this.mealPlan.date).then(res => this._energyExpand = res.totalEnergy);
     }
-
 }

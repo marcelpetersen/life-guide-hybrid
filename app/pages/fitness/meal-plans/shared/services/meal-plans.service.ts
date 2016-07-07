@@ -17,12 +17,19 @@ export class MealPlansService {
   }
 
   public getMpDate(date: string): Promise<MealPlan> {
-    return new Promise(resolve => {
-      this.getMealPlans().subscribe(mealPlans => mealPlans.forEach(mp => {
+    return new Promise((resolve, reject) => {
+      let found: boolean = false;
+      this.getMealPlans().subscribe(mealPlans => mealPlans.forEach((mp, index) => {
         if (mp.date === date) {
+          found = true;
           resolve(mp);
         }
       }));
+      setTimeout(() => {
+        if (!found) {
+          reject('No meal plan found with this date');
+        }
+      }, 3000);
     });
   }
 
@@ -32,15 +39,11 @@ export class MealPlansService {
 
   public addMealPlan(mp: MealPlan): void {
     this.getMpDate(mp.date).then(res => {
-      if (!!res) {
         let key = res['$key'];
         res = mp;
         res['$key'] = key;
         this.updateMealPlan(res);
-      } else {
-        this._mealPlans.push(mp);
-      }
-    });
+      }, err => this._mealPlans.push(mp));
   }
 
   public updateMealPlan(mp: MealPlan): void {

@@ -28,27 +28,29 @@ export class ActivityPlanService {
     }
 
     public getApDate(date: string): Promise<ActivityPlan> {
-        return new Promise(resolve => {
-            this.getActivityPlans().subscribe(activityPlans => activityPlans.forEach(ap => {
+        return new Promise((resolve, reject) => {
+            let found: boolean = false;
+            this.getActivityPlans().subscribe(activityPlans => activityPlans.forEach((ap, index) => {
                 if (ap.date === date) {
+                    found = true;
                     resolve(ap);
                 }
             }));
+            setTimeout(() => {
+                if (!found) {
+                    reject('No activity plan found with this date');
+                }
+            }, 3000);
         });
     }
 
     public addAp(ap: ActivityPlan): void {
         this.getApDate(ap.date).then(res => {
-            if (!!res) {
-                let key = res['$key'];
-                res = ap;
-                res['$key'] = key;
-                this.updateAp(res);
-            } else {
-                this._activityPlans.push(ap);
-            }
-        });
-        this._activityPlans.push(ap);
+            let key = res['$key'];
+            res = ap;
+            res['$key'] = key;
+            this.updateAp(res);
+        }, err => this._activityPlans.push(ap));
     }
 
     public updateAp(activityPlan: ActivityPlan): void {
