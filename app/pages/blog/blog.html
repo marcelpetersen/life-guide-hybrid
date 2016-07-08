@@ -1,0 +1,12 @@
+<navbar [pageTitle]="'Blog'"></navbar>
+
+<ion-content padding class="blog">
+  <ion-card *ngFor="let post of userPosts | async">
+    <ion-card-header>
+      {{ post.title }}
+    </ion-card-header>
+  </ion-card>
+  <button primary fab fab-bottom fab-right fab-fixed (click)="createPost()">
+    <ion-icon name="create"></ion-icon>
+  </button>
+</ion-content>

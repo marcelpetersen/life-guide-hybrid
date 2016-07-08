@@ -13,6 +13,7 @@ import {
 import { MATERIAL_PROVIDERS } from "ng2-material";
 
 import { AuthenticationPage } from './pages/authentication';
+import { BlogPage, PostsService } from './pages/blog';
 import { CreditsListPage, CreditsService } from './pages/credits';
 import { DiagnosisPage } from './pages/diagnosis/diagnosis';
 import { ActivityPlanService, FitnessPage, MealPlansService, NutritionService, ProfileService } from './pages/fitness';
@@ -31,6 +32,7 @@ import { RecipeListPage, RecipeService } from './pages/recipes';
     MealPlansService,
     NutrientService,
     NutritionService,
+    PostsService,
     ProfileService,
     RecipeService,
     FIREBASE_PROVIDERS,
@@ -56,6 +58,7 @@ export class MyApp {
   constructor(private _auth: FirebaseAuth, private _platform: Platform) {
     _platform.ready().then(() => StatusBar.styleDefault());
     this.pages = [
+      { title: 'Blog', icon: 'logo-rss', component: BlogPage },
       { title: 'Diagnosis', icon: 'pulse', component: DiagnosisPage },
       { title: 'Fitness', icon: 'bicycle', component: FitnessPage },
       { title: 'Food', icon: 'cart', component: FoodListPage },
