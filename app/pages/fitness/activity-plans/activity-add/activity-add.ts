@@ -28,9 +28,10 @@ export class ActivityAddPage implements OnInit {
         this._viewCtrl.dismiss(this.selectedActivities);
     }
 
-    public setActivity(event: any, activity: Activity): void {
-        let activityIndex = this.selectedActivities.indexOf(activity);
-        if (activityIndex === -1) {
+    public setActivity(activity: any): void {
+        if (activity.checked) {
+            this.selectedActivities.splice(this.selectedActivities.indexOf(activity), 1);
+        } else {
             let durationModal = Alert.create({
                 title: `${activity.name} (${activity.details})`,
                 message: "Enter activity duration",
@@ -45,21 +46,23 @@ export class ActivityAddPage implements OnInit {
                     {
                         text: 'Cancel',
                         handler: () => {
-                            console.log('Canceled');
+                            activity.checked = false;
                         }
                     },
                     {
                         text: 'Save',
                         handler: data => {
-                            activity.time = +data.duration;
-                            this.selectedActivities.push(activity);
+                            if (data.duration) {
+                                activity.time = +data.duration;
+                                this.selectedActivities.push(activity);
+                            } else {
+                                activity.checked = false;
+                            }
                         }
                     }
                 ]
             });
             this._nav.present(durationModal);
-        } else {
-            this.selectedActivities.splice(activityIndex, 1);
         }
     }
 

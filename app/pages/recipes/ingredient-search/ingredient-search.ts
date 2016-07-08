@@ -32,25 +32,26 @@ export class IngredientSearchPage implements OnInit {
         this._viewCtrl.dismiss(this.selectedIngredients);
     }
 
-    public setIngredient(event: any, ingredient: any): void {
-        if (!ingredient.hasOwnProperty('quantity')) {
-            Object.defineProperty(ingredient, 'quantity', {
-                value: 100,
-                writable: true,
-                enumerable: true,
-                configurable: true
-            });
-        }
-        if (!ingredient.hasOwnProperty('amount')) {
-            Object.defineProperty(ingredient, 'amount', {
-                value: 1,
-                writable: true,
-                enumerable: true,
-                configurable: true
-            });
-        }
-        let selectedIngredients = this.selectedIngredients.indexOf(ingredient);
-        if (selectedIngredients === -1) {
+    public setIngredient(ingredient: any): void {
+        if (ingredient.checked) {
+            this.selectedIngredients.splice(this.selectedIngredients.indexOf(ingredient), 1);
+        } else {
+            if (!ingredient.hasOwnProperty('quantity')) {
+                Object.defineProperty(ingredient, 'quantity', {
+                    value: 100,
+                    writable: true,
+                    enumerable: true,
+                    configurable: true
+                });
+            }
+            if (!ingredient.hasOwnProperty('amount')) {
+                Object.defineProperty(ingredient, 'amount', {
+                    value: 1,
+                    writable: true,
+                    enumerable: true,
+                    configurable: true
+                });
+            }
             let quantityModal = Alert.create({
                 title: `${ingredient.name}`,
                 message: "Enter quantity",
@@ -65,25 +66,27 @@ export class IngredientSearchPage implements OnInit {
                     {
                         text: 'Cancel',
                         handler: () => {
-                            console.log('Canceled');
+                            ingredient.checked = false;
                         }
                     },
                     {
                         text: 'Save',
                         handler: data => {
-                            if (ingredient.hasOwnProperty('chef')) {
-                                ingredient.amount = +data.quantity;
+                            if (!!data.quantity) {
+                                if (ingredient.hasOwnProperty('chef')) {
+                                    ingredient.amount = +data.quantity;
+                                } else {
+                                    ingredient.quantity = +data.quantity;
+                                }
+                                this.selectedIngredients.push(ingredient);
                             } else {
-                                ingredient.quantity = +data.quantity;
+                                ingredient.checked = false;
                             }
-                            this.selectedIngredients.push(ingredient);
                         }
                     }
                 ]
             });
             this._nav.present(quantityModal);
-        } else {
-            this.selectedIngredients.splice(selectedIngredients, 1);
         }
     }
 

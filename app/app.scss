@@ -8,6 +8,9 @@ ion-content {
     font-family: 'Raleway', sans-serif;
     font-style: normal;
     font-weight: 400;
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
 }
 
 .side-menu ion-content{

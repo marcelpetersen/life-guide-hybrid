@@ -14,6 +14,7 @@ import { Recipe, RecipeService } from '../../../recipes';
     pipes: [ItemSearchPipe]
 })
 export class MealAddPage implements OnInit {
+    public checked: boolean[] = [];
     public food: FirebaseListObservable<Food[]>;
     public recipes: Observable<Recipe[]>;
     public selectedMeals: any[] = [];
@@ -34,17 +35,18 @@ export class MealAddPage implements OnInit {
         this._viewCtrl.dismiss(this.selectedMeals);
     }
 
-    public setMeal(event: any, meal: any): void {
-        if (!meal.hasOwnProperty('amount')) {
-            Object.defineProperty(meal, 'amount', {
-                value: 1,
-                writable: true,
-                enumerable: true,
-                configurable: true
-            });
-        }
-        let mealIndex = this.selectedMeals.indexOf(meal);
-        if (mealIndex === -1) {
+    public setMeal(meal: any): void {
+        if (meal.checked) {
+            this.selectedMeals.splice(this.selectedMeals.indexOf(meal), 1);
+        } else {
+            if (!meal.hasOwnProperty('amount')) {
+                Object.defineProperty(meal, 'amount', {
+                    value: 1,
+                    writable: true,
+                    enumerable: true,
+                    configurable: true
+                });
+            }
             let quantityModal = Alert.create({
                 title: `${meal.name}`,
                 message: "Enter quantity",
@@ -59,22 +61,25 @@ export class MealAddPage implements OnInit {
                     {
                         text: 'Cancel',
                         handler: () => {
-                            console.log('Canceled');
+                            meal.checked = false;
                         }
                     },
                     {
                         text: 'Save',
                         handler: data => {
-                            meal.amount = +data.quantity;
-                            this.selectedMeals.push(meal);
+                            if (data.quantity) {
+                                meal.amount = +data.quantity;
+                                this.selectedMeals.push(meal);
+                            } else {
+                                meal.checked = false;
+                            }
                         }
                     }
                 ]
             });
             this._nav.present(quantityModal);
-        } else {
-            this.selectedMeals.splice(mealIndex, 1);
         }
+
     }
 
     ngOnInit() {
