@@ -21,7 +21,7 @@
 
     <div [ngSwitch]="nutritionView">
         <div *ngSwitchWhen="'total'">
-            <button block (click)="changeView()">
+            <button secondary full (click)="changeView()">
                 {{ percentageView ? 'Numeric' : 'Percentage' }}
             </button>
             <nutrition-tables *ngIf="!percentageView" [nutritionData]="numericIntake"></nutrition-tables>

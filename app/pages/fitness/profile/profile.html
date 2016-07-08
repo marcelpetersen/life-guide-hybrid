@@ -7,7 +7,7 @@
                     <h1>Fitness status</h1>
                 </ion-col>
                 <ion-col text-right>
-                    <button clear (click)="editProfile()">
+                    <button primary clear (click)="editProfile()">
                         <ion-icon *ngIf="!editing" name="create"></ion-icon>
                         <ion-icon *ngIf="editing" name="done-all"></ion-icon>
                     </button>
@@ -23,7 +23,7 @@
                     </ion-note>
                 </ion-item>
                 <ion-item>
-                    <ion-icon *ngIf="profile.bmi.normal" primary item-left name="thumbs-up"></ion-icon>
+                    <ion-icon *ngIf="profile.bmi.normal" secondary item-left name="thumbs-up"></ion-icon>
                     <ion-icon *ngIf="!profile.bmi.normal" danger item-left name="thumbs-down"></ion-icon>
                     BMI
                     <ion-note item-right>
@@ -31,7 +31,7 @@
                     </ion-note>
                 </ion-item>
                 <ion-item>
-                    <ion-icon *ngIf="profile.fatPercentage.normal" primary item-left name="thumbs-up"></ion-icon>
+                    <ion-icon *ngIf="profile.fatPercentage.normal" secondary item-left name="thumbs-up"></ion-icon>
                     <ion-icon *ngIf="!profile.fatPercentage.normal" danger item-left name="thumbs-down"></ion-icon>
                     Body fat
                     <ion-note item-right>

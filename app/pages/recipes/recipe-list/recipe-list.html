@@ -24,13 +24,13 @@
         </ion-card-content>
         <ion-row no-padding>
           <ion-col>
-            <button clear small primary (click)="openRecipeDetails(recipe)">
+            <button clear small secondary (click)="openRecipeDetails(recipe)">
               <ion-icon name='book'></ion-icon>
               Read more
             </button>
           </ion-col>
           <ion-col text-center>
-            <button clear small secondary (click)="editRecipe(recipe)">
+            <button clear small primary (click)="editRecipe(recipe)">
               <ion-icon name='create'></ion-icon>
               Edit
             </button>
@@ -56,7 +56,7 @@
         </ion-card-content>
         <ion-row no-padding>
           <ion-col>
-            <button clear primary (click)="openRecipeDetails(recipe)">
+            <button clear secondary (click)="openRecipeDetails(recipe)">
               <ion-icon name='book'></ion-icon>
               Read more
             </button>
@@ -64,7 +64,7 @@
         </ion-row>
       </ion-card>
     </div>
-    <button secondary fab fab-bottom fab-right fab-fixed (click)="createRecipe()">
+    <button primary fab fab-bottom fab-right fab-fixed (click)="createRecipe()">
     <ion-icon name="color-wand"></ion-icon>
   </button>
   </div>

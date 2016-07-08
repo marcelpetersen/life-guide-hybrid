@@ -9,7 +9,7 @@
         </ion-card-content>
         <ion-row no-padding>
             <ion-col>
-                <button clear small secondary (click)="editAp(ap)">
+                <button clear small primary (click)="editAp(ap)">
               <ion-icon name='create'></ion-icon>
               Edit
             </button>
@@ -22,7 +22,7 @@
             </ion-col>
         </ion-row>
     </ion-card>
-    <button secondary fab fab-bottom fab-right fab-fixed class="float-button" (click)="addActivityPlan()">
+    <button primary fab fab-bottom fab-right fab-fixed class="float-button" (click)="addActivityPlan()">
     <ion-icon name="add"></ion-icon>
   </button>
     <ion-infinite-scroll (ionInfinite)="loadMore($event)">

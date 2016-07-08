@@ -1,4 +1,4 @@
-<ion-navbar *navbar>
+<ion-navbar light *navbar>
     <ion-title>Edit meal plan</ion-title>
     <ion-buttons end>
         <button (click)="cancelAp()">
@@ -19,7 +19,7 @@
                         <ion-icon name="add"></ion-icon>
                         Add activity
                     </button>
-                    <button full block primary type="button" (click)="changeActivityView()">
+                    <button full secondary type="button" (click)="changeActivityView()">
                         {{ durationView ? 'Duration' : 'Energy' }}
                     </button>
                     <div *ngIf="!durationView">
@@ -48,6 +48,6 @@
                 </ion-list>
             </ion-card-content>
         </ion-card>
-        <button block secondary type="submit" [disabled]="!apForm.form.valid">Set activity plan</button>
+        <button full primary type="submit" [disabled]="!apForm.form.valid">Set activity plan</button>
     </form>
 </ion-content>

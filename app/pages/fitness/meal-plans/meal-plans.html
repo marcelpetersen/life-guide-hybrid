@@ -15,13 +15,13 @@
     </ion-card-header>
     <ion-row no-padding>
       <ion-col>
-        <button clear small primary (click)="openMpNutrition(mealPlan)">
+        <button clear small secondary (click)="openMpNutrition(mealPlan)">
               <ion-icon name='stats'></ion-icon>
               View nutrition
             </button>
       </ion-col>
       <ion-col text-right>
-        <button clear small primary (click)="openMpDetails(mealPlan)">
+        <button clear small secondary (click)="openMpDetails(mealPlan)">
           <ion-icon name='book'></ion-icon>
             View meals
           </button>
@@ -29,7 +29,7 @@
     </ion-row>
     <ion-row no-padding>
       <ion-col>
-        <button clear small secondary (click)="editMp(mealPlan)">
+        <button clear small primary (click)="editMp(mealPlan)">
           <ion-icon name='create'></ion-icon>
             Edit
         </button>
@@ -42,7 +42,7 @@
       </ion-col>
     </ion-row>
   </ion-card>
-  <button secondary fab fab-bottom fab-right fab-fixed class="float-button" (click)="addMealPlan()">
+  <button primary fab fab-bottom fab-right fab-fixed class="float-button" (click)="addMealPlan()">
     <ion-icon name="add"></ion-icon>
   </button>
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
