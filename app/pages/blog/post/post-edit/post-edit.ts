@@ -19,7 +19,7 @@ export class PostEditPage implements OnInit {
 
     public editPost(): void {
         this.editing = !this.editing;
-        this.post.content = this.contentEl.nativeElement.innerHtml;
+        this.post.content = this.contentEl.nativeElement.innerHTML;
         console.log(this.post);
     }
 
