@@ -2,16 +2,16 @@
     <ion-title>Write a post</ion-title>
     <ion-buttons end>
         <button (click)="editPost()">
-        <ion-icon *ngIf="!editing" name="create"></ion-icon>
-        <ion-icon *ngIf="editing" name="done-all"></ion-icon>
-      </button>
+            <ion-icon *ngIf="!editing" name="create"></ion-icon>
+            <ion-icon *ngIf="editing" name="done-all"></ion-icon>
+        </button>
+        <button (click)="showOptions($event)">
+            <ion-icon name="options"></ion-icon>
+        </button>
     </ion-buttons>
 </ion-navbar>
-<ion-content>
-    <div [contentEditable]="editing">
+<ion-content padding>
+    <div [contentEditable]="editing" #postContent>
         This text can be edited by the user.
-    </div>
-    <div postEdit [editing]="editing">
-        <h1>{{ post.title ? post.title : "My first post" }}</h1>
     </div>
 </ion-content>
