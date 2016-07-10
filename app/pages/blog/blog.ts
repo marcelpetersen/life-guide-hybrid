@@ -4,11 +4,11 @@ import { NavController } from 'ionic-angular';
 
 import { NavbarComponent } from '../../components';
 import { Post, PostsService } from './shared';
-import { PostEditPage } from './post';
+import { PostPage } from './post/post';
 
 @Component({
-  directives: [NavbarComponent],
   templateUrl: 'build/pages/blog/blog.html',
+  directives: [NavbarComponent]
 })
 export class BlogPage implements OnInit {
   public userPosts: FirebaseListObservable<Post[]>;
@@ -16,7 +16,7 @@ export class BlogPage implements OnInit {
 
   public createPost(): void {
     let newPost: Post = new Post();
-    this._nav.push(PostEditPage, { post: newPost })
+    this._nav.push(PostPage, { post: newPost })
   }
 
   ngOnInit() {

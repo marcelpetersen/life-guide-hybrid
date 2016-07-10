@@ -2,14 +2,14 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { NavController, NavParams, Popover } from 'ionic-angular';
 
-import { Post } from '../../shared';
+import { Post } from '../shared';
 import { TextOptionsPage } from './text-options/text-options';
 
 @Component({
     directives: [CORE_DIRECTIVES],
-    templateUrl: 'build/pages/blog/post/post-edit/post-edit.html'
+    templateUrl: 'build/pages/blog/post/post.html'
 })
-export class PostEditPage implements OnInit {
+export class PostPage implements OnInit {
     @ViewChild('postContent') contentEl: ElementRef;
     public editing: boolean = false;
     public postContent: string[] = [];
