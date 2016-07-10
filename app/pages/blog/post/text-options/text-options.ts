@@ -21,36 +21,33 @@ export class TextOptionsPage implements OnInit {
                 if (!!selectedText) {
                     let selectedNode: any = docSelection.focusNode.parentNode;
                     if (selectedNode.style.fontWeight === 'bold') {
-                        selectedNode.parentNode.replaceChild(document.createTextNode(selectedText), selectedNode);
+                        selectedNode.innerHTML = selectedNode.innerHTML.replace(selectedText, `<span style="font-weight: normal">${selectedText}</span>`);
                     } else {
-                        let selectedHtml: string = docSelection.focusNode.parentNode.innerHTML;
-                        selectedHtml = selectedHtml.replace(selectedText, `<span style="font-weight: bold">${selectedText}</span>`);
-                        docSelection.focusNode.parentNode.innerHTML = selectedHtml;
+                        selectedNode.innerHTML = selectedNode.innerHTML.replace(selectedText, `<span style="font-weight: bold">${selectedText}</span>`);
                     }
+                    docSelection.focusNode.parentNode.innerHTML = selectedNode.innerHTML;
                 }
                 break;
             case 'italics':
                 if (!!selectedText) {
                     let selectedNode: any = docSelection.focusNode.parentNode;
                     if (selectedNode.style.fontStyle === 'italic') {
-                        selectedNode.parentNode.replaceChild(document.createTextNode(selectedText), selectedNode);
+                        selectedNode.innerHTML = selectedNode.innerHTML.replace(selectedText, `<span style="font-style: normal">${selectedText}</span>`);
                     } else {
-                        let selectedHtml: string = docSelection.focusNode.parentNode.innerHTML;
-                        selectedHtml = selectedHtml.replace(selectedText, `<span style="font-style: italic">${selectedText}</span>`);
-                        docSelection.focusNode.parentNode.innerHTML = selectedHtml;
+                        selectedNode.innerHTML = selectedNode.innerHTML.replace(selectedText, `<span style="font-style: italic">${selectedText}</span>`);
                     }
+                    docSelection.focusNode.parentNode.innerHTML = selectedNode.innerHTML;
                 }
                 break;
             case 'underline':
                 if (!!selectedText) {
                     let selectedNode: any = docSelection.focusNode.parentNode;
                     if (selectedNode.style.textDecoration === 'underline') {
-                        selectedNode.parentNode.replaceChild(document.createTextNode(selectedText), selectedNode);
+                        selectedNode.innerHTML = selectedNode.innerHTML.replace(selectedText, `<span style="text-decoration: none">${selectedText}</span>`);
                     } else {
-                        let selectedHtml: string = docSelection.focusNode.parentNode.innerHTML;
-                        selectedHtml = selectedHtml.replace(selectedText, `<span style="text-decoration: underline">${selectedText}</span>`);
-                        docSelection.focusNode.parentNode.innerHTML = selectedHtml;
+                        selectedNode.innerHTML = selectedNode.innerHTML.replace(selectedText, `<span style="text-decoration: underline">${selectedText}</span>`);
                     }
+                    docSelection.focusNode.parentNode.innerHTML = selectedNode.innerHTML;
                 }
                 break;
             case 'heading':
@@ -74,3 +71,14 @@ export class TextOptionsPage implements OnInit {
     }
 
 }
+
+/*
+                    let selectedNode: any = docSelection.focusNode.parentNode;
+                    if (selectedNode.style.fontWeight === 'bold') {
+                        selectedNode.parentNode.replaceChild(document.createTextNode(selectedText), selectedNode);
+                    } else {
+                        let selectedHtml: string = docSelection.focusNode.parentNode.innerHTML;
+                        selectedHtml = selectedHtml.replace(selectedText, `<span style="font-weight: bold">${selectedText}</span>`);
+                        docSelection.focusNode.parentNode.innerHTML = selectedHtml;
+                    }
+                    */
