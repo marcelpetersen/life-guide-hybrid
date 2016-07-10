@@ -32,6 +32,13 @@ export class PostPage implements OnInit {
 
     ngOnInit() {
         this.post = this._params.data.post;
-     }
+        let myDate = new Date(),
+            currentDay = myDate.getDate(),
+            currentMonth = myDate.getMonth() + 1,
+            currentYear = myDate.getFullYear();
+        this.post.date = currentYear + '-' +
+            ((currentMonth < 10) ? '0' + currentMonth : currentMonth) + '-' +
+            ((currentDay < 10) ? '0' + currentDay : currentDay);
+    }
 
 }

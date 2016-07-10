@@ -10,8 +10,15 @@
         </button>
     </ion-buttons>
 </ion-navbar>
-<ion-content padding>
-    <div [contentEditable]="editing" #postContent [innerHtml]="post.content" class="post-content">
-        This text can be edited by the user.
-    </div>
+<ion-content padding [contentEditable]="editing">
+    <ion-card>
+        <ion-card-header>
+            <h1>Post title</h1>
+            <h3>Post author</h3>
+            <p>{{ post.date }}</p>
+        </ion-card-header>
+        <ion-card-content #postContent [innerHtml]="post.content" class="post-content">
+
+        </ion-card-content>
+    </ion-card>
 </ion-content>

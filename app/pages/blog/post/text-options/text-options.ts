@@ -62,10 +62,20 @@ export class TextOptionsPage implements OnInit {
             case 'quote':
                 if (!!selectedText) {
                     let selectedHtml: string = docSelection.focusNode.parentNode.innerHTML;
-                    selectedHtml = selectedHtml.replace(selectedText, `<quote>${selectedText}</quote>`);
+                    selectedHtml = selectedHtml.replace(selectedText, `<h3 class="post-quote">${selectedText}</h3>`);
                 } else {
-                    this._render.createElement(this.contentEl, 'quote', null);
+                    this._render.createElement(this.contentEl, 'h3', null);
                     this._render.setText(this.contentEl.lastChild, "Add your quote");
+                    this._render.setElementClass(this.contentEl.lastChild, 'post-quote', true);
+                }
+                break;
+            case 'paragraph':
+                if (!!selectedText) {
+                    let selectedHtml: string = docSelection.focusNode.parentNode.innerHTML;
+                    selectedHtml = selectedHtml.replace(selectedText, `<p>${selectedText}</p>`);
+                } else {
+                    this._render.createElement(this.contentEl, 'p', null);
+                    this._render.setText(this.contentEl.lastChild, "Add your content");
                 }
                 break;
             default:
@@ -75,7 +85,7 @@ export class TextOptionsPage implements OnInit {
 
     ngOnInit() {
         this.contentEl = this._params.data.contentEl.nativeElement;
-        console.clear()
+        console.clear();
         console.log(this.contentEl);
     }
 
