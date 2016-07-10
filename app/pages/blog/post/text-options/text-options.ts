@@ -19,35 +19,35 @@ export class TextOptionsPage implements OnInit {
         switch (style) {
             case 'bold':
                 if (!!selectedText) {
-                    let selectedNode: any = docSelection.focusNode.parentNode;
-                    if (selectedNode.style.fontWeight === 'bold') {
-                        selectedNode.innerHTML = selectedNode.innerHTML.replace(selectedText, `<span style="font-weight: normal">${selectedText}</span>`);
+                    let selectedHtml = docSelection.focusNode.parentNode.innerHTML;
+                    if (docSelection.focusNode.parentNode.style.fontWeight === 'bold') {
+                        selectedHtml = selectedHtml.replace(selectedText, `<span style="font-weight: normal">${selectedText}</span>`);
                     } else {
-                        selectedNode.innerHTML = selectedNode.innerHTML.replace(selectedText, `<span style="font-weight: bold">${selectedText}</span>`);
+                        selectedHtml = selectedHtml.replace(selectedText, `<span style="font-weight: bold">${selectedText}</span>`);
                     }
-                    docSelection.focusNode.parentNode.innerHTML = selectedNode.innerHTML;
+                    docSelection.focusNode.parentNode.innerHTML = selectedHtml;
                 }
                 break;
             case 'italics':
                 if (!!selectedText) {
-                    let selectedNode: any = docSelection.focusNode.parentNode;
-                    if (selectedNode.style.fontStyle === 'italic') {
-                        selectedNode.innerHTML = selectedNode.innerHTML.replace(selectedText, `<span style="font-style: normal">${selectedText}</span>`);
+                    let selectedHtml = docSelection.focusNode.parentNode.innerHTML;
+                    if (docSelection.focusNode.parentNode.style.fontStyle === 'italic') {
+                        selectedHtml = selectedHtml.replace(selectedText, `<span style="font-style: normal">${selectedText}</span>`);
                     } else {
-                        selectedNode.innerHTML = selectedNode.innerHTML.replace(selectedText, `<span style="font-style: italic">${selectedText}</span>`);
+                        selectedHtml = selectedHtml.replace(selectedText, `<span style="font-style: italic">${selectedText}</span>`);
                     }
-                    docSelection.focusNode.parentNode.innerHTML = selectedNode.innerHTML;
+                    docSelection.focusNode.parentNode.innerHTML = selectedHtml;
                 }
                 break;
             case 'underline':
                 if (!!selectedText) {
-                    let selectedNode: any = docSelection.focusNode.parentNode;
-                    if (selectedNode.style.textDecoration === 'underline') {
-                        selectedNode.innerHTML = selectedNode.innerHTML.replace(selectedText, `<span style="text-decoration: none">${selectedText}</span>`);
+                    let selectedHtml = docSelection.focusNode.parentNode.innerHTML;
+                    if (docSelection.focusNode.parentNode.style.textDecoration === 'underline') {
+                        selectedHtml = selectedHtml.replace(selectedText, `<span style="text-decoration: none">${selectedText}</span>`);
                     } else {
-                        selectedNode.innerHTML = selectedNode.innerHTML.replace(selectedText, `<span style="text-decoration: underline">${selectedText}</span>`);
+                        selectedHtml = selectedHtml.replace(selectedText, `<span style="text-decoration: underline">${selectedText}</span>`);
                     }
-                    docSelection.focusNode.parentNode.innerHTML = selectedNode.innerHTML;
+                    docSelection.focusNode.parentNode.innerHTML = selectedHtml;
                 }
                 break;
             case 'heading':
@@ -57,6 +57,15 @@ export class TextOptionsPage implements OnInit {
                 } else {
                     this._render.createElement(this.contentEl, 'h1', null);
                     this._render.setText(this.contentEl.lastChild, "Add your heading");
+                }
+                break;
+            case 'quote':
+                if (!!selectedText) {
+                    let selectedHtml: string = docSelection.focusNode.parentNode.innerHTML;
+                    selectedHtml = selectedHtml.replace(selectedText, `<quote>${selectedText}</quote>`);
+                } else {
+                    this._render.createElement(this.contentEl, 'quote', null);
+                    this._render.setText(this.contentEl.lastChild, "Add your quote");
                 }
                 break;
             default:
