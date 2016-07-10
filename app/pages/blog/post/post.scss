@@ -1,4 +1,4 @@
-.post-content {
+.post {
     padding: 2em 20vw;
     h1 {
         font-family: 'Open Sans', sans-serif;
@@ -9,6 +9,10 @@
 
     p {
         font-size: 20px;
+    }
+
+    .post-content {
+        margin-top: 1em;
     }
 
     .post-quote {

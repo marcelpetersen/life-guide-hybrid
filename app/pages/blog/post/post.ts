@@ -14,13 +14,17 @@ export class PostPage implements OnInit {
     public editing: boolean = false;
     public postContent: string[] = [];
     public post: Post;
+    public showInfo: boolean = true;
     constructor(private _nav: NavController, private _params: NavParams) { }
-
 
     public editPost(): void {
         this.editing = !this.editing;
         this.post.content = this.contentEl.nativeElement.innerHTML;
         console.log(this.post);
+    }
+
+    public toggleInfo(): void {
+        this.showInfo = !this.showInfo;
     }
 
     public showOptions(event): void {

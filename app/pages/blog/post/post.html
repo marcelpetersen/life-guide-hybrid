@@ -11,14 +11,28 @@
     </ion-buttons>
 </ion-navbar>
 <ion-content padding [contentEditable]="editing">
-    <ion-card>
-        <ion-card-header>
-            <h1>Post title</h1>
-            <h3>Post author</h3>
-            <p>{{ post.date }}</p>
+    <ion-card class="post">
+        <button clear (click)="toggleInfo()">
+            <ion-icon *ngIf="!showInfo" name="ios-arrow-down"></ion-icon>
+            <ion-icon *ngIf="showInfo" name="ios-arrow-up"></ion-icon>
+        </button>
+        <ion-card-header *ngIf="showInfo">
+            <ion-item>
+                <ion-label>Title</ion-label>
+                <ion-input [(ngModel)]="post.title"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Author</ion-label>
+                <ion-input [(ngModel)]="post.author"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Date</ion-label>
+                <ion-input [(ngModel)]="post.date"></ion-input>
+            </ion-item>
         </ion-card-header>
         <ion-card-content #postContent [innerHtml]="post.content" class="post-content">
 
         </ion-card-content>
     </ion-card>
+    <button block secondary>Add post</button>
 </ion-content>
