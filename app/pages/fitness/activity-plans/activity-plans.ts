@@ -6,17 +6,18 @@ import { Modal, NavController, NavParams } from 'ionic-angular';
 import { Activity, ActivityPlan, ActivityPlanService } from './shared';
 import { ActivityAddPage } from './activity-add/activity-add';
 import { ApEditPage } from './ap-edit/ap-edit';
-import { ItemLimitPipe } from '../../shared';
+import { ItemLimitPipe, ItemSearchPipe } from '../../shared';
 import { NavbarComponent } from '../../../components';
 
 @Component({
     templateUrl: 'build/pages/fitness/activity-plans/activity-plans.html',
     directives: [CORE_DIRECTIVES, NavbarComponent],
-    pipes: [ItemLimitPipe]
+    pipes: [ItemLimitPipe, ItemSearchPipe]
 })
 export class ActivityPlansPage implements OnInit {
     public activityPlans: FirebaseListObservable<ActivityPlan[]>;
-    public limit: number = 10;
+    public limitQuery: number = 10;
+    public searchQuery: string = '';
     constructor(private _activityPlanService: ActivityPlanService, private _nav: NavController) { }
 
     public addActivityPlan(): void {
@@ -40,9 +41,13 @@ export class ActivityPlansPage implements OnInit {
         });
     }
 
+    public filterAp(event): void {
+        this.searchQuery = event;
+    }
+
     public loadMore(infiniteScroll) {
         setTimeout(() => {
-            this.limit += 5;
+            this.limitQuery += 5;
             infiniteScroll.complete();
         }, 500);
     }

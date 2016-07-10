@@ -13,6 +13,7 @@ import { Recipe, RecipeService } from '../../recipes/shared';
 })
 export class IngredientSearchPage implements OnInit {
     public food: FirebaseListObservable<Food[]>;
+    public noQuantity: boolean = false;
     public recipes: Observable<Recipe[]>;
     public selectedIngredients: any[] = [];
     public searchQuery: string = '';
@@ -35,7 +36,7 @@ export class IngredientSearchPage implements OnInit {
     public setIngredient(ingredient: any): void {
         if (ingredient.checked) {
             this.selectedIngredients.splice(this.selectedIngredients.indexOf(ingredient), 1);
-        } else {
+        } else if (!this.noQuantity) {
             if (!ingredient.hasOwnProperty('quantity')) {
                 Object.defineProperty(ingredient, 'quantity', {
                     value: 100,
@@ -87,12 +88,17 @@ export class IngredientSearchPage implements OnInit {
                 ]
             });
             this._nav.present(quantityModal);
+        } else {
+            this.selectedIngredients.push(ingredient);
         }
     }
 
     ngOnInit(): void {
         this.food = this._foodService.getFood();
         this.recipes = this._recipeService.getAllRecipes();
+        if (this._params.data.noQuantity) {
+            this.noQuantity = true;
+        }
     }
 
 }

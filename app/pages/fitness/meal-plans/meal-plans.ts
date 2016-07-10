@@ -5,7 +5,7 @@ import { Modal, NavController } from 'ionic-angular';
 
 import { ActivityPlanService } from '../activity-plans';
 import { Food } from '../../food';
-import { ItemLimitPipe } from '../../shared';
+import { ItemLimitPipe, ItemSearchPipe } from '../../shared';
 import { MpDetailsPage } from './mp-details/mp-details';
 import { MpEditPage } from './mp-edit/mp-edit';
 import { MpNutritionPage } from './mp-nutrition/mp-nutrition';
@@ -17,12 +17,13 @@ import { Profile, ProfileService } from '../profile';
 @Component({
   templateUrl: 'build/pages/fitness/meal-plans/meal-plans.html',
   directives: [CORE_DIRECTIVES, NavbarComponent],
-  pipes: [ItemLimitPipe]
+  pipes: [ItemLimitPipe, ItemSearchPipe]
 })
 export class MealPlansPage implements OnInit {
   private _fitnessProfile: Profile;
-  public limit: number = 10;
+  public limitQuery: number = 10;
   public mealPlans: FirebaseListObservable<MealPlan[]>;
+  public searchQuery: string = '';
   constructor(
     private _apService: ActivityPlanService,
     private _meaplPlansService: MealPlansService,
@@ -52,9 +53,13 @@ export class MealPlansPage implements OnInit {
     });
   }
 
+  public filterMp(event): void {
+    this.searchQuery = event;
+  }
+
   public loadMore(infiniteScroll) {
     setTimeout(() => {
-      this.limit += 5;
+      this.limitQuery += 5;
       infiniteScroll.complete();
     }, 500);
   }

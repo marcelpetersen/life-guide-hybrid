@@ -1,6 +1,6 @@
-<navbar [pageTitle]="'Fitness'"></navbar>
-<ion-content [virtualScroll]="activityPlans | async | itemLimit: limit">
-    <ion-card *virtualItem="let ap">
+<navbar [pageTitle]="'Fitness'" (searchTrigger)="filterAp($event)"></navbar>
+<ion-content>
+    <ion-card *ngFor="let ap of activityPlans | async | itemSearch: searchQuery: 'date' | itemLimit: limitQuery">
         <ion-card-header>
             <h1>{{ ap.date }}</h1>
         </ion-card-header>

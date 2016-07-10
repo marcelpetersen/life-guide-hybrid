@@ -1,7 +1,6 @@
-<navbar [pageTitle]="'Food'"></navbar>
+<navbar [pageTitle]="'Food'" (searchTrigger)="filterFood($event)"></navbar>
 
 <ion-content class="food">
-  <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
   <ion-card>
     <md-data-table layout-fill flex>
       <thead>
@@ -19,21 +18,24 @@
       </thead>
       <tbody>
 
-        <tr *ngFor="let food of food | async | itemSearch: searchQuery" (click)="openFoodDetails(food)">
+        <tr *ngFor="let food of food | async | itemSearch: searchQuery: 'name' | itemLimit : limitQuery" (click)="openFoodDetails(food)">
           <td class="md-text-cell">{{ food.name }}</td>
           <td>{{ food.energy }} kcal</td>
-          <td>{{ food.macronutrients.Protein }} g</td>
-          <td>{{ food.macronutrients.Carbohydrates }} g</td>
-          <td>{{ food.macronutrients.Fiber }} g</td>
-          <td>{{ food.macronutrients.Sugars }} g</td>
-          <td>{{ food.macronutrients.Fats }} g</td>
-          <td>
+          <td *ngIf="food.macronutrients">{{ food.macronutrients.Protein }} g</td>
+          <td *ngIf="food.macronutrients">{{ food.macronutrients.Carbohydrates }} g</td>
+          <td *ngIf="food.macronutrients">{{ food.macronutrients.Fiber }} g</td>
+          <td *ngIf="food.macronutrients">{{ food.macronutrients.Sugars }} g</td>
+          <td *ngIf="food.macronutrients">{{ food.macronutrients.Fats }} g</td>
+          <td *ngIf="food.macronutrients">
             {{ (food.macronutrients['Monounsaturated fat'] + food.macronutrients['Polyunsaturated fat']).toFixed(2) }} g
           </td>
-          <td>{{ food.macronutrients['Saturated fat'] }} g</td>
+          <td *ngIf="food.macronutrients">{{ food.macronutrients['Saturated fat'] }} g</td>
         </tr>
       </tbody>
     </md-data-table>
   </ion-card>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
 
 </ion-content>

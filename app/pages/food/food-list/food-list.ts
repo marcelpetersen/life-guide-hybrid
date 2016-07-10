@@ -19,6 +19,17 @@ export class FoodListPage implements OnInit {
   public searchQuery: string = '';
   constructor(private _foodService: FoodService, private _nav: NavController) { }
 
+  public filterFood(event): void {
+    this.searchQuery = event;
+  }
+
+  public loadMore(infiniteScroll) {
+    setTimeout(() => {
+      this.limitQuery += 5;
+      infiniteScroll.complete();
+    }, 500);
+  }
+
   public openFoodDetails(food: Food): void {
     this._nav.push(FoodDetailsPage, { food });
   }

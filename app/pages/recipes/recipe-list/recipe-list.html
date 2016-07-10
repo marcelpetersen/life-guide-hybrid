@@ -1,6 +1,24 @@
-<navbar [pageTitle]="'Recipes'"></navbar>
-<ion-content class="recipes">
-  <ion-searchbar [(ngModel)]="searchQuery"></ion-searchbar>
+<navbar [pageTitle]="'Recipes'" (searchTrigger)="filterRecipes($event)"></navbar>
+<ion-content class="recipes" padding>
+  <ion-toolbar light>
+    <ion-buttons start *ngIf="recipeQuery === 'ingredients' && searchQuery.length > 0">
+      <button secondary clear small *ngFor="let ingredient of searchQuery; let i = index" (click)="removeIngredientQ(i)">
+        <ion-icon name="close"></ion-icon>
+        {{ ingredient.name }}
+      </button>
+    </ion-buttons>
+    <ion-buttons start>
+      <button (click)="showIngredients()">
+        <ion-icon name="funnel"></ion-icon>
+        Ingredients
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button>
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
   <div padding>
     <ion-segment [(ngModel)]="recipeFilter">
       <ion-segment-button value="mine">
@@ -13,7 +31,7 @@
   </div>
   <div [ngSwitch]="recipeFilter">
     <div *ngSwitchWhen="'mine'">
-      <ion-card *ngFor="let recipe of myRecipes | async | itemSearch: searchQuery">
+      <ion-card *ngFor="let recipe of myRecipes | async | recipeSearch: searchQuery: recipeQuery | itemLimit: limitQuery">
         <ion-card-header>
           {{ recipe.name }}
         </ion-card-header>
@@ -45,7 +63,7 @@
       </ion-card>
     </div>
     <div *ngSwitchWhen="'all'">
-      <ion-card *ngFor="let recipe of allRecipes | async | itemSearch: searchQuery">
+      <ion-card *ngFor="let recipe of allRecipes | async | recipeSearch: searchQuery: recipeQuery | itemLimit: limitQuery">
         <ion-card-header>
           {{ recipe.name }}
         </ion-card-header>
@@ -68,4 +86,7 @@
     <ion-icon name="color-wand"></ion-icon>
   </button>
   </div>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
