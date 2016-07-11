@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { Alert, NavController, NavParams, ViewController } from 'ionic-angular';
 
 @Component({
     templateUrl: 'build/pages/blog/post/text-options/text-options.html'
@@ -19,63 +19,103 @@ export class TextOptionsPage implements OnInit {
         switch (style) {
             case 'bold':
                 if (!!selectedText) {
-                    let selectedHtml = docSelection.focusNode.parentNode.innerHTML;
-                    if (docSelection.focusNode.parentNode.style.fontWeight === 'bold') {
-                        selectedHtml = selectedHtml.replace(selectedText, `<span style="font-weight: normal">${selectedText}</span>`);
+                    let selectedNode: any = docSelection.focusNode.parentNode,
+                        selectedHtml: string = selectedNode.innerHTML;
+                    if (selectedNode.tagName === 'STRONG') {
+                        selectedNode.parentNode.replaceChild(document.createTextNode(selectedHtml), selectedNode);
                     } else {
-                        selectedHtml = selectedHtml.replace(selectedText, `<span style="font-weight: bold">${selectedText}</span>`);
+                        selectedNode.innerHTML = selectedHtml.replace(selectedText, `<strong>${selectedText}</strong>`);
                     }
-                    docSelection.focusNode.parentNode.innerHTML = selectedHtml;
                 }
                 break;
             case 'italics':
                 if (!!selectedText) {
-                    let selectedHtml = docSelection.focusNode.parentNode.innerHTML;
-                    if (docSelection.focusNode.parentNode.style.fontStyle === 'italic') {
-                        selectedHtml = selectedHtml.replace(selectedText, `<span style="font-style: normal">${selectedText}</span>`);
+                    let selectedNode: any = docSelection.focusNode.parentNode,
+                        selectedHtml: string = selectedNode.innerHTML;
+                    if (selectedNode.tagName === 'EM') {
+                        selectedNode.parentNode.replaceChild(document.createTextNode(selectedHtml), selectedNode);
                     } else {
-                        selectedHtml = selectedHtml.replace(selectedText, `<span style="font-style: italic">${selectedText}</span>`);
+                        selectedNode.innerHTML = selectedHtml.replace(selectedText, `<em>${selectedText}</em>`);
                     }
-                    docSelection.focusNode.parentNode.innerHTML = selectedHtml;
                 }
                 break;
             case 'underline':
                 if (!!selectedText) {
-                    let selectedHtml = docSelection.focusNode.parentNode.innerHTML;
-                    if (docSelection.focusNode.parentNode.style.textDecoration === 'underline') {
-                        selectedHtml = selectedHtml.replace(selectedText, `<span style="text-decoration: none">${selectedText}</span>`);
+                    let selectedNode: any = docSelection.focusNode.parentNode,
+                        selectedHtml: string = selectedNode.innerHTML;
+                    if (selectedNode.tagName === 'INS') {
+                        selectedNode.parentNode.replaceChild(document.createTextNode(selectedHtml), selectedNode);
                     } else {
-                        selectedHtml = selectedHtml.replace(selectedText, `<span style="text-decoration: underline">${selectedText}</span>`);
+                        selectedNode.innerHTML = selectedHtml.replace(selectedText, `<ins>${selectedText}</ins>`);
                     }
-                    docSelection.focusNode.parentNode.innerHTML = selectedHtml;
                 }
                 break;
-            case 'heading':
+            case 'headline':
                 if (!!selectedText) {
-                    let selectedHtml: string = docSelection.focusNode.parentNode.innerHTML;
-                    selectedHtml = selectedHtml.replace(selectedText, `<h1 class="post-heading">${selectedText}</h1>`);
+                    let selectedNode: any = docSelection.focusNode.parentNode,
+                        selectedHtml: string = selectedNode.innerHTML;
+                    selectedNode.innerHTML = selectedHtml.replace(selectedText, `<h1>${selectedText}</h1>`);
                 } else {
                     this._render.createElement(this.contentEl, 'h1', null);
-                    this._render.setText(this.contentEl.lastChild, "Add your heading");
+                    this._render.setText(this.contentEl.lastChild, "Add your headline");
                 }
                 break;
-            case 'quote':
+            case 'blockquote':
                 if (!!selectedText) {
-                    let selectedHtml: string = docSelection.focusNode.parentNode.innerHTML;
-                    selectedHtml = selectedHtml.replace(selectedText, `<h3 class="post-quote">${selectedText}</h3>`);
+                    let selectedNode: any = docSelection.focusNode.parentNode,
+                        selectedHtml: string = selectedNode.innerHTML;
+                    selectedNode.innerHTML = selectedHtml.replace(selectedText, `<blockquote>${selectedText}</blockquote>`);
                 } else {
-                    this._render.createElement(this.contentEl, 'h3', null);
+                    this._render.createElement(this.contentEl, 'blockquote', null);
                     this._render.setText(this.contentEl.lastChild, "Add your quote");
-                    this._render.setElementClass(this.contentEl.lastChild, 'post-quote', true);
                 }
                 break;
             case 'paragraph':
                 if (!!selectedText) {
-                    let selectedHtml: string = docSelection.focusNode.parentNode.innerHTML;
-                    selectedHtml = selectedHtml.replace(selectedText, `<p>${selectedText}</p>`);
+                    let selectedNode: any = docSelection.focusNode.parentNode,
+                        selectedHtml: string = selectedNode.innerHTML;
+                    selectedNode.innerHTML = selectedHtml.replace(selectedText, `<p>${selectedText}</p>`);
                 } else {
                     this._render.createElement(this.contentEl, 'p', null);
                     this._render.setText(this.contentEl.lastChild, "Add your content");
+                }
+                break;
+            case 'link':
+                if (!!selectedText) {
+                    let selectedNode: any = docSelection.focusNode.parentNode,
+                        selectedHtml: string = docSelection.focusNode.parentNode.innerHTML;
+                    if (selectedNode.tagName === 'A') {
+                        selectedNode.parentNode.replaceChild(document.createTextNode(selectedHtml), selectedNode);
+                    } else {
+                        let linkModal = Alert.create({
+                            title: 'URL',
+                            message: 'Enter your link',
+                            inputs: [
+                                {
+                                    name: 'link',
+                                    placeholder: 'https://site.domain',
+                                    type: 'text'
+                                },
+                            ],
+                            buttons: [
+                                {
+                                    text: 'Cancel',
+                                    handler: () => {
+                                        console.log('Canceled');
+                                    }
+                                },
+                                {
+                                    text: 'Add',
+                                    handler: data => {
+                                        if (data.link) {
+                                            selectedNode.innerHTML = selectedHtml.replace(selectedText, selectedText.link(data.link));
+                                        }
+                                    }
+                                }
+                            ]
+                        });
+                        this._nav.present(linkModal);
+                    }
                 }
                 break;
             default:
@@ -85,19 +125,6 @@ export class TextOptionsPage implements OnInit {
 
     ngOnInit() {
         this.contentEl = this._params.data.contentEl.nativeElement;
-        console.clear();
-        console.log(this.contentEl);
     }
 
 }
-
-/*
-                    let selectedNode: any = docSelection.focusNode.parentNode;
-                    if (selectedNode.style.fontWeight === 'bold') {
-                        selectedNode.parentNode.replaceChild(document.createTextNode(selectedText), selectedNode);
-                    } else {
-                        let selectedHtml: string = docSelection.focusNode.parentNode.innerHTML;
-                        selectedHtml = selectedHtml.replace(selectedText, `<span style="font-weight: bold">${selectedText}</span>`);
-                        docSelection.focusNode.parentNode.innerHTML = selectedHtml;
-                    }
-                    */

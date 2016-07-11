@@ -1,3 +1,11 @@
+body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga" on;
+    font-feature-settings: "liga" on;
+}
+
 h1, h2, h3, h4, h5, h6, ion-navbar, ion-menu {
     font-family: 'Open Sans', sans-serif;
     font-style: normal;

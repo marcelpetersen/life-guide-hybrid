@@ -1,23 +1,30 @@
 <ion-list>
     <button ion-item (click)="changeStyle('bold')">
         Bold
+        <strong item-right>B</strong>
     </button>
     <button ion-item (click)="changeStyle('italics')">
         Italics
+        <em item-right>I</em>
     </button>
     <button ion-item (click)="changeStyle('underline')">
         Underline
+        <ins item-right>U</ins>
     </button>
-    <button ion-item (click)="changeStyle('heading')">
-        Heading
+    <button ion-item (click)="changeStyle('headline')">
+        Headline
+        <span item-right>H1</span>
     </button>
     <button ion-item (click)="changeStyle('paragraph')">
         Paragraph
+        <span item-right>p</span>
     </button>
-    <button ion-item (click)="changeStyle('quote')">
+    <button ion-item (click)="changeStyle('blockquote')">
         Quote
+        <ion-icon item-right name="quote"></ion-icon>
     </button>
     <button ion-item (click)="changeStyle('link')">
         Link
+        <ion-icon item-right name="link"></ion-icon>
     </button>
 </ion-list>
