@@ -54,7 +54,11 @@ export class TextOptionsPage implements OnInit {
                 if (!!selectedText) {
                     let selectedNode: any = docSelection.focusNode.parentNode,
                         selectedHtml: string = selectedNode.innerHTML;
-                    selectedNode.innerHTML = selectedHtml.replace(selectedText, `<h1>${selectedText}</h1>`);
+                    if (selectedNode.tagName === 'H1') {
+                        selectedNode.parentNode.replaceChild(document.createTextNode(selectedHtml), selectedNode);
+                    } else {
+                        selectedNode.innerHTML = selectedHtml.replace(selectedText, `<h1>${selectedText}</h1>`);
+                    }
                 } else {
                     this._render.createElement(this.contentEl, 'h1', null);
                     this._render.setText(this.contentEl.lastChild, "Add your headline");
@@ -64,7 +68,11 @@ export class TextOptionsPage implements OnInit {
                 if (!!selectedText) {
                     let selectedNode: any = docSelection.focusNode.parentNode,
                         selectedHtml: string = selectedNode.innerHTML;
-                    selectedNode.innerHTML = selectedHtml.replace(selectedText, `<blockquote>${selectedText}</blockquote>`);
+                    if (selectedNode.tagName === 'BLOCKQUOTE') {
+                        selectedNode.parentNode.replaceChild(document.createTextNode(selectedHtml), selectedNode);
+                    } else {
+                        selectedNode.innerHTML = selectedHtml.replace(selectedText, `<blockquote>${selectedText}</blockquote>`);
+                    }
                 } else {
                     this._render.createElement(this.contentEl, 'blockquote', null);
                     this._render.setText(this.contentEl.lastChild, "Add your quote");
@@ -74,7 +82,11 @@ export class TextOptionsPage implements OnInit {
                 if (!!selectedText) {
                     let selectedNode: any = docSelection.focusNode.parentNode,
                         selectedHtml: string = selectedNode.innerHTML;
-                    selectedNode.innerHTML = selectedHtml.replace(selectedText, `<p>${selectedText}</p>`);
+                    if (selectedNode.tagName === 'P') {
+                        selectedNode.parentNode.replaceChild(document.createTextNode(selectedHtml), selectedNode);
+                    } else {
+                        selectedNode.innerHTML = selectedHtml.replace(selectedText, `<p>${selectedText}</p>`);
+                    }
                 } else {
                     this._render.createElement(this.contentEl, 'p', null);
                     this._render.setText(this.contentEl.lastChild, "Add your content");
