@@ -2,11 +2,11 @@
   <ion-content>
     
     <ion-list>
-      <button secondary menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <button secondary menuClose ion-item no-lines *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
         <ion-icon [name]="p.icon" item-left></ion-icon>
       </button>
-      <button secondary ion-item menuClose (click)="logout()">
+      <button secondary ion-item no-lines menuClose (click)="logout()">
         Logout
         <ion-icon name="exit" item-left></ion-icon>
       </button>

@@ -5,7 +5,9 @@ import { Alert, NavController, NavParams, ViewController } from 'ionic-angular';
     templateUrl: 'build/pages/blog/post/text-options/text-options.html'
 })
 export class TextOptionsPage implements OnInit {
-    public contentEl: HTMLBaseElement;
+    public _focusedEl: HTMLInputElement | HTMLTextAreaElement | any;
+    private _elements: string[];
+    private _tags: string[];
     constructor(
         private _nav: NavController,
         private _params: NavParams,
@@ -13,6 +15,34 @@ export class TextOptionsPage implements OnInit {
         private _viewCtrl: ViewController
     ) { }
 
+    public insertMetaTag(sStartTag: string, sEndTag: string): void {
+        let bDouble = arguments.length > 1,
+            oMsgInput: HTMLInputElement | HTMLTextAreaElement | any = this._focusedEl._elementRef.nativeElement.firstChild,
+            nSelStart = oMsgInput.selectionStart,
+            nSelEnd = oMsgInput.selectionEnd,
+            sOldText = oMsgInput.value;
+        oMsgInput.value = sOldText.substring(0, nSelStart) + (bDouble ? sStartTag + sOldText.substring(nSelStart, nSelEnd) + sEndTag : sStartTag) + sOldText.substring(nSelEnd);
+        oMsgInput.setSelectionRange(bDouble || nSelStart === nSelEnd ? nSelStart + sStartTag.length : nSelStart, (bDouble ? nSelEnd : nSelStart) + sStartTag.length);
+        oMsgInput.focus();
+    }
+
+    public changeText(tag: string): void {
+        this._tags.push(`${tag}`);
+        this._elements.push("");
+    }
+
+    ngOnInit() {
+        this._focusedEl = this._params.data.focusedEl;
+        this._elements = this._params.data.elements;
+        this._tags = this._params.data.tags;
+        console.log(this._focusedEl._elementRef.nativeElement.firstChild.selectionStart);
+    }
+
+}
+
+
+
+    /*
     public changeStyle(style: string): void {
         let docSelection: any = document.getSelection(),
             selectedText: string = docSelection.toString();
@@ -134,9 +164,4 @@ export class TextOptionsPage implements OnInit {
                 break;
         }
     }
-
-    ngOnInit() {
-        this.contentEl = this._params.data.contentEl.nativeElement;
-    }
-
-}
+*/

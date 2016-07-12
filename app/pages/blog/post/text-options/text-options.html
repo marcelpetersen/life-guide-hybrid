@@ -1,30 +1,26 @@
 <ion-list>
-    <button ion-item (click)="changeStyle('bold')">
+    <button ion-item (click)="insertMetaTag('&lt;strong&gt;','&lt;\/strong&gt;')">
         Bold
         <strong item-right>B</strong>
     </button>
-    <button ion-item (click)="changeStyle('italics')">
+    <button ion-item (click)="insertMetaTag('&lt;em&gt;','&lt;\/em&gt;')">
         Italics
         <em item-right>I</em>
     </button>
-    <button ion-item (click)="changeStyle('underline')">
+    <button ion-item (click)="insertMetaTag('&lt;ins&gt;','&lt;\/ins&gt;')">
         Underline
         <ins item-right>U</ins>
     </button>
-    <button ion-item (click)="changeStyle('headline')">
+    <button ion-item (click)="changeText('h1')">
         Headline
         <span item-right>H1</span>
     </button>
-    <button ion-item (click)="changeStyle('paragraph')">
+    <button ion-item (click)="changeText('p')">
         Paragraph
         <span item-right>p</span>
     </button>
-    <button ion-item (click)="changeStyle('blockquote')">
+    <button ion-item (click)="changeText('blockquote')">
         Quote
         <ion-icon item-right name="quote"></ion-icon>
-    </button>
-    <button ion-item (click)="changeStyle('link')">
-        Link
-        <ion-icon item-right name="link"></ion-icon>
     </button>
 </ion-list>
