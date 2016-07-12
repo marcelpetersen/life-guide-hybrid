@@ -1,6 +1,6 @@
 <navbar [pageTitle]="'Recipes'" (searchTrigger)="filterRecipes($event)"></navbar>
 <ion-content class="recipes" padding>
-  <ion-toolbar light>
+  <ion-toolbar light class="filter-options">
     <ion-buttons start *ngIf="recipeQuery === 'ingredients' && searchQuery.length > 0">
       <button secondary clear small *ngFor="let ingredient of searchQuery; let i = index" (click)="removeIngredientQ(i)">
         <ion-icon name="close"></ion-icon>
