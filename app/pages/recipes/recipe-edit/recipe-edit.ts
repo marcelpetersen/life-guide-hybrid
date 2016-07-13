@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES, NgForm } from '@angular/common';
 import { Alert, Modal, NavController, NavParams, Toast, ViewController } from 'ionic-angular';
 
-import { Food } from '../../food';
+import { Food, FoodService } from '../../food';
 import { IngredientSearchPage } from '../ingredient-search/ingredient-search';
 import { Recipe, RecipeService } from '../shared';
 
@@ -11,11 +11,16 @@ import { Recipe, RecipeService } from '../shared';
     directives: [CORE_DIRECTIVES, NgForm]
 })
 export class RecipeEditPage implements OnInit {
+    private _ingredients: Recipe[] | Food[];
     public recipe: Recipe;
-    public foodSource: Food[];
     public ingredient: Food;
     public recipeSteps: string[] = [];
-    constructor(private _nav: NavController, private _params: NavParams, private _viewCtrl: ViewController) { }
+    constructor(
+        private _foodService: FoodService,
+        private _nav: NavController, 
+        private _params: NavParams,
+        private _recipeService: RecipeService,
+        private _viewCtrl: ViewController) { }
 
     public addStep(): void {
         this.recipeSteps.push('');
@@ -86,7 +91,7 @@ export class RecipeEditPage implements OnInit {
     }
 
     public searchIngredient(): void {
-        let ingredientSearchModal = Modal.create(IngredientSearchPage);
+        let ingredientSearchModal = Modal.create(IngredientSearchPage, { ingredients: this._ingredients });
         ingredientSearchModal.onDismiss(ingredients => {
             if (!this.recipe.hasOwnProperty('ingredients')) {
                 this.recipe.ingredients = [];
@@ -107,6 +112,8 @@ export class RecipeEditPage implements OnInit {
     
 
     ngOnInit(): void {
+        this._foodService.getFood().subscribe(food => this._ingredients = food);
+        this._recipeService.getAllRecipes().subscribe(recipes => this._ingredients = [].concat(recipes, this._ingredients));
         this.recipe = this._params.data.recipe;
         if (this.recipe.steps) {
             this.recipe.steps.forEach((step, index) => this.recipeSteps[index] = step);

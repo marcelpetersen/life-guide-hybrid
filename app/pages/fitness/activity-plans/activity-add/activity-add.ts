@@ -3,18 +3,18 @@ import { Alert, NavController, NavParams, ViewController } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2';
 
 import { Activity, ActivityPlanService } from '../shared';
-import { ItemSearchPipe } from '../../../shared';
+import { ItemLimitPipe, ItemSearchPipe } from '../../../shared';
 
 @Component({
     templateUrl: 'build/pages/fitness/activity-plans/activity-add/activity-add.html',
-    pipes: [ItemSearchPipe]
+    pipes: [ItemLimitPipe, ItemSearchPipe]
 })
 export class ActivityAddPage implements OnInit {
     public activities: FirebaseListObservable<Activity[]>;
+    public limitQuery: number = 10;
     public searchQuery: string = '';
     public selectedActivities: Activity[] = [];
     constructor(
-        private _activityService: ActivityPlanService,
         private _nav: NavController,
         private _params: NavParams,
         private _viewCtrl: ViewController
@@ -26,6 +26,13 @@ export class ActivityAddPage implements OnInit {
 
     public doneAdding(): void {
         this._viewCtrl.dismiss(this.selectedActivities);
+    }
+
+    public loadMore(infiniteScroll) {
+        setTimeout(() => {
+            this.limitQuery += 5;
+            infiniteScroll.complete();
+        }, 500);
     }
 
     public setActivity(activity: any): void {
@@ -67,7 +74,7 @@ export class ActivityAddPage implements OnInit {
     }
 
     ngOnInit() {
-        this.activities = this._activityService.getActivities();
+        this.activities = this._params.data.activities;
     }
 
 }

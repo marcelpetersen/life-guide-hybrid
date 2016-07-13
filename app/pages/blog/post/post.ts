@@ -27,6 +27,7 @@ export class PostPage implements OnInit {
             });
             this.editing = false;
         } else {
+            this.editing = true;
             this.tags = [];
             this.postElements = this.post.content.split("<br/>");
             this.postElements.forEach((el, idx) => {
@@ -41,9 +42,7 @@ export class PostPage implements OnInit {
                      this.postElements[idx] = el.substring(12, el.length - 13);
                 }
             });
-            console.clear()
             console.log(this.postElements);
-            this.editing = true;
         }
     }
 
@@ -61,6 +60,11 @@ export class PostPage implements OnInit {
         this._nav.present(popover, {
             ev: event
         });
+    }
+
+    public updateSize(element: any): void {
+        let textarea = element._elementRef.nativeElement.firstChild;
+        textarea.style.height =  textarea.scrollHeight + "px";
     }
 
     ngOnInit() {

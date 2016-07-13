@@ -1,6 +1,15 @@
 <navbar [pageTitle]="'Nutrients'" (searchTrigger)="filterNutrient($event)"></navbar>
+<ion-content padding>
+  <ion-toolbar light class="filter-options">
+    <ion-buttons end>
+      
+      <button (click)="setFilterOpts()">
+        <ion-icon name="funnel"></ion-icon>
+        Nutrient {{ searchFilter }}
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 
-<ion-content>
   <div padding>
     <ion-segment [(ngModel)]="nutrientGroup">
       <ion-segment-button value="macronutrients">
@@ -11,10 +20,9 @@
       </ion-segment-button>
     </ion-segment>
   </div>
-
   <div [ngSwitch]="nutrientGroup">
     <div *ngSwitchWhen="'micronutrients'">
-      <ion-card *ngFor="let micronutrient of micronutrients | async | itemSearch: searchQuery: 'name' | itemLimit: limitQuery">
+      <ion-card *ngFor="let micronutrient of micronutrients | async | itemSearch: searchQuery: searchFilter | itemLimit: limitQuery">
         <ion-card-header>
           {{ micronutrient.name }}
         </ion-card-header>
@@ -31,7 +39,7 @@
       </ion-card>
     </div>
     <div *ngSwitchWhen="'macronutrients'">
-      <ion-card *ngFor="let macronutrient of macronutrients | async | itemSearch: searchQuery: 'name' | itemLimit: limitQuery">
+      <ion-card *ngFor="let macronutrient of macronutrients | async | itemSearch: searchQuery: searchFilter | itemLimit: limitQuery">
         <ion-card-header>
           {{ macronutrient.name }}
         </ion-card-header>

@@ -16,17 +16,13 @@
 </ion-toolbar>
 <ion-content padding>
     <ion-list>
-        <ion-item *ngFor="let recipe of recipes | async | itemSearch: searchQuery: 'name'">
-            <ion-label>{{ recipe.name }}</ion-label>
-            <ion-checkbox [(ngModel)]="recipe.checked" (click)="setMeal(recipe)">
+        <ion-item *ngFor="let meal of meals | itemSearch: searchQuery: 'name' | itemLimit: limitQuery">
+            <ion-label>{{ meal.name }}</ion-label>
+            <ion-checkbox [(ngModel)]="meal.checked" (click)="setMeal(meal)">
             </ion-checkbox>
         </ion-item>
-        <ion-item *ngFor="let food of food | async | itemSearch: searchQuery: 'name'">
-            <ion-label>{{ food.name }}</ion-label>
-            <ion-checkbox [(ngModel)]="food.checked" (click)="setMeal(food)">
-            </ion-checkbox>
-        </ion-item>
-
     </ion-list>
-
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

@@ -3,25 +3,23 @@ import { FirebaseListObservable } from 'angularfire2';
 import { Alert, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 
-import { Food, FoodService } from '../../food/shared';
-import { ItemSearchPipe } from '../../shared';
-import { Recipe, RecipeService } from '../../recipes/shared';
+import { Food } from '../../food/shared';
+import { ItemLimitPipe, ItemSearchPipe } from '../../shared';
+import { Recipe } from '../../recipes/shared';
 
 @Component({
     templateUrl: 'build/pages/recipes/ingredient-search/ingredient-search.html',
-    pipes: [ItemSearchPipe]
+    pipes: [ItemLimitPipe, ItemSearchPipe]
 })
 export class IngredientSearchPage implements OnInit {
-    public food: FirebaseListObservable<Food[]>;
+    public ingredients: Recipe[] | Food[];
+    public limitQuery: number = 10;
     public noQuantity: boolean = false;
-    public recipes: Observable<Recipe[]>;
     public selectedIngredients: any[] = [];
     public searchQuery: string = '';
     constructor(
-        private _foodService: FoodService,
         private _nav: NavController,
         private _params: NavParams,
-        private _recipeService: RecipeService,
         private _viewCtrl: ViewController
     ) { }
 
@@ -31,6 +29,13 @@ export class IngredientSearchPage implements OnInit {
 
     public doneAdding(): void {
         this._viewCtrl.dismiss(this.selectedIngredients);
+    }
+
+    public loadMore(infiniteScroll) {
+        setTimeout(() => {
+        this.limitQuery += 5;
+        infiniteScroll.complete();
+        }, 500);
     }
 
     public setIngredient(ingredient: any): void {
@@ -94,8 +99,7 @@ export class IngredientSearchPage implements OnInit {
     }
 
     ngOnInit(): void {
-        this.food = this._foodService.getFood();
-        this.recipes = this._recipeService.getAllRecipes();
+        this.ingredients = this._params.data.ingredients;
         if (this._params.data.noQuantity) {
             this.noQuantity = true;
         }

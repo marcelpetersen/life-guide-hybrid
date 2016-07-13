@@ -5,7 +5,7 @@ import { Alert, NavController, NavParams, ViewController } from 'ionic-angular';
     templateUrl: 'build/pages/blog/post/text-options/text-options.html'
 })
 export class TextOptionsPage implements OnInit {
-    public _focusedEl: HTMLInputElement | HTMLTextAreaElement | any;
+    public _focusedEl: any;
     private _elements: string[];
     private _tags: string[];
     constructor(
@@ -17,7 +17,7 @@ export class TextOptionsPage implements OnInit {
 
     public insertMetaTag(sStartTag: string, sEndTag: string): void {
         let bDouble = arguments.length > 1,
-            oMsgInput: HTMLInputElement | HTMLTextAreaElement | any = this._focusedEl._elementRef.nativeElement.firstChild,
+            oMsgInput: any = this._focusedEl._elementRef.nativeElement.firstChild,
             nSelStart = oMsgInput.selectionStart,
             nSelEnd = oMsgInput.selectionEnd,
             sOldText = oMsgInput.value;

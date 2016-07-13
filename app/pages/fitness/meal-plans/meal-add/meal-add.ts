@@ -4,26 +4,24 @@ import { Alert, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { FirebaseListObservable } from 'angularfire2';
 
-import { Food, FoodService } from '../../../food';
-import { ItemSearchPipe } from '../../../shared';
-import { Recipe, RecipeService } from '../../../recipes';
+import { Food, FoodDetailsPage } from '../../../food';
+import { ItemLimitPipe, ItemSearchPipe } from '../../../shared';
+import { Recipe } from '../../../recipes';
 
 @Component({
     templateUrl: 'build/pages/fitness/meal-plans/meal-add/meal-add.html',
     directives: [CORE_DIRECTIVES],
-    pipes: [ItemSearchPipe]
+    pipes: [ItemLimitPipe, ItemSearchPipe]
 })
 export class MealAddPage implements OnInit {
     public checked: boolean[] = [];
-    public food: FirebaseListObservable<Food[]>;
-    public recipes: Observable<Recipe[]>;
+    public meals: Recipe[] | Food[];
+    public limitQuery: number = 10;
     public selectedMeals: any[] = [];
     public searchQuery: string = '';
     constructor(
-        private _foodService: FoodService,
         private _nav: NavController,
         private _params: NavParams,
-        private _recipeService: RecipeService,
         private _viewCtrl: ViewController
     ) { }
 
@@ -33,6 +31,13 @@ export class MealAddPage implements OnInit {
 
     public doneAdding(): void {
         this._viewCtrl.dismiss(this.selectedMeals);
+    }
+
+    public loadMore(infiniteScroll) {
+        setTimeout(() => {
+            this.limitQuery += 5;
+            infiniteScroll.complete();
+        }, 500);
     }
 
     public setMeal(meal: any): void {
@@ -83,8 +88,7 @@ export class MealAddPage implements OnInit {
     }
 
     ngOnInit() {
-        this.food = this._foodService.getFood();
-        this.recipes = this._recipeService.getAllRecipes();
+        this.meals = this._params.data.meals;
     }
 
 }

@@ -16,12 +16,14 @@
 </ion-toolbar>
 <ion-content padding>
     <ion-list>
-    <ion-item *ngFor="let activity of activities | async | itemSearch: searchQuery: 'name'">
-        <ion-label>{{ activity.name }}({{activity.details}})</ion-label>
-        <ion-checkbox [(ngModel)]="activity.checked" (click)="setActivity(activity)">
-        </ion-checkbox>
-    </ion-item>
-
-</ion-list>
+        <ion-item *ngFor="let activity of activities | itemSearch: searchQuery: 'name' | itemLimit: limitQuery">
+            <ion-label>{{ activity.name }}({{activity.details}})</ion-label>
+            <ion-checkbox [(ngModel)]="activity.checked" (click)="setActivity(activity)">
+            </ion-checkbox>
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 </ion-content>

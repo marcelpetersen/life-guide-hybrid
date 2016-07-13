@@ -3,11 +3,12 @@ import { CORE_DIRECTIVES, NgForm } from '@angular/common';
 import { Alert, Modal, NavController, NavParams, Toast, ViewController } from 'ionic-angular';
 
 import { ActivityPlanService } from '../../activity-plans';
-import { Food } from '../../../food';
+import { Food, FoodService } from '../../../food';
 import { MealAddPage } from '../meal-add/meal-add';
 import { MealPlan } from '../shared';
 import { Profile, ProfileService } from '../../profile';
 import { NutritionService } from '../../shared';
+import { Recipe, RecipeService } from '../../../recipes';
 
 @Component({
     templateUrl: 'build/pages/fitness/meal-plans/mp-edit/mp-edit.html',
@@ -16,14 +17,17 @@ import { NutritionService } from '../../shared';
 export class MpEditPage implements OnInit {
     private _energyExpand: number = 0;
     private _fitnessProfile: Profile;
+    private _meals: Food[] | Recipe[];
     public mpDate: string;
     public mealPlan: MealPlan;
     constructor(
         private _apService: ActivityPlanService,
+        private _foodService: FoodService,
         private _nav: NavController,
         private _nutritionService: NutritionService,
         private _params: NavParams,
         private _profileService: ProfileService,
+        private _recipeService: RecipeService,
         private _viewCtrl: ViewController) { }
 
     public cancelMp(): void {
@@ -96,7 +100,7 @@ export class MpEditPage implements OnInit {
     }
 
     public searchMeal(mpTime: string): void {
-        let mealAddModal = Modal.create(MealAddPage);
+        let mealAddModal = Modal.create(MealAddPage, { meals: this._meals });
         mealAddModal.onDismiss(meals => {
             if (!this.mealPlan[mpTime].hasOwnProperty('meals')) {
                 this.mealPlan[mpTime].meals = [];
@@ -128,5 +132,7 @@ export class MpEditPage implements OnInit {
         }
         this._profileService.getMyProfile().subscribe(profile => this._fitnessProfile = profile);
         this._apService.getApDate(this.mealPlan.date).then(res => this._energyExpand = res.totalEnergy);
+        this._foodService.getFood().subscribe(food => this._meals = food);
+        this._recipeService.getAllRecipes().subscribe(recipes => this._meals = [].concat(recipes, this._meals));
     }
 }

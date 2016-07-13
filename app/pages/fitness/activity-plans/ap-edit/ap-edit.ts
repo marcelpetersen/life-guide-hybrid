@@ -11,6 +11,7 @@ import { Profile, ProfileService } from '../../profile';
     directives: [CORE_DIRECTIVES, NgForm]
 })
 export class ApEditPage implements OnInit {
+    private _activities: Activity[];
     private _fitnessProfile: Profile;
     public activityPlan: ActivityPlan;
     public durationView: boolean = true;
@@ -119,7 +120,7 @@ export class ApEditPage implements OnInit {
     }
 
     public searchActivity(): void {
-        let activitySearchModal = Modal.create(ActivityAddPage);
+        let activitySearchModal = Modal.create(ActivityAddPage, { activities: this._activities });
         activitySearchModal.onDismiss(activities => {
             if (!this.activityPlan.hasOwnProperty('activities')) {
                 this.activityPlan.activities = [];
@@ -150,6 +151,7 @@ export class ApEditPage implements OnInit {
                 ((currentDay < 10) ? '0' + currentDay : currentDay);
         }
          this._profileService.getMyProfile().subscribe(profile => this._fitnessProfile = profile);
+         this._activityPlanService.getActivities().subscribe(activities => this._activities = activities);
     }
 
 }

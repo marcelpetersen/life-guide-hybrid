@@ -13,29 +13,15 @@
 <ion-content padding>
     <div *ngIf="editing">
         <ion-card class="post" #postContent>
-            <button clear (click)="toggleInfo()">
-                <ion-icon *ngIf="!showInfo" name="ios-arrow-down"></ion-icon>
-                <ion-icon *ngIf="showInfo" name="ios-arrow-up"></ion-icon>
-            </button>
-            <ion-card-header *ngIf="showInfo">
-                <ion-item>
-                    <ion-label>Title</ion-label>
-                    <ion-input [(ngModel)]="post.title"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Author</ion-label>
-                    <ion-input [(ngModel)]="post.author"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Date</ion-label>
-                    <ion-input [(ngModel)]="post.date"></ion-input>
-                </ion-item>
+            <ion-card-header>
+                <ion-input [(ngModel)]="post.title" placeholder="Title"></ion-input>
+                <ion-input [(ngModel)]="post.author" placeholder="Author"></ion-input>
             </ion-card-header>
             <ion-card-content class="post-content">
                 <div *ngFor="let element of postElements; let i = index">
-                    <ion-input (click)="logFocused(postElement)" #postElement [value]="element" class="post-quote" *ngIf="tags[i] === 'blockquote'" placeholder="Add your quoute"></ion-input>
-                    <ion-input (click)="logFocused(postElement)" #postElement [value]="element" class="post-headline" *ngIf="tags[i] === 'h1'" placeholder="Add your headline"></ion-input>
-                    <ion-textarea (click)="logFocused(postElement)" #postElement [value]="element" class="post-paragraph" *ngIf="tags[i] === 'p'" placeholder="Add your quoute"></ion-textarea>
+                    <ion-textarea rows="1" (keyup)="updateSize(postElement)" (click)="logFocused(postElement)" #postElement [value]="element" class="post-quote" *ngIf="tags[i] === 'blockquote'" placeholder="Add your quoute"></ion-textarea>
+                    <ion-textarea rows="1" (keyup)="updateSize(postElement)" (click)="logFocused(postElement)" #postElement [value]="element" class="post-headline" *ngIf="tags[i] === 'h1'" placeholder="Add your headline"></ion-textarea>
+                    <ion-textarea (keyup)="updateSize(postElement)" (click)="logFocused(postElement)" #postElement [value]="element" class="post-paragraph" *ngIf="tags[i] === 'p'" placeholder="Add your paragraph"></ion-textarea>
                 </div>
             </ion-card-content>
         </ion-card>

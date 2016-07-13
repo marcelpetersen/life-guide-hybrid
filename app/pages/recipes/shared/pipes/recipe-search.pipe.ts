@@ -5,21 +5,23 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class RecipeSearchPipe implements PipeTransform {
     transform(recipes: any[] = [], exponent: any = "", prop: string = "name"): any {
-        if (prop === 'ingredients') {
-            return exponent.length ? recipes.filter(recipe => {
-                let found = 0;
-                recipe.ingredients.forEach(ingredient => {
-                    exponent.forEach(element => {
-                        if (ingredient.name === element.name) {
-                            found++;
-                        }
+        if (!!recipes && !!recipes.length) {
+            if (prop === 'ingredients') {
+                return exponent.length ? recipes.filter(recipe => {
+                    let found = 0;
+                    recipe.ingredients.forEach(ingredient => {
+                        exponent.forEach(element => {
+                            if (ingredient.name === element.name) {
+                                found++;
+                            }
+                        });
                     });
-                });
-                return found === exponent.length;
-            }) : recipes;
-        } else {
-            let filter = exponent.toLocaleLowerCase();
-            return filter ? recipes.filter(item => item[prop].toLocaleLowerCase().indexOf(filter) !== -1) : recipes;
+                    return found === exponent.length;
+                }) : recipes;
+            } else {
+                let filter = exponent.toLocaleLowerCase();
+                return filter ? recipes.filter(item => item[prop].toLocaleLowerCase().indexOf(filter) !== -1) : recipes;
+            }
         }
     }
 }
