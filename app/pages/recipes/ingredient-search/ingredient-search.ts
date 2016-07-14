@@ -33,14 +33,15 @@ export class IngredientSearchPage implements OnInit {
 
     public loadMore(infiniteScroll) {
         setTimeout(() => {
-        this.limitQuery += 5;
-        infiniteScroll.complete();
+            this.limitQuery += 5;
+            infiniteScroll.complete();
         }, 500);
     }
 
-    public setIngredient(ingredient: any): void {
-        if (ingredient.checked) {
-            this.selectedIngredients.splice(this.selectedIngredients.indexOf(ingredient), 1);
+    public setIngredient(ingredient: any, checkEl: any): void {
+        let idx = this.selectedIngredients.indexOf(ingredient);
+        if (idx >= 0) {
+            this.selectedIngredients.splice(idx, 1);
         } else if (!this.noQuantity) {
             if (!ingredient.hasOwnProperty('quantity')) {
                 Object.defineProperty(ingredient, 'quantity', {
@@ -72,7 +73,7 @@ export class IngredientSearchPage implements OnInit {
                     {
                         text: 'Cancel',
                         handler: () => {
-                            ingredient.checked = false;
+                            checkEl.checked = false;
                         }
                     },
                     {
@@ -86,7 +87,7 @@ export class IngredientSearchPage implements OnInit {
                                 }
                                 this.selectedIngredients.push(ingredient);
                             } else {
-                                ingredient.checked = false;
+                                checkEl.checked = false;
                             }
                         }
                     }
@@ -104,5 +105,4 @@ export class IngredientSearchPage implements OnInit {
             this.noQuantity = true;
         }
     }
-
 }

@@ -120,23 +120,25 @@ export class ApEditPage implements OnInit {
     }
 
     public searchActivity(): void {
-        let activitySearchModal = Modal.create(ActivityAddPage, { activities: this._activities });
-        activitySearchModal.onDismiss(activities => {
-            if (!this.activityPlan.hasOwnProperty('activities')) {
-                this.activityPlan.activities = [];
-            }
-            if (!!activities) {
-                activities.forEach(activity => {
-                    if (activity.hasOwnProperty('$key')) {
-                        delete activity['$key'];
-                    }
-                    if (this.activityPlan.activities.indexOf(activity) === -1) {
-                        this.activityPlan.activities.push(activity);
-                    }
-                });
-            }
-        });
-        this._nav.present(activitySearchModal);
+        setTimeout(() => {
+            let activitySearchModal = Modal.create(ActivityAddPage, { activities: this._activities });
+            activitySearchModal.onDismiss(activities => {
+                if (!this.activityPlan.hasOwnProperty('activities')) {
+                    this.activityPlan.activities = [];
+                }
+                if (!!activities) {
+                    activities.forEach(activity => {
+                        if (activity.hasOwnProperty('$key')) {
+                            delete activity['$key'];
+                        }
+                        if (this.activityPlan.activities.indexOf(activity) === -1) {
+                            this.activityPlan.activities.push(activity);
+                        }
+                    });
+                }
+            });
+            this._nav.present(activitySearchModal);
+        }, 2000);
     }
 
     ngOnInit() {
@@ -150,8 +152,8 @@ export class ApEditPage implements OnInit {
                 ((currentMonth < 10) ? '0' + currentMonth : currentMonth) + '-' +
                 ((currentDay < 10) ? '0' + currentDay : currentDay);
         }
-         this._profileService.getMyProfile().subscribe(profile => this._fitnessProfile = profile);
-         this._activityPlanService.getActivities().subscribe(activities => this._activities = activities);
+        this._profileService.getMyProfile().subscribe(profile => this._fitnessProfile = profile);
+        this._activityPlanService.getActivities().subscribe(activities => this._activities = activities);
     }
 
 }

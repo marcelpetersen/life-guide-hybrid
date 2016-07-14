@@ -35,8 +35,9 @@ export class ActivityAddPage implements OnInit {
         }, 500);
     }
 
-    public setActivity(activity: any): void {
-        if (activity.checked) {
+    public setActivity(activity: any, checkEl: any): void {
+        let idx = this.selectedActivities.indexOf(activity);
+        if (idx >= 0) {
             this.selectedActivities.splice(this.selectedActivities.indexOf(activity), 1);
         } else {
             let durationModal = Alert.create({
@@ -53,17 +54,17 @@ export class ActivityAddPage implements OnInit {
                     {
                         text: 'Cancel',
                         handler: () => {
-                            activity.checked = false;
+                            checkEl.checked = false;
                         }
                     },
                     {
                         text: 'Save',
                         handler: data => {
-                            if (data.duration) {
+                            if (!!data.duration) {
                                 activity.time = +data.duration;
                                 this.selectedActivities.push(activity);
                             } else {
-                                activity.checked = false;
+                                checkEl.checked = false;
                             }
                         }
                     }

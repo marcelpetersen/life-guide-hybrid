@@ -17,7 +17,7 @@ export class RecipeEditPage implements OnInit {
     public recipeSteps: string[] = [];
     constructor(
         private _foodService: FoodService,
-        private _nav: NavController, 
+        private _nav: NavController,
         private _params: NavParams,
         private _recipeService: RecipeService,
         private _viewCtrl: ViewController) { }
@@ -91,25 +91,27 @@ export class RecipeEditPage implements OnInit {
     }
 
     public searchIngredient(): void {
-        let ingredientSearchModal = Modal.create(IngredientSearchPage, { ingredients: this._ingredients });
-        ingredientSearchModal.onDismiss(ingredients => {
-            if (!this.recipe.hasOwnProperty('ingredients')) {
-                this.recipe.ingredients = [];
-            }
-            if (!!ingredients) {
-                ingredients.forEach(ingredient => {
-                    if (ingredient.hasOwnProperty('$key')) {
-                        delete ingredient['$key'];
-                    }
-                    if (this.recipe.ingredients.indexOf(ingredient) === -1) {
-                        this.recipe.ingredients.push(ingredient);
-                    }
-                });
-            }
-        });
-        this._nav.present(ingredientSearchModal);
+        setTimeout(() => {
+            let ingredientSearchModal: Modal = Modal.create(IngredientSearchPage, { ingredients: this._ingredients });
+            ingredientSearchModal.onDismiss(ingredients => {
+                if (!this.recipe.hasOwnProperty('ingredients')) {
+                    this.recipe.ingredients = [];
+                }
+                if (!!ingredients) {
+                    ingredients.forEach(ingredient => {
+                        if (ingredient.hasOwnProperty('$key')) {
+                            delete ingredient['$key'];
+                        }
+                        if (this.recipe.ingredients.indexOf(ingredient) === -1) {
+                            this.recipe.ingredients.push(ingredient);
+                        }
+                    });
+                }
+            });
+            this._nav.present(ingredientSearchModal);
+        }, 2000);
     }
-    
+
 
     ngOnInit(): void {
         this._foodService.getFood().subscribe(food => this._ingredients = food);

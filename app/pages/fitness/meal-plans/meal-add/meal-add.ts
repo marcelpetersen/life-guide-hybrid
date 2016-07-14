@@ -40,8 +40,9 @@ export class MealAddPage implements OnInit {
         }, 500);
     }
 
-    public setMeal(meal: any): void {
-        if (meal.checked) {
+    public setMeal(meal: any, checkEl: any): void {
+        let idx = this.selectedMeals.indexOf(meal);
+        if (idx >= 0) {
             this.selectedMeals.splice(this.selectedMeals.indexOf(meal), 1);
         } else {
             if (!meal.hasOwnProperty('amount')) {
@@ -66,17 +67,17 @@ export class MealAddPage implements OnInit {
                     {
                         text: 'Cancel',
                         handler: () => {
-                            meal.checked = false;
+                            checkEl.checked = false;
                         }
                     },
                     {
                         text: 'Save',
                         handler: data => {
-                            if (data.quantity) {
+                            if (!!data.quantity) {
                                 meal.amount = +data.quantity;
                                 this.selectedMeals.push(meal);
                             } else {
-                                meal.checked = false;
+                                checkEl.checked = false;
                             }
                         }
                     }
@@ -84,7 +85,6 @@ export class MealAddPage implements OnInit {
             });
             this._nav.present(quantityModal);
         }
-
     }
 
     ngOnInit() {

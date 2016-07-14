@@ -100,23 +100,25 @@ export class MpEditPage implements OnInit {
     }
 
     public searchMeal(mpTime: string): void {
-        let mealAddModal = Modal.create(MealAddPage, { meals: this._meals });
-        mealAddModal.onDismiss(meals => {
-            if (!this.mealPlan[mpTime].hasOwnProperty('meals')) {
-                this.mealPlan[mpTime].meals = [];
-            }
-            if (!!meals) {
-                meals.forEach(meal => {
-                    if (meal.hasOwnProperty('$key')) {
-                        delete meal['$key'];
-                    }
-                    if (this.mealPlan[mpTime].meals && this.mealPlan[mpTime].meals.indexOf(meal) === -1) {
-                        this.mealPlan[mpTime].meals.push(meal);
-                    }
-                });
-            }
-        });
-        this._nav.present(mealAddModal);
+        setTimeout(() => {
+            let mealAddModal = Modal.create(MealAddPage, { meals: this._meals });
+            mealAddModal.onDismiss(meals => {
+                if (!this.mealPlan[mpTime].hasOwnProperty('meals')) {
+                    this.mealPlan[mpTime].meals = [];
+                }
+                if (!!meals) {
+                    meals.forEach(meal => {
+                        if (meal.hasOwnProperty('$key')) {
+                            delete meal['$key'];
+                        }
+                        if (this.mealPlan[mpTime].meals && this.mealPlan[mpTime].meals.indexOf(meal) === -1) {
+                            this.mealPlan[mpTime].meals.push(meal);
+                        }
+                    });
+                }
+            });
+            this._nav.present(mealAddModal);
+        }, 2000);
     }
 
     ngOnInit() {
