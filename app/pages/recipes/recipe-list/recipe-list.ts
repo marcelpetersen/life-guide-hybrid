@@ -3,6 +3,7 @@ import { CORE_DIRECTIVES } from '@angular/common'
 import { Observable } from 'rxjs/Observable';
 import { Modal, NavController } from 'ionic-angular';
 
+import { Food, FoodService } from '../../food';
 import { IngredientSearchPage } from '../ingredient-search/ingredient-search';
 import { ItemLimitPipe } from '../../shared';
 import { RecipeDetailsPage } from '../recipe-details/recipe-details';
@@ -17,6 +18,7 @@ import { NavbarComponent } from '../../../components';
   pipes: [ItemLimitPipe, RecipeSearchPipe]
 })
 export class RecipeListPage implements OnInit {
+  private _ingredients: Food[] | Recipe[] = [];
   private newRecipe: Recipe;
   public allRecipes: Observable<Recipe[]>;
   public limitQuery: number = 10;
@@ -24,7 +26,7 @@ export class RecipeListPage implements OnInit {
   public recipeFilter: string = "mine";
   public recipeQuery: string = 'name';
   public searchQuery: any;
-  constructor(private _nav: NavController, private _recipeService: RecipeService) { }
+  constructor(private _foodService: FoodService, private _nav: NavController, private _recipeService: RecipeService) { }
 
   public createRecipe(): void {
     this.newRecipe = new Recipe();
@@ -75,22 +77,22 @@ export class RecipeListPage implements OnInit {
   }
 
   public showIngredients(): void {
-    let ingredientSearchModal = Modal.create(IngredientSearchPage, { noQuantity: true });
-    ingredientSearchModal.onDismiss(ingredients => {
-      if (!!ingredients) {
-        this.recipeQuery = 'ingredients';
-        this.searchQuery = ingredients;
-      }
-    });
-    this._nav.present(ingredientSearchModal);
+    setTimeout(() => {
+      let ingredientSearchModal = Modal.create(IngredientSearchPage, { ingredients: this._ingredients, noQuantity: true });
+      ingredientSearchModal.onDismiss(ingredients => {
+        if (!!ingredients) {
+          this.recipeQuery = 'ingredients';
+          this.searchQuery = ingredients;
+        }
+      });
+      this._nav.present(ingredientSearchModal);
+    }, 2000);
   }
 
   ngOnInit(): void {
     this.myRecipes = this._recipeService.getMyRecipes();
     this.allRecipes = this._recipeService.getAllRecipes();
-    //this.allRecipes.retryWhen(error => error.delay(2000));
-    //this.myRecipes.retryWhen(error => error.delay(2000));
+    this._foodService.getFood().subscribe(food => this._ingredients = food);
+    this.allRecipes.subscribe(recipes => this._ingredients = [].concat(recipes, this._ingredients));
   }
-
-
 }

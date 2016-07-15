@@ -9,7 +9,7 @@
         <ion-card-header>
             Details
         </ion-card-header>
-        <ion-card-content padding>
+        <ion-card-content>
             <ion-list>
                 <ion-item>
                     <h4>Chef</h4>
@@ -84,13 +84,6 @@
             </ion-list>
         </ion-card-content>
     </ion-card>
-    <ion-card>
-        <ion-card-header>
-            Nutrition values
-        </ion-card-header>
-        <ion-card-content>
-            <nutrition-tables [nutritionData]="recipe.nutrients"></nutrition-tables>
-        </ion-card-content>
-    </ion-card>
+    <nutrition-tables [nutritionData]="recipe.nutrients"></nutrition-tables>
     
 </ion-content>
