@@ -7,7 +7,7 @@ export class RecipeSearchPipe implements PipeTransform {
     transform(recipes: any[] = [], exponent: any = "", prop: string = "name"): any {
         if (!!recipes && !!recipes.length) {
             if (prop === 'ingredients') {
-                return exponent.length ? recipes.filter(recipe => {
+                return exponent[0] ? recipes.filter(recipe => {
                     let found = 0;
                     recipe.ingredients.forEach(ingredient => {
                         exponent.forEach(element => {
