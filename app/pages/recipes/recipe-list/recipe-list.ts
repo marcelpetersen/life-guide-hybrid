@@ -84,7 +84,7 @@ export class RecipeListPage implements OnInit {
         noQuantity: true,
         selected: this.ingredientsQuery
       });
-      ingredientSearchModal.onDismiss(ingredients => this.ingredientsQuery = ingredients);
+      ingredientSearchModal.onDismiss(ingredients => this.ingredientsQuery = [...ingredients]);
       this._nav.present(ingredientSearchModal);
     }, 2000);
   }
