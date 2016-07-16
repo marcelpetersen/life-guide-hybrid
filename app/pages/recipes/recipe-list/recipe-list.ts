@@ -78,12 +78,13 @@ export class RecipeListPage implements OnInit {
 
   public showIngredients(): void {
     setTimeout(() => {
-      let ingredientSearchModal = Modal.create(IngredientSearchPage, { ingredients: this._ingredients, noQuantity: true });
-      ingredientSearchModal.onDismiss(ingredients => {
-        if (!!ingredients) {
-          this.ingredientsQuery = ingredients;
-        }
+      let ingredientSearchModal = Modal.create(IngredientSearchPage, 
+      { 
+        ingredients: this._ingredients,
+        noQuantity: true,
+        selected: this.ingredientsQuery
       });
+      ingredientSearchModal.onDismiss(ingredients => this.ingredientsQuery = ingredients);
       this._nav.present(ingredientSearchModal);
     }, 2000);
   }

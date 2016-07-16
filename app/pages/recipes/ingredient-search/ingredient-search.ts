@@ -104,5 +104,8 @@ export class IngredientSearchPage implements OnInit {
         if (this._params.data.noQuantity) {
             this.noQuantity = true;
         }
+        if (this._params.data.selected) {
+            this.selectedIngredients = this._params.data.selected;
+        }
     }
 }
