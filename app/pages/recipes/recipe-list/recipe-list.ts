@@ -5,22 +5,23 @@ import { Modal, NavController } from 'ionic-angular';
 
 import { Food, FoodService } from '../../food';
 import { IngredientSearchPage } from '../ingredient-search/ingredient-search';
-import { ItemLimitPipe } from '../../shared';
+import { ItemSearchPipe, ItemLimitPipe } from '../../shared';
 import { RecipeDetailsPage } from '../recipe-details/recipe-details';
 import { RecipeEditPage } from '../recipe-edit/recipe-edit';
-import { Recipe, RecipeSearchPipe, RecipeService } from '../shared';
+import { Recipe, IngredientSearchPipe, RecipeService } from '../shared';
 
 import { NavbarComponent } from '../../../components';
 
 @Component({
   templateUrl: 'build/pages/recipes/recipe-list/recipe-list.html',
   directives: [CORE_DIRECTIVES, NavbarComponent],
-  pipes: [ItemLimitPipe, RecipeSearchPipe]
+  pipes: [IngredientSearchPipe, ItemLimitPipe, ItemSearchPipe]
 })
 export class RecipeListPage implements OnInit {
   private _ingredients: Food[] | Recipe[] = [];
   private newRecipe: Recipe;
   public allRecipes: Observable<Recipe[]>;
+  public ingredientsQuery: any[] = [];
   public limitQuery: number = 10;
   public myRecipes: any;
   public recipeFilter: string = "mine";
@@ -67,9 +68,8 @@ export class RecipeListPage implements OnInit {
   }
 
   public removeIngredientQ(index: number): void {
-    this.searchQuery.splice(index, 1);
-    this.searchQuery = [...this.searchQuery];
-    console.log(this.searchQuery);
+    this.ingredientsQuery.splice(index, 1);
+    this.ingredientsQuery = [...this.ingredientsQuery];
   }
 
   public removeRecipe(recipe: Recipe): void {
@@ -81,8 +81,7 @@ export class RecipeListPage implements OnInit {
       let ingredientSearchModal = Modal.create(IngredientSearchPage, { ingredients: this._ingredients, noQuantity: true });
       ingredientSearchModal.onDismiss(ingredients => {
         if (!!ingredients) {
-          this.recipeQuery = 'ingredients';
-          this.searchQuery = ingredients;
+          this.ingredientsQuery = ingredients;
         }
       });
       this._nav.present(ingredientSearchModal);

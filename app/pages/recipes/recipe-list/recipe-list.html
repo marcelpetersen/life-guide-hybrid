@@ -1,8 +1,8 @@
 <navbar [pageTitle]="'Recipes'" (searchTrigger)="filterRecipes($event)"></navbar>
 <ion-content class="recipes" padding>
   <ion-toolbar light class="filter-options">
-    <ion-buttons start *ngIf="recipeQuery === 'ingredients' && searchQuery.length > 0">
-      <button secondary clear small *ngFor="let ingredient of searchQuery; let i = index" (click)="removeIngredientQ(i)">
+    <ion-buttons start *ngIf="ingredientsQuery.length">
+      <button secondary clear small *ngFor="let ingredient of ingredientsQuery; let i = index" (click)="removeIngredientQ(i)">
         <ion-icon name="close"></ion-icon>
         {{ ingredient.name }}
       </button>
@@ -31,7 +31,7 @@
   </div>
   <div [ngSwitch]="recipeFilter">
     <div *ngSwitchWhen="'mine'">
-      <ion-card *ngFor="let recipe of myRecipes | async | recipeSearch: searchQuery: recipeQuery | itemLimit: limitQuery">
+      <ion-card *ngFor="let recipe of myRecipes | async | ingredientSearch: ingredientsQuery | itemSearch: searchQuery : recipeQuery | itemLimit: limitQuery">
         <ion-card-header>
           {{ recipe.name }}
         </ion-card-header>
@@ -63,7 +63,7 @@
       </ion-card>
     </div>
     <div *ngSwitchWhen="'all'">
-      <ion-card *ngFor="let recipe of allRecipes | async | recipeSearch: searchQuery: recipeQuery | itemLimit: limitQuery">
+      <ion-card *ngFor="let recipe of allRecipes | async | ingredientSearch: ingredientsQuery | itemSearch: searchQuery : recipeQuery | itemLimit: limitQuery">
         <ion-card-header>
           {{ recipe.name }}
         </ion-card-header>
